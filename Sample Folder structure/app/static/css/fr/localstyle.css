@@ -1,0 +1,35 @@
+/* French Sidebar */
+
+.language-sidebar {
+    position: fixed;
+    top: 40%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 80px;
+    background-color: #1c2d44; /* deep French navy */
+    border-radius: 0 6px 6px 0;
+    box-shadow: 3px 0 12px rgba(0,0,0,0.35);
+    font-family: "Lora", serif;
+}
+
+.language-sidebar a {
+    display: block;
+    padding: 0.95rem 0;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    letter-spacing: 0.02rem;
+    transition: all 0.25s ease;
+}
+
+.language-sidebar a:hover {
+    background-color: rgba(178, 34, 52, 0.18); /* Bordeaux tone */
+    color: #f4f4f4;
+}
+
+.language-sidebar a.active {
+    border-left: 4px solid #b22234;
+    padding-left: 4px;
+    color: #ffffff;
+}

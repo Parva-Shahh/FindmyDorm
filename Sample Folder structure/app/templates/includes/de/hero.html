@@ -1,0 +1,124 @@
+<!--
+Container adds horizontal padding and vertical spacing (py-5).
+Keeps the slider visually separated from other content.
+-->
+<div class="container py-5">
+
+    <!--
+    Bootstrap row:
+    justify-content-center → centres content horizontally
+    align-items-center → vertically aligns arrows with image
+    -->
+    <div class="row justify-content-center align-items-center">
+
+        <!-- LEFT ARROW COLUMN -->
+        <!-- col-auto → column only as wide as its content -->
+        <div class="col-auto">
+
+            <!--
+            Bootstrap button:
+            btn btn-primary → styled button
+            rounded-circle → circular shape
+            Inline width/height ensures equal circular dimensions
+            onclick triggers previous image function
+            -->
+            <button class="btn btn-primary rounded-circle"
+                    style="width:45px; height:45px;"
+                    onclick="prevImage()">
+                &#9664;  <!-- Left arrow symbol -->
+            </button>
+        </div>
+
+        <!-- IMAGE COLUMN -->
+        <!-- col-md-4 → controlled width on medium+ screens -->
+        <!-- text-center → centre image horizontally -->
+        <div class="col-md-4 text-center">
+
+            <!--
+            position-relative allows stacking context if needed
+            overflow-hidden prevents image overflow
+            -->
+            <div class="position-relative overflow-hidden">
+
+                <!--
+                Each image:
+                img-fluid → responsive scaling
+                slider-image → custom class for JS control
+                active → visible image (others hidden)
+                lang_code dynamically loads locale-specific images
+                -->
+                <img src="{{ url_for('static', filename='assets/img/' + lang_code + '/image1.jpg') }}"
+                     class="img-fluid slider-image active"
+                     alt="Image 1">
+
+                <img src="{{ url_for('static', filename='assets/img/' + lang_code + '/image2.jpg') }}"
+                     class="img-fluid slider-image"
+                     alt="Image 2">
+
+                <img src="{{ url_for('static', filename='assets/img/' + lang_code + '/image3.jpg') }}"
+                     class="img-fluid slider-image"
+                     alt="Image 3">
+
+            </div>
+        </div>
+
+        <!-- RIGHT ARROW COLUMN -->
+        <div class="col-auto">
+            <button class="btn btn-primary rounded-circle"
+                    style="width:45px; height:45px;"
+                    onclick="nextImage()">
+                &#9654;  <!-- Right arrow symbol -->
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!--
+CSS controls visibility:
+All images hidden by default.
+Only the image with class "active" is displayed.
+This avoids reloading images.
+-->
+<style>
+    .slider-image {
+        display: none;
+    }
+
+    .slider-image.active {
+        display: block;
+    }
+</style>
+
+<script>
+    // Tracks the currently displayed image
+    let index = 0;
+
+    // Select all slider images once when script loads
+    const images = document.querySelectorAll('.slider-image');
+
+    /*
+    showImage(newIndex):
+    1. Remove "active" from current image
+    2. Calculate new index (wraps around using modulus)
+    3. Add "active" to new image
+    */
+    function showImage(newIndex) {
+        images[index].classList.remove('active');
+
+        // Wrap around if user goes beyond first/last image
+        index = (newIndex + images.length) % images.length;
+
+        images[index].classList.add('active');
+    }
+
+    // Move forward one image
+    function nextImage() {
+        showImage(index + 1);
+    }
+
+    // Move backward one image
+    function prevImage() {
+        showImage(index - 1);
+    }
+</script>
