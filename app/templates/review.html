@@ -1,4 +1,77 @@
 {% extends "base.html" %}
 {% block main %}
-       
+<section class="page-section">
+    <div class="container">
+        <div class="bg-faded p-5 rounded">
+            <div class="mb-4 text-end">
+                <small class="text-uppercase fw-bold">Change Language:</small>
+                <div class="btn-group btn-group-sm" role="group">
+                    <a href="{{ url_for('set_language', lang_code='en') }}" class="btn btn-outline-primary">English</a>
+                    <a href="{{ url_for('set_language', lang_code='cn') }}" class="btn btn-outline-primary">中文 (CN)</a>
+                    <a href="{{ url_for('set_language', lang_code='de') }}" class="btn btn-outline-primary">Deutsch (DE)</a>
+                </div>
+            </div>
+
+            {% if lang_code == 'cn' %}
+            <div class="border p-4 mb-5 rounded bg-white shadow-sm">
+                <h5 class="fw-bold mb-3">OTHER REVIEWS</h5>
+                <div class="row">
+                    <div class="col-md-6 d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-light border me-3" style="width: 50px; height: 50px;"></div>
+                        <div class="w-75 border-bottom" style="height: 10px;"></div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-light border me-3" style="width: 50px; height: 50px;"></div>
+                        <div class="w-75 border-bottom" style="height: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="{% if lang_code == 'de' %}col-md-8{% else %}col-12{% endif %}">
+                    <div class="mb-4">
+                        <h4 class="fw-bold">OVERALL RATING: <span class="text-warning">★★★★★</span></h4>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg" placeholder="Review Title">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="5" placeholder="Review Paragraph"></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold">RATINGS BREAKDOWN:</h5>
+                        <p class="mb-1">Location: <span class="text-warning">★★★★★</span></p>
+                        <p class="mb-1">Amenities: <span class="text-warning">★★★★★</span></p>
+                        <p class="mb-1">Social: <span class="text-warning">★★★★☆</span></p>
+                    </div>
+
+                    <button class="btn btn-primary btn-xl">SUBMIT REVIEW</button>
+                </div>
+
+                {% if lang_code == 'de' %}
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <div class="border p-4 rounded bg-light shadow-sm">
+                        <h5 class="fw-bold">CHECKLIST</h5>
+                        <p class="mb-1 text-primary fw-bold">50% COMPLETE</p>
+                        <div class="progress mb-3">
+                            <div class="progress-bar w-50" role="progressbar"></div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked disabled>
+                            <label class="form-check-label">Rating Selected</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" disabled>
+                            <label class="form-check-label">Review Text Added</label>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
