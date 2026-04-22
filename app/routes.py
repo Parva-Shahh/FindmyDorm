@@ -1,38 +1,37 @@
-# Import the Flask application instance named 'app'
-# This object was created in __init__.py
 from app import app
-
-# The @app.route decorator tells Flask which URL should trigger the function
-# This route maps the root URL (http://localhost:5000/)
+from flask import render_template, session, redirect, request
 
 @app.route('/')
 
-# Define a function named 'index'
-# This function is called when a user visits '/'
-def week1():
-    # Return a simple text response to be displayed in the browser
-    return "Hello, From Lab Class Week 1!"
+@app.route('/index')
+def index():
+    return (render_template("index.html"))
 
 @app.route('/about')
 def about():
     return (render_template ("about.html"))
 
-@app.route('/base')
-def base():
-    return (render_template ("base.html"))
-
-@app.route('/home')
-def home():
-    return (render_template ("home.html"))
-
-@app.route('/info')
-def info():
-    return (render_template ("info.html"))
-
 @app.route('/listings')
 def listings():
-    return (render_template ("listings.html"))
+        return (render_template ("listings.html"))
 
 @app.route('/profile')
 def profile():
     return (render_template ("profile.html"))
+
+@app.route('/setlang/<lang_code>')
+def set_language(lang_code):
+    # If the language matches one of the languages we are facilitating
+    # Change the value of the language variable in session to that
+    if lang_code in ['en', 'fr', 'de']:
+        session['language'] = lang_code
+    # Redirect the page to the page from which the language change
+    # request was made
+    return redirect(request.referrer or '/')
+
+# Before each request to the app, check if the language variable
+# in session has a value. If not set it to English.
+@app.before_request
+def set_session_language():
+    if 'language' not in session:
+        session['language'] = 'en' # Set default language here
