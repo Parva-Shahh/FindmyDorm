@@ -5,23 +5,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-msgid "Our Mission"
-msgstr "Our Mission"
+msgid "Student Housing Made Simple"
+msgstr "Student Housing Made Simple"
 
-msgid "About_Mission_P1"
-msgstr "There's a notion that to grow a business, you have to be ruthless. But we know there's a better way to grow. One where what's good for the bottom line is also good for customers."
+msgid "Click to see our vision for students"
+msgstr "Click to see our vision for students"
 
-msgid "About_Mission_P2"
-msgstr "We believe businesses can grow with a conscience, and succeed with a soul — and that they can do it with inbound."
+msgid "About_Goal_P1"
+msgstr "We know that finding the right room can be stressful, especially in a new city. FindMyDorm was created to bridge the gap between students and their ideal homes."
 
-msgid "Our Story"
-msgstr "Our Story"
+msgid "About_Goal_P2"
+msgstr "Our platform focuses on transparency, real reviews, and verified residents, so you can book with confidence."
 
-msgid "About_Story_P1"
-msgstr "As graduate students at MIT in 2004, Brian and Dharmesh noticed a shift in the way people shop and buy."
+msgid "Built by Students, for Students"
+msgstr "Built by Students, for Students"
 
-msgid "About_Story_P2"
-msgstr "Consumers were no longer tolerating interruptive bids for their attention — in fact, they had become quite adept at ignoring them."
+msgid "Click to see how we help"
+msgstr "Click to see how we help"
+
+msgid "About_Community_P1"
+msgstr "FindMyDorm started as a small project by students who were tired of hidden costs and poor dormitory conditions."
+
+msgid "About_Community_P2"
+msgstr "Today, we help thousands find communities, not just rooms. We believe your dorm should be where lifelong friendships begin."
 
 msgid "My Profile"
 msgstr "My Profile"
