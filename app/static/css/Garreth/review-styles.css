@@ -1,0 +1,118 @@
+/**
+ * FILE: review-styles.css
+ * AUTHOR: Garreth (C24451694)
+ */
+
+#germanChecklist li {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+/* Override Bootstrap blue border on checklist card */
+[data-lang="de"] .card.border-primary,
+[data-lang="de"] .card.shadow.border-primary {
+    border-color: #212529 !important;
+    border-width: 2px !important;
+}
+
+/* Override Bootstrap blue text on checklist heading */
+[data-lang="de"] .text-primary,
+[data-lang="de"] h5.text-primary,
+[data-lang="de"] .fw-bold.text-primary {
+    color: #212529 !important;
+}
+
+/* Checklist success state — black not green */
+[data-lang="de"] .text-success,
+[data-lang="de"] #germanChecklist .text-success {
+    color: #212529 !important;
+}
+
+[data-lang="de"] #germanChecklist .fw-bold {
+    color: #212529 !important;
+}
+
+/* Button overrides */
+[data-lang="de"] .btn-primary {
+    background-color: #212529 !important;
+    border-color: #212529 !important;
+    color: #ffffff !important;
+}
+
+[data-lang="zh"] .btn-primary {
+    background-color: #ff6633 !important;
+    border-color: #ff6633 !important;
+    color: #ffffff !important;
+}
+
+/* Chinese other reviews panel avatar */
+[data-lang="zh"] .zh-avatar.flex-shrink-0 {
+    width: 40px;
+    height: 40px;
+    background: #ff6633;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 2px solid white;
+    flex-shrink: 0;
+    margin-right: 0;
+}
+
+/* ===== PROPERTY PREVIEW ===== */
+.property-preview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    border: 1px solid #dee2e6;
+}
+
+.property-preview img {
+    width: 90px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.property-preview .property-info .property-name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.property-preview .property-info .property-location {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.property-preview .property-info .property-location i {
+    color: #6c757d;
+    margin-right: 4px;
+}
+
+/* German property preview */
+[data-lang="de"] .property-preview {
+    border-color: #212529;
+}
+
+[data-lang="de"] .property-preview .property-info .property-location i {
+    color: #212529;
+}
+
+/* Chinese property preview */
+[data-lang="zh"] .property-preview {
+    border-color: #ff6633;
+    background: #fff8f5;
+}
+
+[data-lang="zh"] .property-preview .property-info .property-location i {
+    color: #ff6633;
+}

@@ -38,7 +38,7 @@ def login():
 def set_language(lang_code):
     # If the language matches one of the languages we are facilitating
     # Change the value of the language variable in session to that
-    if lang_code in ['en', 'cn', 'de']:
+    if lang_code in ['en', 'zh', 'de']:
         session['language'] = lang_code
     # Redirect the page to the page from which the language change
     # request was made
