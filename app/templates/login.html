@@ -3,12 +3,6 @@
 {% block extra_css %}
     <link href="{{ url_for('static', filename='css/Garreth/components-styles.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/Garreth/login-styles.css') }}" rel="stylesheet" />
-
-    {% if session.get('language') == 'zh' %}
-        <link href="{{ url_for('static', filename='css/Garreth/chinese-styles.css') }}" rel="stylesheet" />
-    {% elif session.get('language') == 'de' %}
-        <link href="{{ url_for('static', filename='css/Garreth/german-styles.css') }}" rel="stylesheet" />
-    {% endif %}
 {% endblock %}
 
 {% block extra_js %}

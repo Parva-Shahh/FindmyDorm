@@ -1,4 +1,70 @@
 {% extends "base.html" %}
-{% block main %}
 
+{% block extra_css %}
+    <!-- This ensures your reveal logic and card hover effects work with their base -->
+    <link href="{{ url_for('static', filename='css/components-styles.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block main %}
+<!-- 1. Changed to min-vh-100 to ensure the container is always at least screen-height -->
+<div class="container py-5 d-flex flex-column min-vh-100">
+
+    <!-- SECTION 1: MISSION -->
+    <div class="row align-items-center mb-5 gx-5">
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-4">{{ _('Our Mission') }}</h2>
+
+            {# IMPORTANT: Using 'zh' here because your routes.py normalizes 'cn' to 'zh' #}
+            {% if session.get('language') == 'zh' %}
+                <input type="checkbox" id="mission-toggle" class="toggle-input d-none">
+                <label for="mission-toggle" class="reveal-btn">
+                    <i class="fas fa-eye me-2"></i>{{ _('Click the image to reveal our mission') }}
+                </label>
+                <div class="reveal-content">
+                    <p>{{ _('About_Mission_P1') }}</p>
+                    <p>{{ _('About_Mission_P2') }}</p>
+                    <a href="{{ url_for('profile') }}" class="btn btn-primary btn-sm mt-2">{{ _('View Resident Profile') }}</a>
+                </div>
+            {% else %}
+                <p>{{ _('About_Mission_P1') }}</p>
+                <p>{{ _('About_Mission_P2') }}</p>
+                <a href="{{ url_for('profile') }}" class="btn btn-primary mt-2 shadow-sm">{{ _('View Resident Profile') }}</a>
+            {% endif %}
+        </div>
+        <div class="col-lg-6 text-center">
+            <img src="{{ url_for('static', filename='assets/image1.jpg') }}" class="img-fluid rounded shadow">
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- SECTION 2: STORY -->
+    <div class="row align-items-center mb-5 gx-5 flex-column-reverse flex-lg-row">
+        <div class="col-lg-6 text-center">
+            <img src="{{ url_for('static', filename='assets/image4.jpg') }}" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-4">{{ _('Our Story') }}</h2>
+            {% if session.get('language') == 'zh' %}
+                <input type="checkbox" id="story-toggle" class="toggle-input d-none">
+                <label for="story-toggle" class="reveal-btn">
+                    <i class="fas fa-eye me-2"></i>{{ _('Click the image to reveal our story') }}
+                </label>
+                <div class="reveal-content">
+                    <p>{{ _('About_Story_P1') }}</p>
+                    <p>{{ _('About_Story_P2') }}</p>
+                    <a href="{{ url_for('profile') }}" class="btn btn-outline-primary btn-sm mt-2">{{ _('Ask a Resident') }}</a>
+                </div>
+            {% else %}
+                <p>{{ _('About_Story_P1') }}</p>
+                <p>{{ _('About_Story_P2') }}</p>
+                <a href="{{ url_for('profile') }}" class="btn btn-outline-primary mt-2 shadow-sm">{{ _('Ask a Resident') }}</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 2. This spacer uses mt-auto to push the footer away and pb-5 to prevent overlapping -->
+    <div class="mt-auto pb-5"></div>
+
+</div>
 {% endblock %}

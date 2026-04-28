@@ -1,0 +1,86 @@
+/**
+ * GLOBAL LAYOUT: Navigation & Footer Themes
+ */
+
+:root {
+    --primary-blue: #0d6efd;
+    --zh-orange: #ff6633;
+    --de-black: #212529;
+}
+
+/* ===== DEFAULT / ENGLISH THEME (White) ===== */
+#mainNav {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #dee2e6;
+}
+#mainNav .nav-link {
+    color: #212529 !important;
+}
+#mainNav .navbar-brand {
+    color: var(--primary-blue) !important;
+}
+#mainNav .btn-outline-light {
+    color: #212529 !important;
+    border-color: #dee2e6 !important;
+}
+#mainNav .btn-outline-light.active {
+    background-color: var(--primary-blue) !important;
+    color: #ffffff !important;
+}
+#mainFooter {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+}
+
+/* ===== CHINESE THEME (Orange) ===== */
+[data-lang="zh"] #mainNav {
+    background-color: var(--zh-orange) !important;
+    border: none !important;
+}
+[data-lang="zh"] #mainNav .nav-link,
+[data-lang="zh"] #mainNav .navbar-brand {
+    color: #ffffff !important;
+}
+[data-lang="zh"] #mainNav .btn-outline-light.active {
+    background-color: #ffffff !important;
+    color: var(--zh-orange) !important;
+}
+[data-lang="zh"] #mainFooter {
+    background-color: var(--zh-orange) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+[data-lang="zh"] #mainNav .text-white-50 {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+[data-lang="zh"] #mainNav .btn-outline-light {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* ===== GERMAN THEME (Black) ===== */
+[data-lang="de"] #mainNav {
+    background-color: var(--de-black) !important;
+    border: none !important;
+}
+[data-lang="de"] #mainNav .nav-link,
+[data-lang="de"] #mainNav .navbar-brand {
+    color: #ffffff !important;
+}
+[data-lang="de"] #mainNav .btn-outline-light.active {
+    background-color: #ffffff !important;
+    color: var(--de-black) !important;
+}
+[data-lang="de"] #mainFooter {
+    background-color: var(--de-black) !important;
+    color: #adb5bd !important;
+    border: none !important;
+}
+[data-lang="de"] #mainNav .text-white-50 {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+[data-lang="de"] #mainNav .btn-outline-light {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.6) !important;
+}

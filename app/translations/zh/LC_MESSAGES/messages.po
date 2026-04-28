@@ -1,30 +1,50 @@
-# Chinese (Simplified) Translations for FindMyDorm
-# Copyright (C) 2026 FindMyDorm
-#
 msgid ""
 msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
 "Project-Id-Version: FindMyDorm 1.0\n"
 "PO-Revision-Date: 2026-01-01 00:00+0000\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+"Language: zh\n"
 
+msgid "Our Mission"
+msgstr "我们的使命"
+
+msgid "About_Mission_P1"
+msgstr "有一种观念认为，要发展业务，就必须冷酷无情。但我们知道有更好的成长方式。在这种方式中，对底线有利的事情也对客户有利。"
 msgid "Home"
 msgstr "首页"
 
+msgid "About_Mission_P2"
+msgstr "我们相信企业可以凭良心发展，并凭借灵魂获得成功——而且他们可以通过入境营销做到这一点。"
 msgid "About"
 msgstr "关于"
 
+msgid "Our Story"
+msgstr "我们的故事"
 msgid "Listings"
 msgstr "房源"
 
+msgid "About_Story_P1"
+msgstr "作为 2004 年麻省理工学院的研究生，Brian 和 Dharmesh 注意到人们购物和购买方式发生了变化。"
 msgid "Reviews"
 msgstr "评价"
+
+msgid "About_Story_P2"
+msgstr "消费者不再容忍打扰性的注意力争夺——事实上，他们已经变得非常善于忽视这些干扰。"
+
+msgid "Log In"
+msgstr "登录"
 
 msgid "Login"
 msgstr "登录"
 
+msgid "My Profile"
+msgstr "我的个人资料"
 msgid "Profile"
 msgstr "个人资料"
 
@@ -73,36 +93,58 @@ msgstr "准备登录"
 msgid "Write a Review"
 msgstr "撰写评价"
 
+msgid "Status"
+msgstr "状态"
 msgid "Your Rating"
 msgstr "您的评分"
 
+msgid "About Me"
+msgstr "关于我"
 msgid "Review Title"
 msgstr "评价标题"
 
+msgid "Ask a Resident"
+msgstr "咨询住户"
 msgid "Summary"
 msgstr "简要概述"
 
+msgid "My Accommodation Reviews"
+msgstr "我的住宿评价"
 msgid "Detailed Feedback"
 msgstr "详细反馈"
 
+msgid "Watch Video Review"
+msgstr "观看视频评价"
 msgid "Describe your stay"
 msgstr "描述您的入住体验"
 
+msgid "View Resident Profile"
+msgstr "查看住户资料"
 msgid "Location"
 msgstr "位置"
 
+msgid "My Saved"
+msgstr "我的保存"
 msgid "Cleanliness"
 msgstr "清洁度"
 
+msgid "Click the image to see more details"
+msgstr "点击图片查看更多详情"
 msgid "Value"
 msgstr "性价比"
 
+msgid "Click the image to reveal our mission"
+msgstr "点击图片揭示我们的使命"
 msgid "Post Review"
 msgstr "发布评价"
 
+msgid "Click the image to reveal our story"
+msgstr "点击图片揭示我们的故事"
 msgid "Submission Progress"
 msgstr "提交进度"
 
+msgid "CLICK TO REVEAL"
+msgstr "点击以查看"
 msgid "Overall Rating"
 msgstr "总体评分"
 
