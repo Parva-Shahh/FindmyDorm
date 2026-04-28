@@ -1,0 +1,324 @@
+/* ============================================================
+   FindMyDorm — de_listings.css
+   German locale: Trivago-inspired layout
+   Colours match existing DE navbar: #212529 dark / #ffffff text
+   Navbar handled by base.html + nav-footer-styles.css
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap');
+
+/* ── Tokens — DE: dark theme ────────────────────────────────── */
+:root {
+  --de-primary:        #212529;
+  --de-primary-dark:   #16191c;
+  --de-primary-light:  #e9ecef;
+  --de-accent:         #fd7e14;
+  --de-accent-dark:    #e06c0c;
+  --de-green:          #198754;
+  --de-text:           #212529;
+  --de-text-muted:     #6c757d;
+  --de-text-light:     #adb5bd;
+  --de-bg:             #f8f9fa;
+  --de-card-bg:        #ffffff;
+  --de-border:         #dee2e6;
+  --de-radius:         0.5rem;
+  --de-radius-sm:      0.3rem;
+  --de-shadow:         0 1px 3px rgba(0,0,0,0.08);
+  --de-shadow-hover:   0 4px 16px rgba(0,0,0,0.15);
+  --de-transition:     0.18s ease;
+}
+
+body { font-family: 'Nunito Sans', 'Raleway', sans-serif; background: var(--de-bg); color: var(--de-text); }
+
+/* ── Search bar ─────────────────────────────────────────────── */
+.search-bar-wrapper {
+  background: var(--de-primary);
+  padding: 1.1rem 1.5rem;
+  border-bottom: none;
+}
+
+.search-container {
+  position: relative;
+  max-width: 100%; margin: 0;
+  display: flex;
+}
+
+.search-pill {
+  flex: 1;
+  border: none;
+  border-radius: var(--de-radius) 0 0 var(--de-radius);
+  padding: 0.8rem 1rem 0.8rem 3rem;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 1rem; font-weight: 600;
+  color: var(--de-text); background: #fff; outline: none;
+}
+
+.search-pill:focus { box-shadow: inset 0 0 0 2px var(--de-accent); }
+.search-pill::placeholder { color: var(--de-text-light); font-weight: 400; }
+
+.search-icon {
+  position: absolute; left: 1rem; top: 50%;
+  transform: translateY(-50%);
+  color: var(--de-text-muted); font-size: 1rem;
+  pointer-events: none; z-index: 1;
+}
+
+.de-search-btn {
+  background: var(--de-accent); color: #fff;
+  border: none; border-radius: 0 var(--de-radius) var(--de-radius) 0;
+  padding: 0 1.75rem;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 800;
+  cursor: pointer; letter-spacing: 0.03em;
+  transition: background var(--de-transition);
+  white-space: nowrap;
+}
+
+.de-search-btn:hover { background: var(--de-accent-dark); }
+
+/* ── Hide base HTML blocks (DE JS rebuilds into Trivago layout) */
+.filter-bar-wrapper   { display: none !important; }
+.listings-map-wrapper { display: none !important; }
+
+/* ── Map banner — full width below search ───────────────────── */
+.de-map-banner {
+  width: 100%; height: 240px;
+  border-bottom: 3px solid var(--de-primary);
+}
+
+.de-map-banner #dormMap { width: 100%; height: 100%; }
+
+/* ── Results bar ────────────────────────────────────────────── */
+.de-results-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--de-border);
+  padding: 0.55rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'Nunito Sans', sans-serif; font-size: 0.85rem;
+}
+
+.de-results-count { font-weight: 800; color: var(--de-text); }
+
+.de-sort-select {
+  border: 1px solid var(--de-border); border-radius: var(--de-radius-sm);
+  padding: 0.25rem 0.6rem;
+  font-family: 'Nunito Sans', sans-serif; font-size: 0.82rem;
+  color: var(--de-text); background: #fff; cursor: pointer; outline: none; margin-left: 0.5rem;
+}
+
+/* ── Main layout ────────────────────────────────────────────── */
+.de-layout {
+  display: flex; align-items: flex-start;
+  padding: 1.25rem 1.5rem 3rem; gap: 1.25rem;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.de-sidebar {
+  width: 250px; flex-shrink: 0;
+  position: sticky; top: 1rem;
+  max-height: calc(100vh - 2rem); overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.de-sidebar::-webkit-scrollbar { width: 4px; }
+.de-sidebar::-webkit-scrollbar-thumb { background: var(--de-border); border-radius: 2px; }
+
+.de-filter-reset {
+  display: block; width: 100%; text-align: center;
+  font-size: 0.78rem; font-weight: 800;
+  color: #fff; background: var(--de-primary);
+  border: 1px solid var(--de-primary); border-radius: var(--de-radius-sm);
+  padding: 0.5rem; margin-bottom: 0.75rem;
+  cursor: pointer; font-family: 'Nunito Sans', sans-serif;
+  transition: background var(--de-transition);
+}
+
+.de-filter-reset:hover { background: var(--de-primary-dark); border-color: var(--de-primary-dark); }
+
+.de-filter-section {
+  background: var(--de-card-bg); border: 1px solid var(--de-border);
+  border-radius: var(--de-radius); margin-bottom: 0.65rem; overflow: hidden;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.de-filter-header {
+  padding: 0.65rem 0.9rem;
+  font-size: 0.78rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--de-text); background: #f8f9fa;
+  border-bottom: 1px solid var(--de-border);
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; user-select: none;
+}
+
+.de-filter-header .de-chevron {
+  font-size: 0.65rem; color: var(--de-text-muted);
+  transition: transform var(--de-transition);
+}
+
+.de-filter-header.collapsed .de-chevron { transform: rotate(-90deg); }
+
+.de-filter-body { padding: 0.5rem 0.9rem 0.65rem; }
+
+.de-filter-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.28rem 0; cursor: pointer;
+}
+
+.de-filter-item:hover .de-filter-label { color: var(--de-accent); }
+
+.de-filter-left { display: flex; align-items: center; gap: 0.45rem; }
+
+.de-filter-label {
+  font-size: 0.82rem; font-weight: 600; color: var(--de-text);
+  transition: color var(--de-transition);
+}
+
+.de-filter-count { font-size: 0.72rem; color: var(--de-text-light); }
+
+.de-filter-check { accent-color: var(--de-accent); width: 14px; height: 14px; cursor: pointer; }
+
+/* ── Listings column ────────────────────────────────────────── */
+.de-listings {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: 0.85rem;
+}
+
+/* ── Horizontal card ────────────────────────────────────────── */
+.de-hcard {
+  background: var(--de-card-bg); border: 1px solid var(--de-border);
+  border-radius: var(--de-radius); box-shadow: var(--de-shadow);
+  display: flex; overflow: hidden;
+  transition: box-shadow var(--de-transition), transform var(--de-transition);
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.de-hcard:hover { box-shadow: var(--de-shadow-hover); transform: translateY(-2px); }
+
+.de-hcard-img {
+  width: 220px; flex-shrink: 0;
+  position: relative; overflow: hidden; background: #e9ecef;
+}
+
+.de-hcard-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.4s ease;
+}
+
+.de-hcard:hover .de-hcard-img img { transform: scale(1.04); }
+
+.de-badge {
+  position: absolute; top: 0.5rem; left: 0.5rem;
+  font-size: 0.65rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  padding: 0.22em 0.6em; border-radius: var(--de-radius-sm);
+  background: rgba(255,255,255,0.93); color: var(--de-text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.de-hcard-body {
+  flex: 1; padding: 0.9rem 1.1rem;
+  display: flex; flex-direction: column; justify-content: space-between; min-width: 0;
+}
+
+.de-hcard-title { font-size: 1rem; font-weight: 800; color: var(--de-text); margin-bottom: 0.2rem; line-height: 1.3; }
+.de-hcard-address { font-size: 0.78rem; color: var(--de-text-muted); margin-bottom: 0.55rem; }
+
+.de-hcard-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.6rem; }
+
+.de-hcard-tag {
+  font-size: 0.68rem; font-weight: 700; color: var(--de-text-muted);
+  background: #f8f9fa; border: 1px solid var(--de-border);
+  border-radius: var(--de-radius-sm); padding: 0.15em 0.55em;
+}
+
+.de-hcard-rating { display: flex; align-items: center; gap: 0.45rem; }
+
+.de-rating-score {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2rem; height: 2rem; border-radius: 50% 50% 50% 0;
+  background: var(--de-primary); color: #fff;
+  font-size: 0.8rem; font-weight: 900; flex-shrink: 0;
+}
+
+.de-rating-label { font-size: 0.8rem; font-weight: 700; color: var(--de-text); }
+.de-rating-reviews { font-size: 0.7rem; color: var(--de-text-light); margin-left: 0.25rem; }
+
+.de-hcard-aside {
+  width: 185px; flex-shrink: 0; padding: 0.9rem 1rem;
+  border-left: 1px solid var(--de-border); background: #f8f9fa;
+  display: flex; flex-direction: column;
+  justify-content: space-between; align-items: flex-end; text-align: right;
+}
+
+.de-price-from  { font-size: 0.7rem; color: var(--de-text-light); display: block; }
+.de-price-amount { font-size: 1.6rem; font-weight: 900; color: var(--de-text); line-height: 1; }
+.de-price-per   { font-size: 0.7rem; color: var(--de-text-light); display: block; margin-bottom: 0.4rem; }
+
+.de-deal-badge {
+  font-size: 0.65rem; font-weight: 800; color: var(--de-green);
+  background: #d1e7dd; border: 1px solid #a3cfbb;
+  border-radius: var(--de-radius-sm); padding: 0.18em 0.5em;
+  margin-bottom: 0.65rem; display: inline-block;
+}
+
+.de-view-btn {
+  display: block; width: 100%;
+  background: var(--de-primary); border: none;
+  border-radius: var(--de-radius-sm); color: #fff;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.83rem; font-weight: 800;
+  padding: 0.55rem 0.75rem; text-align: center; cursor: pointer;
+  transition: background var(--de-transition), box-shadow var(--de-transition);
+}
+
+.de-view-btn:hover {
+  background: var(--de-primary-dark);
+  box-shadow: 0 4px 10px rgba(33,37,41,0.3);
+}
+
+/* Map pins */
+.map-price-pin {
+  background: var(--de-primary); color: #fff;
+  font-size: 0.7rem; font-weight: 800; padding: 3px 9px;
+  border-radius: var(--de-radius-sm);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25); white-space: nowrap; cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+  transition: background var(--de-transition), transform var(--de-transition);
+}
+
+.map-price-pin:hover { background: var(--de-primary-dark); transform: scale(1.1); }
+
+.leaflet-popup-content-wrapper {
+  border-radius: var(--de-radius); font-family: 'Nunito Sans', sans-serif; font-size: 0.82rem;
+}
+
+/* Stagger */
+.de-hcard-wrapper { animation: deFadeUp 0.3s ease both; }
+.de-hcard-wrapper:nth-child(1) { animation-delay: 0.04s; }
+.de-hcard-wrapper:nth-child(2) { animation-delay: 0.08s; }
+.de-hcard-wrapper:nth-child(3) { animation-delay: 0.12s; }
+.de-hcard-wrapper:nth-child(4) { animation-delay: 0.16s; }
+
+@keyframes deFadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .de-layout { flex-direction: column; padding: 1rem; }
+  .de-sidebar { width: 100%; position: relative; max-height: none; }
+  .de-hcard-img { width: 160px; }
+  .de-hcard-aside { width: 150px; }
+}
+
+@media (max-width: 580px) {
+  .de-hcard { flex-direction: column; }
+  .de-hcard-img { width: 100%; height: 170px; }
+  .de-hcard-aside {
+    width: 100%; border-left: none; border-top: 1px solid var(--de-border);
+    flex-direction: row; align-items: center; justify-content: space-between; text-align: left;
+  }
+  .de-map-banner { height: 180px; }
+}
