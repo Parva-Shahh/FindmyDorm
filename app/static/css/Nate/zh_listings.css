@@ -31,6 +31,9 @@ body {
   font-family: 'Noto Sans SC', 'Raleway', sans-serif;
   background: var(--zh-bg);
   color: var(--zh-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Search bar ─────────────────────────────────────────────── */

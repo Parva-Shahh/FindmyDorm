@@ -1,56 +1,85 @@
+# Chinese (Simplified) Translations for FindMyDorm
+# Copyright (C) 2026 FindMyDorm
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
 "Project-Id-Version: FindMyDorm 1.0\n"
 "PO-Revision-Date: 2026-01-01 00:00+0000\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-"Language: zh\n"
 
-msgid "Our Mission"
-msgstr "我们的使命"
-
-msgid "About_Mission_P1"
-msgstr "有一种观念认为，要发展业务，就必须冷酷无情。但我们知道有更好的成长方式。在这种方式中，对底线有利的事情也对客户有利。"
+# ── Navigation ──────────────────────────────────────────────────────────────
 msgid "Home"
 msgstr "首页"
 
-msgid "About_Mission_P2"
-msgstr "我们相信企业可以凭良心发展，并凭借灵魂获得成功——而且他们可以通过入境营销做到这一点。"
 msgid "About"
 msgstr "关于"
 
-msgid "Our Story"
-msgstr "我们的故事"
 msgid "Listings"
 msgstr "房源"
 
-msgid "About_Story_P1"
-msgstr "作为 2004 年麻省理工学院的研究生，Brian 和 Dharmesh 注意到人们购物和购买方式发生了变化。"
 msgid "Reviews"
 msgstr "评价"
-
-msgid "About_Story_P2"
-msgstr "消费者不再容忍打扰性的注意力争夺——事实上，他们已经变得非常善于忽视这些干扰。"
-
-msgid "Log In"
-msgstr "登录"
 
 msgid "Login"
 msgstr "登录"
 
-msgid "My Profile"
-msgstr "我的个人资料"
+msgid "Log In"
+msgstr "登录"
+
 msgid "Profile"
 msgstr "个人资料"
 
 msgid "Copyright"
 msgstr "版权所有"
 
+# ── About page ───────────────────────────────────────────────────────────────
+msgid "Our Mission"
+msgstr "我们的使命"
+
+msgid "About_Mission_P1"
+msgstr "有一种观念认为，要发展业务，就必须冷酷无情。但我们知道有更好的成长方式。在这种方式中，对底线有利的事情也对客户有利。"
+
+msgid "About_Mission_P2"
+msgstr "我们相信企业可以凭良心发展，并凭借灵魂获得成功——而且他们可以通过入境营销做到这一点。"
+
+msgid "Our Story"
+msgstr "我们的故事"
+
+msgid "About_Story_P1"
+msgstr "作为 2004 年麻省理工学院的研究生，Brian 和 Dharmesh 注意到人们购物和购买方式发生了变化。"
+
+msgid "About_Story_P2"
+msgstr "消费者不再容忍打扰性的注意力争夺——事实上，他们已经变得非常善于忽视这些干扰。"
+
+msgid "Student Housing Made Simple"
+msgstr "让学生租房变得简单"
+
+msgid "Click to see our vision for students"
+msgstr "点击查看我们为学生设计的愿景"
+
+msgid "About_Goal_P1"
+msgstr "我们知道寻找合适的房间可能会压力很大，尤其是在一个陌生的城市。FindMyDorm 的创建是为了缩短学生与理想家园之间的距离。"
+
+msgid "About_Goal_P2"
+msgstr "我们的平台专注于透明度、真实评价和经过验证的住户，让您可以放心地预订。"
+
+msgid "Built by Students, for Students"
+msgstr "由学生发起，为学生服务"
+
+msgid "Click to see how we help"
+msgstr "点击查看我们如何提供帮助"
+
+msgid "About_Community_P1"
+msgstr "FindMyDorm 最初是由几名厌倦了隐藏费用和劣质宿舍环境的学生发起的一个小项目。"
+
+msgid "About_Community_P2"
+msgstr "今天，我们帮助成千上万的人找到社区，而不仅仅是房间。我们相信，宿舍应该是开启终身友谊的地方。"
+
+# ── Login / Auth ─────────────────────────────────────────────────────────────
 msgid "Sign In"
 msgstr "登录"
 
@@ -90,61 +119,65 @@ msgstr "已输入密码"
 msgid "Ready to sign in"
 msgstr "准备登录"
 
-msgid "Write a Review"
-msgstr "撰写评价"
+# ── Profile ───────────────────────────────────────────────────────────────────
+msgid "My Profile"
+msgstr "我的个人资料"
 
 msgid "Status"
 msgstr "状态"
-msgid "Your Rating"
-msgstr "您的评分"
 
 msgid "About Me"
 msgstr "关于我"
-msgid "Review Title"
-msgstr "评价标题"
 
 msgid "Ask a Resident"
 msgstr "咨询住户"
-msgid "Summary"
-msgstr "简要概述"
 
 msgid "My Accommodation Reviews"
 msgstr "我的住宿评价"
-msgid "Detailed Feedback"
-msgstr "详细反馈"
 
 msgid "Watch Video Review"
 msgstr "观看视频评价"
-msgid "Describe your stay"
-msgstr "描述您的入住体验"
 
 msgid "View Resident Profile"
 msgstr "查看住户资料"
-msgid "Location"
-msgstr "位置"
 
 msgid "My Saved"
 msgstr "我的保存"
+
+# ── Review page ───────────────────────────────────────────────────────────────
+msgid "Write a Review"
+msgstr "撰写评价"
+
+msgid "Your Rating"
+msgstr "您的评分"
+
+msgid "Review Title"
+msgstr "评价标题"
+
+msgid "Summary"
+msgstr "简要概述"
+
+msgid "Detailed Feedback"
+msgstr "详细反馈"
+
+msgid "Describe your stay"
+msgstr "描述您的入住体验"
+
+msgid "Location"
+msgstr "位置"
+
 msgid "Cleanliness"
 msgstr "清洁度"
 
-msgid "Click the image to see more details"
-msgstr "点击图片查看更多详情"
 msgid "Value"
 msgstr "性价比"
 
-msgid "Click the image to reveal our mission"
-msgstr "点击图片揭示我们的使命"
 msgid "Post Review"
 msgstr "发布评价"
 
-msgid "Click the image to reveal our story"
-msgstr "点击图片揭示我们的故事"
 msgid "Submission Progress"
 msgstr "提交进度"
 
-msgid "CLICK TO REVEAL"
-msgstr "点击以查看"
 msgid "Overall Rating"
 msgstr "总体评分"
 
@@ -168,3 +201,422 @@ msgstr "价格合理，房间宽敞，非常推荐！"
 
 msgid "Internet speed could be improved, otherwise very satisfied."
 msgstr "网络速度有待提高，其他方面都很满意。"
+
+msgid "Click the image to reveal our mission"
+msgstr "点击图片揭示我们的使命"
+
+msgid "Click the image to reveal our story"
+msgstr "点击图片揭示我们的故事"
+
+msgid "Click the image to see more details"
+msgstr "点击图片查看更多详情"
+
+msgid "CLICK TO REVEAL"
+msgstr "点击以查看"
+
+# ── Homepage – shared ─────────────────────────────────────────────────────────
+msgid "University"
+msgstr "大学"
+
+msgid "Select University"
+msgstr "选择大学"
+
+msgid "Room Type"
+msgstr "房间类型"
+
+msgid "Any Type"
+msgstr "所有类型"
+
+msgid "En-Suite"
+msgstr "套间"
+
+msgid "Studio"
+msgstr "单间公寓"
+
+msgid "Shared"
+msgstr "合租"
+
+msgid "Private"
+msgstr "私人房间"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Universities"
+msgstr "大学"
+
+msgid "Providers"
+msgstr "提供商"
+
+msgid "week"
+msgstr "周"
+
+msgid "weeks"
+msgstr "周"
+
+msgid "Irish Universities"
+msgstr "爱尔兰大学"
+
+msgid "Featured Accommodations"
+msgstr "精选公寓"
+
+msgid "How FindMyDorm Works"
+msgstr "FindMyDorm如何运作"
+
+msgid "Real Students, Real Reviews"
+msgstr "真实学生，真实评价"
+
+msgid "What Students Say"
+msgstr "同学们怎么说"
+
+msgid "Step"
+msgstr "第"
+
+msgid "View Listing"
+msgstr "查看房源"
+
+msgid "View All Listings"
+msgstr "查看所有房源"
+
+msgid "View Listings"
+msgstr "查看房源"
+
+msgid "View Full Listing"
+msgstr "查看完整房源"
+
+msgid "View Details"
+msgstr "查看详情"
+
+msgid "Browse Listings"
+msgstr "浏览房源"
+
+# ── Homepage – Chinese layout ─────────────────────────────────────────────────
+msgid "Ireland's Most Social Student Housing Platform"
+msgstr "爱尔兰最具社交性的学生住房平台"
+
+msgid "Find Your"
+msgstr "找到你的"
+
+msgid "Community"
+msgstr "理想社区"
+
+msgid "Perfect Dorm"
+msgstr "完美宿舍"
+
+msgid "in Ireland"
+msgstr "在爱尔兰"
+
+msgid "Discover student accommodation loved by thousands. Read real peer reviews, explore communities, and connect with residents before you book."
+msgstr "探索深受数千名学生喜爱的公寓。阅读真实同伴评价，探索社区，入住前与居民直接交流。"
+
+msgid "Chat live with current residents before you decide"
+msgstr "入住前与在住学生实时聊天，获取第一手信息"
+
+msgid "Explore"
+msgstr "探索"
+
+msgid "Trending:"
+msgstr "🔥 热门："
+
+msgid "98 students viewed Yugo Dublin today"
+msgstr "今天98位同学查看了都柏林Yugo公寓"
+
+msgid "This week's top review"
+msgstr "本周最热评价"
+
+msgid "45 UCD students now live at Aparto"
+msgstr "45位UCD学生现居住在Aparto"
+
+msgid "Community Event: Mezzino Welcome Week"
+msgstr "社区活动：Mezzino迎新周"
+
+msgid "New: Swuite Galway now accepting bookings"
+msgstr "新消息：高威Swuite公寓现已开放预订"
+
+msgid "Student Reviews"
+msgstr "学生评价"
+
+msgid "Events"
+msgstr "社区活动"
+
+msgid "Welcome Week · Sports"
+msgstr "迎新周 · 体育活动"
+
+msgid "Shared Kitchen"
+msgstr "共享厨房"
+
+msgid "Cook & Connect"
+msgstr "一起煮饭，结交朋友"
+
+msgid "Study Spaces"
+msgstr "学习空间"
+
+msgid "Libraries · WiFi"
+msgstr "图书馆 · WiFi"
+
+msgid "Transport"
+msgstr "交通"
+
+msgid "mins to campus"
+msgstr "分钟可到校园"
+
+msgid "Most Loved by Students"
+msgstr "同学最爱"
+
+msgid "Top-rated by your fellow students — see what the community says"
+msgstr "同学评分最高——看看大家都怎么说"
+
+msgid "students already living here"
+msgstr "位同学已在这里居住"
+
+msgid "Explore Community"
+msgstr "探索社区"
+
+msgid "Your Journey"
+msgstr "你的探索之旅"
+
+msgid "Explore, connect and discover your perfect community"
+msgstr "探索、联系，发现你的理想社区"
+
+msgid "Read Reviews"
+msgstr "阅读评价"
+
+msgid "Check what real students say — peer validation you can trust."
+msgstr "查看真实学生的评价——值得信赖的同伴验证。"
+
+msgid "Connect directly with students living there right now."
+msgstr "直接与目前在住的学生联系。"
+
+msgid "Join the Community"
+msgstr "加入社区"
+
+msgid "Book confidently knowing your new community is waiting."
+msgstr "放心预订，你的新社区正在等待你的加入。"
+
+msgid "Browse listings freely and discover communities that match your vibe."
+msgstr "自由浏览房源，发现与你气场相符的社区。"
+
+msgid "authentic reviews from your fellow students"
+msgstr "条来自同学的真实评价"
+
+msgid "Great location, convenient transport, facilities nearby. The community events were amazing!"
+msgstr "位置超好，交通便利，设施齐全。社区活动非常棒！"
+
+msgid "Reasonable price, spacious rooms, highly recommended! Made so many friends here."
+msgstr "性价比超高，房间宽敞，强烈推荐！在这里交到了很多朋友。"
+
+msgid "Clean and tidy overall, friendly staff. The Ask a Resident feature was so helpful before I moved in."
+msgstr "整体干净整洁，工作人员友好。入住前使用"问问居民"功能真的很有帮助。"
+
+msgid "Internet speed could be improved, otherwise very satisfied. Great community atmosphere."
+msgstr "网速有待提升，其他方面非常满意。社区氛围很棒。"
+
+msgid "Join 10,000+ Students Who Found Their Home"
+msgstr "加入10,000+名已找到家园的学生"
+
+msgid "Explore, connect, and discover your community in Ireland"
+msgstr "探索、联系，发现你在爱尔兰的社区"
+
+msgid "Discover student communities near every Irish university"
+msgstr "探索每所爱尔兰大学附近的学生社区"
+
+msgid "Where We Cover"
+msgstr "覆盖范围"
+
+# ── Homepage – English layout keys (ZH needs fallbacks for these too) ─────────
+msgid "Ireland's #1 Student Housing Platform"
+msgstr "爱尔兰第一学生住房平台"
+
+msgid "Compare verified student accommodations across Ireland. Read honest reviews from real students and find the place that feels like home."
+msgstr "比较爱尔兰各地经过验证的学生住宿。阅读真实学生的诚实评价，找到让你有家感觉的地方。"
+
+msgid "Student accommodation options near all major Irish universities"
+msgstr "爱尔兰主要大学附近的学生住宿选择"
+
+msgid "Verified student accommodations with real reviews from students like you"
+msgstr "经过验证的学生住宿，附有像你一样的学生的真实评价"
+
+msgid "Simple Process"
+msgstr "简单流程"
+
+msgid "Find your perfect student home in just a few steps"
+msgstr "几步找到你的完美学生宿舍"
+
+msgid "Compare"
+msgstr "比较"
+
+msgid "Filter by university, price, room type, and distance to campus."
+msgstr "按大学、价格、房间类型和到校园的距离筛选。"
+
+msgid "Filter by university, price, room type, and distance."
+msgstr "按大学、价格、房间类型和距离筛选。"
+
+msgid "Read verified reviews and compare facilities side by side."
+msgstr "阅读经过验证的评价，并排比较设施。"
+
+msgid "Connect with current residents and ask your questions."
+msgstr "与现任居民联系并提问。"
+
+msgid "Book directly through the provider with confidence."
+msgstr "放心直接通过提供商预订。"
+
+msgid "Ready to Find Your Perfect Dorm?"
+msgstr "准备好找到你的完美宿舍了吗？"
+
+msgid "Join thousands of students who found their home through FindMyDorm"
+msgstr "加入数千名通过FindMyDorm找到家园的学生"
+
+msgid "FindMyDorm saved me weeks of stress. I found Yugo Dublin in minutes and the reviews were spot on."
+msgstr "FindMyDorm为我节省了数周的压力。我在几分钟内找到了都柏林Yugo，评价完全正确。"
+
+msgid "As an international student, seeing real photos and honest ratings made the whole process so much less daunting."
+msgstr "作为一名国际学生，看到真实的照片和诚实的评分，让整个过程变得不那么令人生畏。"
+
+msgid "The verified badge system gave me real peace of mind. No dodgy listings – everything is genuine and accurate."
+msgstr "经过验证的徽章系统让我真正放心。没有可疑的房源——一切都是真实准确的。"
+
+# ── Homepage – German layout keys (ZH needs fallbacks) ────────────────────────
+msgid "Verified Student Housing · Ireland"
+msgstr "已验证的爱尔兰学生住房"
+
+msgid "Verified Student Housing · Ireland"
+msgstr "已验证的爱尔兰学生住房"
+
+msgid "Compare verified student accommodations with exact specifications, transparent pricing and a clear booking process."
+msgstr "比较具有精确规格、透明定价和清晰预订流程的经过验证的学生住宿。"
+
+msgid "Verified"
+msgstr "已验证"
+
+msgid "Why Students Trust Us"
+msgstr "学生为何信任我们"
+
+msgid "Verified Listings Only"
+msgstr "仅限已验证房源"
+
+msgid "Every listing is manually checked"
+msgstr "每个房源都经过人工检查"
+
+msgid "Exact Specifications"
+msgstr "精确规格"
+
+msgid "Room size, distance, contract terms"
+msgstr "房间大小、距离、合同条款"
+
+msgid "Transparent Pricing"
+msgstr "透明定价"
+
+msgid "No hidden fees. Bills included."
+msgstr "无隐藏费用。含账单。"
+
+msgid "Real students, real feedback"
+msgstr "真实学生，真实反馈"
+
+msgid "Coverage"
+msgstr "覆盖范围"
+
+msgid "Verified accommodation near every major Irish university"
+msgstr "爱尔兰每所主要大学附近的经过验证的住宿"
+
+msgid "Top Rated"
+msgstr "评分最高"
+
+msgid "Full specifications and transparent pricing for every listing"
+msgstr "每个房源的完整规格和透明定价"
+
+msgid "Room Size"
+msgstr "房间大小"
+
+msgid "Distance to University"
+msgstr "到大学的距离"
+
+msgid "Contract Length"
+msgstr "合同期限"
+
+msgid "Bills"
+msgstr "账单"
+
+msgid "Included"
+msgstr "已包含"
+
+msgid "Weekly Price"
+msgstr "每周价格"
+
+msgid "Structured Process"
+msgstr "结构化流程"
+
+msgid "A clear, transparent four-step process"
+msgstr "清晰透明的四步流程"
+
+msgid "Compare Listings"
+msgstr "比较房源"
+
+msgid "Review exact specifications, floor plans and verified data."
+msgstr "查看精确规格、平面图和经过验证的数据。"
+
+msgid "View Details"
+msgstr "查看详情"
+
+msgid "Check contract terms, security certifications and all costs."
+msgstr "检查合同条款、安全认证和所有费用。"
+
+msgid "Book securely with full transparency over every term."
+msgstr "以对每个条款完全透明的方式安全预订。"
+
+msgid "Book"
+msgstr "预订"
+
+msgid "Start Your Structured Search"
+msgstr "开始结构化搜索"
+
+msgid "Verified listings, exact specifications, transparent pricing."
+msgstr "经过验证的房源、精确规格、透明定价。"
+
+msgid "The technical specifications and verified data gave me the confidence to book without any uncertainty. Very professional."
+msgstr "技术规格和经过验证的数据让我有信心毫无疑虑地预订。非常专业。"
+
+msgid "Exact room dimensions and distance information made comparison straightforward. No surprises on arrival."
+msgstr "精确的房间尺寸和距离信息使比较变得简单。到达时没有惊喜。"
+
+msgid "The booking progress steps kept me informed at every stage. Transparent and trustworthy process from start to finish."
+msgstr "预订进度步骤让我在每个阶段都了解情况。从头到尾透明且值得信赖的流程。"
+
+msgid "Avg. Satisfaction"
+msgstr "平均满意度"
+
+msgid "Avg. Walk"
+msgstr "平均步行时间"
+
+msgid "Avg. rent"
+msgstr "平均租金"
+
+msgid "Avg. Rent"
+msgstr "平均租金"
+
+msgid "min walk from nearest accom"
+msgstr "分钟步行到最近住宿"
+
+# University descriptions
+msgid "Ireland's largest university. Strong research culture, vibrant campus life and excellent transport links to the city centre."
+msgstr "爱尔兰最大的大学。强大的研究文化、充满活力的校园生活以及通往市中心的出色交通联系。"
+
+msgid "Consistently ranked among Ireland's top universities for graduate employment. Modern campus with purpose-built student accommodation on-site."
+msgstr "始终跻身爱尔兰应届毕业生就业率最高的大学之列。现代化校园，设有专门建造的学生住宿。"
+
+msgid "Ireland's first technological university. Located in a landmark regeneration quarter in the heart of Dublin, minutes from the city centre."
+msgstr "爱尔兰第一所技术大学。位于都柏林市中心的标志性再生区，距市中心仅几分钟路程。"
+
+msgid "Founded in 1592, Trinity is Ireland's oldest and most prestigious university. Located in the city centre, accommodation nearby is in high demand."
+msgstr "三一学院成立于1592年，是爱尔兰历史最悠久、最负盛名的大学。位于市中心，附近住宿供不应求。"
+
+msgid "A welcoming university town campus 25 km west of Dublin. Known for its friendly community atmosphere and affordable accommodation options."
+msgstr "位于都柏林以西25公里的热情大学城校园。以友好的社区氛围和实惠的住宿选择而闻名。"
+
+msgid "One of Ireland's leading research universities, set on a stunning Victorian campus. Cork city offers a lively student scene and lower living costs."
+msgstr "爱尔兰领先的研究型大学之一，坐落在令人叹为观止的维多利亚式校园内。科克市提供充满活力的学生环境和较低的生活成本。"
+
+msgid "A dynamic campus university on the banks of the River Shannon. Known for its co-operative education programme and strong industry links."
+msgstr "坐落在香农河畔的充满活力的校园大学。以其合作教育计划和强大的行业联系而闻名。"
+
+msgid "Located in the heart of one of Ireland's most vibrant cities. Renowned for its bilingual character, arts culture and thriving student community."
+msgstr "位于爱尔兰最具活力的城市之一的中心。以其双语特色、艺术文化和蓬勃发展的学生社区而闻名。"
