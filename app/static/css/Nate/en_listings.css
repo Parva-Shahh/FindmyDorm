@@ -32,6 +32,9 @@ body {
   font-family: 'DM Sans', 'Raleway', sans-serif;
   background: var(--en-bg);
   color: var(--en-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Search bar ─────────────────────────────────────────────── */
