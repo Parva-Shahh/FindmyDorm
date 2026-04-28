@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block main %}
-<div class="container py-5">
+<!-- 1. Changed to min-vh-100 to ensure the container is always at least screen-height -->
+<div class="container py-5 d-flex flex-column min-vh-100">
+
     <!-- SECTION 1: MISSION -->
     <div class="row align-items-center mb-5 gx-5">
         <div class="col-lg-6">
@@ -60,5 +62,9 @@
             {% endif %}
         </div>
     </div>
+
+    <!-- 2. This spacer uses mt-auto to push the footer away and pb-5 to prevent overlapping -->
+    <div class="mt-auto pb-5"></div>
+
 </div>
 {% endblock %}

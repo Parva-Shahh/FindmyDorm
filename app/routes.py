@@ -24,10 +24,6 @@ def about():
 def listings():
         return (render_template ("listings.html"))
 
-#Routes to Profile page - Alex
-@app.route('/profile')
-def profile():
-    return (render_template ("profile.html"))
 
 #Routes to Login page - Garreth
 @app.route('/login')
@@ -61,7 +57,7 @@ def profile():
 def set_language(lang_code):
     # If the language matches one of the languages we are facilitating
     # Change the value of the language variable in session to that
-    if lang_code in ['en', 'cn', 'de']:
+    if lang_code in ['en', 'zh', 'de']:
         session['language'] = lang_code
     # Redirect the page to the page from which the language change
     # request was made

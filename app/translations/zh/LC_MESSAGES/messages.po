@@ -38,6 +38,8 @@ msgid "About_Story_P2"
 msgstr "消费者不再容忍打扰性的注意力争夺——事实上，他们已经变得非常善于忽视这些干扰。"
 
 msgid "Log In"
+msgstr "登录"
+
 msgid "Login"
 msgstr "登录"
 
