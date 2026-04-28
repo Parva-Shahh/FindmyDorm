@@ -388,14 +388,14 @@
     overflow: hidden;
     box-shadow: 0 3px 18px rgba(0,0,0,0.10);
     text-decoration: none;
-    color: inherit;
+    color: #212529;
     transition: transform 0.22s, box-shadow 0.22s;
     display: block;
 }
 .uni-card-en:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 36px rgba(0,0,0,0.15);
-    color: inherit;
+    color: #212529;
     text-decoration: none;
 }
 .uni-card-en .uni-card-thumb {
@@ -423,19 +423,21 @@
    ============================================= */
 .uni-card-zh {
     flex: 0 0 220px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: #fff;
+    border: 2px solid #ffe0d6;
     border-radius: 14px;
     overflow: hidden;
     text-decoration: none;
-    color: #fff;
-    transition: background 0.22s, transform 0.22s;
+    color: #212529;
+    transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
     display: block;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.07);
 }
 .uni-card-zh:hover {
-    background: rgba(255,255,255,0.25);
+    border-color: #e8230a;
     transform: translateY(-4px);
-    color: #fff;
+    box-shadow: 0 10px 30px rgba(232,35,10,0.12);
+    color: #212529;
     text-decoration: none;
 }
 .uni-card-zh .uni-card-thumb {
@@ -447,11 +449,11 @@
     width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .uni-card-zh .uni-card-body { padding: 12px 14px; }
-.uni-card-zh .uni-card-name { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.88rem; color: #fff; margin-bottom: 3px; }
-.uni-card-zh .uni-card-city { font-size: 0.73rem; color: rgba(255,255,255,0.75); margin-bottom: 7px; }
+.uni-card-zh .uni-card-name { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.88rem; color: #212529; margin-bottom: 3px; }
+.uni-card-zh .uni-card-city { font-size: 0.73rem; color: #6c757d; margin-bottom: 7px; }
 .uni-card-zh .uni-card-pill {
     display: inline-block;
-    background: #fff200; color: #c0160a;
+    background: #ffe8e4; color: #c0160a;
     font-size: 0.68rem; font-weight: 700;
     padding: 2px 9px; border-radius: 50px;
 }
@@ -599,8 +601,8 @@
 .car-btn:hover { background: #0d6efd; border-color: #0d6efd; color: #fff; }
 .car-btn.prev { left: -18px; }
 .car-btn.next { right: -18px; }
-[data-lang="zh"] .car-btn { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: #fff; }
-[data-lang="zh"] .car-btn:hover { background: rgba(255,255,255,0.4); border-color: #fff; color: #fff; }
+[data-lang="zh"] .car-btn { background: #fff; border-color: #ffe0d6; color: #e8230a; }
+[data-lang="zh"] .car-btn:hover { background: #e8230a; border-color: #e8230a; color: #fff; }
 
 /* =============================================
    ACCOMMODATION CARDS (EN + ZH)
@@ -837,9 +839,9 @@
 /* =============================================
    EYEBROW THEME OVERRIDES
    ============================================= */
-[data-lang="zh"] .eyebrow { color: #fff200; }
-[data-lang="zh"] .section-heading-main { color: #fff; }
-[data-lang="zh"] .section-sub { color: rgba(255,255,255,0.80); }
+/* =============================================
+   EYEBROW / SECTION HEADING THEME OVERRIDES
+   ============================================= */
 [data-lang="de"] .eyebrow { color: #856404; letter-spacing: 3px; }
 
 /* ZH sections alternate orange hero / white content / orange / white */
