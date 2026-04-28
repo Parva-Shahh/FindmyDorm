@@ -1,61 +1,71 @@
 <!DOCTYPE html>
-<html> {% set lang_code = session["language"] %}
+<html data-lang="{{ session.get('language', 'en') }}">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Business Casual - Start Bootstrap Theme</title>
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
-        <!-- Font Awesome icons (free version)-->
+        <title>FindMyDorm - Student Accommodations</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,400,700|Lora:400,700" rel="stylesheet" />
 
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
-        <link href="{{ url_for('static', filename= 'css/' + lang_code +'/localstyle.css') }}" rel="stylesheet" />
+        <link href="{{ url_for('static', filename='css/common-styles.css') }}" rel="stylesheet" />
 
+        <!-- Load language CSS globally so theming applies on every page -->
+        {% if session.get('language') == 'zh' %}
+            <link href="{{ url_for('static', filename='css/chinese-styles.css') }}" rel="stylesheet" />
+        {% elif session.get('language') == 'de' %}
+            <link href="{{ url_for('static', filename='css/german-styles.css') }}" rel="stylesheet" />
+        {% endif %}
+
+        {% block extra_css %}{% endblock %}
     </head>
 
     <body>
-        <header>
-            <h1 class="site-heading text-center text-faded d-none d-lg-block">
-                    <span class="site-heading-upper text-primary mb-3">FindMyDorm</span>
-                    <span class="site-heading-lower">- Student accoms in Ireland!!</span>
-            </h1>
-        </header>
-        <!-- Navigation-->
-         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-3" id="mainNav">
             <div class="container">
-                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="{{url_for('index')}}">FindMyDorm</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Logo left -->
+                <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">FindMyDorm</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navContent">
+                    <!-- Links centered -->
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url_for('index') }}">{{_('Home')}}</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url_for('about') }}">{{_('About')}}</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url_for('listings') }}">{{_('Dormitories')}}</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url_for('profile') }}">{{_('MyProfile')}}</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="{{ url_for('login') }}">{{_('Log In')}}</a></li>
+                        <li class="nav-item px-lg-2"><a class="nav-link text-uppercase" href="{{ url_for('index') }}">Home</a></li>
+                        <li class="nav-item px-lg-2"><a class="nav-link text-uppercase" href="{{ url_for('about') }}">About</a></li>
+                        <li class="nav-item px-lg-2"><a class="nav-link text-uppercase" href="{{ url_for('listings') }}">Listings</a></li>
+                        <li class="nav-item px-lg-2"><a class="nav-link text-uppercase" href="{{ url_for('review') }}">Reviews</a></li>
+                        <li class="nav-item px-lg-2"><a class="nav-link text-uppercase" href="{{ url_for('login') }}">Login</a></li>
+                        <li class="nav-item px-lg-2"><a class="nav-link text-uppercase" href="{{ url_for('profile') }}">Profile</a></li>
                     </ul>
+
+                    <!-- Language switcher far right -->
+                    <div class="d-flex align-items-center gap-1 ms-lg-3 mt-3 mt-lg-0">
+                        <span class="text-white-50 small me-1 fw-bold">LANG:</span>
+                        <a href="{{ url_for('set_language', lang_code='en') }}"
+                           class="btn btn-sm btn-outline-light {% if session.get('language', 'en') == 'en' %}active{% endif %}">EN</a>
+                        <a href="{{ url_for('set_language', lang_code='zh') }}"
+                           class="btn btn-sm btn-outline-light {% if session.get('language') == 'zh' %}active{% endif %}">CN</a>
+                        <a href="{{ url_for('set_language', lang_code='de') }}"
+                           class="btn btn-sm btn-outline-light {% if session.get('language') == 'de' %}active{% endif %}">DE</a>
+                    </div>
                 </div>
             </div>
         </nav>
 
+        {% block main %}{% endblock %}
 
-        {% block main %}
-        {% endblock %}
-
-        <footer class="footer text-faded text-center py-5">
-            <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2022</p></div>
+        <footer class="footer text-faded text-center py-4" id="mainFooter">
+            <div class="container">
+                <p class="m-0 small">Copyright &copy; FindMyDorm 2026</p>
+            </div>
         </footer>
 
-        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-            <!-- Core theme JS-->
-        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-
+        {% block extra_js %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,78 @@
+/**
+ * FILE: chinese-styles.css
+ * AUTHOR: Garreth (C24451694)
+ */
+
+/* ===== NAVBAR & FOOTER ===== */
+[data-lang="zh"] #mainNav {
+    background-color: #ff6633 !important;
+}
+
+[data-lang="zh"] #mainFooter {
+    background-color: #ff6633 !important;
+    color: #ffffff !important;
+}
+
+/* ===== HEADINGS ===== */
+[data-lang="zh"] .section-heading,
+[data-lang="zh"] .section-heading-lower,
+[data-lang="zh"] h2,
+[data-lang="zh"] h5.fw-bold {
+    color: #ff6633 !important;
+}
+
+/* ===== STARS ===== */
+[data-lang="zh"] .star-rating input:checked ~ label,
+[data-lang="zh"] .star-rating label:hover,
+[data-lang="zh"] .star-rating label:hover ~ label {
+    color: #ff6633 !important;
+}
+
+/* ===== BUTTONS ===== */
+[data-lang="zh"] .btn-primary {
+    background-color: #ff6633 !important;
+    border-color: #ff6633 !important;
+}
+
+/* ===== BACKGROUNDS — white ===== */
+[data-lang="zh"] .bg-faded,
+[data-lang="zh"] .cta-inner {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+}
+
+/* ===== SOCIAL PROOF BOX ===== */
+[data-lang="zh"] .social-proof-box {
+    background-color: #fff3ee;
+    border: 1px solid #ff6633;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(255, 102, 51, 0.2);
+    display: block !important;
+}
+
+/* ===== LOGIN: social proof bar ===== */
+[data-lang="zh"] .zh-social-proof {
+    background-color: #fff3ee;
+    border: 1px solid #ff6633;
+    border-radius: 10px;
+}
+
+[data-lang="zh"] .zh-avatar {
+    width: 36px;
+    height: 36px;
+    background: #ff6633;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-right: -8px;
+    border: 2px solid white;
+}
+
+[data-lang="zh"] .zh-avatar.flex-shrink-0 {
+    width: 40px;
+    height: 40px;
+    margin-right: 0;
+    font-size: 1.2rem;
+}

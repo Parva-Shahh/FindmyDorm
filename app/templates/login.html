@@ -1,47 +1,167 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+    <link href="{{ url_for('static', filename='css/common-styles.css') }}" rel="stylesheet" />
+    {% if session.get('language') == 'zh' %}
+        <link href="{{ url_for('static', filename='css/chinese-styles.css') }}" rel="stylesheet" />
+    {% elif session.get('language') == 'de' %}
+        <link href="{{ url_for('static', filename='css/german-styles.css') }}" rel="stylesheet" />
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    {% if session.get('language') == 'de' %}
+        <script src="{{ url_for('static', filename='assets/js/Garreth/culture-logic.js') }}"></script>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
-<section class="page-section">
+<section class="page-section cta">
     <div class="container">
-        <div class="bg-faded p-5 rounded">
-            <h2 class="section-heading mb-4"><span class="section-heading-lower">{{ _('Log In') }}</span></h2>
 
-            <div class="row">
-                {% if lang_code == 'de' %}
-                <div class="col-md-4 order-md-2 mb-3">
-                    <div class="border p-3 text-center rounded border-primary bg-white shadow-sm">
-                        <p class="fw-bold mb-1">SCHRITT 1 VON 3</p>
-                        <div class="progress" style="height: 10px;"><div class="progress-bar w-33"></div></div>
+        {% if session.get('language') == 'zh' %}
+        <!-- ========== CHINESE LAYOUT ========== -->
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8">
+                <div class="cta-inner bg-faded text-center rounded p-5">
+
+                    <div class="mb-4">
+                        <img src="{{ url_for('static', filename='assets/img/dorm-banner.jpg') }}"
+                             alt="FindMyDorm" class="img-fluid rounded w-100"
+                             style="max-height:160px; object-fit:cover;"
+                             onerror="this.style.display='none'">
                     </div>
-                </div>
-                {% endif %}
 
-                <div class="{% if lang_code == 'de' %}col-md-8{% else %}col-12{% endif %}">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-lower">登录</span>
+                    </h2>
+
                     <form>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">{{ _('Email Address') }}</label>
-                            <input type="email" class="form-control">
+                        <div class="mb-3 text-start">
+                            <label class="form-label">电子邮件</label>
+                            <input type="email" class="form-control" placeholder="you@example.com">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">{{ _('Password') }}</label>
-                            <input type="password" class="form-control">
+                        <div class="mb-4 text-start">
+                            <label class="form-label">密码</label>
+                            <input type="password" class="form-control" placeholder="••••••••">
                         </div>
-                        <button class="btn btn-primary w-100">{{ _('Sign In') }}</button>
+                        <button type="submit" class="btn btn-primary w-100 py-3">登录</button>
                     </form>
 
-                    <p class="mt-3 text-center small">
-                        New here? <a href="#" class="text-primary fw-bold">Create account</a>
+                    <p class="login-footer-text mt-3">
+                        新用户? <a href="/register">创建账号</a>
+                    </p>
+
+                    <hr class="my-4">
+
+                    <div class="zh-social-proof d-flex align-items-center justify-content-between p-3 rounded">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="d-flex">
+                                <div class="zh-avatar">👤</div>
+                                <div class="zh-avatar">👤</div>
+                                <div class="zh-avatar">👤</div>
+                            </div>
+                            <div class="text-start ms-1">
+                                <strong class="d-block" style="font-size:0.85rem;">加入</strong>
+                                <strong style="font-size:0.85rem;">10,000+ 名学生!</strong>
+                            </div>
+                        </div>
+                        <div class="text-start border-start ps-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-circle me-2" style="font-size:0.4rem; color:#ff6633;"></i>
+                                <span class="small text-muted">非常好的宿舍体验</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-circle me-2" style="font-size:0.4rem; color:#ff6633;"></i>
+                                <span class="small text-muted">性价比超高，推荐入住</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% elif session.get('language') == 'de' %}
+        <!-- ========== GERMAN LAYOUT ========== -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row g-4 align-items-start">
+
+                    <!-- Left: login form -->
+                    <div class="col-md-7">
+                        <div class="cta-inner bg-faded rounded p-5">
+                            <div class="mb-4">
+                                <img src="{{ url_for('static', filename='assets/img/dorm-banner.jpg') }}"
+                                     alt="FindMyDorm" class="img-fluid rounded w-100"
+                                     style="max-height:140px; object-fit:cover;"
+                                     onerror="this.style.display='none'">
+                            </div>
+                            <h2 class="section-heading mb-4 text-center">
+                                <span class="section-heading-lower">Anmelden</span>
+                            </h2>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">E-Mail</label>
+                                    <input type="email" id="loginEmail" class="form-control" placeholder="du@beispiel.de">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Passwort</label>
+                                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-3">Anmelden</button>
+                            </form>
+                            <p class="login-footer-text mt-4 text-center">
+                                Neu hier? <a href="/register">Konto erstellen</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right: checklist sidebar -->
+                    <div class="col-md-5 mt-5">
+                        <div class="card shadow border-primary">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold text-primary mb-3">Fortschritt</h5>
+                                <ul class="list-unstyled" id="germanLoginChecklist">
+                                    <li class="text-muted"><i class="far fa-circle me-2"></i> E-Mail eingegeben</li>
+                                    <li class="text-muted"><i class="far fa-circle me-2"></i> Passwort eingegeben</li>
+                                    <li class="text-muted"><i class="far fa-circle me-2"></i> Bereit zum Anmelden</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- ========== DEFAULT (EN) LAYOUT ========== -->
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8">
+                <div class="cta-inner bg-faded text-center rounded p-5">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-lower">Sign In</span>
+                    </h2>
+                    <form>
+                        <div class="mb-3 text-start">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="you@example.com">
+                        </div>
+                        <div class="mb-4 text-start">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-3">Sign In</button>
+                    </form>
+                    <p class="login-footer-text mt-4">
+                        New here? <a href="/register">Create account</a>
                     </p>
                 </div>
             </div>
-
-            {% if lang_code == 'cn' %}
-            <div class="mt-4 p-4 border rounded bg-white text-center shadow-sm">
-                <h4 class="fw-bold text-primary">加入 10,000+ 名学生！</h4>
-                <p>Be part of our community.</p>
-            </div>
-            {% endif %}
         </div>
+        {% endif %}
+
     </div>
 </section>
 {% endblock %}

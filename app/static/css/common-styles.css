@@ -1,0 +1,47 @@
+/**
+ * FILE: common-styles.css
+ * AUTHOR: Garreth (C24451694)
+ */
+
+/* =============================================
+   STAR RATING SYSTEM
+============================================= */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.25rem;
+}
+
+.star-rating input { display: none; }
+
+.star-rating label {
+    font-size: 2.25rem;
+    color: #d9d9d9;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+/* =============================================
+   LOGIN FOOTER TEXT
+============================================= */
+.login-footer-text {
+    color: #6c757d;
+}
+
+.login-footer-text a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* =============================================
+   DEFAULT NAVBAR (English)
+============================================= */
+#mainNav {
+    background-color: rgba(47, 23, 15, 0.9);
+}
