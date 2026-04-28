@@ -1,67 +1,22 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+    <!-- This ensures your reveal logic and card hover effects work with their base -->
+    <link href="{{ url_for('static', filename='css/components-styles.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block main %}
-<style>
-    /* Hidden state for the text content */
-    .reveal-content {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: all 0.5s ease-in-out;
-    }
-
-    /* Shown state when checkbox is checked */
-    .toggle-input:checked ~ .reveal-content {
-        max-height: 500px; /* Adjust based on text length */
-        opacity: 1;
-        margin-top: 1rem;
-    }
-
-    /* Style for the "Reveal" button/label */
-    .reveal-btn {
-        display: inline-block;
-        padding: 8px 20px;
-        background-color: #f8f9fa;
-        border: 2px dashed #0d6efd;
-        color: #0d6efd;
-        border-radius: 50px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
-
-    .reveal-btn:hover {
-        background-color: #0d6efd;
-        color: white;
-    }
-
-    /* Hide the button when the content is revealed */
-    .toggle-input:checked ~ .reveal-btn {
-        display: none;
-    }
-</style>
-
 <div class="container py-5">
-    <!-- Language Switcher -->
-    <div class="d-flex justify-content-end mb-5">
-        <div class="p-2 border rounded bg-light shadow-sm">
-            <span class="me-2 fw-bold text-muted small">LANG:</span>
-            <a href="{{ url_for('set_language', lang_code='en') }}" class="btn btn-sm {% if session.get('language') == 'en' %}btn-primary{% else %}btn-outline-secondary{% endif %}">EN</a>
-            <a href="{{ url_for('set_language', lang_code='zh') }}" class="btn btn-sm {% if session.get('language') == 'zh' %}btn-primary{% else %}btn-outline-secondary{% endif %} mx-1">CN</a>
-            <a href="{{ url_for('set_language', lang_code='de') }}" class="btn btn-sm {% if session.get('language') == 'de' %}btn-primary{% else %}btn-outline-secondary{% endif %}">DE</a>
-        </div>
-    </div>
-
     <!-- SECTION 1: MISSION -->
     <div class="row align-items-center mb-5 gx-5">
         <div class="col-lg-6">
             <h2 class="fw-bold mb-4">{{ _('Our Mission') }}</h2>
 
+            {# IMPORTANT: Using 'zh' here because your routes.py normalizes 'cn' to 'zh' #}
             {% if session.get('language') == 'zh' %}
-                <!-- CHINESE INTERACTIVE REVEAL -->
                 <input type="checkbox" id="mission-toggle" class="toggle-input d-none">
                 <label for="mission-toggle" class="reveal-btn">
-                    <i class="fas fa-eye me-2"></i>{{ _('CLICK TO REVEAL') }}
+                    <i class="fas fa-eye me-2"></i>{{ _('Click the image to reveal our mission') }}
                 </label>
                 <div class="reveal-content">
                     <p>{{ _('About_Mission_P1') }}</p>
@@ -69,13 +24,11 @@
                     <a href="{{ url_for('profile') }}" class="btn btn-primary btn-sm mt-2">{{ _('View Resident Profile') }}</a>
                 </div>
             {% else %}
-                <!-- STANDARD EN/DE CONTENT -->
                 <p>{{ _('About_Mission_P1') }}</p>
                 <p>{{ _('About_Mission_P2') }}</p>
                 <a href="{{ url_for('profile') }}" class="btn btn-primary mt-2 shadow-sm">{{ _('View Resident Profile') }}</a>
             {% endif %}
         </div>
-
         <div class="col-lg-6 text-center">
             <img src="{{ url_for('static', filename='assets/image1.jpg') }}" class="img-fluid rounded shadow">
         </div>
@@ -86,21 +39,14 @@
     <!-- SECTION 2: STORY -->
     <div class="row align-items-center mb-5 gx-5 flex-column-reverse flex-lg-row">
         <div class="col-lg-6 text-center">
-            {% if session.get('language') == 'de' %}
-                <img src="{{ url_for('static', filename='assets/Image2.jpg') }}" class="img-fluid rounded shadow">
-            {% else %}
-                <img src="{{ url_for('static', filename='assets/image4.jpg') }}" class="img-fluid rounded shadow">
-            {% endif %}
+            <img src="{{ url_for('static', filename='assets/image4.jpg') }}" class="img-fluid rounded shadow">
         </div>
-
         <div class="col-lg-6">
             <h2 class="fw-bold mb-4">{{ _('Our Story') }}</h2>
-
             {% if session.get('language') == 'zh' %}
-                <!-- CHINESE INTERACTIVE REVEAL -->
                 <input type="checkbox" id="story-toggle" class="toggle-input d-none">
                 <label for="story-toggle" class="reveal-btn">
-                    <i class="fas fa-eye me-2"></i>{{ _('CLICK TO REVEAL') }}
+                    <i class="fas fa-eye me-2"></i>{{ _('Click the image to reveal our story') }}
                 </label>
                 <div class="reveal-content">
                     <p>{{ _('About_Story_P1') }}</p>
@@ -108,7 +54,6 @@
                     <a href="{{ url_for('profile') }}" class="btn btn-outline-primary btn-sm mt-2">{{ _('Ask a Resident') }}</a>
                 </div>
             {% else %}
-                <!-- STANDARD EN/DE CONTENT -->
                 <p>{{ _('About_Story_P1') }}</p>
                 <p>{{ _('About_Story_P2') }}</p>
                 <a href="{{ url_for('profile') }}" class="btn btn-outline-primary mt-2 shadow-sm">{{ _('Ask a Resident') }}</a>

@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+    <!-- This ensures the "Saved Cards" hover effects and profile styling work with the new base -->
+    <link href="{{ url_for('static', filename='css/components-styles.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block main %}
 <div class="container py-5">
-    <!-- Language Switcher -->
-    <div class="d-flex justify-content-end mb-5">
-        <div class="p-2 border rounded bg-light shadow-sm">
-            <span class="me-2 fw-bold text-muted small">LANG:</span>
-            <a href="{{ url_for('set_language', lang_code='en') }}" class="btn btn-sm {% if session.get('language') == 'en' %}btn-primary{% else %}btn-outline-secondary{% endif %}">EN</a>
-            <a href="{{ url_for('set_language', lang_code='zh') }}" class="btn btn-sm {% if session.get('language') == 'zh' %}btn-primary{% else %}btn-outline-secondary{% endif %} mx-1">CN</a>
-            <a href="{{ url_for('set_language', lang_code='de') }}" class="btn btn-sm {% if session.get('language') == 'de' %}btn-primary{% else %}btn-outline-secondary{% endif %}">DE</a>
-        </div>
-    </div>
-
     <!-- Profile Header -->
     <div class="row mb-5 align-items-center">
         <div class="col-lg-4 text-center">
@@ -46,7 +41,7 @@
 
     <hr class="my-5">
 
-    <!-- Updated Section: My Saved Section -->
+    <!-- My Saved Section -->
     <h2 class="fw-bold mb-4 story-title">{{ _('My Saved') }}</h2>
     <div class="row g-3 mb-5">
         {% for fav in favorites %}
@@ -72,7 +67,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <h5 class="fw-bold text-primary mb-0">{{ review.dorm }}</h5>
-                        <span class="text-warning" title="Privacy: 5/5 | Amenities: 4/5 | Vibe: 5/5">
+                        <span class="text-warning">
                             {% for i in range(review.rating) %}★{% endfor %}
                         </span>
                     </div>
