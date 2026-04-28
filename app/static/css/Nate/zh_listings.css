@@ -1,0 +1,294 @@
+/* ============================================================
+   FindMyDorm — zh_listings.css
+   Chinese locale: Booking.com-inspired, cards left / map right
+   Colours match existing ZH navbar: #ff6633 orange
+   Navbar handled by base.html + nav-footer-styles.css
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+/* ── Tokens — ZH: orange theme ──────────────────────────────── */
+:root {
+  --zh-primary:       #ff6633;
+  --zh-primary-dark:  #cc5500;
+  --zh-primary-light: #fff2ee;
+  --zh-accent:        #ffaa00;
+  --zh-green:         #00875a;
+  --zh-text:          #1a1a1a;
+  --zh-text-muted:    #6b7280;
+  --zh-text-light:    #9ca3af;
+  --zh-bg:            #f9f0ec;
+  --zh-card-bg:       #ffffff;
+  --zh-border:        #f0d5c8;
+  --zh-radius:        0.6rem;
+  --zh-radius-sm:     0.35rem;
+  --zh-shadow:        0 1px 4px rgba(0,0,0,0.08);
+  --zh-shadow-hover:  0 6px 20px rgba(255,102,51,0.15);
+  --zh-transition:    0.2s ease;
+}
+
+body {
+  font-family: 'Noto Sans SC', 'Raleway', sans-serif;
+  background: var(--zh-bg);
+  color: var(--zh-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Search bar ─────────────────────────────────────────────── */
+.search-bar-wrapper {
+  background: var(--zh-primary);
+  padding: 1.1rem 0;
+  border-bottom: none;
+}
+
+.search-container {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.search-pill {
+  flex: 1;
+  border: none;
+  border-radius: var(--zh-radius) 0 0 var(--zh-radius);
+  padding: 0.75rem 1rem 0.75rem 2.8rem;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.95rem; font-weight: 400;
+  color: var(--zh-text); background: #fff;
+  outline: none;
+  transition: box-shadow var(--zh-transition);
+}
+
+.search-pill::placeholder { color: var(--zh-text-light); }
+.search-pill:focus { box-shadow: inset 0 0 0 2px var(--zh-accent); }
+
+.search-icon {
+  position: absolute; left: 1rem; top: 50%;
+  transform: translateY(-50%);
+  color: var(--zh-text-muted); font-size: 0.9rem;
+  pointer-events: none; z-index: 1;
+}
+
+.zh-search-btn {
+  background: var(--zh-primary-dark); color: #fff;
+  border: none; border-radius: 0 var(--zh-radius) var(--zh-radius) 0;
+  padding: 0 1.5rem;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background var(--zh-transition);
+}
+
+.zh-search-btn:hover { background: #aa4400; }
+
+/* ── Filter bar ─────────────────────────────────────────────── */
+.filter-bar-wrapper {
+  background: #fff;
+  border-bottom: 1px solid var(--zh-border);
+  padding: 0.6rem 1.5rem;
+  width: 100%; margin: 0 !important;
+  display: flex !important;
+  align-items: center; gap: 0.5rem; flex-wrap: wrap;
+}
+
+.filter-label { font-size: 0.78rem; font-weight: 700; color: var(--zh-text-muted); }
+
+.filter-pill {
+  border: 1px solid var(--zh-border);
+  border-radius: 2rem; padding: 0.38rem 0.9rem;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--zh-text); background: #fff; cursor: pointer;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 0.3rem;
+  transition: all var(--zh-transition);
+}
+
+.filter-pill:hover, .filter-pill:focus {
+  border-color: var(--zh-primary); color: var(--zh-primary);
+  background: var(--zh-primary-light); outline: none;
+}
+
+.dropdown-menu {
+  border: 1px solid var(--zh-border); border-radius: var(--zh-radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  font-family: 'Noto Sans SC', sans-serif; font-size: 0.83rem;
+  padding: 0.5rem 0.75rem; min-width: 160px;
+}
+
+.dropdown-menu .dropdown-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 0.25rem; border-radius: var(--zh-radius-sm);
+  color: var(--zh-text); font-weight: 500; cursor: pointer;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background: var(--zh-primary-light); color: var(--zh-primary);
+}
+
+.filter-check { accent-color: var(--zh-primary); width: 15px; height: 15px; cursor: pointer; }
+
+#resultCount {
+  margin-left: auto; font-size: 0.8rem;
+  color: var(--zh-text-muted); font-weight: 600; white-space: nowrap;
+}
+
+.btn-outline-secondary {
+  border-radius: 2rem; font-size: 0.75rem; font-weight: 700;
+  padding: 0.35rem 0.85rem; border-color: var(--zh-border);
+  color: var(--zh-text-muted); background: transparent;
+  transition: all var(--zh-transition);
+}
+
+.btn-outline-secondary:hover {
+  border-color: var(--zh-primary); color: var(--zh-primary);
+  background: var(--zh-primary-light);
+}
+
+/* ── Two-column layout ──────────────────────────────────────── */
+.listings-map-wrapper {
+  height: calc(100vh - 160px);
+  display: block !important;
+}
+
+.listings-split { display: flex; height: 100%; }
+
+.listings-col {
+  width: 48%; overflow-y: auto;
+  padding: 1rem 1rem 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 0.85rem;
+  background: var(--zh-bg); scrollbar-width: thin;
+}
+
+.listings-col::-webkit-scrollbar { width: 4px; }
+.listings-col::-webkit-scrollbar-thumb { background: var(--zh-border); border-radius: 2px; }
+
+.map-col { width: 52%; position: sticky; top: 0; height: 100%; }
+
+#dormMap { width: 100%; height: 100%; z-index: 0; }
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.listing-card {
+  background: var(--zh-card-bg); border: 1px solid var(--zh-border);
+  border-radius: var(--zh-radius); box-shadow: var(--zh-shadow);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: box-shadow var(--zh-transition), transform var(--zh-transition);
+}
+
+.listing-card:hover { box-shadow: var(--zh-shadow-hover); transform: translateY(-2px); }
+
+.card-image {
+  position: relative; aspect-ratio: 16/9;
+  overflow: hidden; background: #f0d5c8;
+}
+
+.card-image img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.4s ease;
+}
+
+.listing-card:hover .card-image img { transform: scale(1.03); }
+
+.card-image .badge {
+  position: absolute; top: 0.5rem; left: 0.5rem;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  padding: 0.25em 0.65em; border-radius: 1rem;
+  background: rgba(255,255,255,0.93) !important; color: var(--zh-text) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.card-content { padding: 0.75rem 0.9rem 0.4rem; flex: 1; }
+
+.card-content h5 {
+  font-size: 0.95rem; font-weight: 700; color: var(--zh-text);
+  margin-bottom: 0.2rem; line-height: 1.3;
+}
+
+.card-content .small {
+  font-size: 0.78rem; color: var(--zh-text-muted);
+  display: flex; align-items: center; gap: 0.25rem; margin-bottom: 0.5rem;
+}
+
+.amenity-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.6rem; }
+
+.amenity-tag {
+  font-size: 0.68rem; font-weight: 600;
+  color: var(--zh-primary); background: var(--zh-primary-light);
+  border-radius: 1rem; padding: 0.18em 0.6em;
+}
+
+.card-footer-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0.5rem 0.9rem 0.75rem; border-top: 1px solid var(--zh-border);
+}
+
+.rating-block { display: flex; align-items: center; gap: 0.45rem; }
+
+.rating-score {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.9rem; height: 1.9rem; border-radius: 0.4rem;
+  background: var(--zh-primary); color: #fff;
+  font-size: 0.78rem; font-weight: 800; flex-shrink: 0;
+}
+
+.rating-label { font-size: 0.78rem; font-weight: 700; color: var(--zh-text); display: block; line-height: 1.2; }
+.rating-reviews { font-size: 0.7rem; color: var(--zh-text-light); display: block; }
+
+.price-block { text-align: right; line-height: 1.2; }
+.price-from  { font-size: 0.7rem; color: var(--zh-text-light); display: block; }
+.price-amount { font-size: 1.25rem; font-weight: 900; color: var(--zh-primary); }
+.price-per   { font-size: 0.7rem; color: var(--zh-text-light); display: block; }
+
+.btn-view-deal {
+  display: block; width: calc(100% - 1.8rem); margin: 0 0.9rem 0.9rem;
+  background: var(--zh-primary); border: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.85rem; font-weight: 700;
+  border-radius: var(--zh-radius-sm); padding: 0.55rem 1rem;
+  text-align: center; color: #fff; cursor: pointer;
+  transition: background var(--zh-transition), box-shadow var(--zh-transition);
+}
+
+.btn-view-deal:hover {
+  background: var(--zh-primary-dark);
+  box-shadow: 0 4px 12px rgba(255,102,51,0.3);
+}
+
+/* Map pins */
+.map-price-pin {
+  background: var(--zh-primary); color: #fff;
+  font-size: 0.7rem; font-weight: 800; padding: 3px 9px;
+  border-radius: var(--zh-radius-sm);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); white-space: nowrap; cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: background var(--zh-transition), transform var(--zh-transition);
+}
+
+.map-price-pin:hover { background: var(--zh-primary-dark); transform: scale(1.1); }
+
+.leaflet-popup-content-wrapper {
+  border-radius: var(--zh-radius); font-family: 'Noto Sans SC', sans-serif; font-size: 0.82rem;
+}
+
+/* Stagger */
+.dorm-item { animation: zhFadeUp 0.3s ease both; }
+.dorm-item:nth-child(1) { animation-delay: 0.04s; }
+.dorm-item:nth-child(2) { animation-delay: 0.08s; }
+.dorm-item:nth-child(3) { animation-delay: 0.12s; }
+.dorm-item:nth-child(4) { animation-delay: 0.16s; }
+
+@keyframes zhFadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .listings-split { flex-direction: column; }
+  .listings-col { width: 100%; height: auto; }
+  .map-col { width: 100%; height: 280px; position: relative; }
+  .filter-bar-wrapper { flex-direction: column; align-items: stretch; }
+}

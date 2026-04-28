@@ -43,6 +43,30 @@ msgstr "登录"
 msgid "Login"
 msgstr "登录"
 
+msgid "Student Housing Made Simple"
+msgstr "让学生租房变得简单"
+
+msgid "Click to see our vision for students"
+msgstr "点击查看我们为学生设计的愿景"
+
+msgid "About_Goal_P1"
+msgstr "我们知道寻找合适的房间可能会压力很大，尤其是在一个陌生的城市。FindMyDorm 的创建是为了缩短学生与理想家园之间的距离。"
+
+msgid "About_Goal_P2"
+msgstr "我们的平台专注于透明度、真实评价和经过验证的住户，让您可以放心地预订。"
+
+msgid "Built by Students, for Students"
+msgstr "由学生发起，为学生服务"
+
+msgid "Click to see how we help"
+msgstr "点击查看我们如何提供帮助"
+
+msgid "About_Community_P1"
+msgstr "FindMyDorm 最初是由几名厌倦了隐藏费用和劣质宿舍环境的学生发起的一个小项目。"
+
+msgid "About_Community_P2"
+msgstr "今天，我们帮助成千上万的人找到社区，而不仅仅是房间。我们相信，宿舍应该是开启终身友谊的地方。"
+
 msgid "My Profile"
 msgstr "我的个人资料"
 msgid "Profile"
