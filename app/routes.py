@@ -21,17 +21,17 @@ def about():
 @app.route('/listings')
 def listings():
     # Placeholder until you create listings.html
-    return render_template("index.html")
+    return render_template("listings.html")
 
 @app.route('/review')
 def review():
     # Placeholder until you create review.html
-    return render_template("index.html")
+    return render_template("review.html")
 
 @app.route('/login')
 def login():
     # Placeholder until you create login.html
-    return render_template("index.html")
+    return render_template("login.html")
 
 # ----------------------------------
 
@@ -60,8 +60,6 @@ def profile():
 
 @app.route('/set_language/<lang_code>')
 def set_language(lang_code):
-    if lang_code == 'cn':
-        lang_code = 'zh'
     if lang_code in ['en', 'zh', 'de']:
         session['language'] = lang_code
-    return redirect(request.referrer or url_for('index'))
+    return redirect(request.referrer or'/')
