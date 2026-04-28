@@ -1,6 +1,3 @@
-# Chinese (Simplified) Translations for FindMyDorm
-# Copyright (C) 2026 FindMyDorm
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: FindMyDorm 1.0\n"
@@ -143,6 +140,31 @@ msgstr "查看住户资料"
 
 msgid "My Saved"
 msgstr "我的保存"
+
+msgid "Verified Resident"
+msgstr "认证住户"
+
+msgid "Show Personality Tags"
+msgstr "点击揭晓我的个性标签"
+
+msgid "Quiet"
+msgstr "安静"
+
+msgid "Early Bird"
+msgstr "早起鸟"
+
+msgid "Helpful"
+msgstr "热心肠"
+
+msgid "My Saved Dorms"
+msgstr "我收藏的宿舍房源"
+
+msgid "View Details"
+msgstr "查看详情"
+
+msgid "Click to reveal bio"
+msgstr "点击查看个人简介"
+
 
 # ── Review page ───────────────────────────────────────────────────────────────
 msgid "Write a Review"
