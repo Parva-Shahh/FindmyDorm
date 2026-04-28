@@ -2,13 +2,13 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="{{ url_for('static', filename='css/components-styles.css') }}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/review-styles.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/Garreth/components-styles.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/Garreth/review-styles.css') }}" rel="stylesheet" />
 
     {% if session.get('language') == 'zh' %}
-        <link href="{{ url_for('static', filename='css/chinese-styles.css') }}" rel="stylesheet" />
+        <link href="{{ url_for('static', filename='css/Garreth/chinese-styles.css') }}" rel="stylesheet" />
     {% elif session.get('language') == 'de' %}
-        <link href="{{ url_for('static', filename='css/german-styles.css') }}" rel="stylesheet" />
+        <link href="{{ url_for('static', filename='css/Garreth/german-styles.css') }}" rel="stylesheet" />
     {% endif %}
 
     <style>
@@ -207,5 +207,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{{ url_for('static', filename='assets/js/Garreth/culture-logic.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Garreth/culture-logic.js') }}"></script>
 {% endblock %}
