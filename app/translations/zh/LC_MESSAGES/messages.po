@@ -1,41 +1,24 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
 "Project-Id-Version: FindMyDorm 1.0\n"
 "PO-Revision-Date: 2026-01-01 00:00+0000\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-"Language: zh\n"
 
-msgid "Our Mission"
-msgstr "我们的使命"
-
-msgid "About_Mission_P1"
-msgstr "有一种观念认为，要发展业务，就必须冷酷无情。但我们知道有更好的成长方式。在这种方式中，对底线有利的事情也对客户有利。"
 msgid "Home"
 msgstr "首页"
 
-msgid "About_Mission_P2"
-msgstr "我们相信企业可以凭良心发展，并凭借灵魂获得成功——而且他们可以通过入境营销做到这一点。"
 msgid "About"
 msgstr "关于"
 
-msgid "Our Story"
-msgstr "我们的故事"
 msgid "Listings"
 msgstr "房源"
 
-msgid "About_Story_P1"
-msgstr "作为 2004 年麻省理工学院的研究生，Brian 和 Dharmesh 注意到人们购物和购买方式发生了变化。"
 msgid "Reviews"
 msgstr "评价"
-
-msgid "About_Story_P2"
-msgstr "消费者不再容忍打扰性的注意力争夺——事实上，他们已经变得非常善于忽视这些干扰。"
 
 msgid "Log In"
 msgstr "登录"
@@ -43,128 +26,38 @@ msgstr "登录"
 msgid "Login"
 msgstr "登录"
 
+msgid "Student Housing Made Simple"
+msgstr "让学生租房变得简单"
+
+msgid "Click to see our vision for students"
+msgstr "点击查看我们为学生设计的愿景"
+
+msgid "About_Goal_P1"
+msgstr "我们知道寻找合适的房间可能会压力很大，尤其是在一个陌生的城市。FindMyDorm 的创建是为了缩短学生与理想家园之间的距离。"
+
+msgid "About_Goal_P2"
+msgstr "我们的平台专注于透明度、真实评价和经过验证的住户，让您可以放心地预订。"
+
+msgid "Built by Students, for Students"
+msgstr "由学生发起，为学生服务"
+
+msgid "Click to see how we help"
+msgstr "点击查看我们如何提供帮助"
+
+msgid "About_Community_P1"
+msgstr "FindMyDorm 最初是由几名厌倦了隐藏费用和劣质宿舍环境的学生发起的一个小项目。"
+
+msgid "About_Community_P2"
+msgstr "今天，我们帮助成千上万的人找到社区，而不仅仅是房间。我们相信，宿舍应该是开启终身友谊的地方。"
+
 msgid "My Profile"
 msgstr "我的个人资料"
-msgid "Profile"
-msgstr "个人资料"
-
-msgid "Copyright"
-msgstr "版权所有"
-
-msgid "Sign In"
-msgstr "登录"
-
-msgid "Email"
-msgstr "电子邮件"
-
-msgid "Password"
-msgstr "密码"
-
-msgid "New here?"
-msgstr "新用户?"
-
-msgid "Create account"
-msgstr "创建账号"
-
-msgid "Join"
-msgstr "加入"
-
-msgid "10,000+ students!"
-msgstr "10,000+ 名学生!"
-
-msgid "Great dorm experience"
-msgstr "非常好的宿舍体验"
-
-msgid "Great value, highly recommended"
-msgstr "性价比超高，推荐入住"
-
-msgid "Progress"
-msgstr "进度"
-
-msgid "Email entered"
-msgstr "已输入电子邮件"
-
-msgid "Password entered"
-msgstr "已输入密码"
-
-msgid "Ready to sign in"
-msgstr "准备登录"
-
-msgid "Write a Review"
-msgstr "撰写评价"
-
-msgid "Status"
-msgstr "状态"
-msgid "Your Rating"
-msgstr "您的评分"
-
-msgid "About Me"
-msgstr "关于我"
-msgid "Review Title"
-msgstr "评价标题"
 
 msgid "Ask a Resident"
 msgstr "咨询住户"
-msgid "Summary"
-msgstr "简要概述"
-
-msgid "My Accommodation Reviews"
-msgstr "我的住宿评价"
-msgid "Detailed Feedback"
-msgstr "详细反馈"
-
-msgid "Watch Video Review"
-msgstr "观看视频评价"
-msgid "Describe your stay"
-msgstr "描述您的入住体验"
 
 msgid "View Resident Profile"
 msgstr "查看住户资料"
-msgid "Location"
-msgstr "位置"
 
 msgid "My Saved"
 msgstr "我的保存"
-msgid "Cleanliness"
-msgstr "清洁度"
-
-msgid "Click the image to see more details"
-msgstr "点击图片查看更多详情"
-msgid "Value"
-msgstr "性价比"
-
-msgid "Click the image to reveal our mission"
-msgstr "点击图片揭示我们的使命"
-msgid "Post Review"
-msgstr "发布评价"
-
-msgid "Click the image to reveal our story"
-msgstr "点击图片揭示我们的故事"
-msgid "Submission Progress"
-msgstr "提交进度"
-
-msgid "CLICK TO REVEAL"
-msgstr "点击以查看"
-msgid "Overall Rating"
-msgstr "总体评分"
-
-msgid "Title & Content"
-msgstr "标题与内容"
-
-msgid "Category Breakdown"
-msgstr "分类评分"
-
-msgid "Other User Reviews"
-msgstr "其他用户评价"
-
-msgid "Great location, convenient transport, facilities nearby."
-msgstr "宿舍位置非常好，交通方便，周围设施齐全。"
-
-msgid "Clean and tidy overall, friendly staff."
-msgstr "整体环境干净整洁，工作人员态度友好。"
-
-msgid "Reasonable price, spacious rooms, highly recommended!"
-msgstr "价格合理，房间宽敞，非常推荐！"
-
-msgid "Internet speed could be improved, otherwise very satisfied."
-msgstr "网络速度有待提高，其他方面都很满意。"
