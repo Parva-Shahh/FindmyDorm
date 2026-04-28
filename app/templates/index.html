@@ -1,8 +1,868 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+    <link href="{{ url_for('static', filename='css/home-styles.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block main %}
-<div class="container py-5">
-    <h1 class="fw-bold">Information</h1>
-    <p class="lead">Content for the Info page will go here.</p>
+
+{# ================================================================
+   GERMAN LAYOUT – Individualist / High Uncertainty Avoidance
+================================================================ #}
+{% if session.get('language') == 'de' %}
+
+<div class="de-progress-bar">
+    <div class="container">
+        <ol class="de-steps" id="deSteps">
+            <li class="active"><div class="step-circle">1</div>{{ _('Search') }}</li>
+            <span class="step-sep">›</span>
+            <li><div class="step-circle">2</div>{{ _('Compare Listings') }}</li>
+            <span class="step-sep">›</span>
+            <li><div class="step-circle">3</div>{{ _('View Details') }}</li>
+            <span class="step-sep">›</span>
+            <li><div class="step-circle">4</div>{{ _('Book') }}</li>
+        </ol>
+    </div>
 </div>
+
+<section class="hero-de">
+    <div class="container py-5" style="position:relative;z-index:1;">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <div class="hero-badge"><i class="fa fa-shield-alt me-1"></i>{{ _('Verified Student Housing · Ireland') }}</div>
+                <h1 class="hero-title">{{ _('Find Your') }} <span class="accent">{{ _('Perfect Dorm') }}</span><br>{{ _('in Ireland') }}</h1>
+                <p class="hero-subtitle">{{ _('Compare verified student accommodations with exact specifications, transparent pricing and a clear booking process.') }}</p>
+                <div class="search-panel">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label">{{ _('University') }}</label>
+                            <select class="form-select">
+                                <option value="">{{ _('Select University') }}</option>
+                                <option>University College Dublin</option>
+                                <option>Dublin City University</option>
+                                <option>TU Dublin</option>
+                                <option>Trinity College Dublin</option>
+                                <option>Maynooth University</option>
+                                <option>University College Cork</option>
+                                <option>University of Limerick</option>
+                                <option>University of Galway</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">{{ _('Room Type') }}</label>
+                            <select class="form-select">
+                                <option value="">{{ _('Any Type') }}</option>
+                                <option>{{ _('En-Suite') }}</option>
+                                <option>{{ _('Studio') }}</option>
+                                <option>{{ _('Shared') }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('listings') }}" class="btn-search-de"><i class="fa fa-search me-1"></i> {{ _('Search') }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><span class="stat-num">1,200+</span><span class="stat-label">{{ _('Listings') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">4,800+</span><span class="stat-label">{{ _('Reviews') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">8</span><span class="stat-label">{{ _('Universities') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">100%</span><span class="stat-label">{{ _('Verified') }}</span></div>
+                </div>
+            </div>
+            <div class="col-lg-5 d-none d-lg-block">
+                <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:2rem;">
+                    <div style="font-family:'Raleway',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:2.5px;text-transform:uppercase;color:#e8c012;margin-bottom:1.2rem;">{{ _('Why Students Trust Us') }}</div>
+                    {% for icon, title, sub in [('✓',_('Verified Listings Only'),_('Every listing is manually checked')),('📋',_('Exact Specifications'),_('Room size, distance, contract terms')),('🔒',_('Transparent Pricing'),_('No hidden fees. Bills included.')),('⭐','4,800+ ' + _('Reviews'),_('Real students, real feedback'))] %}
+                    <div style="display:flex;align-items:center;gap:14px;margin-bottom:1rem;">
+                        <div style="width:42px;height:42px;background:#e8c01222;border:2px solid #e8c012;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">{{ icon }}</div>
+                        <div><div style="font-weight:700;color:#fff;font-size:0.88rem;">{{ title }}</div><div style="color:#6c757d;font-size:0.78rem;">{{ sub }}</div></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DE Universities: one per slide with real logo, rating, walk time -->
+<section class="home-section-alt">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Coverage') }}</div>
+            <h2 class="section-heading-main">{{ _('Irish Universities') }}</h2>
+            <p class="section-sub">{{ _('Verified accommodation near every major Irish university') }}</p>
+        </div>
+        <div class="de-uni-carousel-wrapper">
+            <div class="de-uni-track" id="deUniTrack">
+                {#
+                  Tuple fields:
+                  id, name, city, listings, reviews, logo_file, rating_stars, rating_num, walk_min, avg_rent, description
+                #}
+                {% set de_unis = [
+                    (
+                        'ucd',
+                        'University College Dublin',
+                        'Belfield, Dublin 4',
+                        '142', '312',
+                        'ucd_logo.png',
+                        4, '4.1',
+                        '12',
+                        '€230',
+                        _("Ireland's largest university. Strong research culture, vibrant campus life and excellent transport links to the city centre.")
+                    ),
+                    (
+                        'dcu',
+                        'Dublin City University',
+                        'Glasnevin, Dublin 9',
+                        '98', '198',
+                        'dcu_logo.png',
+                        5, '4.7',
+                        '8',
+                        '€210',
+                        _('Consistently ranked among Ireland\'s top universities for graduate employment. Modern campus with purpose-built student accommodation on-site.')
+                    ),
+                    (
+                        'tud',
+                        'TU Dublin',
+                        'Grangegorman, Dublin 7',
+                        '87', '176',
+                        'tud_logo.png',
+                        5, '4.8',
+                        '6',
+                        '€195',
+                        _('Ireland\'s first technological university. Located in a landmark regeneration quarter in the heart of Dublin, minutes from the city centre.')
+                    ),
+                    (
+                        'tcd',
+                        'Trinity College Dublin',
+                        'College Green, Dublin 2',
+                        '115', '289',
+                        'trinity_logo.png',
+                        3, '3.6',
+                        '18',
+                        '€245',
+                        _('Founded in 1592, Trinity is Ireland\'s oldest and most prestigious university. Located in the city centre, accommodation nearby is in high demand.')
+                    ),
+                    (
+                        'mu',
+                        'Maynooth University',
+                        'Maynooth, Co. Kildare',
+                        '64', '134',
+                        'maynooth_logo.png',
+                        4, '4.3',
+                        '10',
+                        '€175',
+                        _('A welcoming university town campus 25 km west of Dublin. Known for its friendly community atmosphere and affordable accommodation options.')
+                    ),
+                    (
+                        'ucc',
+                        'University College Cork',
+                        'Cork City',
+                        '79', '154',
+                        'ucc_logo.png',
+                        4, '4.5',
+                        '9',
+                        '€195',
+                        _('One of Ireland\'s leading research universities, set on a stunning Victorian campus. Cork city offers a lively student scene and lower living costs.')
+                    ),
+                    (
+                        'ul',
+                        'University of Limerick',
+                        'Castletroy, Limerick',
+                        '71', '142',
+                        'ul_logo.png',
+                        3, '3.8',
+                        '14',
+                        '€175',
+                        _('A dynamic campus university on the banks of the River Shannon. Known for its co-operative education programme and strong industry links.')
+                    ),
+                    (
+                        'nuig',
+                        'University of Galway',
+                        'Galway City',
+                        '58', '116',
+                        'galway_logo.png',
+                        5, '4.6',
+                        '11',
+                        '€185',
+                        _('Located in the heart of one of Ireland\'s most vibrant cities. Renowned for its bilingual character, arts culture and thriving student community.')
+                    ),
+                ] %}
+                {% for id, name, city, listings, reviews, logo_file, stars, rating_num, walk_min, avg_rent, desc in de_unis %}
+                <div class="uni-card-de">
+                    <!-- Logo -->
+                    <div class="uni-logo-box">
+                        <img src="{{ url_for('static', filename='assets/' + logo_file) }}"
+                             alt="{{ name }} logo"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="uni-logo-fallback" style="display:none;">{{ id|upper }}</div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="de-uni-info">
+                        <div class="de-uni-name">{{ name }}</div>
+                        <div class="de-uni-city"><i class="fa fa-map-marker-alt me-1"></i>{{ city }}</div>
+
+                        <!-- Star rating + walk time row -->
+                        <div class="de-uni-meta">
+                            <div class="de-uni-meta-item">
+                                <div class="de-uni-stars">
+                                    {% for i in range(5) %}
+                                        {% if i < stars %}
+                                            <i class="fa fa-star"></i>
+                                        {% else %}
+                                            <i class="fa fa-star" style="opacity:0.2;"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <span class="de-uni-rating-label">{{ _('Avg. Satisfaction') }} {{ rating_num }}/5</span>
+                            </div>
+                            <div class="de-uni-meta-sep">|</div>
+                            <div class="de-uni-meta-item">
+                                <i class="fa fa-walking de-walk-icon"></i>
+                                <span class="de-walk-label">~{{ walk_min }} {{ _('min walk from nearest accom') }}</span>
+                            </div>
+                            <div class="de-uni-meta-sep">|</div>
+                            <div class="de-uni-meta-item">
+                                <i class="fa fa-euro-sign de-walk-icon"></i>
+                                <span class="de-walk-label">{{ _('Avg. rent') }} {{ avg_rent }}/{{ _('week') }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <p class="de-uni-desc">{{ desc }}</p>
+
+                        <!-- Stats row -->
+                        <div class="de-uni-stats">
+                            <div class="uni-stat-box">
+                                <span class="us-num">{{ listings }}</span>
+                                <span class="us-lbl">{{ _('Listings') }}</span>
+                            </div>
+                            <div class="uni-stat-box">
+                                <span class="us-num">{{ reviews }}</span>
+                                <span class="us-lbl">{{ _('Reviews') }}</span>
+                            </div>
+                            <div class="uni-stat-box">
+                                <span class="us-num">{{ walk_min }}m</span>
+                                <span class="us-lbl">{{ _('Avg. Walk') }}</span>
+                            </div>
+                            <div class="uni-stat-box">
+                                <span class="us-num">{{ avg_rent }}</span>
+                                <span class="us-lbl">{{ _('Avg. Rent') }}</span>
+                            </div>
+                        </div>
+
+                        <a href="{{ url_for('listings') }}?uni={{ id }}" class="de-uni-btn">{{ _('View Listings') }} →</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="de-uni-nav">
+            <div class="nav-left">
+                <button class="de-uni-nav-btn" id="deUniPrev" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
+            </div>
+            <div class="de-uni-counter" id="deUniCounter">1 / 8</div>
+            <div class="nav-right">
+                <button class="de-uni-nav-btn" id="deUniNext" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DE Accommodations: one at a time slider -->
+<section class="home-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Top Rated') }}</div>
+            <h2 class="section-heading-main">{{ _('Featured Accommodations') }}</h2>
+            <p class="section-sub">{{ _('Full specifications and transparent pricing for every listing') }}</p>
+        </div>
+        <div class="de-accom-wrapper">
+            <div class="de-accom-track" id="deAccomTrack">
+                {% for name, loc, rating, reviews, size, dist, contract, price, icon, img, tags in [
+                    ('Yugo Dublin','City Centre · Near TCD & TU Dublin','4.8','312','18','0.4','44','230','🏙️','image1.jpg',['En-Suite','Gym','Study Room','Bills Incl.']),
+                    ('Mezzino','Glasnevin · Near DCU','4.7','198','16','0.6','40','210','🌟','Image2.jpg',['Studio Option','Communal Areas','Laundry']),
+                    ('Aparto','Dublin 2 · Near UCD','4.5','276','20','2.1','44','245','🏢','image3.jpg',['Private Studio','Rooftop','Cinema Room']),
+                    ('Nido Student','Cork City · Near UCC','4.9','154','17','0.8','40','195','🌿','image4.jpg',['En-Suite','Bike Storage','Events']),
+                    ('Fresh Student Living','Limerick · Near UL','4.4','89','15','1.2','38','175','🏖️','image1.jpg',['Shared Kitchen','Garden','WiFi']),
+                    ('Swuite','Galway City · Near NUIG','4.6','112','19','0.9','40','220','✨','Image2.jpg',['Luxury Studio','Co-working','Concierge']),
+                ] %}
+                <div class="de-accom-slide">
+                    <div class="de-accom-img">
+                        <img src="{{ url_for('static', filename='assets/' + img) }}" alt="{{ name }}" onerror="this.style.display='none'">
+                        {{ icon }}
+                        <div class="de-verified">✓ Verified</div>
+                    </div>
+                    <div class="de-accom-content">
+                        <div class="de-accom-name">{{ name }}</div>
+                        <div class="de-accom-loc"><i class="fa fa-map-marker-alt me-1"></i>{{ loc }}</div>
+                        <div class="de-accom-stars">★★★★★ <span class="rating-val">{{ rating }}</span> <small class="text-muted">({{ reviews }} {{ _('Reviews') }})</small></div>
+                        <div class="de-specs">
+                            <div class="de-spec-row"><span>{{ _('Room Size') }}</span><strong>{{ size }} m²</strong></div>
+                            <div class="de-spec-row"><span>{{ _('Distance to University') }}</span><strong>{{ dist }} km</strong></div>
+                            <div class="de-spec-row"><span>{{ _('Contract Length') }}</span><strong>{{ contract }} {{ _('weeks') }}</strong></div>
+                            <div class="de-spec-row"><span>{{ _('Bills') }}</span><strong>{{ _('Included') }}</strong></div>
+                            <div class="de-spec-row"><span>{{ _('Weekly Price') }}</span><strong style="color:#e8c012;">€{{ price }}</strong></div>
+                        </div>
+                        <div class="de-accom-tags">{% for tag in tags %}<span class="de-accom-tag">{{ tag }}</span>{% endfor %}</div>
+                        <a href="{{ url_for('listings') }}" class="btn-de-view">{{ _('View Full Listing') }} →</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="de-accom-nav">
+            <div class="nav-left">
+                <button class="de-nav-btn" id="deAccomPrev" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
+            </div>
+            <div class="de-accom-counter" id="deAccomCounter">1 / 6</div>
+            <div class="nav-right">
+                <button class="de-nav-btn" id="deAccomNext" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('listings') }}" class="btn btn-outline-secondary btn-lg px-5">{{ _('View All Listings') }} <i class="fa fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- DE How It Works -->
+<section class="home-section-alt">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Structured Process') }}</div>
+            <h2 class="section-heading-main">{{ _('How FindMyDorm Works') }}</h2>
+            <p class="section-sub">{{ _('A clear, transparent four-step process') }}</p>
+        </div>
+        <div class="row g-4">
+            {% for icon, num, title, desc in [('🔍','01',_('Search'),_('Filter by university, price, room type, and distance.')),('📋','02',_('Compare Listings'),_('Review exact specifications, floor plans and verified data.')),('📄','03',_('View Details'),_('Check contract terms, security certifications and all costs.')),('✅','04',_('Book'),_('Book securely with full transparency over every term.'))] %}
+            <div class="col-md-3"><div class="step-card"><div class="step-icon">{{ icon }}</div><div class="step-num">{{ _('Step') }} {{ num }}</div><div class="step-title">{{ title }}</div><p class="step-desc">{{ desc }}</p></div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- DE Reviews -->
+<section class="home-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Real Students, Real Reviews') }}</div>
+            <h2 class="section-heading-main">{{ _('What Students Say') }}</h2>
+        </div>
+        <div class="row g-4">
+            {% for stars, text, name, school in [('★★★★★',_('The technical specifications and verified data gave me the confidence to book without any uncertainty. Very professional.'),'Karl Schmidt','Erasmus, DCU'),('★★★★★',_('Exact room dimensions and distance information made comparison straightforward. No surprises on arrival.'),'Lukas Bauer','1st Year, UCD'),('★★★★★',_('The booking progress steps kept me informed at every stage. Transparent and trustworthy process from start to finish.'),'Anna Müller','2nd Year, TCD')] %}
+            <div class="col-md-4"><div class="review-strip"><div class="review-stars-home">{{ stars }}</div><p class="review-text-home">{{ text }}</p><div class="review-author-home">{{ name }}<br><small>{{ school }}</small></div></div></div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4"><a href="{{ url_for('review') }}" class="btn btn-outline-secondary"><i class="fa fa-pen me-2"></i>{{ _('Write a Review') }}</a></div>
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div class="container">
+        <div class="cta-banner-title">{{ _('Start Your Structured Search') }}</div>
+        <p class="cta-banner-sub">{{ _('Verified listings, exact specifications, transparent pricing.') }}</p>
+        <a href="{{ url_for('listings') }}" class="btn-cta-main me-3"><i class="fa fa-search me-2"></i>{{ _('Browse Listings') }}</a>
+        <a href="{{ url_for('review') }}" class="btn btn-outline-light px-4" style="border-radius:50px;font-family:'Raleway',sans-serif;font-weight:700;">{{ _('Write a Review') }}</a>
+    </div>
+</section>
+
+
+{# ================================================================
+   ENGLISH LAYOUT – Balanced, aspirational
+================================================================ #}
+{% elif session.get('language') != 'zh' %}
+
+<section class="hero-en">
+    <div class="container py-5" style="position:relative;z-index:1;">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="hero-badge"><i class="fa fa-map-marker-alt me-1"></i>{{ _("Ireland's #1 Student Housing Platform") }}</div>
+                <h1 class="hero-title">{{ _('Find Your') }} <span class="accent">{{ _('Perfect Dorm') }}</span><br>{{ _('in Ireland') }}</h1>
+                <p class="hero-subtitle">{{ _('Compare verified student accommodations across Ireland. Read honest reviews from real students and find the place that feels like home.') }}</p>
+                <div class="search-panel">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label">{{ _('University') }}</label>
+                            <select class="form-select">
+                                <option value="">{{ _('Select University') }}</option>
+                                <option>University College Dublin</option>
+                                <option>Dublin City University</option>
+                                <option>TU Dublin</option>
+                                <option>Trinity College Dublin</option>
+                                <option>Maynooth University</option>
+                                <option>University College Cork</option>
+                                <option>University of Limerick</option>
+                                <option>University of Galway</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">{{ _('Room Type') }}</label>
+                            <select class="form-select">
+                                <option value="">{{ _('Any Type') }}</option>
+                                <option>{{ _('En-Suite') }}</option>
+                                <option>{{ _('Studio') }}</option>
+                                <option>{{ _('Shared') }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('listings') }}" class="btn-search-en"><i class="fa fa-search me-1"></i> {{ _('Search') }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><span class="stat-num">1,200+</span><span class="stat-label">{{ _('Listings') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">4,800+</span><span class="stat-label">{{ _('Reviews') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">8</span><span class="stat-label">{{ _('Universities') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">15+</span><span class="stat-label">{{ _('Providers') }}</span></div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block" style="position:relative;">
+                <img src="{{ url_for('static', filename='assets/image1.jpg') }}" alt="Student accommodation" class="img-fluid rounded shadow-lg" style="border-radius:18px;max-height:420px;object-fit:cover;width:100%;" onerror="this.style.display='none'">
+                <div class="floating-card">
+                    <div class="fc-stars">★★★★★</div>
+                    <div class="fc-name">Aoife K., Trinity College</div>
+                    <div class="fc-text">"Found my perfect dorm in minutes!"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EN Universities: large cards, scroll to see more -->
+<section class="home-section-alt">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Where We Cover') }}</div>
+            <h2 class="section-heading-main">{{ _('Irish Universities') }}</h2>
+            <p class="section-sub">{{ _('Student accommodation options near all major Irish universities') }}</p>
+        </div>
+        <div class="carousel-outer px-4">
+            <button class="car-btn prev" id="uniPrev" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
+            <div class="uni-track" id="uniTrack">
+                {% set en_imgs = ['ucd_image.jpg','dcu_image.jpg','tud_image.jpg','trinity_image.jpg','maynooth_image.jpg','ucc_image.jpg','ul_image.jpeg','galway_image.jpg'] %}
+                {% for id, name, city, count in [('ucd','University College Dublin','Dublin 4','142'),('dcu','Dublin City University','Glasnevin, Dublin','98'),('tud','TU Dublin','Grangegorman','87'),('tcd','Trinity College Dublin','City Centre','115'),('mu','Maynooth University','Maynooth, Kildare','64'),('ucc','University College Cork','Cork City','79'),('ul','University of Limerick','Castletroy, Limerick','71'),('nuig','University of Galway','Galway City','58')] %}
+                <a href="{{ url_for('listings') }}?uni={{ id }}" class="uni-card-en">
+                    <div class="uni-card-thumb">
+                        <img src="{{ url_for('static', filename='assets/' + en_imgs[loop.index0]) }}" alt="{{ name }}" onerror="this.style.background='#dce8ff'">
+                    </div>
+                    <div class="uni-card-body">
+                        <div class="uni-card-name">{{ name }}</div>
+                        <div class="uni-card-city"><i class="fa fa-map-marker-alt me-1"></i>{{ city }}</div>
+                        <div class="uni-card-pill">{{ count }} {{ _('Listings') }}</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <button class="car-btn next" id="uniNext" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- EN Featured Accommodations -->
+<section class="home-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Top Rated') }}</div>
+            <h2 class="section-heading-main">{{ _('Featured Accommodations') }}</h2>
+            <p class="section-sub">{{ _('Verified student accommodations with real reviews from students like you') }}</p>
+        </div>
+        <div class="row g-4">
+            {% for name, loc, rating, rev, price, icon, img, tags in [
+                ('Yugo Dublin','City Centre · Near TCD','4.8','312','230','🏙️','image1.jpg',['En-Suite','Gym','Study Room','Bills Incl.']),
+                ('Mezzino','Glasnevin · Near DCU','4.7','198','210','🌟','Image2.jpg',['Studio Option','Communal Areas','Laundry']),
+                ('Aparto','Dublin 2 · Near UCD','4.5','276','245','🏢','image3.jpg',['Private Studio','Rooftop','Cinema Room']),
+                ('Nido Student','Cork City · Near UCC','4.9','154','195','🌿','image4.jpg',['En-Suite','Bike Storage','Events']),
+                ('Fresh Student Living','Limerick · Near UL','4.4','89','175','🏖️','image1.jpg',['Shared Kitchen','Garden','WiFi']),
+                ('Swuite','Galway City · Near NUIG','4.6','112','220','✨','Image2.jpg',['Luxury Studio','Co-working','Concierge']),
+            ] %}
+            <div class="col-md-6 col-lg-4">
+                <div class="accom-card">
+                    <div class="accom-thumb">
+                        <img src="{{ url_for('static', filename='assets/' + img) }}" alt="{{ name }}" onerror="this.style.display='none'">
+                        {{ icon }}
+                        <div class="verified-badge">✓ Verified</div>
+                    </div>
+                    <div class="accom-body">
+                        <div class="accom-name">{{ name }}</div>
+                        <div class="accom-loc"><i class="fa fa-map-marker-alt me-1"></i>{{ loc }}</div>
+                        <div class="accom-stars">★★★★★ <span class="rating-val">{{ rating }}</span> <small class="text-muted">({{ rev }} {{ _('Reviews') }})</small></div>
+                        <div class="accom-tags">{% for tag in tags %}<span class="accom-tag">{{ tag }}</span>{% endfor %}</div>
+                        <div class="accom-price">€{{ price }} <small>/{{ _('week') }}</small></div>
+                        <a href="{{ url_for('listings') }}" class="btn-view">{{ _('View Listing') }}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="{{ url_for('listings') }}" class="btn btn-outline-primary btn-lg px-5">{{ _('View All Listings') }} <i class="fa fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- EN How It Works -->
+<section class="home-section-alt">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Simple Process') }}</div>
+            <h2 class="section-heading-main">{{ _('How FindMyDorm Works') }}</h2>
+            <p class="section-sub">{{ _('Find your perfect student home in just a few steps') }}</p>
+        </div>
+        <div class="row g-4">
+            {% for icon, num, title, desc in [('🔍','01',_('Search'),_('Filter by university, price, room type, and distance to campus.')),('📋','02',_('Compare'),_('Read verified reviews and compare facilities side by side.')),('💬','03',_('Ask a Resident'),_('Connect with current residents and ask your questions.')),('✅','04',_('Book'),_('Book directly through the provider with confidence.'))] %}
+            <div class="col-md-3"><div class="step-card"><div class="step-icon">{{ icon }}</div><div class="step-num">{{ _('Step') }} {{ num }}</div><div class="step-title">{{ title }}</div><p class="step-desc">{{ desc }}</p></div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- EN Reviews -->
+<section class="home-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Real Students, Real Reviews') }}</div>
+            <h2 class="section-heading-main">{{ _('What Students Say') }}</h2>
+        </div>
+        <div class="row g-4">
+            {% for stars, text, name, school in [('★★★★★',_('FindMyDorm saved me weeks of stress. I found Yugo Dublin in minutes and the reviews were spot on.'),'Aoife Kelly','1st Year, Trinity College Dublin'),('★★★★★',_('As an international student, seeing real photos and honest ratings made the whole process so much less daunting.'),'Marco Bianchi','Exchange Student, UCD'),('★★★★★',_('The verified badge system gave me real peace of mind. No dodgy listings – everything is genuine and accurate.'),'Ciarán Murphy','2nd Year, UCC')] %}
+            <div class="col-md-4"><div class="review-strip"><div class="review-stars-home">{{ stars }}</div><p class="review-text-home">{{ text }}</p><div class="review-author-home">{{ name }}<br><small>{{ school }}</small></div></div></div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4"><a href="{{ url_for('review') }}" class="btn btn-outline-secondary"><i class="fa fa-pen me-2"></i>{{ _('Write a Review') }}</a></div>
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div class="container">
+        <div class="cta-banner-title">{{ _('Ready to Find Your Perfect Dorm?') }}</div>
+        <p class="cta-banner-sub">{{ _('Join thousands of students who found their home through FindMyDorm') }}</p>
+        <a href="{{ url_for('listings') }}" class="btn-cta-main me-3"><i class="fa fa-search me-2"></i>{{ _('Browse Listings') }}</a>
+        <a href="{{ url_for('review') }}" class="btn btn-outline-light px-4" style="border-radius:50px;font-family:'Raleway',sans-serif;font-weight:700;">{{ _('Write a Review') }}</a>
+    </div>
+</section>
+
+
+{# ================================================================
+   CHINESE LAYOUT – Collectivist / Low Uncertainty Avoidance
+================================================================ #}
+{% else %}
+
+<!-- ZH: entire page sits on the orange background -->
+
+
+<!-- Ticker -->
+<div class="zh-ticker">
+    <div class="container">
+        <div class="zh-ticker-inner">
+            <span class="zh-ticker-label">🔥 {{ _('Trending:') }}</span>
+            <span class="zh-ticker-badge">{{ _('98 students viewed Yugo Dublin today') }}</span>
+            <span class="zh-ticker-badge alt">★4.8 Nido Student – {{ _("This week's top review") }}</span>
+            <span class="zh-ticker-badge">{{ _('45 UCD students now live at Aparto') }}</span>
+            <span class="zh-ticker-badge alt">{{ _('Community Event: Mezzino Welcome Week') }}</span>
+            <span class="zh-ticker-badge">{{ _('New: Swuite Galway now accepting bookings') }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- ZH Hero -->
+<section class="hero-zh">
+    <div class="container py-5" style="position:relative;z-index:1;">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="hero-badge"><i class="fa fa-users me-1"></i>{{ _("Ireland's Most Social Student Housing Platform") }}</div>
+                <h1 class="hero-title">{{ _('Find Your') }} <span class="accent">{{ _('Community') }}</span><br>{{ _('in Ireland') }}</h1>
+                <p class="hero-subtitle">{{ _('Discover student accommodation loved by thousands. Read real peer reviews, explore communities, and connect with residents before you book.') }}</p>
+                <a href="{{ url_for('profile') }}" class="zh-ask-bar">
+                    <div><div class="ask-title">💬 {{ _('Ask a Resident') }}</div><div class="ask-sub">{{ _('Chat live with current residents before you decide') }}</div></div>
+                    <div class="ask-arrow">›</div>
+                </a>
+                <div class="search-panel">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label">{{ _('University') }}</label>
+                            <select class="form-select">
+                                <option value="">{{ _('Select University') }}</option>
+                                <option>University College Dublin</option>
+                                <option>Dublin City University</option>
+                                <option>TU Dublin</option>
+                                <option>Trinity College Dublin</option>
+                                <option>Maynooth University</option>
+                                <option>University College Cork</option>
+                                <option>University of Limerick</option>
+                                <option>University of Galway</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">{{ _('Room Type') }}</label>
+                            <select class="form-select">
+                                <option value="">{{ _('Any Type') }}</option>
+                                <option>{{ _('En-Suite') }}</option>
+                                <option>{{ _('Studio') }}</option>
+                                <option>{{ _('Shared') }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('listings') }}" class="btn-search-zh">🔍 {{ _('Explore') }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><span class="stat-num">1,200+</span><span class="stat-label">{{ _('Listings') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">4,800+</span><span class="stat-label">{{ _('Reviews') }}</span></div>
+                    <div class="hero-stat"><span class="stat-num">10,000+</span><span class="stat-label">{{ _('10,000+ students!') }}</span></div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="zh-mosaic-grid">
+                    <div class="mosaic-cell featured">
+                        <div class="mosaic-icon">🏠</div>
+                        <div class="mosaic-label">{{ _('Student Reviews') }}</div>
+                        <div class="mosaic-sublabel" style="margin-top:6px;">4,800+ {{ _('Reviews') }}</div>
+                        <a href="{{ url_for('review') }}" class="btn mt-3" style="background:#fff200;color:#c0160a;font-weight:800;border-radius:50px;padding:7px 20px;font-size:0.85rem;">{{ _('Reviews') }} ›</a>
+                    </div>
+                    <div class="mosaic-cell"><div class="mosaic-icon">🎉</div><div class="mosaic-label">{{ _('Events') }}</div><div class="mosaic-sublabel">{{ _('Welcome Week · Sports') }}</div></div>
+                    <div class="mosaic-cell"><div class="mosaic-icon">🍜</div><div class="mosaic-label">{{ _('Shared Kitchen') }}</div><div class="mosaic-sublabel">{{ _('Cook & Connect') }}</div></div>
+                    <div class="mosaic-cell"><div class="mosaic-icon">📖</div><div class="mosaic-label">{{ _('Study Spaces') }}</div><div class="mosaic-sublabel">{{ _('Libraries · WiFi') }}</div></div>
+                    <div class="mosaic-cell"><div class="mosaic-icon">🚌</div><div class="mosaic-label">{{ _('Transport') }}</div><div class="mosaic-sublabel">&lt;15 {{ _('mins to campus') }}</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ZH Universities: campus photos -->
+<section class="home-section" style="padding-top:56px;padding-bottom:56px;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Explore') }}</div>
+            <h2 class="section-heading-main">{{ _('Irish Universities') }}</h2>
+            <p class="section-sub">{{ _('Discover student communities near every Irish university') }}</p>
+        </div>
+        <div class="carousel-outer px-4">
+            <button class="car-btn prev" id="uniPrev" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
+            <div class="uni-track" id="uniTrack">
+                {% set zh_imgs = ['ucd_image.jpg','dcu_image.jpg','tud_image.jpg','trinity_image.jpg','maynooth_image.jpg','ucc_image.jpg','ul_image.jpeg','galway_image.jpg'] %}
+                {% for id, name, city, count in [('ucd','University College Dublin','Dublin 4','142'),('dcu','Dublin City University','Glasnevin, Dublin','98'),('tud','TU Dublin','Grangegorman','87'),('tcd','Trinity College Dublin','City Centre','115'),('mu','Maynooth University','Maynooth, Kildare','64'),('ucc','University College Cork','Cork City','79'),('ul','University of Limerick','Castletroy, Limerick','71'),('nuig','University of Galway','Galway City','58')] %}
+                <a href="{{ url_for('listings') }}?uni={{ id }}" class="uni-card-zh">
+                    <div class="uni-card-thumb">
+                        <img src="{{ url_for('static', filename='assets/' + zh_imgs[loop.index0]) }}" alt="{{ name }}" onerror="this.style.background='rgba(255,255,255,0.1)'">
+                    </div>
+                    <div class="uni-card-body">
+                        <div class="uni-card-name">{{ name }}</div>
+                        <div class="uni-card-city"><i class="fa fa-map-marker-alt me-1"></i>{{ city }}</div>
+                        <div class="uni-card-pill">{{ count }} {{ _('Listings') }}</div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <button class="car-btn next" id="uniNext" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+        </div>
+    </div>
+</section>
+
+<!-- ZH Featured Accommodations -->
+<section class="home-section" style="padding-top:0;padding-bottom:56px;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Most Loved by Students') }}</div>
+            <h2 class="section-heading-main">{{ _('Featured Accommodations') }}</h2>
+            <p class="section-sub">{{ _('Top-rated by your fellow students — see what the community says') }}</p>
+        </div>
+        <div class="row g-4">
+            {% for name, loc, rating, rev, price, icon, img, tags in [
+                ('Yugo Dublin','City Centre · Near TCD','4.8','312','230','🏙️','image1.jpg',['En-Suite','Gym','Study Room','Bills Incl.']),
+                ('Mezzino','Glasnevin · Near DCU','4.7','198','210','🌟','Image2.jpg',['Studio Option','Communal Areas','Laundry']),
+                ('Aparto','Dublin 2 · Near UCD','4.5','276','245','🏢','image3.jpg',['Private Studio','Rooftop','Cinema Room']),
+                ('Nido Student','Cork City · Near UCC','4.9','154','195','🌿','image4.jpg',['En-Suite','Bike Storage','Events']),
+                ('Fresh Student Living','Limerick · Near UL','4.4','89','175','🏖️','image1.jpg',['Shared Kitchen','Garden','WiFi']),
+                ('Swuite','Galway City · Near NUIG','4.6','112','220','✨','Image2.jpg',['Luxury Studio','Co-working','Concierge']),
+            ] %}
+            <div class="col-md-6 col-lg-4">
+                <div class="accom-card">
+                    <div class="accom-thumb">
+                        <img src="{{ url_for('static', filename='assets/' + img) }}" alt="{{ name }}" onerror="this.style.display='none'">
+                        {{ icon }}
+                        <div class="verified-badge">✓ Verified</div>
+                    </div>
+                    <div class="accom-body">
+                        <div class="accom-name">{{ name }}</div>
+                        <div class="accom-loc"><i class="fa fa-map-marker-alt me-1"></i>{{ loc }}</div>
+                        <div class="accom-stars">★★★★★ <span class="rating-val">{{ rating }}</span> <small class="text-muted">({{ rev }} {{ _('Reviews') }})</small></div>
+                        <div style="background:#ffe8e4;border-radius:8px;padding:7px 12px;margin:8px 0;font-size:0.78rem;color:#c0160a;">
+                            👥 {{ _('Join') }} {{ (rev|int // 3) }}+ {{ _('students already living here') }}
+                        </div>
+                        <div class="accom-tags">{% for tag in tags %}<span class="accom-tag">{{ tag }}</span>{% endfor %}</div>
+                        <div class="accom-price">€{{ price }} <small>/{{ _('week') }}</small></div>
+                        <a href="{{ url_for('listings') }}" class="btn-view">{{ _('Explore Community') }}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="{{ url_for('listings') }}" class="btn btn-lg px-5" style="background:#e8230a;color:#fff;border-radius:50px;font-family:'Raleway',sans-serif;font-weight:700;">{{ _('View All Listings') }} <i class="fa fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ZH How It Works -->
+<section class="home-section" style="padding-top:0;padding-bottom:56px;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Your Journey') }}</div>
+            <h2 class="section-heading-main">{{ _('How FindMyDorm Works') }}</h2>
+            <p class="section-sub">{{ _('Explore, connect and discover your perfect community') }}</p>
+        </div>
+        <div class="row g-4">
+            {% for icon, num, title, desc in [('🔍','01',_('Explore'),_('Browse listings freely and discover communities that match your vibe.')),('⭐','02',_('Read Reviews'),_('Check what real students say — peer validation you can trust.')),('💬','03',_('Ask a Resident'),_('Connect directly with students living there right now.')),('🏠','04',_('Join the Community'),_('Book confidently knowing your new community is waiting.'))] %}
+            <div class="col-md-3"><div class="step-card"><div class="step-icon">{{ icon }}</div><div class="step-num">{{ _('Step') }} {{ num }}</div><div class="step-title">{{ title }}</div><p class="step-desc">{{ desc }}</p></div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ZH Reviews -->
+<section class="home-section" style="padding-top:0;padding-bottom:56px;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="eyebrow">{{ _('Real Students, Real Reviews') }}</div>
+            <h2 class="section-heading-main">{{ _('What Students Say') }}</h2>
+            <p class="section-sub">4,800+ {{ _('authentic reviews from your fellow students') }}</p>
+        </div>
+        <div class="row g-3 mb-3">
+            {% for stars, text, name, school in [
+                ('★★★★★',_('Great location, convenient transport, facilities nearby. The community events were amazing!'),'Wei Chen','UCD'),
+                ('★★★★★',_('Reasonable price, spacious rooms, highly recommended! Made so many friends here.'),'Lin Mei','TCD'),
+                ('★★★★★',_('Clean and tidy overall, friendly staff. The Ask a Resident feature was so helpful before I moved in.'),'Jia Hui','DCU'),
+                ('★★★☆☆',_('Internet speed could be improved, otherwise very satisfied. Great community atmosphere.'),'Xiao Ming','UCC'),
+            ] %}
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3 bg-white p-3 rounded shadow-sm" style="border-left:3px solid #e8230a;">
+                    <div style="width:40px;height:40px;background:#e8230a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">👤</div>
+                    <div>
+                        <div class="text-warning mb-1">{{ stars }}</div>
+                        <p style="font-size:0.88rem;color:#495057;font-style:italic;margin-bottom:6px;">{{ text }}</p>
+                        <small style="color:#6c757d;font-weight:700;">{{ name }} · {{ school }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('review') }}" class="btn btn-lg px-5" style="background:#e8230a;color:#fff;border-radius:50px;font-family:'Raleway',sans-serif;font-weight:700;"><i class="fa fa-pen me-2"></i>{{ _('Write a Review') }}</a>
+        </div>
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div class="container">
+        <div class="cta-banner-title">{{ _('Join 10,000+ Students Who Found Their Home') }}</div>
+        <p class="cta-banner-sub">{{ _('Explore, connect, and discover your community in Ireland') }}</p>
+        <a href="{{ url_for('listings') }}" class="btn-cta-main me-3">🔍 {{ _('Browse Listings') }}</a>
+        <a href="{{ url_for('profile') }}" class="btn btn-outline-light px-4" style="border-radius:50px;font-family:'Raleway',sans-serif;font-weight:700;border-color:rgba(255,255,255,0.6);">💬 {{ _('Ask a Resident') }}</a>
+    </div>
+</section>
+
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+/* =====================================================
+   EN + ZH: Standard carousel (scrolls by one card)
+===================================================== */
+(function () {
+    var track = document.getElementById('uniTrack');
+    var prev  = document.getElementById('uniPrev');
+    var next  = document.getElementById('uniNext');
+    if (!track) return;
+
+    var pos = 0;
+    function cardW() {
+        var c = track.querySelector('.uni-card-en, .uni-card-zh');
+        if (!c) return 240;
+        return c.offsetWidth + 19; /* card + gap */
+    }
+    function maxPos() {
+        return Math.max(0, track.scrollWidth - track.parentElement.offsetWidth + 36);
+    }
+    function slide(dir) {
+        pos = Math.max(0, Math.min(pos + dir * cardW(), maxPos()));
+        track.style.transform = 'translateX(-' + pos + 'px)';
+    }
+    if (prev) prev.addEventListener('click', function () { slide(-1); });
+    if (next) next.addEventListener('click', function () { slide(1); });
+
+    var startX = 0;
+    track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   function (e) {
+        var dx = startX - e.changedTouches[0].clientX;
+        if (Math.abs(dx) > 40) slide(dx > 0 ? 1 : -1);
+    });
+})();
+
+/* =====================================================
+   DE: University slider (1 card at a time)
+===================================================== */
+(function () {
+    var track   = document.getElementById('deUniTrack');
+    var prevBtn = document.getElementById('deUniPrev');
+    var nextBtn = document.getElementById('deUniNext');
+    var counter = document.getElementById('deUniCounter');
+    if (!track) return;
+
+    var slides = track.querySelectorAll('.uni-card-de');
+    var total  = slides.length;
+    var idx    = 0;
+
+    function go(newIdx) {
+        idx = (newIdx + total) % total;
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        if (counter) counter.textContent = (idx + 1) + ' / ' + total;
+    }
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(idx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(idx + 1); });
+})();
+
+/* =====================================================
+   DE: Accommodation slider (1 card at a time)
+===================================================== */
+(function () {
+    var track   = document.getElementById('deAccomTrack');
+    var prevBtn = document.getElementById('deAccomPrev');
+    var nextBtn = document.getElementById('deAccomNext');
+    var counter = document.getElementById('deAccomCounter');
+    if (!track) return;
+
+    var slides = track.querySelectorAll('.de-accom-slide');
+    var total  = slides.length;
+    var idx    = 0;
+
+    function go(newIdx) {
+        idx = (newIdx + total) % total;
+        track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        if (counter) counter.textContent = (idx + 1) + ' / ' + total;
+    }
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(idx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(idx + 1); });
+})();
+
+/* =====================================================
+   DE: Progress bar – highlight step on scroll
+===================================================== */
+(function () {
+    var steps = document.querySelectorAll('#deSteps li');
+    if (!steps.length) return;
+    window.addEventListener('scroll', function () {
+        var ratio = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+        var idx   = Math.min(Math.floor(ratio * steps.length), steps.length - 1);
+        steps.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+    }, { passive: true });
+})();
+</script>
 {% endblock %}

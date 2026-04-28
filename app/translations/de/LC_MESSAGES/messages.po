@@ -172,3 +172,211 @@ msgstr "Internetgeschwindigkeit könnte verbessert werden, ansonsten sehr zufrie
 
 msgid "My Saved"
 msgstr "Meine Gespeicherten"
+
+
+msgid "Verified Student Housing · Ireland"
+msgstr "Verifizierte Studentenunterkünfte · Irland"
+
+msgid "Find Your"
+msgstr "Finden Sie Ihre"
+
+msgid "Perfect Dorm"
+msgstr "Perfekte Unterkunft"
+
+msgid "in Ireland"
+msgstr "in Irland"
+
+msgid "Compare verified student accommodations with exact specifications, transparent pricing and a clear booking process."
+msgstr "Vergleichen Sie verifizierte Studentenunterkünfte mit genauen Spezifikationen, transparenten Preisen und einem klaren Buchungsprozess."
+
+msgid "Select University"
+msgstr "Universität auswählen"
+
+msgid "Any Type"
+msgstr "Alle Typen"
+
+msgid "En-Suite"
+msgstr "En-Suite"
+
+msgid "Studio"
+msgstr "Studio"
+
+msgid "Shared"
+msgstr "Geteilt"
+
+msgid "Private"
+msgstr "Privat"
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "Verified"
+msgstr "Verifiziert"
+
+msgid "Why Students Trust Us"
+msgstr "Warum Studierende uns vertrauen"
+
+msgid "Verified Listings Only"
+msgstr "Nur verifizierte Angebote"
+
+msgid "Every listing is manually checked"
+msgstr "Jedes Angebot wird manuell geprüft"
+
+msgid "Exact Specifications"
+msgstr "Genaue Spezifikationen"
+
+msgid "Room size, distance, contract terms"
+msgstr "Zimmergröße, Entfernung, Vertragsbedingungen"
+
+msgid "Transparent Pricing"
+msgstr "Transparente Preise"
+
+msgid "No hidden fees. Bills included."
+msgstr "Keine versteckten Gebühren. Nebenkosten inklusive."
+
+msgid "Real students, real feedback"
+msgstr "Echte Studierende, echtes Feedback"
+
+msgid "Coverage"
+msgstr "Abdeckung"
+
+msgid "Irish Universities"
+msgstr "Irische Universitäten"
+
+msgid "Verified accommodation near every major Irish university"
+msgstr "Verifizierte Unterkunft in der Nähe jeder großen irischen Universität"
+
+msgid "Top Rated"
+msgstr "Am besten bewertet"
+
+msgid "Featured Accommodations"
+msgstr "Ausgewählte Unterkünfte"
+
+msgid "Full specifications and transparent pricing for every listing"
+msgstr "Vollständige Spezifikationen und transparente Preise für jedes Angebot"
+
+msgid "Room Size"
+msgstr "Zimmergröße"
+
+msgid "Distance"
+msgstr "Entfernung"
+
+msgid "Contract"
+msgstr "Vertrag"
+
+msgid "weeks"
+msgstr "Wochen"
+
+msgid "Included"
+msgstr "Inklusive"
+
+msgid "week"
+msgstr "Woche"
+
+msgid "View Listing"
+msgstr "Angebot ansehen"
+
+msgid "View All Listings"
+msgstr "Alle Angebote ansehen"
+
+msgid "Structured Process"
+msgstr "Strukturierter Prozess"
+
+msgid "How FindMyDorm Works"
+msgstr "Wie FindMyDorm funktioniert"
+
+msgid "A clear, transparent four-step process"
+msgstr "Ein klarer, transparenter vierstufiger Prozess"
+
+msgid "Step"
+msgstr "Schritt"
+
+msgid "Compare Listings"
+msgstr "Angebote vergleichen"
+
+msgid "Review exact specifications, floor plans and verified data."
+msgstr "Überprüfen Sie genaue Spezifikationen, Grundrisse und verifizierte Daten."
+
+msgid "View Details"
+msgstr "Details ansehen"
+
+msgid "Check contract terms, security certifications and all costs."
+msgstr "Prüfen Sie Vertragsbedingungen, Sicherheitszertifikate und alle Kosten."
+
+msgid "Book securely with full transparency over every term."
+msgstr "Buchen Sie sicher mit vollständiger Transparenz über jeden Begriff."
+
+msgid "Filter by university, price, room type, and distance."
+msgstr "Filtern Sie nach Universität, Preis, Zimmertyp und Entfernung."
+
+msgid "Start Your Structured Search"
+msgstr "Starten Sie Ihre strukturierte Suche"
+
+msgid "Verified listings, exact specifications, transparent pricing."
+msgstr "Verifizierte Angebote, genaue Spezifikationen, transparente Preise."
+
+msgid "Browse Listings"
+msgstr "Angebote durchsuchen"
+
+msgid "The technical specifications and verified data gave me the confidence to book without any uncertainty. Very professional."
+msgstr "Die technischen Spezifikationen und verifizierten Daten gaben mir die Sicherheit, ohne Unsicherheit zu buchen. Sehr professionell."
+
+msgid "Exact room dimensions and distance information made comparison straightforward. No surprises on arrival."
+msgstr "Genaue Zimmermaße und Entfernungsangaben machten den Vergleich unkompliziert. Keine Überraschungen bei der Ankunft."
+
+msgid "The booking progress steps kept me informed at every stage. Transparent and trustworthy process from start to finish."
+msgstr "Die Buchungsschritte haben mich auf dem Laufenden gehalten. Transparenter und vertrauenswürdiger Prozess von Anfang bis Ende."
+
+msgid "Ireland's #1 Student Housing Platform"
+msgstr "Irlands Nr. 1 Studentenwohnungsplattform"
+
+msgid "Compare verified student accommodations across Ireland. Read honest reviews from real students and find the place that feels like home."
+msgstr "Vergleichen Sie verifizierte Studentenunterkünfte in ganz Irland. Lesen Sie ehrliche Bewertungen von echten Studierenden."
+
+msgid "Where We Cover"
+msgstr "Unser Abdeckungsbereich"
+
+msgid "Student accommodation options near all major Irish universities"
+msgstr "Studentenunterkünfte in der Nähe aller großen irischen Universitäten"
+
+msgid "Verified student accommodations with real reviews from students like you"
+msgstr "Verifizierte Studentenunterkünfte mit echten Bewertungen von Studierenden wie Ihnen"
+
+msgid "Simple Process"
+msgstr "Einfacher Prozess"
+
+msgid "Find your perfect student home in just a few steps"
+msgstr "Finden Sie Ihr perfektes Studentenheim in wenigen Schritten"
+
+msgid "Compare"
+msgstr "Vergleichen"
+
+msgid "Read verified reviews and compare facilities side by side."
+msgstr "Lesen Sie verifizierte Bewertungen und vergleichen Sie Einrichtungen."
+
+msgid "Connect with current residents and ask your questions."
+msgstr "Verbinden Sie sich mit aktuellen Bewohnern und stellen Sie Ihre Fragen."
+
+msgid "Book directly through the provider with confidence."
+msgstr "Buchen Sie direkt beim Anbieter mit Zuversicht."
+
+msgid "Real Students, Real Reviews"
+msgstr "Echte Studierende, echte Bewertungen"
+
+msgid "What Students Say"
+msgstr "Was Studierende sagen"
+
+msgid "Ready to Find Your Perfect Dorm?"
+msgstr "Bereit, Ihre perfekte Unterkunft zu finden?"
+
+msgid "Join thousands of students who found their home through FindMyDorm"
+msgstr "Schließen Sie sich Tausenden von Studierenden an, die ihr Zuhause über FindMyDorm gefunden haben"
+
+msgid "FindMyDorm saved me weeks of stress. I found Yugo Dublin in minutes and the reviews were spot on."
+msgstr "FindMyDorm hat mir wochenlangen Stress erspart. Ich habe Yugo Dublin in wenigen Minuten gefunden."
+
+msgid "As an international student, seeing real photos and honest ratings made the whole process so much less daunting."
+msgstr "Als ausländischer Student hat mich das Sehen echter Fotos und ehrlicher Bewertungen sehr beruhigt."
+
+msgid "The verified badge system gave me real peace of mind. No dodgy listings – everything is genuine and accurate."
+msgstr "Das Verifizierungssystem hat mir echte Sicherheit gegeben. Keine dubiosen Angebote – alles ist echt und genau."

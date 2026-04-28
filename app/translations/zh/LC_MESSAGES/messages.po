@@ -168,3 +168,190 @@ msgstr "价格合理，房间宽敞，非常推荐！"
 
 msgid "Internet speed could be improved, otherwise very satisfied."
 msgstr "网络速度有待提高，其他方面都很满意。"
+
+
+msgid "Ireland's Most Social Student Housing Platform"
+msgstr "爱尔兰最具社交性的学生住房平台"
+
+msgid "Find Your"
+msgstr "找到你的"
+
+msgid "Community"
+msgstr "理想社区"
+
+msgid "Perfect Dorm"
+msgstr "完美宿舍"
+
+msgid "in Ireland"
+msgstr "在爱尔兰"
+
+msgid "Discover student accommodation loved by thousands. Read real peer reviews, explore communities, and connect with residents before you book."
+msgstr "探索深受数千名学生喜爱的公寓。阅读真实同伴评价，探索社区，入住前与居民直接交流。"
+
+msgid "Chat live with current residents before you decide"
+msgstr "入住前与在住学生实时聊天，获取第一手信息"
+
+msgid "Select University"
+msgstr "选择大学"
+
+msgid "Any Type"
+msgstr "所有类型"
+
+msgid "En-Suite"
+msgstr "套间"
+
+msgid "Studio"
+msgstr "单间公寓"
+
+msgid "Shared"
+msgstr "合租"
+
+msgid "Private"
+msgstr "私人房间"
+
+msgid "Explore"
+msgstr "探索"
+
+msgid "Trending:"
+msgstr "🔥 热门："
+
+msgid "98 students viewed Yugo Dublin today"
+msgstr "今天98位同学查看了都柏林Yugo公寓"
+
+msgid "This week's top review"
+msgstr "本周最热评价"
+
+msgid "45 UCD students now live at Aparto"
+msgstr "45位UCD学生现居住在Aparto"
+
+msgid "Community Event: Mezzino Welcome Week"
+msgstr "社区活动：Mezzino迎新周"
+
+msgid "New: Swuite Galway now accepting bookings"
+msgstr "新消息：高威Swuite公寓现已开放预订"
+
+msgid "Ireland's #1 Student Housing Platform"
+msgstr "爱尔兰第一学生住房平台"
+
+msgid "Events"
+msgstr "社区活动"
+
+msgid "Welcome Week · Sports"
+msgstr "迎新周 · 体育活动"
+
+msgid "Shared Kitchen"
+msgstr "共享厨房"
+
+msgid "Cook & Connect"
+msgstr "一起煮饭，结交朋友"
+
+msgid "Study Spaces"
+msgstr "学习空间"
+
+msgid "Libraries · WiFi"
+msgstr "图书馆 · WiFi"
+
+msgid "Transport"
+msgstr "交通"
+
+msgid "mins to campus"
+msgstr "分钟可到校园"
+
+msgid "Student Reviews"
+msgstr "学生评价"
+
+msgid "Most Loved by Students"
+msgstr "同学最爱"
+
+msgid "Featured Accommodations"
+msgstr "精选公寓"
+
+msgid "Top-rated by your fellow students — see what the community says"
+msgstr "同学评分最高——看看大家都怎么说"
+
+msgid "students already living here"
+msgstr "位同学已在这里居住"
+
+msgid "Explore Community"
+msgstr "探索社区"
+
+msgid "View All Listings"
+msgstr "查看所有房源"
+
+msgid "Your Journey"
+msgstr "你的探索之旅"
+
+msgid "How FindMyDorm Works"
+msgstr "FindMyDorm如何运作"
+
+msgid "Explore, connect and discover your perfect community"
+msgstr "探索、联系，发现你的理想社区"
+
+msgid "Step"
+msgstr "第"
+
+msgid "Read Reviews"
+msgstr "阅读评价"
+
+msgid "Check what real students say — peer validation you can trust."
+msgstr "查看真实学生的评价——值得信赖的同伴验证。"
+
+msgid "Connect directly with students living there right now."
+msgstr "直接与目前在住的学生联系。"
+
+msgid "Join the Community"
+msgstr "加入社区"
+
+msgid "Book confidently knowing your new community is waiting."
+msgstr "放心预订，你的新社区正在等待你的加入。"
+
+msgid "Browse listings freely and discover communities that match your vibe."
+msgstr "自由浏览房源，发现与你气场相符的社区。"
+
+msgid "Real Students, Real Reviews"
+msgstr "真实学生，真实评价"
+
+msgid "What Students Say"
+msgstr "同学们怎么说"
+
+msgid "authentic reviews from your fellow students"
+msgstr "条来自同学的真实评价"
+
+msgid "Great location, convenient transport, facilities nearby. The community events were amazing!"
+msgstr "位置超好，交通便利，设施齐全。社区活动非常棒！"
+
+msgid "Reasonable price, spacious rooms, highly recommended! Made so many friends here."
+msgstr "性价比超高，房间宽敞，强烈推荐！在这里交到了很多朋友。"
+
+msgid "Clean and tidy overall, friendly staff. The Ask a Resident feature was so helpful before I moved in."
+msgstr "整体干净整洁，工作人员友好。入住前使用"问问居民"功能真的很有帮助。"
+
+msgid "Internet speed could be improved, otherwise very satisfied. Great community atmosphere."
+msgstr "网速有待提升，其他方面非常满意。社区氛围很棒。"
+
+msgid "Join 10,000+ Students Who Found Their Home"
+msgstr "加入10,000+名已找到家园的学生"
+
+msgid "Explore, connect, and discover your community in Ireland"
+msgstr "探索、联系，发现你在爱尔兰的社区"
+
+msgid "Browse Listings"
+msgstr "浏览房源"
+
+msgid "week"
+msgstr "周"
+
+msgid "Listings"
+msgstr "房源"
+
+msgid "Reviews"
+msgstr "评价"
+
+msgid "Where We Cover"
+msgstr "覆盖范围"
+
+msgid "Irish Universities"
+msgstr "爱尔兰大学"
+
+msgid "Discover student communities near every Irish university"
+msgstr "探索每所爱尔兰大学附近的学生社区"

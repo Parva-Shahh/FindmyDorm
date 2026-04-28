@@ -1,0 +1,874 @@
+/**
+ * FILE: home-styles.css
+ * AUTHOR: Parva (D24125609)
+ * Homepage / Index page styles
+ * Three cultural layouts: EN (default), ZH (Chinese/Collectivist), DE (German/High-UA)
+ */
+
+/* =============================================
+   SHARED HELPERS
+   ============================================= */
+.home-section     { padding: 72px 0; }
+.home-section-alt { padding: 72px 0; background-color: #f8f9fa; }
+
+.eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #0d6efd;
+    margin-bottom: 0.4rem;
+}
+.section-heading-main {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+    color: #212529;
+    margin-bottom: 0.5rem;
+}
+.section-sub {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* =============================================
+   HERO – ENGLISH  (solid blue)
+   ============================================= */
+.hero-en {
+    background: #0d6efd;
+    min-height: 82vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.30);
+    color: #ffffff;
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+}
+.hero-title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 1.1rem;
+}
+.hero-title .accent { color: #ffffff; text-decoration: underline; text-underline-offset: 6px; }
+.hero-subtitle {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* Search bar */
+.search-panel {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.search-panel .form-label {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+.search-panel .form-control,
+.search-panel .form-select {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    border-radius: 8px;
+}
+.search-panel .form-control::placeholder { color: rgba(255,255,255,0.5); }
+.search-panel .form-control:focus,
+.search-panel .form-select:focus {
+    background: rgba(255,255,255,0.25);
+    border-color: #fff;
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+}
+.search-panel .form-select option { color: #212529; background: #fff; }
+
+.btn-search-en {
+    background: #ffffff;
+    color: #0d6efd;
+    border: none;
+    border-radius: 8px;
+    padding: 0.68rem 1.6rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.btn-search-en:hover { background: #e9f0ff; color: #0d6efd; text-decoration: none; }
+
+/* Stats row */
+.hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+.hero-stat .stat-num {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 1.55rem;
+    color: #ffffff;
+    display: block;
+}
+.hero-stat .stat-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Floating review card */
+.floating-card {
+    position: absolute;
+    bottom: 24px;
+    left: -16px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.22);
+    min-width: 210px;
+    z-index: 2;
+}
+.floating-card .fc-stars { color: #f59e0b; font-size: 0.85rem; }
+.floating-card .fc-name  { font-weight: 700; font-size: 0.83rem; color: #212529; margin: 3px 0 2px; }
+.floating-card .fc-text  { font-size: 0.76rem; color: #6c757d; }
+
+/* =============================================
+   HERO – CHINESE  (solid orange)
+   ============================================= */
+.hero-zh {
+    background: #ff6633;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.hero-zh .hero-title { color: #fff; }
+.hero-zh .hero-title .accent { color: #fff200; text-decoration: none; }
+.hero-zh .hero-subtitle { color: rgba(255,255,255,0.90); font-family: 'Raleway', sans-serif; }
+.hero-zh .hero-badge {
+    background: rgba(255,255,255,0.20);
+    border-color: rgba(255,255,255,0.40);
+    color: #fff;
+}
+.hero-zh .hero-stat .stat-num  { color: #fff200; }
+.hero-zh .hero-stat .stat-label { color: rgba(255,255,255,0.70); }
+.hero-zh .search-panel {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.30);
+}
+
+.btn-search-zh {
+    background: #fff200;
+    color: #c0160a;
+    border: none;
+    border-radius: 8px;
+    padding: 0.68rem 1.6rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.btn-search-zh:hover { background: #ffe600; color: #c0160a; text-decoration: none; }
+
+/* ZH Social ticker */
+.zh-ticker {
+    background: #e8230a;
+    border-bottom: 2px solid rgba(255,255,255,0.25);
+    padding: 10px 0;
+    overflow: hidden;
+}
+.zh-ticker-inner {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.zh-ticker-inner::-webkit-scrollbar { display: none; }
+.zh-ticker-badge {
+    white-space: nowrap;
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 50px;
+    flex-shrink: 0;
+}
+.zh-ticker-badge.alt { background: rgba(255,255,255,0.15); }
+.zh-ticker-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff200;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ZH Ask-a-Resident bar */
+.zh-ask-bar {
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    border-radius: 12px;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.zh-ask-bar:hover { background: rgba(0,0,0,0.25); color: #fff; text-decoration: none; }
+.zh-ask-bar .ask-title { font-weight: 700; font-size: 1rem; }
+.zh-ask-bar .ask-sub   { font-size: 0.82rem; opacity: 0.9; }
+.zh-ask-bar .ask-arrow { font-size: 1.5rem; }
+
+/* ZH Mosaic grid */
+.zh-mosaic-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 160px 160px;
+    gap: 10px;
+}
+.mosaic-cell {
+    border-radius: 12px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.4rem;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    overflow: hidden;
+    color: #fff;
+}
+.mosaic-cell:hover { background: rgba(255,255,255,0.25); }
+.mosaic-cell.featured {
+    grid-row: span 2;
+    background: rgba(0,0,0,0.20);
+    border-color: rgba(255,255,255,0.30);
+}
+.mosaic-icon     { font-size: 2.2rem; margin-bottom: 0.5rem; }
+.mosaic-label    { font-weight: 700; font-size: 0.92rem; }
+.mosaic-sublabel { font-size: 0.75rem; opacity: 0.85; margin-top: 3px; }
+.mosaic-cell.featured .mosaic-label { font-size: 1.15rem; }
+
+/* =============================================
+   HERO – GERMAN  (solid black)
+   ============================================= */
+.hero-de {
+    background: #111111;
+    min-height: 72vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.hero-de .hero-badge {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.18);
+    color: #adb5bd;
+    border-radius: 4px;
+    letter-spacing: 3px;
+}
+.hero-de .hero-title { color: #fff; letter-spacing: -0.5px; }
+.hero-de .hero-title .accent { color: #e8c012; text-decoration: none; }
+.hero-de .hero-subtitle { color: rgba(255,255,255,0.60); font-family: 'Raleway', sans-serif; font-size: 1rem; }
+.hero-de .hero-stat .stat-num   { color: #e8c012; }
+.hero-de .hero-stat .stat-label { color: rgba(255,255,255,0.45); }
+.hero-de .search-panel {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+}
+
+.btn-search-de {
+    background: #e8c012;
+    color: #111;
+    border: none;
+    border-radius: 4px;
+    padding: 0.68rem 1.6rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.btn-search-de:hover { background: #d4ae0f; color: #111; text-decoration: none; }
+
+/* DE Progress Steps bar */
+.de-progress-bar {
+    background: #1a1a1a;
+    border-bottom: 3px solid #e8c012;
+    padding: 10px 0;
+}
+.de-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0; margin: 0;
+}
+.de-steps li {
+    display: flex;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.77rem;
+    font-weight: 600;
+    color: #6c757d;
+    letter-spacing: 0.4px;
+}
+.de-steps li.active { color: #e8c012; }
+.de-steps .step-circle {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.68rem;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+.de-steps li.active .step-circle {
+    background: #e8c012;
+    border-color: #e8c012;
+    color: #111;
+}
+.de-steps .step-sep { margin: 0 14px; color: #444; font-size: 0.9rem; }
+
+/* =============================================
+   UNIVERSITY CAROUSEL – ENGLISH
+   Larger cards, fewer visible at once (scroll more)
+   ============================================= */
+.carousel-outer { position: relative; overflow: hidden; }
+.uni-track {
+    display: flex;
+    gap: 1.2rem;
+    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+/* EN: big cards, only ~2 visible at once */
+.uni-card-en {
+    flex: 0 0 340px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 3px 18px rgba(0,0,0,0.10);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.22s, box-shadow 0.22s;
+    display: block;
+}
+.uni-card-en:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+    color: inherit;
+    text-decoration: none;
+}
+.uni-card-en .uni-card-thumb {
+    height: 180px;
+    overflow: hidden;
+    background: #dce8ff;
+}
+.uni-card-en .uni-card-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+}
+.uni-card-en .uni-card-body { padding: 16px 18px; }
+.uni-card-en .uni-card-name { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 1rem; color: #212529; margin-bottom: 4px; }
+.uni-card-en .uni-card-city { font-size: 0.78rem; color: #6c757d; margin-bottom: 8px; }
+.uni-card-en .uni-card-pill {
+    display: inline-block;
+    background: #e9f0ff; color: #0d6efd;
+    font-size: 0.70rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 50px;
+}
+
+/* =============================================
+   UNIVERSITY CAROUSEL – CHINESE
+   Campus photos, medium cards
+   ============================================= */
+.uni-card-zh {
+    flex: 0 0 220px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.22s, transform 0.22s;
+    display: block;
+}
+.uni-card-zh:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-4px);
+    color: #fff;
+    text-decoration: none;
+}
+.uni-card-zh .uni-card-thumb {
+    height: 130px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.1);
+}
+.uni-card-zh .uni-card-thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.uni-card-zh .uni-card-body { padding: 12px 14px; }
+.uni-card-zh .uni-card-name { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.88rem; color: #fff; margin-bottom: 3px; }
+.uni-card-zh .uni-card-city { font-size: 0.73rem; color: rgba(255,255,255,0.75); margin-bottom: 7px; }
+.uni-card-zh .uni-card-pill {
+    display: inline-block;
+    background: #fff200; color: #c0160a;
+    font-size: 0.68rem; font-weight: 700;
+    padding: 2px 9px; border-radius: 50px;
+}
+
+/* =============================================
+   UNIVERSITY CAROUSEL – GERMAN
+   One card visible at a time, full-width, with logo
+   ============================================= */
+.de-uni-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.de-uni-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.uni-card-de {
+    flex: 0 0 100%;
+    background: #fff;
+    border: 2px solid #e8c012;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem 2.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+.uni-card-de:hover { color: inherit; text-decoration: none; }
+.uni-logo-box {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    border: 2px solid #f0f0f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+    overflow: hidden;
+}
+.uni-logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.uni-logo-box .uni-logo-fallback {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #212529;
+    text-align: center;
+    line-height: 1.2;
+}
+.uni-card-de .de-uni-info { flex: 1; }
+.uni-card-de .de-uni-name {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    color: #212529;
+    margin-bottom: 6px;
+}
+.uni-card-de .de-uni-city { font-size: 0.85rem; color: #6c757d; margin-bottom: 14px; }
+.uni-card-de .de-uni-stats { display: flex; gap: 2rem; }
+.uni-stat-box { text-align: center; }
+.uni-stat-box .us-num { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 1.4rem; color: #e8c012; display: block; }
+.uni-stat-box .us-lbl { font-size: 0.72rem; color: #6c757d; text-transform: uppercase; letter-spacing: 1px; }
+.de-uni-btn {
+    display: inline-block;
+    background: #e8c012;
+    color: #111;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 22px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-top: 14px;
+    transition: background 0.2s;
+}
+.de-uni-btn:hover { background: #d4ae0f; color: #111; text-decoration: none; }
+
+/* DE uni card – star rating, walk time, description */
+.de-uni-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: 10px 0 12px;
+}
+.de-uni-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.de-uni-meta-sep { color: #dee2e6; font-size: 0.85rem; }
+.de-uni-stars { color: #e8c012; font-size: 0.88rem; letter-spacing: 1px; }
+.de-uni-rating-label { font-size: 0.78rem; color: #495057; font-weight: 600; }
+.de-walk-icon  { color: #6c757d; font-size: 0.82rem; }
+.de-walk-label { font-size: 0.78rem; color: #495057; }
+.de-uni-desc {
+    font-size: 0.85rem;
+    color: #6c757d;
+    line-height: 1.65;
+    margin-bottom: 14px;
+    max-width: 540px;
+}
+
+/* DE carousel nav */
+.de-uni-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.2rem;
+}
+.de-uni-nav-btn {
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    background: #212529;
+    border: 2px solid #e8c012;
+    color: #e8c012;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-size: 0.9rem;
+}
+.de-uni-nav-btn:hover { background: #e8c012; color: #111; }
+.de-uni-counter {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #6c757d;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* Shared carousel nav buttons (EN + ZH) */
+.car-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #fff; border: 2px solid #dee2e6;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 5;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.09);
+    transition: all 0.18s;
+}
+.car-btn:hover { background: #0d6efd; border-color: #0d6efd; color: #fff; }
+.car-btn.prev { left: -18px; }
+.car-btn.next { right: -18px; }
+[data-lang="zh"] .car-btn { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: #fff; }
+[data-lang="zh"] .car-btn:hover { background: rgba(255,255,255,0.4); border-color: #fff; color: #fff; }
+
+/* =============================================
+   ACCOMMODATION CARDS (EN + ZH)
+   ============================================= */
+.accom-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 18px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.22s, box-shadow 0.22s;
+}
+.accom-card:hover { transform: translateY(-5px); box-shadow: 0 14px 44px rgba(0,0,0,0.12); }
+.accom-thumb {
+    height: 185px;
+    background: linear-gradient(135deg, #e9f0ff, #c8daff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; position: relative;
+}
+.accom-thumb img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.verified-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: #198754; color: #fff;
+    font-size: 0.66rem; font-weight: 700;
+    padding: 3px 9px; border-radius: 50px; z-index: 1;
+}
+.accom-body { padding: 15px; flex: 1; display: flex; flex-direction: column; }
+.accom-name  { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 1rem; color: #212529; }
+.accom-loc   { font-size: 0.78rem; color: #6c757d; margin: 3px 0 8px; }
+.accom-stars { color: #f59e0b; font-size: 0.82rem; }
+.accom-stars .rating-val { color: #212529; font-weight: 700; font-size: 0.88rem; }
+.accom-tags  { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+.accom-tag {
+    background: #f0f4ff; color: #0d6efd;
+    font-size: 0.68rem; font-weight: 600;
+    padding: 3px 9px; border-radius: 50px;
+}
+.accom-price { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 1.1rem; color: #0d6efd; margin-top: auto; }
+.accom-price small { font-weight: 400; font-size: 0.73rem; color: #6c757d; }
+.btn-view {
+    display: block;
+    background: #0d6efd; color: #fff;
+    border: none; border-radius: 8px;
+    padding: 9px; margin-top: 10px;
+    font-family: 'Raleway', sans-serif; font-weight: 700;
+    text-align: center; text-decoration: none;
+    transition: background 0.18s;
+}
+.btn-view:hover { background: #0b5ed7; color: #fff; text-decoration: none; }
+
+/* ZH card overrides */
+[data-lang="zh"] .accom-tag    { background: #ffe8e4; color: #c0160a; }
+[data-lang="zh"] .accom-price  { color: #c0160a; }
+[data-lang="zh"] .btn-view     { background: #ff6633; }
+[data-lang="zh"] .btn-view:hover { background: #e05520; }
+[data-lang="zh"] .accom-card:hover { box-shadow: 0 14px 44px rgba(192,22,10,0.15); }
+
+/* =============================================
+   ACCOMMODATION SLIDER – GERMAN
+   One card at a time, full-width slider
+   ============================================= */
+.de-accom-wrapper { position: relative; overflow: hidden; }
+.de-accom-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.de-accom-slide {
+    flex: 0 0 100%;
+    display: flex;
+    gap: 2rem;
+    background: #fff;
+    border: 2px solid #f0f0f0;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    min-height: 320px;
+}
+.de-accom-slide:hover { border-color: #e8c012; }
+.de-accom-img {
+    width: 320px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+.de-accom-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.de-accom-img .de-verified {
+    position: absolute; top: 12px; right: 12px;
+    background: #198754; color: #fff;
+    font-size: 0.66rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 4px;
+}
+.de-accom-content { flex: 1; padding: 2rem 2rem 2rem 0; display: flex; flex-direction: column; }
+.de-accom-name  { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 1.4rem; color: #212529; margin-bottom: 4px; }
+.de-accom-loc   { font-size: 0.85rem; color: #6c757d; margin-bottom: 12px; }
+.de-accom-stars { color: #f59e0b; font-size: 0.9rem; margin-bottom: 16px; }
+.de-accom-stars .rating-val { color: #212529; font-weight: 700; }
+.de-specs { margin-bottom: 16px; border: 1px solid #f0f0f0; border-radius: 6px; overflow: hidden; }
+.de-spec-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.82rem;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 7px 12px;
+    color: #495057;
+}
+.de-spec-row:last-child { border-bottom: none; }
+.de-spec-row strong { color: #212529; }
+.de-accom-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.de-accom-tag {
+    background: #fff8d6; color: #856404;
+    font-size: 0.70rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 4px;
+}
+.de-accom-price { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 1.5rem; color: #212529; margin-top: auto; }
+.de-accom-price small { font-size: 0.78rem; font-weight: 400; color: #6c757d; }
+.btn-de-view {
+    display: inline-block;
+    background: #e8c012; color: #111;
+    border: none; border-radius: 4px;
+    padding: 10px 28px; margin-top: 12px;
+    font-family: 'Raleway', sans-serif; font-weight: 800;
+    text-decoration: none; font-size: 0.9rem;
+    transition: background 0.18s;
+}
+.btn-de-view:hover { background: #d4ae0f; color: #111; text-decoration: none; }
+
+/* DE accom nav */
+.de-accom-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.2rem;
+    padding: 0 2px;
+}
+.de-accom-nav .nav-left,
+.de-accom-nav .nav-right { display: flex; gap: 0.5rem; }
+.de-nav-btn {
+    width: 44px; height: 44px;
+    border-radius: 4px;
+    background: #212529;
+    border: 2px solid #e8c012;
+    color: #e8c012;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-size: 0.9rem;
+}
+.de-nav-btn:hover { background: #e8c012; color: #111; }
+.de-accom-counter {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* =============================================
+   HOW IT WORKS – STEPS
+   ============================================= */
+.step-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 18px rgba(0,0,0,0.07);
+    padding: 2rem 1.6rem;
+    text-align: center;
+    height: 100%;
+}
+.step-icon {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #e9f0ff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin: 0 auto 1rem;
+}
+.step-num   { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.71rem; letter-spacing: 2px; text-transform: uppercase; color: #0d6efd; margin-bottom: 0.3rem; }
+.step-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+.step-desc  { font-size: 0.86rem; color: #6c757d; line-height: 1.6; }
+
+[data-lang="zh"] .step-icon  { background: #ffe8e4; }
+[data-lang="zh"] .step-num   { color: #e8230a; }
+[data-lang="zh"] .step-card  { background: #fff; border: 1px solid #ffe0d6; color: #212529; }
+[data-lang="zh"] .step-title { color: #212529; }
+[data-lang="zh"] .step-desc  { color: #6c757d; }
+
+[data-lang="de"] .step-card  { border-radius: 6px; border: 2px solid #f0f0f0; }
+[data-lang="de"] .step-icon  { background: #fff8d6; border-radius: 6px; }
+[data-lang="de"] .step-num   { color: #856404; }
+
+/* =============================================
+   REVIEW CARDS
+   ============================================= */
+.review-strip {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 4px solid #0d6efd;
+    height: 100%;
+}
+.review-stars-home { color: #f59e0b; margin-bottom: 0.6rem; }
+.review-text-home  { font-family: 'Lora', serif; font-size: 0.9rem; font-style: italic; color: #495057; line-height: 1.7; margin-bottom: 0.9rem; }
+.review-author-home { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.82rem; }
+.review-author-home small { font-weight: 400; color: #6c757d; }
+
+[data-lang="zh"] .review-strip { border-left-color: #e8230a; background: #fff8f5; border-radius: 12px; }
+[data-lang="zh"] .review-text-home   { color: #495057; }
+[data-lang="zh"] .review-author-home { color: #212529; }
+[data-lang="zh"] .review-author-home small { color: #6c757d; }
+
+[data-lang="de"] .review-strip { border-left-color: #e8c012; background: #fafafa; border-radius: 4px; }
+
+/* =============================================
+   CTA BANNER
+   ============================================= */
+.cta-banner { background: #0a58ca; padding: 70px 0; text-align: center; }
+.cta-banner-title { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; margin-bottom: 1rem; }
+.cta-banner-sub   { color: rgba(255,255,255,0.85); font-size: 1.05rem; margin-bottom: 2rem; }
+.btn-cta-main {
+    background: #fff; color: #0d6efd;
+    border: none; border-radius: 50px;
+    padding: 0.8rem 2.4rem;
+    font-family: 'Raleway', sans-serif; font-weight: 800;
+    font-size: 1rem; text-decoration: none;
+    display: inline-block; transition: all 0.2s;
+}
+.btn-cta-main:hover { background: #e9f0ff; color: #0b5ed7; text-decoration: none; }
+
+[data-lang="zh"] .cta-banner { background: rgba(0,0,0,0.25); border-top: 1px solid rgba(255,255,255,0.2); }
+[data-lang="zh"] .btn-cta-main { color: #ff6633; }
+[data-lang="de"] .cta-banner { background: #000; border-top: 3px solid #e8c012; }
+[data-lang="de"] .btn-cta-main { color: #111; }
+
+/* =============================================
+   EYEBROW THEME OVERRIDES
+   ============================================= */
+[data-lang="zh"] .eyebrow { color: #fff200; }
+[data-lang="zh"] .section-heading-main { color: #fff; }
+[data-lang="zh"] .section-sub { color: rgba(255,255,255,0.80); }
+[data-lang="de"] .eyebrow { color: #856404; letter-spacing: 3px; }
+
+/* ZH sections alternate orange hero / white content / orange / white */
+[data-lang="zh"] .home-section {
+    background: #ffffff;
+}
+[data-lang="zh"] .home-section-alt {
+    background: #fff3ee;
+}
+[data-lang="zh"] .eyebrow { color: #e8230a; }
+[data-lang="zh"] .section-heading-main { color: #212529; }
+[data-lang="zh"] .section-sub { color: #6c757d; }
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 991px) {
+    .hero-en, .hero-zh, .hero-de { min-height: auto; padding: 60px 0 48px; }
+    .floating-card  { display: none; }
+    .zh-mosaic-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .mosaic-cell.featured { grid-row: span 1; min-height: 180px; }
+    .de-accom-slide { flex-direction: column; }
+    .de-accom-img   { width: 100%; height: 220px; }
+    .de-accom-content { padding: 1.5rem; }
+    .uni-card-de    { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
+    .uni-logo-box   { width: 90px; height: 90px; }
+}
+@media (max-width: 575px) {
+    .uni-card-en { flex: 0 0 280px; }
+    .uni-card-zh { flex: 0 0 180px; }
+    .zh-mosaic-grid { grid-template-columns: 1fr; }
+}
