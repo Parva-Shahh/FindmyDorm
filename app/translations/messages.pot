@@ -1,0 +1,132 @@
+# FindMyDorm Translation Template
+# Copyright (C) 2026 FindMyDorm
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: FindMyDorm 1.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Listings"
+msgstr ""
+
+msgid "Reviews"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Copyright"
+msgstr ""
+
+msgid "Sign In"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "New here?"
+msgstr ""
+
+msgid "Create account"
+msgstr ""
+
+msgid "Join"
+msgstr ""
+
+msgid "10,000+ students!"
+msgstr ""
+
+msgid "Great dorm experience"
+msgstr ""
+
+msgid "Great value, highly recommended"
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "Email entered"
+msgstr ""
+
+msgid "Password entered"
+msgstr ""
+
+msgid "Ready to sign in"
+msgstr ""
+
+msgid "Write a Review"
+msgstr ""
+
+msgid "Your Rating"
+msgstr ""
+
+msgid "Review Title"
+msgstr ""
+
+msgid "Summary"
+msgstr ""
+
+msgid "Detailed Feedback"
+msgstr ""
+
+msgid "Describe your stay"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Cleanliness"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Post Review"
+msgstr ""
+
+msgid "Submission Progress"
+msgstr ""
+
+msgid "Overall Rating"
+msgstr ""
+
+msgid "Title & Content"
+msgstr ""
+
+msgid "Category Breakdown"
+msgstr ""
+
+msgid "Other User Reviews"
+msgstr ""
+
+msgid "Great location, convenient transport, facilities nearby."
+msgstr ""
+
+msgid "Clean and tidy overall, friendly staff."
+msgstr ""
+
+msgid "Reasonable price, spacious rooms, highly recommended!"
+msgstr ""
+
+msgid "Internet speed could be improved, otherwise very satisfied."
+msgstr ""

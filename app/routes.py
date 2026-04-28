@@ -1,39 +1,38 @@
 from app import app
-from flask import render_template, session, redirect, request, url_for
-from flask_babel import _
+from flask import render_template, session, redirect, request
 
-@app.before_request
-def ensure_language():
-    if 'language' not in session:
-        session['language'] = 'en'
-
+#Starts, website function
 @app.route('/')
+
+#Routes to Home page - Parva
 @app.route('/index')
 def index():
-    return render_template("index.html")
+    return (render_template("index.html"))
 
-@app.route('/about')
-def about():
-    return render_template("about.html")
-
-# --- MISSING ROUTES ADDED BELOW ---
-
-@app.route('/listings')
-def listings():
-    # Placeholder until you create listings.html
-    return render_template("listings.html")
-
+#Routes to review - Garreth
 @app.route('/review')
 def review():
-    # Placeholder until you create review.html
-    return render_template("review.html")
+    return (render_template ("review.html"))
 
+#Routes to About page - Alex
+@app.route('/about')
+def about():
+    return (render_template ("about.html"))
+
+#Routes to Listings page - Nathaniel
+@app.route('/listings')
+def listings():
+        return (render_template ("listings.html"))
+
+#Routes to Profile page - Alex
+@app.route('/profile')
+def profile():
+    return (render_template ("profile.html"))
+
+#Routes to Login page - Garreth
 @app.route('/login')
 def login():
-    # Placeholder until you create login.html
-    return render_template("login.html")
-
-# ----------------------------------
+    return (render_template ("login.html"))
 
 @app.route('/profile')
 def profile():
@@ -60,6 +59,17 @@ def profile():
 
 @app.route('/set_language/<lang_code>')
 def set_language(lang_code):
-    if lang_code in ['en', 'zh', 'de']:
+    # If the language matches one of the languages we are facilitating
+    # Change the value of the language variable in session to that
+    if lang_code in ['en', 'cn', 'de']:
         session['language'] = lang_code
-    return redirect(request.referrer or'/')
+    # Redirect the page to the page from which the language change
+    # request was made
+    return redirect(request.referrer or '/')
+
+# Before each request to the app, check if the language variable
+# in session has a value. If not set it to English.
+@app.before_request
+def set_session_language():
+    if 'language' not in session:
+        session['language'] = 'en' # Set default language here

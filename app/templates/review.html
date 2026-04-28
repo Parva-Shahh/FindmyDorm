@@ -1,77 +1,211 @@
 {% extends "base.html" %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{{ url_for('static', filename='css/Garreth/components-styles.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/Garreth/review-styles.css') }}" rel="stylesheet" />
+
+    {% if session.get('language') == 'zh' %}
+        <link href="{{ url_for('static', filename='css/Garreth/chinese-styles.css') }}" rel="stylesheet" />
+    {% elif session.get('language') == 'de' %}
+        <link href="{{ url_for('static', filename='css/Garreth/german-styles.css') }}" rel="stylesheet" />
+    {% endif %}
+
+    <style>
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+        .star-rating input { display: none; }
+        .star-rating label {
+            color: #ccc !important;
+            cursor: pointer;
+            font-size: 32px !important;
+            transition: color 0.2s;
+            margin: 0 2px;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ffca08 !important;
+        }
+        .text-success { color: #198754 !important; }
+        .fw-bold { font-weight: 700 !important; }
+        #germanChecklist li {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .justify-content-center {
+            justify-content: center !important;
+            flex-direction: row-reverse !important;
+        }
+    </style>
+{% endblock %}
+
 {% block main %}
+
+{% if session.get('language') == 'zh' %}
+<!-- ========== CHINESE: Other Reviews panel ========== -->
+<section class="py-4" style="background:#f8f8f8;">
+    <div class="container">
+        <h5 class="fw-bold mb-3">{{ _('Other User Reviews') }}</h5>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3 bg-white p-3 rounded shadow-sm">
+                    <div class="zh-avatar flex-shrink-0">👤</div>
+                    <div>
+                        <div class="text-warning mb-1">★★★★★</div>
+                        <p class="small mb-0 text-muted">{{ _('Great location, convenient transport, facilities nearby.') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3 bg-white p-3 rounded shadow-sm">
+                    <div class="zh-avatar flex-shrink-0">👤</div>
+                    <div>
+                        <div class="text-warning mb-1">★★★★☆</div>
+                        <p class="small mb-0 text-muted">{{ _('Clean and tidy overall, friendly staff.') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3 bg-white p-3 rounded shadow-sm">
+                    <div class="zh-avatar flex-shrink-0">👤</div>
+                    <div>
+                        <div class="text-warning mb-1">★★★★★</div>
+                        <p class="small mb-0 text-muted">{{ _('Reasonable price, spacious rooms, highly recommended!') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-start gap-3 bg-white p-3 rounded shadow-sm">
+                    <div class="zh-avatar flex-shrink-0">👤</div>
+                    <div>
+                        <div class="text-warning mb-1">★★★☆☆</div>
+                        <p class="small mb-0 text-muted">{{ _('Internet speed could be improved, otherwise very satisfied.') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <section class="page-section">
     <div class="container">
-        <div class="bg-faded p-5 rounded">
-            <div class="mb-4 text-end">
-                <small class="text-uppercase fw-bold">Change Language:</small>
-                <div class="btn-group btn-group-sm" role="group">
-                    <a href="{{ url_for('set_language', lang_code='en') }}" class="btn btn-outline-primary">English</a>
-                    <a href="{{ url_for('set_language', lang_code='cn') }}" class="btn btn-outline-primary">中文 (CN)</a>
-                    <a href="{{ url_for('set_language', lang_code='de') }}" class="btn btn-outline-primary">Deutsch (DE)</a>
+        <div class="row">
+
+            <div class="{% if session.get('language') != 'de' %}col-lg-8 mx-auto{% else %}col-lg-8{% endif %}">
+                <div class="bg-faded p-5 rounded shadow-sm">
+                    <h2 class="section-heading mb-3">{{ _('Write a Review') }}</h2>
+
+                    <!-- ===== PROPERTY PREVIEW ===== -->
+                    <div class="property-preview">
+                        <img src="{{ url_for('static', filename='assets/img/dorm-banner.jpg') }}"
+                             alt="{{ _('Simmons Hall') }}"
+                             onerror="this.src='https://placehold.co/90x65?text=Dorm'">
+                        <div class="property-info">
+                            <div class="property-name">{{ _('Simmons Hall') }}</div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ _('229 Vassar St, Cambridge, MA 02139') }}
+                            </div>
+                            <div class="mt-1">
+                                <span class="badge"
+                                      style="background:#e9ecef; color:#495057; font-size:0.75rem;">
+                                    {{ _('Student Dormitory') }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ===== END PROPERTY PREVIEW ===== -->
+
+                    <form id="reviewForm" method="POST">
+                        <div class="mb-4">
+                            <label class="form-label d-block fw-bold">{{ _('Your Rating') }}</label>
+                            <div class="star-rating">
+                                <input type="radio" name="overall" id="star5" value="5"><label for="star5">★</label>
+                                <input type="radio" name="overall" id="star4" value="4"><label for="star4">★</label>
+                                <input type="radio" name="overall" id="star3" value="3"><label for="star3">★</label>
+                                <input type="radio" name="overall" id="star2" value="2"><label for="star2">★</label>
+                                <input type="radio" name="overall" id="star1" value="1"><label for="star1">★</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">{{ _('Review Title') }}</label>
+                            <input type="text" class="form-control" id="reviewTitle" name="title"
+                                   placeholder="{{ _('Summary') }}">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">{{ _('Detailed Feedback') }}</label>
+                            <textarea class="form-control" rows="4" id="reviewContent" name="content"
+                                      placeholder="{{ _('Describe your stay') }}"></textarea>
+                        </div>
+
+                        <div class="row mb-4 border-top pt-4 bg-light rounded p-3">
+                            <div class="col-md-4 text-center">
+                                <label class="small fw-bold">{{ _('Location') }}</label>
+                                <div class="star-rating justify-content-center">
+                                    <input type="radio" name="loc" id="l5" value="5"><label for="l5">★</label>
+                                    <input type="radio" name="loc" id="l4" value="4"><label for="l4">★</label>
+                                    <input type="radio" name="loc" id="l3" value="3"><label for="l3">★</label>
+                                    <input type="radio" name="loc" id="l2" value="2"><label for="l2">★</label>
+                                    <input type="radio" name="loc" id="l1" value="1"><label for="l1">★</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <label class="small fw-bold">{{ _('Cleanliness') }}</label>
+                                <div class="star-rating justify-content-center">
+                                    <input type="radio" name="clean" id="c5" value="5"><label for="c5">★</label>
+                                    <input type="radio" name="clean" id="c4" value="4"><label for="c4">★</label>
+                                    <input type="radio" name="clean" id="c3" value="3"><label for="c3">★</label>
+                                    <input type="radio" name="clean" id="c2" value="2"><label for="c2">★</label>
+                                    <input type="radio" name="clean" id="c1" value="1"><label for="c1">★</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <label class="small fw-bold">{{ _('Value') }}</label>
+                                <div class="star-rating justify-content-center">
+                                    <input type="radio" name="val" id="v5" value="5"><label for="v5">★</label>
+                                    <input type="radio" name="val" id="v4" value="4"><label for="v4">★</label>
+                                    <input type="radio" name="val" id="v3" value="3"><label for="v3">★</label>
+                                    <input type="radio" name="val" id="v2" value="2"><label for="v2">★</label>
+                                    <input type="radio" name="val" id="v1" value="1"><label for="v1">★</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Post Review') }}</button>
+                    </form>
                 </div>
             </div>
 
-            {% if lang_code == 'cn' %}
-            <div class="border p-4 mb-5 rounded bg-white shadow-sm">
-                <h5 class="fw-bold mb-3">OTHER REVIEWS</h5>
-                <div class="row">
-                    <div class="col-md-6 d-flex align-items-center mb-3">
-                        <div class="rounded-circle bg-light border me-3" style="width: 50px; height: 50px;"></div>
-                        <div class="w-75 border-bottom" style="height: 10px;"></div>
-                    </div>
-                    <div class="col-md-6 d-flex align-items-center mb-3">
-                        <div class="rounded-circle bg-light border me-3" style="width: 50px; height: 50px;"></div>
-                        <div class="w-75 border-bottom" style="height: 10px;"></div>
+            {% if session.get('language') == 'de' %}
+            <div class="col-lg-4 mt-5">
+                <div class="card shadow border-primary">
+                    <div class="card-body">
+                        <h5 class="fw-bold text-primary mb-3">{{ _('Submission Progress') }}</h5>
+                        <ul class="list-unstyled" id="germanChecklist">
+                            <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Overall Rating') }}</li>
+                            <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Title & Content') }}</li>
+                            <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Category Breakdown') }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
             {% endif %}
 
-            <div class="row">
-                <div class="{% if lang_code == 'de' %}col-md-8{% else %}col-12{% endif %}">
-                    <div class="mb-4">
-                        <h4 class="fw-bold">OVERALL RATING: <span class="text-warning">★★★★★</span></h4>
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="text" class="form-control form-control-lg" placeholder="Review Title">
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" rows="5" placeholder="Review Paragraph"></textarea>
-                    </div>
-
-                    <div class="mb-4">
-                        <h5 class="fw-bold">RATINGS BREAKDOWN:</h5>
-                        <p class="mb-1">Location: <span class="text-warning">★★★★★</span></p>
-                        <p class="mb-1">Amenities: <span class="text-warning">★★★★★</span></p>
-                        <p class="mb-1">Social: <span class="text-warning">★★★★☆</span></p>
-                    </div>
-
-                    <button class="btn btn-primary btn-xl">SUBMIT REVIEW</button>
-                </div>
-
-                {% if lang_code == 'de' %}
-                <div class="col-md-4 mt-4 mt-md-0">
-                    <div class="border p-4 rounded bg-light shadow-sm">
-                        <h5 class="fw-bold">CHECKLIST</h5>
-                        <p class="mb-1 text-primary fw-bold">50% COMPLETE</p>
-                        <div class="progress mb-3">
-                            <div class="progress-bar w-50" role="progressbar"></div>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" checked disabled>
-                            <label class="form-check-label">Rating Selected</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" disabled>
-                            <label class="form-check-label">Review Text Added</label>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/Garreth/culture-logic.js') }}"></script>
 {% endblock %}

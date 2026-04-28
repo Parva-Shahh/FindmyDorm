@@ -1,71 +1,169 @@
 {% extends "base.html" %}
-{% block main %}
-<section class="page-section">
-    <div class="container">
-        <div class="product-item">
-            <div class="product-item-title d-flex">
-                <div class="bg-faded p-5 d-flex ms-auto rounded">
-                    <h2 class="section-heading mb-0">
-                        <span class="section-heading-upper">FindMyDorm</span>
-                        <span class="section-heading-lower">{{ _('Log In') }}</span>
-                    </h2>
-                </div>
-            </div>
 
-            <div class="product-item-description d-flex me-auto">
-                <div class="bg-faded p-5 rounded w-100">
-                    <div class="mb-4 text-end">
-                        <small class="text-uppercase fw-bold">Change Language:</small>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <a href="{{ url_for('set_language', lang_code='en') }}" class="btn btn-outline-primary">English</a>
-                            <a href="{{ url_for('set_language', lang_code='cn') }}" class="btn btn-outline-primary">中文 (CN)</a>
-                            <a href="{{ url_for('set_language', lang_code='de') }}" class="btn btn-outline-primary">Deutsch (DE)</a>
-                        </div>
+{% block extra_css %}
+    <link href="{{ url_for('static', filename='css/Garreth/components-styles.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/Garreth/login-styles.css') }}" rel="stylesheet" />
+
+    {% if session.get('language') == 'zh' %}
+        <link href="{{ url_for('static', filename='css/Garreth/chinese-styles.css') }}" rel="stylesheet" />
+    {% elif session.get('language') == 'de' %}
+        <link href="{{ url_for('static', filename='css/Garreth/german-styles.css') }}" rel="stylesheet" />
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    {% if session.get('language') == 'de' %}
+        <script src="{{ url_for('static', filename='js/Garreth/culture-logic.js') }}"></script>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+<section class="page-section cta">
+    <div class="container">
+
+        {% if session.get('language') == 'zh' %}
+        <!-- ========== CHINESE LAYOUT ========== -->
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8">
+                <div class="cta-inner bg-faded text-center rounded p-5">
+
+                    <div class="mb-4">
+                        <img src="{{ url_for('static', filename='assets/img/dorm-banner.jpg') }}"
+                             alt="FindMyDorm" class="img-fluid rounded w-100"
+                             style="max-height:160px; object-fit:cover;"
+                             onerror="this.style.display='none'">
                     </div>
 
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-lower">{{ _('Sign In') }}</span>
+                    </h2>
+
                     <form>
-                        <div class="row gx-0">
-                            {% if lang_code == 'de' %}
-                            <div class="col-md-4 order-md-2 mb-3">
-                                <div class="border p-3 text-center rounded bg-light">
-                                    <h5 class="fw-bold">STEP 1 OF 3</h5>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar w-33" role="progressbar"></div>
-                                    </div>
-                                    <p class="small text-muted">Account Details</p>
-                                </div>
-                            </div>
-                            {% endif %}
-
-                            <div class="{% if lang_code == 'de' %}col-md-8 order-md-1{% else %}col-12{% endif %}">
-                                <div class="mb-3">
-                                    <label class="form-label">Email Field</label>
-                                    <input type="email" class="form-control" placeholder="Enter email">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Password Field</label>
-                                    <input type="password" class="form-control" placeholder="Enter password">
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
-                                <p class="text-center"><a href="#">New Here? Create Account</a></p>
-                            </div>
+                        <div class="mb-3 text-start">
+                            <label class="form-label">{{ _('Email') }}</label>
+                            <input type="email" class="form-control" placeholder="you@example.com">
                         </div>
-
-                        {% if lang_code == 'cn' %}
-                        <div class="mt-4 p-4 border rounded bg-light text-center">
-                            <div class="d-flex justify-content-center mb-2">
-                                <div class="rounded-circle bg-secondary mx-1" style="width: 40px; height: 40px;"></div>
-                                <div class="rounded-circle bg-secondary mx-1" style="width: 40px; height: 40px;"></div>
-                                <div class="rounded-circle bg-secondary mx-1" style="width: 40px; height: 40px;"></div>
-                                <div class="rounded-circle bg-secondary mx-1" style="width: 40px; height: 40px;"></div>
-                            </div>
-                            <h4 class="fw-bold text-primary">JOIN 10,000+ STUDENTS!</h4>
+                        <div class="mb-4 text-start">
+                            <label class="form-label">{{ _('Password') }}</label>
+                            <input type="password" class="form-control" placeholder="••••••••">
                         </div>
-                        {% endif %}
+                        <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Sign In') }}</button>
                     </form>
+
+                    <p class="login-footer-text mt-3">
+                        {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
+                    </p>
+
+                    <hr class="my-4">
+
+                    <!-- *** ONLY THIS BLOCK CHANGED *** -->
+                    <div class="zh-social-proof d-flex align-items-center justify-content-between p-3 rounded">
+                        <div class="d-flex align-items-center">
+                            <div class="zh-avatar-group d-flex">
+                                <div class="zh-avatar">👤</div>
+                                <div class="zh-avatar">👤</div>
+                                <div class="zh-avatar">👤</div>
+                            </div>
+                            <div class="text-start zh-proof-text">
+                                <strong class="d-block" style="font-size:0.85rem;">{{ _('Join') }}</strong>
+                                <strong style="font-size:0.85rem;">{{ _('10,000+ students!') }}</strong>
+                            </div>
+                        </div>
+                        <div class="text-start border-start ps-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-circle me-2" style="font-size:0.4rem; color:#ff6633;"></i>
+                                <span class="small text-muted">{{ _('Great dorm experience') }}</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-circle me-2" style="font-size:0.4rem; color:#ff6633;"></i>
+                                <span class="small text-muted">{{ _('Great value, highly recommended') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *** END OF CHANGE *** -->
+
                 </div>
             </div>
         </div>
+
+        {% elif session.get('language') == 'de' %}
+        <!-- ========== GERMAN LAYOUT ========== -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row g-4 align-items-start">
+
+                    <div class="col-md-7">
+                        <div class="cta-inner bg-faded rounded p-5">
+                            <div class="mb-4">
+                                <img src="{{ url_for('static', filename='assets/img/dorm-banner.jpg') }}"
+                                     alt="FindMyDorm" class="img-fluid rounded w-100"
+                                     style="max-height:140px; object-fit:cover;"
+                                     onerror="this.style.display='none'">
+                            </div>
+                            <h2 class="section-heading mb-4 text-center">
+                                <span class="section-heading-lower">{{ _('Sign In') }}</span>
+                            </h2>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">{{ _('Email') }}</label>
+                                    <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">{{ _('Password') }}</label>
+                                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Sign In') }}</button>
+                            </form>
+                            <p class="login-footer-text mt-4 text-center">
+                                {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 mt-5">
+                        <div class="card shadow border-primary">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold text-primary mb-3">{{ _('Progress') }}</h5>
+                                <ul class="list-unstyled" id="germanLoginChecklist">
+                                    <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Email entered') }}</li>
+                                    <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Password entered') }}</li>
+                                    <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Ready to sign in') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- ========== DEFAULT (EN) LAYOUT ========== -->
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8">
+                <div class="cta-inner bg-faded text-center rounded p-5">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-lower">{{ _('Sign In') }}</span>
+                    </h2>
+                    <form>
+                        <div class="mb-3 text-start">
+                            <label class="form-label">{{ _('Email') }}</label>
+                            <input type="email" class="form-control" placeholder="you@example.com">
+                        </div>
+                        <div class="mb-4 text-start">
+                            <label class="form-label">{{ _('Password') }}</label>
+                            <input type="password" class="form-control" placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Sign In') }}</button>
+                    </form>
+                    <p class="login-footer-text mt-4">
+                        {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 </section>
 {% endblock %}

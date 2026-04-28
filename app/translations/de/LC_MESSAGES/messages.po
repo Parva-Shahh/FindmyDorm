@@ -1,48 +1,158 @@
+# German Translations for FindMyDorm
+# Copyright (C) 2026 FindMyDorm
+#
 msgid ""
 msgstr ""
+"Project-Id-Version: FindMyDorm 1.0\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
+msgid "Home"
+msgstr "Startseite"
+
+msgid "About"
+msgstr "Über uns"
+
+msgid "Listings"
+msgstr "Unterkünfte"
+
+msgid "Reviews"
+msgstr "Bewertungen"
 msgid "Our Mission"
 msgstr "Unsere Mission"
 
+msgid "Login"
+msgstr "Anmelden"
 msgid "About_Mission_P1"
 msgstr "Es gibt die Vorstellung, dass man rücksichtslos sein muss, um ein Unternehmen auszubauen. Aber wir wissen, dass es einen besseren Weg gibt. Einen, bei dem das, was gut für das Ergebnis ist, auch gut für die Kunden ist."
 
+msgid "Profile"
+msgstr "Profil"
 msgid "About_Mission_P2"
 msgstr "Wir glauben, dass Unternehmen mit Gewissen wachsen und mit Seele erfolgreich sein können – und dass sie dies mit Inbound erreichen können."
 
+msgid "Copyright"
+msgstr "Urheberrecht"
 msgid "Our Story"
 msgstr "Unsere Geschichte"
 
+msgid "Sign In"
+msgstr "Anmelden"
 msgid "About_Story_P1"
 msgstr "Als Kommilitonen am MIT im Jahr 2004 bemerkten Brian und Dharmesh eine Veränderung in der Art und Weise, wie Menschen einkaufen."
 
+msgid "Email"
+msgstr "E-Mail"
 msgid "About_Story_P2"
 msgstr "Verbraucher tolerierten keine unterbrechenden Angebote mehr – sie waren sogar sehr gut darin geworden, sie einfach zu ignorieren."
 
+msgid "Password"
+msgstr "Passwort"
 msgid "My Profile"
 msgstr "Mein Profil"
 
+msgid "New here?"
+msgstr "Neu hier?"
 msgid "Status"
 msgstr "Status"
 
+msgid "Create account"
+msgstr "Konto erstellen"
 msgid "About Me"
 msgstr "Über mich"
 
+msgid "Join"
+msgstr "Beitreten"
 msgid "Ask a Resident"
 msgstr "Fragen Sie einen Bewohner"
 
+msgid "10,000+ students!"
+msgstr "10.000+ Studierende!"
 msgid "My Accommodation Reviews"
 msgstr "Meine Unterkunfts-Bewertungen"
 
+msgid "Great dorm experience"
+msgstr "Tolle Erfahrung im Wohnheim"
 msgid "Watch Video Review"
 msgstr "Video-Bewertung ansehen"
 
+msgid "Great value, highly recommended"
+msgstr "Super Preis-Leistung, sehr empfehlenswert"
 msgid "View Resident Profile"
 msgstr "Residenten-Profil ansehen"
 
+msgid "Progress"
+msgstr "Fortschritt"
+
+msgid "Email entered"
+msgstr "E-Mail eingegeben"
+
+msgid "Password entered"
+msgstr "Passwort eingegeben"
+
+msgid "Ready to sign in"
+msgstr "Bereit zum Anmelden"
+
+msgid "Write a Review"
+msgstr "Bewertung schreiben"
+
+msgid "Your Rating"
+msgstr "Ihre Bewertung"
+
+msgid "Review Title"
+msgstr "Bewertungstitel"
+
+msgid "Summary"
+msgstr "Zusammenfassung"
+
+msgid "Detailed Feedback"
+msgstr "Detailliertes Feedback"
+
+msgid "Describe your stay"
+msgstr "Beschreiben Sie Ihren Aufenthalt"
+
+msgid "Location"
+msgstr "Lage"
+
+msgid "Cleanliness"
+msgstr "Sauberkeit"
+
+msgid "Value"
+msgstr "Preis-Leistung"
+
+msgid "Post Review"
+msgstr "Bewertung abschicken"
+
+msgid "Submission Progress"
+msgstr "Einreichungsfortschritt"
+
+msgid "Overall Rating"
+msgstr "Gesamtbewertung"
+
+msgid "Title & Content"
+msgstr "Titel & Inhalt"
+
+msgid "Category Breakdown"
+msgstr "Kategorieübersicht"
+
+msgid "Other User Reviews"
+msgstr "Andere Nutzerbewertungen"
+
+msgid "Great location, convenient transport, facilities nearby."
+msgstr "Sehr gute Lage, gute Verkehrsanbindung, Einrichtungen in der Nähe."
+
+msgid "Clean and tidy overall, friendly staff."
+msgstr "Insgesamt sauber und ordentlich, freundliches Personal."
+
+msgid "Reasonable price, spacious rooms, highly recommended!"
+msgstr "Angemessener Preis, geräumige Zimmer, sehr empfehlenswert!"
+
+msgid "Internet speed could be improved, otherwise very satisfied."
+msgstr "Internetgeschwindigkeit könnte verbessert werden, ansonsten sehr zufrieden."
 msgid "My Saved"
 msgstr "Meine Gespeicherten"
