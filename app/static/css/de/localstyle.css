@@ -1,0 +1,56 @@
+/* German Specific Styles - Permanent Fix */
+
+/* Use 'html body' to make the selector stronger than Bootstrap defaults */
+html body {
+    background-color: #ffffff !important;
+    color: #212529 !important; /* Standard dark text */
+}
+
+/* Force headings to stay Blue */
+html body h2.fw-bold,
+html body .mission-title,
+html body .story-title {
+    color: #0d6efd !important;
+}
+
+/* Ensure navbar and footer stay Dark as per your base.html */
+html body .custom-nav,
+html body .custom-footer {
+    background-color: #212529 !important;
+}
+
+/* Make sure paragraphs are visible */
+html body p {
+    color: #212529 !important;
+}
+
+/* --- Profiles Page Layout --- */
+
+/* Ensures all profile photos have a consistent, professional look */
+.profile-img-standard {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* The Dashboard-style Data Blocks */
+.bg-light.p-3.rounded.border {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    transition: all 0.3s ease;
+}
+
+/* Subtle hover effect for Karl's data-driven focus */
+.bg-light.p-3.rounded.border:hover {
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Gradient button style inspired by your dashboard reference */
+.custom-btn-gradient {
+    background: linear-gradient(135deg, #0d6efd 0%, #00d2ff 100%) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600;
+}

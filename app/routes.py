@@ -1,52 +1,70 @@
 from app import app
-from flask import render_template, session, redirect, request
+from flask import render_template, session, redirect, request, url_for
 
-#Starts, website function
+@app.before_request
+def ensure_language():
+    if 'language' not in session or session['language'] == 'cn':
+        session['language'] = 'en'
+
 @app.route('/')
-
-#Routes to Home page - Parva
 @app.route('/index')
-def index():
-    return (render_template("index.html"))
+def index(): return render_template("index.html")
 
-#Routes to review - Garreth
-@app.route('/review')
-def review():
-    return (render_template ("review.html"))
-
-#Routes to About page - Alex
 @app.route('/about')
-def about():
-    return (render_template ("about.html"))
+def about(): return render_template("about.html")
 
-#Routes to Listings page - Nathaniel
+@app.route('/info')
+def info(): return render_template("info.html")
+
 @app.route('/listings')
-def listings():
-        return (render_template ("listings.html"))
+def listings(): return render_template("listings.html")
 
-#Routes to Profile page - Alex
+@app.route('/review')
+def review(): return render_template("review.html")
+
+@app.route('/login')
+def login(): return render_template("login.html")
+
+
 @app.route('/profile')
 def profile():
-    return (render_template ("profile.html"))
+    user_data = {
+        'name': 'Gemini AI',
+        'bio': 'Your adaptive AI collaborator. I specialize in balancing empathy with candor and helping you debug code with a touch of wit.',
+        'pfp': 'profile.jpg'
+    }
 
-#Routes to Login page - Garreth
-@app.route('/login')
-def login():
-    return (render_template ("login.html"))
+    # New section: Saved Favorites
+    saved_favorites = [
+        {'name': 'Simmons Hall', 'image': 'image1.jpg'},
+        {'name': 'Baker House', 'image': 'Image2.jpg'},
+        {'name': 'MacGregor House', 'image': 'image3.jpg'}
+    ]
 
-@app.route('/setlang/<lang_code>')
+    reviews_list = [
+        {
+            'dorm': 'Simmons Hall',
+            'rating': 5,
+            'comment': 'Great architecture and very social atmosphere. The "spongy" design is a conversation starter!',
+            'date': 'March 2026',
+            'has_video': True
+        },
+        {
+            'dorm': 'Baker House',
+            'rating': 4,
+            'comment': 'Beautiful river views. The dining hall is a bit crowded, but the community harmony is excellent.',
+            'date': 'January 2026',
+            'has_video': False
+        }
+    ]
+
+    return render_template("profile.html", user=user_data, reviews=reviews_list, favorites=saved_favorites)
+
+
+@app.route('/set_language/<lang_code>')
 def set_language(lang_code):
-    # If the language matches one of the languages we are facilitating
-    # Change the value of the language variable in session to that
-    if lang_code in ['en', 'cn', 'de']:
+    if lang_code == 'cn':
+        lang_code = 'zh'
+    if lang_code in ['en', 'zh', 'de']:
         session['language'] = lang_code
-    # Redirect the page to the page from which the language change
-    # request was made
-    return redirect(request.referrer or '/')
-
-# Before each request to the app, check if the language variable
-# in session has a value. If not set it to English.
-@app.before_request
-def set_session_language():
-    if 'language' not in session:
-        session['language'] = 'en' # Set default language here
+    return redirect(request.referrer or url_for('index'))
