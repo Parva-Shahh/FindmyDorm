@@ -1,0 +1,128 @@
+# Chinese (Simplified) Translations for FindMyDorm
+# Copyright (C) 2026 FindMyDorm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: FindMyDorm 1.0\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "About"
+msgstr "关于"
+
+msgid "Listings"
+msgstr "房源"
+
+msgid "Reviews"
+msgstr "评价"
+
+msgid "Login"
+msgstr "登录"
+
+msgid "Profile"
+msgstr "个人资料"
+
+msgid "Copyright"
+msgstr "版权所有"
+
+msgid "Sign In"
+msgstr "登录"
+
+msgid "Email"
+msgstr "电子邮件"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "New here?"
+msgstr "新用户?"
+
+msgid "Create account"
+msgstr "创建账号"
+
+msgid "Join"
+msgstr "加入"
+
+msgid "10,000+ students!"
+msgstr "10,000+ 名学生!"
+
+msgid "Great dorm experience"
+msgstr "非常好的宿舍体验"
+
+msgid "Great value, highly recommended"
+msgstr "性价比超高，推荐入住"
+
+msgid "Progress"
+msgstr "进度"
+
+msgid "Email entered"
+msgstr "已输入电子邮件"
+
+msgid "Password entered"
+msgstr "已输入密码"
+
+msgid "Ready to sign in"
+msgstr "准备登录"
+
+msgid "Write a Review"
+msgstr "撰写评价"
+
+msgid "Your Rating"
+msgstr "您的评分"
+
+msgid "Review Title"
+msgstr "评价标题"
+
+msgid "Summary"
+msgstr "简要概述"
+
+msgid "Detailed Feedback"
+msgstr "详细反馈"
+
+msgid "Describe your stay"
+msgstr "描述您的入住体验"
+
+msgid "Location"
+msgstr "位置"
+
+msgid "Cleanliness"
+msgstr "清洁度"
+
+msgid "Value"
+msgstr "性价比"
+
+msgid "Post Review"
+msgstr "发布评价"
+
+msgid "Submission Progress"
+msgstr "提交进度"
+
+msgid "Overall Rating"
+msgstr "总体评分"
+
+msgid "Title & Content"
+msgstr "标题与内容"
+
+msgid "Category Breakdown"
+msgstr "分类评分"
+
+msgid "Other User Reviews"
+msgstr "其他用户评价"
+
+msgid "Great location, convenient transport, facilities nearby."
+msgstr "宿舍位置非常好，交通方便，周围设施齐全。"
+
+msgid "Clean and tidy overall, friendly staff."
+msgstr "整体环境干净整洁，工作人员态度友好。"
+
+msgid "Reasonable price, spacious rooms, highly recommended!"
+msgstr "价格合理，房间宽敞，非常推荐！"
+
+msgid "Internet speed could be improved, otherwise very satisfied."
+msgstr "网络速度有待提高，其他方面都很满意。"
