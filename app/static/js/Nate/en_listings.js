@@ -2,7 +2,8 @@
  * FILE: en_listings.js
  * AUTHOR: Nate
  * English locale — Booking.com style layout
- * Includes filtering and search logic (no separate filter.js needed)
+ * Includes filtering (with university + distance), search,
+ * map centering on hover, and layout rebuild.
  */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -19,16 +20,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var activeTypes     = getChecked(['Apartment', 'Studio', 'Room']);
     var activePrices    = getChecked(['budget', 'mid', 'premium']);
     var activeLocations = getChecked(['dublin 1', 'dublin 2', 'dublin 6', 'dun laoghaire']);
+    var activeUnis      = getChecked(['uni-tcd', 'uni-ucd', 'uni-tud', 'uni-dcu']);
+    var activeDists     = getChecked(['dist-1', 'dist-2', 'dist-5']);
     var activeAmenities = getChecked(['wifi', 'bills', 'furnished', 'parking']);
 
     var visibleCount = 0;
 
     dorms.forEach(function (dorm) {
-      var name      = (dorm.getAttribute('data-name')      || '').toLowerCase();
-      var address   = (dorm.getAttribute('data-address')   || '').toLowerCase();
-      var type      = (dorm.getAttribute('data-type')      || '');
+      var name      = (dorm.getAttribute('data-name')       || '').toLowerCase();
+      var address   = (dorm.getAttribute('data-address')    || '').toLowerCase();
+      var type      = (dorm.getAttribute('data-type')       || '');
       var price     = parseInt(dorm.getAttribute('data-price') || '0', 10);
-      var amenities = (dorm.getAttribute('data-amenities') || '').toLowerCase().split(',');
+      var amenities = (dorm.getAttribute('data-amenities')  || '').toLowerCase().split(',');
+      var uni       = (dorm.getAttribute('data-university') || '').toLowerCase();
+      var dist      = parseFloat(dorm.getAttribute('data-distance') || '99');
 
       var matchesSearch    = !query || name.includes(query) || address.includes(query);
       var matchesType      = activeTypes.length === 0 || activeTypes.includes(type);
@@ -38,10 +43,23 @@ document.addEventListener('DOMContentLoaded', function () {
         if (r === 'premium') return price > 1000;
         return true;
       });
-      var matchesLocation  = activeLocations.length === 0 || activeLocations.some(function (l) { return address.includes(l); });
-      var matchesAmenities = activeAmenities.length === 0 || activeAmenities.every(function (a) { return amenities.includes(a); });
+      var matchesLocation  = activeLocations.length === 0 ||
+        activeLocations.some(function (l) { return address.includes(l); });
+      var matchesUni       = activeUnis.length === 0 ||
+        activeUnis.some(function (u) { return ('uni-' + uni) === u; });
+      var matchesDist      = activeDists.length === 0 ||
+        activeDists.some(function (d) {
+          if (d === 'dist-1') return dist < 1;
+          if (d === 'dist-2') return dist < 2;
+          if (d === 'dist-5') return dist < 5;
+          return true;
+        });
+      var matchesAmenities = activeAmenities.length === 0 ||
+        activeAmenities.every(function (a) { return amenities.includes(a); });
 
-      var visible = matchesSearch && matchesType && matchesPrice && matchesLocation && matchesAmenities;
+      var visible = matchesSearch && matchesType && matchesPrice &&
+                    matchesLocation && matchesUni && matchesDist && matchesAmenities;
+
       dorm.style.setProperty('display', visible ? 'block' : 'none', 'important');
       if (visible) visibleCount++;
     });
@@ -53,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function getChecked(knownValues) {
     var checked = [];
     document.querySelectorAll('.filter-check:checked').forEach(function (cb) {
-      if (knownValues.includes(cb.value)) checked.push(cb.value);
+      if (knownValues.indexOf(cb.value) !== -1) checked.push(cb.value);
     });
     return checked;
   }
@@ -79,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const btn = document.createElement('button');
     btn.className = 'en-search-btn';
     btn.textContent = 'Search';
+    btn.addEventListener('click', applyFilters);
     searchContainer.appendChild(btn);
   }
 
@@ -105,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <option>Price: low to high</option>
       <option>Price: high to low</option>
       <option>Best rating</option>
+      <option>Distance to university</option>
     </select>`;
 
   resultsBar.appendChild(countDisplay);
@@ -121,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const sidebar = document.createElement('aside');
   sidebar.className = 'en-sidebar';
 
+  // Map thumbnail
   const mapThumb = document.createElement('div');
   mapThumb.className = 'en-map-thumb';
   const dormMap = document.getElementById('dormMap');
@@ -134,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
   mapThumb.appendChild(mapOverlay);
   sidebar.appendChild(mapThumb);
 
+  // Filter groups — pull translated labels from hidden filter bar
   const filterGroups = [
     { title: 'Property Type', items: [
         { label: 'Apartment', value: 'Apartment', count: '(1)' },
@@ -151,6 +173,17 @@ document.addEventListener('DOMContentLoaded', function () {
         { label: 'Dublin 6',      value: 'dublin 6',      count: '(1)' },
         { label: 'Dun Laoghaire', value: 'dun laoghaire', count: '(1)' }
     ]},
+    { title: 'University', items: [
+        { label: 'Trinity College Dublin',    value: 'uni-tcd', count: '(2)' },
+        { label: 'University College Dublin', value: 'uni-ucd', count: '(1)' },
+        { label: 'TU Dublin',                 value: 'uni-tud', count: '(1)' },
+        { label: 'Dublin City University',    value: 'uni-dcu', count: '(0)' }
+    ]},
+    { title: 'Distance', items: [
+        { label: 'Under 1 km', value: 'dist-1', count: '(1)' },
+        { label: 'Under 2 km', value: 'dist-2', count: '(2)' },
+        { label: 'Under 5 km', value: 'dist-5', count: '(4)' }
+    ]},
     { title: 'Amenities', items: [
         { label: 'WiFi',           value: 'wifi',      count: '' },
         { label: 'Bills Included', value: 'bills',     count: '' },
@@ -159,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ]}
   ];
 
-  // Pull translated labels from existing hidden filter bar
+  // Pull translated labels from hidden filter bar dropdowns
   const origDropdowns = document.querySelectorAll('.filter-bar-wrapper .dropdown');
   origDropdowns.forEach((dd, gi) => {
     if (!filterGroups[gi]) return;
@@ -200,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <span class="en-filter-count">${item.count}</span>`;
 
-      const newCb  = row.querySelector('input');
+      const newCb = row.querySelector('input');
       const origCb = document.querySelector(`.filter-bar-wrapper input[value="${item.value}"]`);
       if (origCb) {
         newCb.addEventListener('change', () => {
@@ -208,7 +241,6 @@ document.addEventListener('DOMContentLoaded', function () {
           origCb.dispatchEvent(new Event('change', { bubbles: true }));
         });
       }
-      // Also trigger applyFilters directly
       newCb.addEventListener('change', applyFilters);
       body.appendChild(row);
     });
@@ -222,8 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
   clearBtn.className = 'en-filter-reset';
   clearBtn.textContent = '✕ Clear all filters';
   clearBtn.addEventListener('click', () => {
-    document.querySelectorAll('.en-filter-check').forEach(cb => cb.checked = false);
-    document.querySelectorAll('.filter-check').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.en-filter-check, .filter-check').forEach(cb => cb.checked = false);
     applyFilters();
   });
   sidebar.appendChild(clearBtn);
@@ -248,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const reviews = card.querySelector('.rating-reviews');
     const price   = card.querySelector('.price-amount');
     const per     = card.querySelector('.price-per');
+    const distBadge = card.querySelector('.distance-badge');
 
     const amenitiesHTML = Array.from(tags).map(t => `<li>${t.textContent.trim()}</li>`).join('');
 
@@ -267,6 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="en-card-body">
           <span class="en-card-title">${title ? title.textContent.trim() : ''}</span>
           <div class="en-card-address">📍 ${address ? address.textContent.replace('📍','').trim() : ''}</div>
+          ${distBadge ? `<div class="en-distance-badge">${distBadge.innerHTML}</div>` : ''}
           <div class="en-card-rating">
             <span class="en-rating-score">${score ? score.textContent.trim() : ''}</span>
             <span class="en-rating-label">${label ? label.textContent.trim() : ''}</span>
