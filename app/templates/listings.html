@@ -9,233 +9,239 @@
 {% block main %}
 {% set lang = session.get('language', 'en') %}
 {% set dormitories = [
-    {'name': 'Dublin Student Living', 'address': 'Parnell Square, Dublin 1',   'price': 850,  'type': 'Apartment', 'lat': 53.3524, 'lng': -6.2635, 'rating': 8.4, 'rating_label': 'Very Good',   'reviews': 124},
-    {'name': 'Coastal House',         'address': 'Dun Laoghaire, Dublin',      'price': 900,  'type': 'Studio',    'lat': 53.2941, 'lng': -6.1353, 'rating': 7.6, 'rating_label': 'Good',         'reviews': 88},
-    {'name': 'Trinity Hall',          'address': 'Dartry Road, Dublin 6',      'price': 750,  'type': 'Room',      'lat': 53.3201, 'lng': -6.2567, 'rating': 7.9, 'rating_label': 'Good',         'reviews': 211},
-    {'name': 'Grand Canal Dock',      'address': 'Grand Canal Dock, Dublin 2', 'price': 1200, 'type': 'Studio',    'lat': 53.3397, 'lng': -6.2358, 'rating': 9.3, 'rating_label': 'Exceptional',  'reviews': 56}
+  {'name':'Dublin Student Living','address':'Parnell Square, Dublin 1','price':850,'type':'En-Suite','lat':53.3524,'lng':-6.2635,'rating':8.4,'rating_label':'Very Good','reviews':124,'university':'tcd','distance':1.2,'size':18,'contract':44,'bills':True,'img':'image1.jpg','amenities':'wifi,bills,furnished'},
+  {'name':'Coastal House','address':'Dun Laoghaire, Dublin','price':900,'type':'Studio','lat':53.2941,'lng':-6.1353,'rating':7.6,'rating_label':'Good','reviews':88,'university':'ucd','distance':3.4,'size':22,'contract':40,'bills':True,'img':'Image2.jpg','amenities':'wifi,bills,parking'},
+  {'name':'Trinity Hall','address':'Dartry Road, Dublin 6','price':750,'type':'Shared','lat':53.3201,'lng':-6.2567,'rating':7.9,'rating_label':'Good','reviews':211,'university':'tcd','distance':2.1,'size':14,'contract':38,'bills':False,'img':'image3.jpg','amenities':'wifi,furnished'},
+  {'name':'Grand Canal Dock Suites','address':'Grand Canal Dock, Dublin 2','price':1200,'type':'Studio','lat':53.3397,'lng':-6.2358,'rating':9.3,'rating_label':'Exceptional','reviews':56,'university':'tud','distance':0.8,'size':26,'contract':44,'bills':True,'img':'image4.jpg','amenities':'wifi,bills,furnished,parking'},
+  {'name':'Mezzino Glasnevin','address':'Glasnevin, Dublin 9','price':820,'type':'En-Suite','lat':53.3880,'lng':-6.2677,'rating':8.1,'rating_label':'Very Good','reviews':198,'university':'dcu','distance':0.6,'size':16,'contract':40,'bills':True,'img':'image1.jpg','amenities':'wifi,bills,furnished'},
+  {'name':'Aparto Spencer Dock','address':'Spencer Dock, Dublin 1','price':1100,'type':'Studio','lat':53.3480,'lng':-6.2390,'rating':8.8,'rating_label':'Excellent','reviews':143,'university':'tud','distance':1.1,'size':24,'contract':44,'bills':True,'img':'Image2.jpg','amenities':'wifi,bills,furnished,parking'},
+  {'name':'Yugo Dorset Point','address':'Dorset Street, Dublin 1','price':780,'type':'Shared','lat':53.3590,'lng':-6.2640,'rating':7.4,'rating_label':'Good','reviews':312,'university':'tcd','distance':1.8,'size':12,'contract':38,'bills':False,'img':'image3.jpg','amenities':'wifi,furnished'},
+  {'name':'UCD Village','address':'Belfield, Dublin 4','price':870,'type':'En-Suite','lat':53.3079,'lng':-6.2244,'rating':8.6,'rating_label':'Excellent','reviews':276,'university':'ucd','distance':0.2,'size':17,'contract':40,'bills':True,'img':'image4.jpg','amenities':'wifi,bills,furnished'},
+  {'name':'DCU Student Village','address':'Collins Avenue, Dublin 9','price':795,'type':'En-Suite','lat':53.3862,'lng':-6.2587,'rating':7.8,'rating_label':'Good','reviews':154,'university':'dcu','distance':0.3,'size':15,'contract':38,'bills':True,'img':'image1.jpg','amenities':'wifi,bills'},
+  {'name':'Nido Heuston South Quarter','address':'James Street, Dublin 8','price':960,'type':'Studio','lat':53.3415,'lng':-6.2879,'rating':8.9,'rating_label':'Excellent','reviews':89,'university':'tud','distance':1.4,'size':20,'contract':44,'bills':True,'img':'Image2.jpg','amenities':'wifi,bills,furnished'},
+  {'name':'Griffith College Residences','address':'South Circular Road, Dublin 8','price':720,'type':'Shared','lat':53.3325,'lng':-6.2792,'rating':7.2,'rating_label':'Good','reviews':167,'university':'tud','distance':2.3,'size':11,'contract':36,'bills':False,'img':'image3.jpg','amenities':'wifi'},
+  {'name':'Marino Institute Halls','address':'Griffith Avenue, Dublin 9','price':760,'type':'Shared','lat':53.3782,'lng':-6.2341,'rating':7.5,'rating_label':'Good','reviews':98,'university':'dcu','distance':1.9,'size':13,'contract':38,'bills':False,'img':'image4.jpg','amenities':'wifi,furnished'},
+  {'name':'Parnell House','address':'Parnell Street, Dublin 1','price':840,'type':'En-Suite','lat':53.3512,'lng':-6.2621,'rating':8.0,'rating_label':'Very Good','reviews':132,'university':'tcd','distance':1.5,'size':15,'contract':40,'bills':True,'img':'image1.jpg','amenities':'wifi,bills'},
+  {'name':'Rathmines Lodge','address':'Rathmines Road, Dublin 6','price':810,'type':'Studio','lat':53.3231,'lng':-6.2680,'rating':7.7,'rating_label':'Good','reviews':74,'university':'tcd','distance':3.1,'size':19,'contract':40,'bills':True,'img':'Image2.jpg','amenities':'wifi,bills,parking'},
+  {'name':'Inchicore Studios','address':'Tyrconnell Road, Dublin 8','price':890,'type':'Studio','lat':53.3370,'lng':-6.3180,'rating':8.3,'rating_label':'Very Good','reviews':61,'university':'tud','distance':2.0,'size':21,'contract':44,'bills':True,'img':'image3.jpg','amenities':'wifi,bills,furnished'},
+  {'name':'Northside Shared House','address':'Drumcondra Road, Dublin 9','price':700,'type':'Shared','lat':53.3710,'lng':-6.2540,'rating':7.0,'rating_label':'Good','reviews':89,'university':'dcu','distance':2.5,'size':10,'contract':36,'bills':False,'img':'image4.jpg','amenities':'wifi'}
 ] %}
 
-<!-- ── SEARCH BAR ───────────────────────────────────────────── -->
+<!-- Pre-filter values injected by Flask from URL params -->
+<script>
+    window._preFilter = {
+        uni:    "{{ pre_uni | default('') }}",
+        type:   "{{ pre_type | default('') }}",
+        search: "{{ pre_search | default('') }}"
+    };
+</script>
+
+<!-- SEARCH BAR -->
 <div class="search-bar-wrapper">
-    <div class="container">
-        <div class="search-container">
-            <i class="fa fa-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-pill"
-                   placeholder="{{ _('Search by name, address or area...') }}">
-        </div>
+  <div class="container">
+    <div class="search-container">
+      <i class="fa fa-search search-icon"></i>
+      <input type="text" id="searchInput" class="search-pill"
+             placeholder="{{ _('Search by name, address or area...') }}">
     </div>
+  </div>
 </div>
 
-<!-- ── FILTER BAR ──────────────────────────────────────────── -->
+<!-- FILTER BAR -->
 <div class="filter-bar-wrapper d-flex align-items-center gap-3">
-    <span class="filter-label">
-        <i class="fa fa-sliders-h"></i> {{ _('Filters:') }}
-    </span>
+  <span class="filter-label"><i class="fa fa-sliders-h"></i> {{ _('Filters:') }}</span>
 
-    <div class="dropdown">
-        <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            {{ _('Property Type') }}
-        </button>
-        <ul class="dropdown-menu p-3">
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="Apartment"> {{ _('Apartment') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="Studio"> {{ _('Studio') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="Room"> {{ _('Room') }}
-            </label></li>
-        </ul>
-    </div>
+  <div class="dropdown">
+    <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Property Type') }}</button>
+    <ul class="dropdown-menu p-3">
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="En-Suite"> {{ _('En-Suite') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="Studio"> {{ _('Studio') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="Shared"> {{ _('Shared') }}</label></li>
+    </ul>
+  </div>
 
-    <div class="dropdown">
-        <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            {{ _('Price Range') }}
-        </button>
-        <ul class="dropdown-menu p-3">
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="budget"> {{ _('Under €800') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="mid"> {{ _('€800 – €1000') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="premium"> {{ _('Over €1000') }}
-            </label></li>
-        </ul>
-    </div>
+  <div class="dropdown">
+    <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Price Range') }}</button>
+    <ul class="dropdown-menu p-3">
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="budget"> {{ _('Under €800') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="mid"> {{ _('€800 – €1000') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="premium"> {{ _('Over €1000') }}</label></li>
+    </ul>
+  </div>
 
-    <div class="dropdown">
-        <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            {{ _('Location') }}
-        </button>
-        <ul class="dropdown-menu p-3">
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="dublin 1"> {{ _('Dublin 1') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="dublin 2"> {{ _('Dublin 2') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="dublin 6"> {{ _('Dublin 6') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="dun laoghaire"> {{ _('Dun Laoghaire') }}
-            </label></li>
-        </ul>
-    </div>
+  <div class="dropdown">
+    <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Location') }}</button>
+    <ul class="dropdown-menu p-3">
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dublin 1"> {{ _('Dublin 1') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dublin 2"> {{ _('Dublin 2') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dublin 4"> Dublin 4</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dublin 6"> {{ _('Dublin 6') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dublin 8"> Dublin 8</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dublin 9"> Dublin 9</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dun laoghaire"> {{ _('Dun Laoghaire') }}</label></li>
+    </ul>
+  </div>
 
-    <div class="dropdown">
-        <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            {{ _('Amenities') }}
-        </button>
-        <ul class="dropdown-menu p-3">
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="wifi"> {{ _('WiFi') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="bills"> {{ _('Bills Included') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="furnished"> {{ _('Furnished') }}
-            </label></li>
-            <li><label class="dropdown-item">
-                <input type="checkbox" class="filter-check" value="parking"> {{ _('Parking') }}
-            </label></li>
-        </ul>
-    </div>
+  <div class="dropdown">
+    <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('University') }}</button>
+    <ul class="dropdown-menu p-3">
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="uni-tcd"> {{ _('Trinity College Dublin') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="uni-ucd"> {{ _('University College Dublin') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="uni-tud"> {{ _('TU Dublin') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="uni-dcu"> {{ _('Dublin City University') }}</label></li>
+    </ul>
+  </div>
 
-    <button class="btn btn-sm btn-outline-secondary" onclick="resetFilters()">
-        {{ _('Reset') }}
-    </button>
+  <div class="dropdown">
+    <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Distance') }}</button>
+    <ul class="dropdown-menu p-3">
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dist-1"> {{ _('Under 1 km') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dist-2"> {{ _('Under 2 km') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="dist-5"> {{ _('Under 5 km') }}</label></li>
+    </ul>
+  </div>
 
-    <span id="resultCount" class="small text-muted ms-auto">
-        {{ dormitories|length }} {{ _('properties found') }}
-    </span>
+  <div class="dropdown">
+    <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Amenities') }}</button>
+    <ul class="dropdown-menu p-3">
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="wifi"> {{ _('WiFi') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="bills"> {{ _('Bills Included') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="furnished"> {{ _('Furnished') }}</label></li>
+      <li><label class="dropdown-item"><input type="checkbox" class="filter-check" value="parking"> {{ _('Parking') }}</label></li>
+    </ul>
+  </div>
+
+  <button class="btn btn-sm btn-outline-secondary" onclick="resetFilters()">{{ _('Reset') }}</button>
+  <span id="resultCount" class="small text-muted ms-auto">{{ dormitories|length }} {{ _('properties found') }}</span>
 </div>
 
-<!-- ── LISTINGS + MAP WRAPPER ──────────────────────────────── -->
+<!-- LISTINGS + MAP -->
 <div class="listings-map-wrapper">
-    <div class="listings-split">
-
-        <!-- CARDS COLUMN -->
-        <div class="listings-col" id="listing-grid">
-            {% for dorm in dormitories %}
-            <div class="dorm-item"
-                 data-name="{{ dorm.name|lower }}"
-                 data-address="{{ dorm.address|lower }}"
-                 data-type="{{ dorm.type }}"
-                 data-price="{{ dorm.price }}"
-                 data-amenities="wifi,bills,furnished"
-                 data-lat="{{ dorm.lat }}"
-                 data-lng="{{ dorm.lng }}"
-                 data-index="{{ loop.index0 }}">
-
-                <div class="listing-card">
-                    <div class="card-image">
-                        <span class="badge">{{ _(dorm.type) }}</span>
-                        <img src="{{ url_for('static', filename='assets/image1.jpg') }}"
-                             alt="{{ dorm.name }}">
-                    </div>
-                    <div class="card-content">
-                        <h5>{{ dorm.name }}</h5>
-                        <p class="small">📍 {{ dorm.address }}</p>
-                        <div class="amenity-tags">
-                            <span class="amenity-tag">{{ _('WiFi') }}</span>
-                            <span class="amenity-tag">{{ _('Bills Included') }}</span>
-                            <span class="amenity-tag">{{ _('Furnished') }}</span>
-                        </div>
-                    </div>
-                    <div class="card-footer-row">
-                        <div class="rating-block">
-                            <span class="rating-score">{{ dorm.rating }}</span>
-                            <div>
-                                <span class="rating-label">{{ _(dorm.rating_label) }}</span>
-                                <span class="rating-reviews">{{ dorm.reviews }} {{ _('reviews') }}</span>
-                            </div>
-                        </div>
-                        <div class="price-block">
-                            <span class="price-from">{{ _('From') }}</span>
-                            <span class="price-amount">€{{ dorm.price }}</span>
-                            <span class="price-per">/ {{ _('month') }}</span>
-                        </div>
-                    </div>
-                    <button class="btn-view-deal">{{ _('View deal') }}</button>
-                </div>
-
+  <div class="listings-split">
+    <div class="listings-col" id="listing-grid">
+      {% for dorm in dormitories %}
+      <div class="dorm-item"
+           data-name="{{ dorm.name|lower }}"
+           data-address="{{ dorm.address|lower }}"
+           data-type="{{ dorm.type }}"
+           data-price="{{ dorm.price }}"
+           data-amenities="{{ dorm.amenities }}"
+           data-university="{{ dorm.university }}"
+           data-distance="{{ dorm.distance }}"
+           data-lat="{{ dorm.lat }}"
+           data-lng="{{ dorm.lng }}"
+           data-index="{{ loop.index0 }}">
+        <div class="listing-card">
+          <div class="card-image">
+            <span class="badge">{{ _(dorm.type) }}</span>
+            <img src="{{ url_for('static', filename='assets/' + dorm.img) }}" alt="{{ dorm.name }}"
+                 onerror="this.src='{{ url_for('static', filename='assets/image1.jpg') }}'">
+          </div>
+          <div class="card-content">
+            <h5>{{ dorm.name }}</h5>
+            <p class="small">📍 {{ dorm.address }}</p>
+            {% if lang == 'de' %}
+            <div class="de-card-specs">
+              <div class="de-spec-row"><span>{{ _('Room Size') }}</span><strong>{{ dorm.size }} m²</strong></div>
+              <div class="de-spec-row"><span>{{ _('Distance to University') }}</span><strong>{{ dorm.distance }} km</strong></div>
+              <div class="de-spec-row"><span>{{ _('Contract Length') }}</span><strong>{{ dorm.contract }} {{ _('weeks') }}</strong></div>
+              <div class="de-spec-row"><span>{{ _('Bills') }}</span><strong>{% if dorm.bills %}{{ _('Included') }}{% else %}{{ _('Not included') }}{% endif %}</strong></div>
             </div>
-            {% endfor %}
+            {% else %}
+            <div class="amenity-tags">
+              {% for amenity in dorm.amenities.split(',') %}
+              <span class="amenity-tag">
+                {% if amenity == 'wifi' %}{{ _('WiFi') }}
+                {% elif amenity == 'bills' %}{{ _('Bills Included') }}
+                {% elif amenity == 'furnished' %}{{ _('Furnished') }}
+                {% elif amenity == 'parking' %}{{ _('Parking') }}
+                {% endif %}
+              </span>
+              {% endfor %}
+            </div>
+            <div class="distance-badge"><i class="fa fa-walking"></i> {{ dorm.distance }} km {{ _('from university') }}</div>
+            {% endif %}
+          </div>
+          <div class="card-footer-row">
+            <div class="rating-block">
+              <span class="rating-score">{{ dorm.rating }}</span>
+              <div>
+                <span class="rating-label">{{ _(dorm.rating_label) }}</span>
+                <span class="rating-reviews">{{ dorm.reviews }} {{ _('reviews') }}</span>
+              </div>
+            </div>
+            <div class="price-block">
+              <span class="price-from">{{ _('From') }}</span>
+              <span class="price-amount">€{{ dorm.price }}</span>
+              <span class="price-per">/ {{ _('month') }}</span>
+            </div>
+          </div>
+          <a href="{{ url_for('info') }}" class="btn-view-deal">{{ _('View dorm') }}</a>
         </div>
-
-        <!-- MAP COLUMN -->
-        <div class="map-col">
-            <div id="dormMap"></div>
-        </div>
-
+      </div>
+      {% endfor %}
     </div>
+    <div class="map-col"><div id="dormMap"></div></div>
+  </div>
 </div>
-
 {% endblock %}
 
 {% block extra_js %}
 {% set lang = session.get('language', 'en') %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    var dormData = [
-        {% for dorm in dormitories %}
-        {
-            name:    "{{ dorm.name }}",
-            address: "{{ dorm.address }}",
-            price:   {{ dorm.price }},
-            type:    "{{ dorm.type }}",
-            lat:     {{ dorm.lat }},
-            lng:     {{ dorm.lng }},
-            index:   {{ loop.index0 }}
-        }{% if not loop.last %},{% endif %}
-        {% endfor %}
-    ];
+var dormData = [
+  {% for dorm in dormitories %}
+  {name:"{{ dorm.name }}",address:"{{ dorm.address }}",price:{{ dorm.price }},type:"{{ dorm.type }}",lat:{{ dorm.lat }},lng:{{ dorm.lng }},university:"{{ dorm.university }}",distance:{{ dorm.distance }},index:{{ loop.index0 }}}{% if not loop.last %},{% endif %}
+  {% endfor %}
+];
 
-    var map = L.map('dormMap').setView([53.3340, 6.2490], 12);
-    window._dormLeafletMap = map;
+// Compute centre from actual dorm coordinates — fixes the Germany bug
+var avgLat = dormData.reduce(function(s,d){return s+d.lat;},0) / dormData.length;
+var avgLng = dormData.reduce(function(s,d){return s+d.lng;},0) / dormData.length;
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 18
-    }).addTo(map);
+var map = L.map('dormMap').setView([avgLat, avgLng], 12);
+window._dormLeafletMap = map;
 
-    var markers = [];
-    window._dormMarkers = markers;
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  maxZoom: 18
+}).addTo(map);
 
-    dormData.forEach(function(dorm, i) {
-        var icon = L.divIcon({
-            className: '',
-            html: '<div class="map-price-pin">&euro;' + dorm.price + '</div>',
-            iconAnchor: [28, 14]
-        });
-        var marker = L.marker([dorm.lat, dorm.lng], { icon: icon })
-            .addTo(map)
-            .bindPopup(
-                '<strong>' + dorm.name + '</strong><br>' +
-                '&#128205; ' + dorm.address + '<br>' +
-                '<span style="font-weight:700;">&euro;' + dorm.price + ' / month</span>'
-            );
-        markers.push(marker);
+var markers = [];
+window._dormMarkers = markers;
 
-        var card = document.querySelectorAll('.dorm-item')[i];
-        if (card) {
-            card.addEventListener('mouseenter', function() { marker.openPopup(); });
-            card.addEventListener('mouseleave', function() { marker.closePopup(); });
-        }
+dormData.forEach(function(dorm, i) {
+  var icon = L.divIcon({
+    className: '',
+    html: '<div class="map-price-pin">&euro;' + dorm.price + '</div>',
+    iconAnchor: [28, 14]
+  });
+  var marker = L.marker([dorm.lat, dorm.lng], {icon: icon})
+    .addTo(map)
+    .bindPopup('<strong>' + dorm.name + '</strong><br>&#128205; ' + dorm.address +
+      '<br><span style="font-weight:700;">&euro;' + dorm.price + ' / month</span>' +
+      '<br><small>' + dorm.distance + ' km from university</small>');
+  markers.push(marker);
+  var card = document.querySelectorAll('.dorm-item')[i];
+  if (card) {
+    card.addEventListener('mouseenter', function() {
+      marker.openPopup();
+      map.setView([dorm.lat, dorm.lng], 14, {animate:true, duration:0.5});
     });
+    card.addEventListener('mouseleave', function() {
+      marker.closePopup();
+      map.setView([avgLat, avgLng], 12, {animate:true, duration:0.5});
+    });
+  }
+});
 </script>
 
 {% if lang == 'de' %}
-    <script src="{{ url_for('static', filename='js/Nate/de_listings.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/Nate/de_listings.js') }}"></script>
 {% elif lang == 'zh' %}
-    <script src="{{ url_for('static', filename='js/Nate/zh_listings.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/Nate/zh_listings.js') }}"></script>
 {% else %}
-    <script src="{{ url_for('static', filename='js/Nate/en_listings.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/Nate/en_listings.js') }}"></script>
 {% endif %}
-
 {% endblock %}
