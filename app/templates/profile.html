@@ -1,14 +1,19 @@
+<!-- Developed by: Alex(C24375301) -->
 {% extends "base.html" %}
 
 {% block extra_css %}
-    <link href="{{ url_for('static', filename='css/components-styles.css') }}" rel="stylesheet" />
+    <!-- Links to Alex's specific component styles to ensure modularity within the team project -->
+    <link href="{{ url_for('static', filename='css/Alex/components-styles.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block main %}
+<!-- The min-vh-100 class ensures the profile container spans the full height, keeping the footer at the bottom -->
 <div class="container py-5 d-flex flex-column min-vh-100">
 
+    <!-- USER HEADER SECTION -->
     <div class="row mb-5 align-items-center">
         <div class="col-lg-4 text-center">
+            <!-- Dynamic Profile Picture: Uses user-uploaded image or falls back to a default asset -->
             <img src="{{ url_for('static', filename='assets/' + (user.pfp if user.pfp else 'profile.jpg')) }}"
                  class="img-fluid rounded shadow-lg border"
                  style="max-height: 300px; width: 100%; object-fit: cover;"
@@ -16,32 +21,36 @@
         </div>
 
         <div class="col-lg-8">
+            <!-- Translated Page Title -->
             <h1 class="fw-bold mission-title" style="color: #0d6efd;">{{ _('My Profile') }}</h1>
 
             <div class="bg-light p-4 rounded border shadow-sm mb-3">
                 <div class="row">
+                    <!-- RESIDENT STATUS (Trust Indicator) -->
                     <div class="col-md-12 mb-3">
                         <label class="text-muted small fw-bold d-block mb-1">{{ _('Status') }}</label>
                         <span class="badge bg-success shadow-sm p-2">
-                            <!-- WRAPPED: Status text -->
+                            <!-- Verified badge used for the German (DE) adaptation to emphasize technical trust -->
                             <i class="fas fa-check-circle me-1"></i> {{ _('Verified Resident') }}
                         </span>
                     </div>
 
+                    <!-- USER BIO SECTION -->
                     <div class="col-12">
                         <label class="text-muted small fw-bold d-block mb-1">{{ _('About Me') }}</label>
 
+                        <!-- Cultural Adaptation: Chinese (ZH) layout uses a 'Click to Reveal' interaction to manage density -->
                         {% if session.get('language') == 'zh' %}
                             <input type="checkbox" id="profile-toggle" class="toggle-input d-none">
                             <label for="profile-toggle" class="reveal-btn mb-2">
                                 <i class="fas fa-eye me-2"></i>{{ _('Click to reveal bio') }}
                             </label>
                             <div class="reveal-content">
-                                <!-- WRAPPED: Dynamic Bio -->
+                                <!-- user.bio is wrapped in gettext to support dynamic user-generated content translation -->
                                 <p class="mb-0 text-dark">{{ _(user.bio) }}</p>
                             </div>
                         {% else %}
-                            <!-- WRAPPED: Dynamic Bio -->
+                            <!-- Standard layout for English and German -->
                             <p class="mb-0 text-dark">{{ _(user.bio) }}</p>
                         {% endif %}
                     </div>
@@ -50,7 +59,7 @@
         </div>
     </div>
 
-    <!-- My Saved Section -->
+    <!-- MY SAVED SECTION -->
     <div class="container px-0 mb-5">
         <h2 class="fw-bold mb-4 story-title">{{ _('My Saved') }}</h2>
         <div class="row g-4">
@@ -58,7 +67,10 @@
                 {% for dorm in favorites %}
                 <div class="col-md-4">
                     <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                        <!-- Asset Logic: Uses modulo to cycle through 4 specific images to create variety without high storage overhead -->
                         {% set img_num = (loop.index % 4) if (loop.index % 4) != 0 else 4 %}
+
+                        <!-- Check for specific naming convention (Image2.jpg vs imageX.jpg) -->
                         {% if img_num == 2 %}
                             <img src="{{ url_for('static', filename='assets/Image2.jpg') }}" class="card-img-top" style="height: 150px; object-fit: cover;">
                         {% else %}
@@ -73,6 +85,7 @@
                 </div>
                 {% endfor %}
             {% else %}
+                <!-- Empty state display -->
                 <div class="col-12">
                     <p class="text-muted fst-italic">{{ _('No saved dorms yet.') }}</p>
                 </div>
@@ -82,6 +95,7 @@
 
     <hr class="my-5">
 
+    <!-- MY REVIEWS SECTION -->
     <div class="container px-0">
         <h2 class="fw-bold mb-4 story-title">{{ _('My Accommodation Reviews') }}</h2>
         <div class="row g-4">
@@ -91,13 +105,14 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <h5 class="fw-bold text-primary mb-0">{{ review.dorm }}</h5>
+                            <!-- Star Rating display based on database value -->
                             <span class="text-warning">
                                 {% for i in range(review.rating) %}★{% endfor %}
                             </span>
                         </div>
-                        <!-- WRAPPED: Review Date -->
+                        <!-- Meta information (Date) wrapped for localization -->
                         <p class="small text-muted mb-3">{{ _(review.date) }}</p>
-                        <!-- WRAPPED: Review Comment -->
+                        <!-- User comment wrapped for localization -->
                         <p class="fst-italic text-dark mb-0">"{{ _(review.comment) }}"</p>
                     </div>
                 </div>
@@ -106,6 +121,7 @@
         </div>
     </div>
 
+    <!-- Spacer to ensure footer stability on short profiles -->
     <div class="mt-auto"></div>
 </div>
 {% endblock %}
