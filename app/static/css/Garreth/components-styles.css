@@ -1,23 +1,42 @@
-/* Sticky Footer Logic */
+/**
+ * File: components-styles.css
+ * Author: Garreth (C24451694)
+ * * Purpose: Shared styles for the footer and star ratings.
+ * * Cultural Dimensions:
+ * - China: Low UA + Collectivist (Wei Chen)
+ * - Germany: High UA + Individualist (Karl)
+ */
+
+/* --- Sticky Footer ---
+   Design Decision: Using flexbox to keep the footer at the bottom of the page,
+   even if the page doesn't have much content. This prevents the footer
+   from "floating" in the middle of the screen. */
 html, body { height: 100%; }
 body { display: flex; flex-direction: column; min-height: 100vh; }
 main.flex-grow-1 { flex: 1 0 auto; }
 footer { flex-shrink: 0; }
 
-/* Star Rating System */
+/* --- Star Rating System ---
+   Design Decision: This allows users to hover and click stars to rate
+   without needing extra JavaScript. */
 .star-rating label { font-size: 2.25rem; color: #d9d9d9; cursor: pointer; transition: color 0.2s; }
 
-/* Default Star Color (Yellow) */
+/* English - Default yellow stars */
 .star-rating input:checked ~ label,
 .star-rating label:hover,
 .star-rating label:hover ~ label { color: #ffca08 !important; }
 
-/* Chinese Star Color (Orange) */
+/* Chinese - Orange stars
+   Phase 1 Section 6.3: "vibrant colours to entice exploration" for Low UA (Wei Chen).
+   Hypothesis 3: Using bright orange makes the site feel energetic and familiar. */
 [data-lang="zh"] .star-rating input:checked ~ label,
 [data-lang="zh"] .star-rating label:hover,
 [data-lang="zh"] .star-rating label:hover ~ label { color: #ff6633 !important; }
 
-/* German Star Color (Black) */
+/* German - Black stars
+   Deviation: The group guide said blue/grey, but I used black for a more
+   professional and formal look.
+   Hypothesis 1: High UA users (Karl) need a clear, serious interface to feel confident. */
 [data-lang="de"] .star-rating input:checked ~ label,
 [data-lang="de"] .star-rating label:hover,
 [data-lang="de"] .star-rating label:hover ~ label { color: #212529 !important; }

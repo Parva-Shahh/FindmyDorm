@@ -1,26 +1,15 @@
 /**
- * FILE: login-styles.css
- * AUTHOR: Garreth (C24451694)
- *
- * PURPOSE: Cultural adaptations specific to the login page.
- * NOTE: Background image URLs are set via inline style in login.html
- * using url_for() — CSS files cannot use Flask's url_for.
- *
- * CULTURAL DIMENSIONS ADDRESSED (Phase 1, Section 2.2):
- * - China: Low UA + Collectivist (Wei Chen persona)
- * - Germany: High UA + Individualist (Karl persona)
- *
- * HYPOTHESES ADDRESSED:
- * - Hypothesis 1 (German checklist): constant feedback prompts give High UA
- *   users the clear mental map they need (Phase 1, Section 5).
- * - Hypotheses 4 & 5 (Chinese social proof): peer validation and user count
- *   build trust for collectivist users (Phase 1, Section 5).
+ * File: login-styles.css
+ * Author: Garreth (C24451694)
+ * * Cultural Logic (Phase 1, Section 2.2):
+ * - China: Low UA (likes discovery) and Collectivist (trusts the crowd).
+ * - Germany: High UA (needs steps) and Individualist (needs facts).
  */
 
-/* ===== CHINESE LOGIN — full background image layout =====
-   flex:1 works because body is display:flex flex-direction:column
-   in components-styles.css, so this wrapper fills remaining height
-   and pushes the footer to the very bottom of the viewport. */
+ /* --- Chinese Login ---
+   Design Decision: A big background image with a blurry white box on top.
+   This creates an "exciting" look that matches the Low UA preference for
+   vibrant, exploratory sites. */
 .zh-login-wrapper {
     flex: 1;
     position: relative;
@@ -33,7 +22,7 @@
     padding: 2rem 1rem;
 }
 
-/* Semi-transparent overlay keeps the white card legible over any image */
+/* Semi-transparent overlay keeps form legible over any background image */
 .zh-login-overlay {
     position: absolute;
     inset: 0;
@@ -47,7 +36,8 @@
     max-width: 480px;
 }
 
-/* Frosted white card floats above the image */
+/* Frosted white card - floats above the overlay.
+   backdrop-filter adds depth without obscuring the background image. */
 .zh-login-card {
     background: rgba(255, 255, 255, 0.93);
     backdrop-filter: blur(6px);
@@ -55,10 +45,11 @@
     padding: 2.5rem;
 }
 
-/* --- SOCIAL PROOF ---
-   Hypothesis 4 & 5: peer count and review snippets signal social belonging.
-   Key design decision: explicit left/right halves avoid the Bootstrap gap
-   utility conflicting with the negative avatar margin-right overlap. */
+/* --- Social Proof Box (China) ---
+   Hypothesis 4 & 5: Showing the number of students and reviews helps
+   Collectivist users (Wei Chen) feel like they belong to a community.
+   Design Decision: Placed at the bottom to provide "social proof"
+   before the user signs in. */
 .zh-social-proof {
     display: flex;
     align-items: center;
@@ -76,7 +67,8 @@
     flex-shrink: 0;
 }
 
-/* Negative margin creates overlapping crowd effect */
+/* Overlapping avatars: Look similar to popular Chinese apps
+   to show an active community. */
 .zh-avatar-group {
     display: flex;
     align-items: center;
@@ -92,15 +84,14 @@
     justify-content: center;
     font-size: 0.9rem;
     border: 2px solid white;
-    margin-right: -8px;
     flex-shrink: 0;
 }
 
 .zh-avatar:last-child {
-    margin-right: 0;
+    margin-right: 0; /* Remove overlap on last avatar so text clears cleanly */
 }
 
-/* Fixed left margin clears the overlapping avatars cleanly */
+/* Fixed margin clears overlapping avatars so text doesn't collide */
 .zh-proof-text {
     margin-left: 14px;
     font-size: 0.82rem;
@@ -113,7 +104,6 @@
     flex-shrink: 0;
 }
 
-/* Orange bullet dot — more reliable than Font Awesome icon in this context */
 .zh-dot {
     width: 7px;
     height: 7px;
@@ -124,15 +114,16 @@
     display: inline-block;
 }
 
-/* ===== GERMAN LOGIN — Facebook-style 50/50 split =====
-   flex:1 fills remaining height — same approach as Chinese wrapper. */
+/* --- German Login ---
+   Design Decision: A split screen with a clean form. This matches
+   Section 6.3 "Outside-In efficiency" for High UA users like Karl. */
 .de-login-wrapper {
     flex: 1;
     display: flex;
     min-height: 0;
 }
 
-/* Left image panel — hidden on mobile, shown on large screens */
+/* Left image panel - hidden on mobile to preserve usability on small screens */
 .de-login-image {
     display: none;
     flex: 1;
@@ -147,7 +138,8 @@
     }
 }
 
-/* Right white panel */
+/* Right white panel - clean, uncluttered form area.
+   Hypothesis 1: structured, predictable layout reduces ambiguity for Karl. */
 .de-login-form-side {
     flex: 1;
     display: flex;

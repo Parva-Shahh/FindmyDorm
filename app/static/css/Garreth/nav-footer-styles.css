@@ -1,8 +1,12 @@
 /**
- * GLOBAL LAYOUT: Navigation & Footer
+ * File: nav-footer-styles.css
+ * Author: Garreth (C24451694)
+ * * Purpose: Controls the colors of the top bar and bottom footer.
+ * * Design Decision: We use the [data-lang] tag to change the whole theme
+ * * instantly when the user switches languages.
  */
 
-/* ===== DEFAULT (English/White) ===== */
+/* English - Clean white look (Standard style) */
 #mainNav { background-color: #ffffff !important; border-bottom: 1px solid #dee2e6; }
 #mainNav .nav-link { color: #212529 !important; }
 #mainNav .navbar-brand { color: #0d6efd !important; }
@@ -10,34 +14,28 @@
 #mainNav .btn-outline-light.active { background-color: #0d6efd !important; color: #ffffff !important; }
 #mainFooter { background-color: #f8f9fa; color: #6c757d; border-top: 1px solid #dee2e6; }
 
-/* ===== CHINESE THEME (Orange) ===== */
+/* Chinese - Vibrant Orange
+   Phase 1 Section 6.3: "vibrant colours to entice exploration."
+   Hypothesis 3: Helps Low UA users feel comfortable with an energetic look. */
 [data-lang="zh"] #mainNav { background-color: #ff6633 !important; border: none !important; }
 [data-lang="zh"] #mainNav .nav-link, [data-lang="zh"] #mainNav .navbar-brand { color: #ffffff !important; }
 [data-lang="zh"] #mainNav .btn-outline-light.active { background-color: #ffffff !important; color: #ff6633 !important; }
 [data-lang="zh"] #mainFooter { background-color: #ff6633 !important; color: #ffffff !important; border: none !important; }
 
-/* ===== GERMAN THEME (Black/Dark) ===== */
+/* German - Black
+   Deviation: Used black instead of blue/grey for a more "formal" feel.
+   Hypothesis 1: Karl (High UA) needs a structured, professional look
+   to feel the site is trustworthy. */
 [data-lang="de"] #mainNav { background-color: #212529 !important; border: none !important; }
 [data-lang="de"] #mainNav .nav-link, [data-lang="de"] #mainNav .navbar-brand { color: #ffffff !important; }
 [data-lang="de"] #mainNav .btn-outline-light.active { background-color: #ffffff !important; color: #212529 !important; }
 [data-lang="de"] #mainFooter { background-color: #212529 !important; color: #adb5bd !important; border: none !important; }
 
-/* ===== CHINESE: LANG label and inactive buttons white ===== */
-[data-lang="zh"] #mainNav .text-white-50 {
-    color: rgba(255, 255, 255, 0.75) !important;
-}
+/* Override Bootstrap btn-outline-light which inherits dark text on coloured navbars.
+   Key design decision: inactive lang buttons must remain white on both coloured
+   navbars */
+[data-lang="zh"] #mainNav .text-white-50 { color: rgba(255, 255, 255, 0.75) !important; }
+[data-lang="zh"] #mainNav .btn-outline-light { color: #ffffff !important; border-color: rgba(255, 255, 255, 0.6) !important; }
 
-[data-lang="zh"] #mainNav .btn-outline-light {
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.6) !important;
-}
-
-/* ===== GERMAN: LANG label and inactive buttons white ===== */
-[data-lang="de"] #mainNav .text-white-50 {
-    color: rgba(255, 255, 255, 0.75) !important;
-}
-
-[data-lang="de"] #mainNav .btn-outline-light {
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.6) !important;
-}
+[data-lang="de"] #mainNav .text-white-50 { color: rgba(255, 255, 255, 0.75) !important; }
+[data-lang="de"] #mainNav .btn-outline-light { color: #ffffff !important; border-color: rgba(255, 255, 255, 0.6) !important; }
