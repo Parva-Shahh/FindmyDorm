@@ -138,6 +138,8 @@ msgstr "Residenten-Profil ansehen"
 msgid "My Saved"
 msgstr "Meine Gespeicherten"
 
+msgid "Verified Resident"
+msgstr "Verifizierter Einwohner"
 # ── Review page ───────────────────────────────────────────────────────────────
 msgid "Write a Review"
 msgstr "Bewertung schreiben"
@@ -1065,3 +1067,33 @@ msgstr "Inklusive"
 
 msgid "weeks"
 msgstr "Wochen"
+# ── Profile page — strings moved from routes.py ──────────────────────────────
+msgid "Resident User"
+msgstr "Residenz-Nutzer"
+
+msgid "Living the dorm life since 2024. Architecture enthusiast and coffee lover."
+msgstr "Seit 2024 im Wohnheimsleben. Architekturbegeistert und Kaffeeliebhaber."
+
+msgid "Great architecture and very social atmosphere!"
+msgstr "Tolle Architektur und sehr soziale Atmosphäre!"
+
+msgid "March 2026"
+msgstr "März 2026"
+
+msgid "Baker House"
+msgstr "Baker House"
+
+msgid "MacGregor House"
+msgstr "MacGregor House"
+
+msgid "Cambridge, MA"
+msgstr "Cambridge, MA"
+
+msgid "Profile Picture"
+msgstr "Profilbild"
+
+msgid "Click to reveal bio"
+msgstr "Zum Anzeigen der Biografie klicken"
+
+msgid "No saved dorms yet."
+msgstr "Noch keine gespeicherten Wohnheime."

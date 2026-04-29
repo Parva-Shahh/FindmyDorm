@@ -33,26 +33,7 @@ def info():
 
 @app.route('/profile')
 def profile():
-    user_data = {
-        'name': 'Resident User',
-        'bio': 'Living the dorm life since 2024. Architecture enthusiast and coffee lover.',
-        'pfp': 'profile.jpg'
-    }
-    saved_favorites = [
-        {'name': 'Simmons Hall', 'image': 'image1.jpg'},
-        {'name': 'Baker House',  'image': 'Image2.jpg'},
-        {'name': 'MacGregor House', 'image': 'image4.jpg'}
-    ]
-    reviews_list = [
-        {
-            'dorm': 'Simmons Hall',
-            'rating': 5,
-            'comment': 'Great architecture and very social atmosphere!',
-            'date': 'March 2026',
-            'has_video': True
-        }
-    ]
-    return render_template("profile.html", user=user_data, reviews=reviews_list, favorites=saved_favorites)
+    return render_template("profile.html")
 
 @app.route('/set_language/<lang_code>')
 def set_language(lang_code):
