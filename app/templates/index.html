@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block extra_css %}
-    <link href="{{ url_for('static', filename='css/home-styles.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/Parva/home-styles.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block main %}
@@ -192,7 +192,7 @@
                 <div class="uni-card-de">
                     <!-- Logo -->
                     <div class="uni-logo-box">
-                        <img src="{{ url_for('static', filename='assets/' + logo_file) }}"
+                        <img src="{{ url_for('static', filename='assets/img/de-homepage/' + logo_file) }}"
                              alt="{{ name }} logo"
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="uni-logo-fallback" style="display:none;">{{ id|upper }}</div>
@@ -445,7 +445,7 @@
                 {% for id, name, city, count in [('ucd','University College Dublin','Dublin 4','142'),('dcu','Dublin City University','Glasnevin, Dublin','98'),('tud','TU Dublin','Grangegorman','87'),('tcd','Trinity College Dublin','City Centre','115'),('mu','Maynooth University','Maynooth, Kildare','64'),('ucc','University College Cork','Cork City','79'),('ul','University of Limerick','Castletroy, Limerick','71'),('nuig','University of Galway','Galway City','58')] %}
                 <a href="{{ url_for('listings') }}?uni={{ id }}" class="uni-card-en">
                     <div class="uni-card-thumb">
-                        <img src="{{ url_for('static', filename='assets/' + en_imgs[loop.index0]) }}" alt="{{ name }}" onerror="this.style.background='#dce8ff'">
+                        <img src="{{ url_for('static', filename='assets/img/cn-homepage/' + en_imgs[loop.index0]) }}" alt="{{ name }}" onerror="this.style.background='#dce8ff'">
                     </div>
                     <div class="uni-card-body">
                         <div class="uni-card-name">{{ name }}</div>
@@ -647,7 +647,7 @@
                 {% for id, name, city, count in [('ucd','University College Dublin','Dublin 4','142'),('dcu','Dublin City University','Glasnevin, Dublin','98'),('tud','TU Dublin','Grangegorman','87'),('tcd','Trinity College Dublin','City Centre','115'),('mu','Maynooth University','Maynooth, Kildare','64'),('ucc','University College Cork','Cork City','79'),('ul','University of Limerick','Castletroy, Limerick','71'),('nuig','University of Galway','Galway City','58')] %}
                 <a href="{{ url_for('listings') }}?uni={{ id }}" class="uni-card-zh">
                     <div class="uni-card-thumb">
-                        <img src="{{ url_for('static', filename='assets/' + zh_imgs[loop.index0]) }}" alt="{{ name }}" onerror="this.style.background='rgba(255,255,255,0.1)'">
+                        <img src="{{ url_for('static', filename='assets/img/cn-homepage/' + zh_imgs[loop.index0]) }}" alt="{{ name }}" onerror="this.style.background='rgba(255,255,255,0.1)'">
                     </div>
                     <div class="uni-card-body">
                         <div class="uni-card-name">{{ name }}</div>
