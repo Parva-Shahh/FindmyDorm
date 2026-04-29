@@ -1,4 +1,30 @@
 /* ============================================================
+   FILE:    en_listings.css
+   AUTHOR:  Nathaniel Christian Dedumo (C24516069)
+   PAGE:    Dormitory Listings — English Locale
+
+   CULTURAL DESIGN RATIONALE:
+   Booking.com-inspired layout. Blue palette (#0d6efd) — neutral,
+   professional, familiar to EN/Irish users. No strong cultural
+   targeting — this is the baseline "comfort zone" layout.
+
+   Key decisions:
+   - 3-column card grid: maximises listings visible at once
+   - Sidebar map thumbnail: geographic context always available
+     (Hypothesis 1: mental map without dominating the UI)
+   - Yellow search button (#febb02): Booking.com brand recognition
+   - Blue rating badge: consistent with EN trust conventions
+   - filter-bar-wrapper hidden (display:none): EN JS rebuilds
+     it as a structured sidebar (Hypothesis 1: linear structure)
+   - listings-map-wrapper hidden (display:none): EN JS rebuilds
+     layout entirely from scratch
+
+   Asset Loading Deviation (README Section 7):
+   Loaded in {% block extra_css %} per-page, not globally,
+   to avoid affecting teammates' pages during integration.
+   ============================================================ */
+
+/* ============================================================
    FindMyDorm — en_listings.css
    English locale: Booking.com-inspired layout
    Colours match existing EN navbar: white bg, #0d6efd blue
@@ -84,7 +110,9 @@ body {
 
 .en-search-btn:hover { background: #e0a800; }
 
-/* ── Hide base HTML blocks — JS rebuilds into EN layout ─────── */
+/* ── Hide base HTML blocks ─────────────────────────────────────
+   EN JS rebuilds both into Booking.com layout from scratch.
+   Hiding here prevents flash of unstyled content before JS runs. */
 .filter-bar-wrapper   { display: none !important; }
 .listings-map-wrapper { display: none !important; }
 
@@ -204,7 +232,10 @@ body {
 
 .en-filter-reset:hover { background: #cfe2ff; }
 
-/* ── 3-column card grid ─────────────────────────────────────── */
+/* ── 3-column card grid ─────────────────────────────────────────
+   3 columns = max listings visible without scrolling.
+   Reduces need to scroll for users who want a broad overview first.
+   Responsive: drops to 2-col at 1100px, 1-col at 520px. */
 .en-grid {
   flex: 1;
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -329,7 +360,9 @@ body {
   box-shadow: 0 3px 10px rgba(13,110,253,0.3);
 }
 
-/* Map pins */
+/* Map pins — price shown directly on marker (€850, €900 etc).
+   Hypothesis 2: explicit pricing visible on map without clicking.
+   High UA users can compare price + location at a glance. */
 .map-price-pin {
   background: var(--en-primary); color: #fff;
   font-size: 0.7rem; font-weight: 800; padding: 3px 9px;

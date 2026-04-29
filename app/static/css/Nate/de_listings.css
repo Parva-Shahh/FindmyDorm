@@ -1,4 +1,41 @@
 /* ============================================================
+   FILE:    de_listings.css
+   AUTHOR:  Nathaniel Christian Dedumo (C24516069)
+   PAGE:    Dormitory Listings — German Locale
+
+   CULTURAL DESIGN RATIONALE:
+   Trivago-inspired layout — reference site for German user analysis.
+   Charcoal (#212529) palette — structured, authoritative, professional.
+   Addresses High UA + Individualist users (Karl, PoV 1).
+
+   Key decisions:
+   - Charcoal (#212529) palette: Phase 1 Section 6.3 specifies blue/grey
+     but charcoal is used for full monochrome consistency across all DE
+     components — same justification as Garreth's DE nav/footer.
+     Structured and authoritative — reduces visual noise for High UA users.
+   - Full-width map banner: Karl sees ALL dorm locations immediately
+     before browsing cards — Hypothesis 1: visceral geographic mental map.
+   - Amazon-style collapsible sidebar: explicit, labelled filter sections.
+     Hypothesis 1: structured, predictable filter interface eliminates
+     ambiguity about what each option does.
+   - Horizontal card layout: mirrors Trivago.ie — familiar to German users.
+     Linear top-to-bottom flow suits the High UA "Search → Filter → Compare"
+     mental model (Hypothesis 1).
+   - de-hcard-aside: explicit price (Ab €...) + "Bestes Angebot" badge.
+     Hypothesis 2: price and deal validation visible without interaction.
+   - filter-bar-wrapper hidden (display:none): DE JS rebuilds as sidebar.
+   - listings-map-wrapper hidden (display:none): DE JS rebuilds entirely.
+
+   Verified Badge Colour Deviation (README Section 7):
+   Green (#198754) used for "Bestes Angebot" deal badge rather than
+   the Phase 1 blue/grey guideline — visceral trust signalling for
+   High UA financial security decisions (Hypothesis 1).
+
+   Asset Loading Deviation (README Section 7):
+   Loaded in {% block extra_css %} per-page, not globally.
+   ============================================================ */
+
+/* ============================================================
    FindMyDorm — de_listings.css
    German locale: Trivago-inspired layout
    Colours match existing DE navbar: #212529 dark / #fd7e14 accent
@@ -82,11 +119,16 @@ body {
 
 .de-search-btn:hover { background: var(--de-accent-dark); }
 
-/* ── Hide base HTML blocks — DE JS rebuilds into Trivago layout */
+/* ── Hide base HTML blocks ─────────────────────────────────────
+   DE JS rebuilds both into Trivago layout from scratch.
+   Hiding here prevents flash of unstyled content before JS runs. */
 .filter-bar-wrapper   { display: none !important; }
 .listings-map-wrapper { display: none !important; }
 
-/* ── Map banner — full width below search ───────────────────── */
+/* ── Map banner — full width below search ───────────────────────
+   Hypothesis 1: Karl sees ALL dorm locations on map BEFORE browsing
+   any cards. Full-width placement makes geographic context impossible
+   to miss — eliminates location ambiguity immediately. */
 .de-map-banner {
   width: 100%; height: 240px;
   border-bottom: 3px solid var(--de-primary);
@@ -118,7 +160,10 @@ body {
   padding: 1.25rem 1.5rem 3rem; gap: 1.25rem;
 }
 
-/* ── Sidebar ────────────────────────────────────────────────── */
+/* ── Amazon-style sidebar ───────────────────────────────────────
+   Collapsible filter sections with explicit labels.
+   Hypothesis 1: structured, predictable filter interface.
+   Karl can precisely narrow results before reading any card. */
 .de-sidebar {
   width: 250px; flex-shrink: 0;
   position: sticky; top: 1rem;
@@ -190,7 +235,10 @@ body {
   display: flex; flex-direction: column; gap: 0.85rem;
 }
 
-/* ── Horizontal card ────────────────────────────────────────── */
+/* ── Horizontal card ────────────────────────────────────────────
+   Image | Body (specs) | Aside (price + CTA) — mirrors Trivago layout.
+   Hypothesis 2: body contains full spec table; aside has explicit price.
+   Linear horizontal flow suits High UA "compare across rows" behaviour. */
 .de-hcard {
   background: var(--de-card-bg); border: 1px solid var(--de-border);
   border-radius: var(--de-radius); box-shadow: var(--de-shadow);
@@ -287,6 +335,10 @@ body {
 .de-price-amount { font-size: 1.6rem; font-weight: 900; color: var(--de-text); line-height: 1; }
 .de-price-per   { font-size: 0.7rem; color: var(--de-text-light); display: block; margin-bottom: 0.4rem; }
 
+/* Deal badge: green (#198754) — visceral trust signal.
+   Colour deviation justified: green = confirmed deal/verified quality
+   rather than standard blue/grey (README Section 7 deviation note).
+   Hypothesis 1: trust marker reduces commitment anxiety for High UA. */
 .de-deal-badge {
   font-size: 0.65rem; font-weight: 800; color: var(--de-green);
   background: #d1e7dd; border: 1px solid #a3cfbb;
@@ -309,7 +361,9 @@ body {
   box-shadow: 0 4px 10px rgba(33,37,41,0.3);
 }
 
-/* Map pins */
+/* Map pins — charcoal to match DE brand palette.
+   Price pin on map = Hypothesis 2: explicit pricing without clicking.
+   Full-width banner map is always visible for geographic mental map. */
 .map-price-pin {
   background: var(--de-primary); color: #fff;
   font-size: 0.7rem; font-weight: 800; padding: 3px 9px;
