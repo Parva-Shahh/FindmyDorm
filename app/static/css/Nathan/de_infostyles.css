@@ -1,0 +1,179 @@
+/* de_infostyles.css — German Info Page   Author: Nathan
+   Path: app/static/css/Nathan/de_infostyles.css
+   Colour scheme: BLACK / WHITE / GREY — no orange */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap');
+
+:root {
+  --de-info-primary:       #212529;
+  --de-info-primary-dark:  #16191c;
+  --de-info-primary-light: #f0f0f0;
+  --de-info-accent:        #495057;   /* mid-grey accent — replaces orange */
+  --de-info-accent-dark:   #343a40;
+  --de-info-highlight:     #212529;   /* dark for borders/save button saved state */
+  --de-info-save-active:   #212529;
+  --de-info-text:          #212529;
+  --de-info-text-muted:    #6c757d;
+  --de-info-text-light:    #adb5bd;
+  --de-info-bg:            #f8f9fa;
+  --de-info-card-bg:       #ffffff;
+  --de-info-border:        #dee2e6;
+  --de-info-radius:        0.5rem;
+  --de-info-radius-sm:     0.3rem;
+  --de-info-shadow:        0 2px 8px rgba(0,0,0,0.08);
+  --de-info-shadow-hover:  0 6px 20px rgba(0,0,0,0.15);
+  --de-info-transition:    0.18s ease;
+  --de-info-font:          'Nunito Sans', 'Raleway', sans-serif;
+}
+
+body { font-family: var(--de-info-font); background: var(--de-info-bg); color: var(--de-info-text); }
+
+/* ── Hero — black/grey scheme ─────────────────────────────── */
+.info-hero { background: #212529; color: #fff; padding: 2rem 0 0; }
+.info-hero__inner { padding-bottom: 1.25rem; }
+.info-hero__title { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.35rem; color: #fff; }
+.info-hero__meta { font-size: 0.95rem; color: rgba(255,255,255,0.75); margin-bottom: 0; }
+.info-hero__meta i { margin-right: 0.3rem; }
+.info-hero__banner { width: 100%; max-height: 340px; overflow: hidden; }
+.info-hero__banner-img { width: 100%; height: 340px; object-fit: cover; display: block; }
+.info-hero__banner--no-img { height: 8px; background: #16191c; }
+
+/* ── Section headings ─────────────────────────────────────── */
+.info-section-heading--de {
+  font-size: 1.25rem; font-weight: 900; color: var(--de-info-text);
+  margin-bottom: 1rem; padding-bottom: 0.45rem;
+  border-bottom: 3px solid #212529; display: inline-block; letter-spacing: -0.3px;
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.info-body--de { padding: 2rem 0 4rem; }
+.de-top-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-bottom: 2.5rem; }
+
+/* ── Carousel ─────────────────────────────────────────────── */
+.info-carousel { border-radius: var(--de-info-radius); overflow: hidden; box-shadow: var(--de-info-shadow); background: #e9ecef; margin-bottom: 1rem; }
+.info-carousel__img { height: 360px; object-fit: cover; display: block; }
+.info-carousel__caption-badge {
+  background: rgba(0,0,0,0.6); color: #fff;
+  font-size: 0.78rem; font-weight: 700;
+  padding: 0.3rem 0.8rem; border-radius: 2rem; backdrop-filter: blur(4px);
+}
+
+/* ── Contact a Resident button ────────────────────────────── */
+.de-contact-resident { margin-top: 0.75rem; }
+.de-contact-btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: #212529; color: #fff;
+  border: 2px solid #212529; border-radius: var(--de-info-radius-sm);
+  padding: 0.65rem 1.3rem; font-family: var(--de-info-font);
+  font-size: 0.9rem; font-weight: 700; text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  width: 100%; justify-content: center;
+}
+.de-contact-btn:hover { background: var(--de-info-bg); color: #212529; text-decoration: none; }
+.de-contact-btn i { font-size: 1rem; }
+
+/* ── Details card — grey top border instead of orange ────── */
+.info-details-card--de {
+  background: var(--de-info-card-bg); border: 1px solid var(--de-info-border);
+  border-top: 4px solid #212529;   /* dark top-accent bar */
+  border-radius: var(--de-info-radius); box-shadow: var(--de-info-shadow);
+  padding: 1.5rem; height: 100%;
+}
+.info-details-card__header { margin-bottom: 1.25rem; }
+.info-details-card__name { font-size: 1.5rem; font-weight: 900; color: var(--de-info-primary); margin: 0; line-height: 1.2; }
+
+/* ── Details list ─────────────────────────────────────────── */
+.info-details-list { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.info-details-list__item { display: flex; flex-direction: column; gap: 0.2rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--de-info-border); }
+.info-details-list__item:last-child { border-bottom: none; padding-bottom: 0; }
+.info-details-list__label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: var(--de-info-text-muted); }
+.info-details-list__label i { color: #495057; margin-right: 0.3rem; }
+.info-details-list__value { font-size: 0.95rem; font-weight: 700; color: var(--de-info-text); }
+.info-details-list__value--price { font-size: 1.3rem; font-weight: 900; color: #212529; }
+.info-amenities-list { list-style: none; padding: 0; margin: 0.3rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.info-amenities-list li { background: #f0f0f0; color: #212529; border: 1px solid #dee2e6; border-radius: 2rem; padding: 0.2rem 0.7rem; font-size: 0.78rem; font-weight: 700; }
+
+/* ── Action buttons (TikTok, Video Tour, Post a Review) ───── */
+.info-social-links--de {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  padding-top: 1rem; border-top: 1px solid var(--de-info-border);
+  margin-bottom: 0.75rem;
+}
+.de-social-icon-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 0.9rem; border-radius: var(--de-info-radius-sm);
+  font-size: 0.8rem; font-weight: 800; text-decoration: none;
+  transition: opacity 0.18s, transform 0.15s;
+}
+.de-social-icon-btn:hover { opacity: 0.88; transform: translateY(-2px); text-decoration: none; }
+.de-social-icon-btn i { font-size: 1rem; }
+.de-social-icon-btn__label { font-size: 0.78rem; }
+.info-social-btn--tiktok.de-social-icon-btn  { background: #010101; color: #fff; }
+.info-social-btn--youtube.de-social-icon-btn { background: #ff0000; color: #fff; }
+.info-social-btn--review.de-social-icon-btn  { background: #212529; color: #fff; }
+
+/* ── Save button — grey/dark scheme + text label ─────────── */
+.info-save-btn--de {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: none; border: 2px solid var(--de-info-border);
+  border-radius: var(--de-info-radius-sm);
+  padding: 0.6rem 1.2rem; cursor: pointer;
+  color: var(--de-info-text-muted);
+  font-family: var(--de-info-font); font-size: 0.9rem; font-weight: 700;
+  transition: border-color 0.18s, color 0.18s, background 0.18s, transform 0.15s;
+  margin-top: 0.5rem;
+}
+.info-save-btn--de:hover { border-color: #212529; color: #212529; background: #f0f0f0; }
+.info-save-btn--de.is-saved,
+.info-save-btn--de:has(.info-save-btn__icon--saved) { border-color: #212529; color: #fff; background: #212529; }
+.info-save-btn--de.just-saved { animation: deSavePulse 0.35s ease; }
+@keyframes deSavePulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+
+/* ── Description ──────────────────────────────────────────── */
+.info-description--de { margin-bottom: 2.5rem; }
+.info-description__text { font-size: 1rem; line-height: 1.85; color: var(--de-info-text); max-width: 75ch; }
+
+/* ── Reviews ──────────────────────────────────────────────── */
+.info-reviews--de { margin-top: 1rem; }
+.info-reviews__wrapper { position: relative; }
+.info-reviews__track {
+  display: flex; gap: 1.25rem; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.75rem; scrollbar-width: thin; scrollbar-color: var(--de-info-border) transparent;
+}
+.info-review-card--de {
+  flex: 0 0 calc(33.333% - 0.85rem); min-width: 200px;
+  scroll-snap-align: start;
+  background: var(--de-info-card-bg); border: 1px solid var(--de-info-border);
+  border-top: 3px solid #212529;
+  border-radius: var(--de-info-radius); box-shadow: var(--de-info-shadow);
+  padding: 1.25rem; display: flex; flex-direction: column; gap: 0.65rem;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.info-review-card--de:hover { box-shadow: var(--de-info-shadow-hover); transform: translateY(-3px); }
+.info-review-card__avatar img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #e9ecef; }
+.info-review-card__name { font-size: 0.9rem; font-weight: 800; color: var(--de-info-text); margin: 0; }
+.info-review-card__stars i { font-size: 0.9rem; color: var(--de-info-text-light); }
+.info-review-card__star--filled { color: #febb02 !important; }
+.info-review-card__comment { font-size: 0.82rem; line-height: 1.6; color: var(--de-info-text-muted); margin: 0; }
+.info-reviews__controls { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem; }
+.info-reviews__arrow--de {
+  background: var(--de-info-card-bg); border: 1.5px solid var(--de-info-border);
+  border-radius: 50%; width: 2.5rem; height: 2.5rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--de-info-text-muted); font-size: 0.85rem;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.info-reviews__arrow--de:hover { background: #212529; border-color: #212529; color: #fff; }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .de-top-split { grid-template-columns: 1fr; }
+  .info-carousel__img { height: 260px; }
+}
+@media (max-width: 640px) {
+  .info-details-card__name { font-size: 1.2rem; }
+  .info-review-card--de { flex: 0 0 85%; }
+  .info-social-links--de { flex-direction: column; }
+  .de-social-icon-btn { justify-content: center; }
+}
