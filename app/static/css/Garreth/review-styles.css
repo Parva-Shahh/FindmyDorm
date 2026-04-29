@@ -1,8 +1,15 @@
 /**
- * FILE: review-styles.css
- * AUTHOR: Garreth (C24451694)
+ * File: review-styles.css
+ * Author: Garreth (C24451694)
+ * * Purpose: Styles for the review page to help different cultures.
+ * * Cultural Logic:
+ * - Germany (Karl): Needs a clear "checklist" (Hypothesis 1) to see progress.
+ * - China (Wei Chen): Needs "peer reviews" (Hypothesis 4) to see what others think.
  */
 
+/* --- German Checklist ---
+   Design Decision: Using 'flex' keeps the icons and text lined up,
+   even if the German words are long. */
 #germanChecklist li {
     font-size: 1.1rem;
     margin-bottom: 12px;
@@ -10,21 +17,28 @@
     align-items: center;
 }
 
-/* Override Bootstrap blue border on checklist card */
+/* --- Bootstrap Color Overrides ---
+   Design Decision: Bootstrap usually makes things blue. Because German users (Karl)
+   prefer a formal look, we force the colors to be black/dark.
+   We use !important to force our colors to show up.
+   Without it, the website's default blue would override our custom colors. */
 [data-lang="de"] .card.border-primary,
 [data-lang="de"] .card.shadow.border-primary {
     border-color: #212529 !important;
     border-width: 2px !important;
 }
 
-/* Override Bootstrap blue text on checklist heading */
 [data-lang="de"] .text-primary,
 [data-lang="de"] h5.text-primary,
 [data-lang="de"] .fw-bold.text-primary {
     color: #212529 !important;
 }
 
-/* Checklist success state — black not green */
+/* --- Completion Logic (Germany) ---
+   Hypothesis 1: Karl needs "Zero Ambiguity" (no confusion).
+   Design Decision: We keep finished items black instead of turning them green.
+   If they turned green, Karl might think the form was already sent.
+   Keeping them black keeps the interface serious and clear. */
 [data-lang="de"] .text-success,
 [data-lang="de"] #germanChecklist .text-success {
     color: #212529 !important;
@@ -34,7 +48,9 @@
     color: #212529 !important;
 }
 
-/* Button overrides */
+/* --- Button Colors ---
+   Design Decision: We change the button colors to match the theme of each culture.
+   Germany gets black; China gets energetic orange. */
 [data-lang="de"] .btn-primary {
     background-color: #212529 !important;
     border-color: #212529 !important;
@@ -47,7 +63,11 @@
     color: #ffffff !important;
 }
 
-/* Chinese other reviews panel avatar */
+/* --- Chinese Peer Reviews ---
+   Hypothesis 4: Wei Chen (Collectivist) trusts the community.
+   Design Decision: We show avatars and reviews from others at the top.
+   Seeing that other students have left reviews makes her feel more
+   comfortable leaving her own. */
 [data-lang="zh"] .zh-avatar.flex-shrink-0 {
     width: 40px;
     height: 40px;
@@ -62,7 +82,9 @@
     margin-right: 0;
 }
 
-/* ===== PROPERTY PREVIEW ===== */
+/* --- Property Review Card (General) ---
+   Design Decision: This box shows exactly which dorm the user is reviewing.
+   Showing this upfront prevents users from getting confused or leaving the page. */
 .property-preview {
     display: flex;
     align-items: center;
@@ -98,7 +120,9 @@
     margin-right: 4px;
 }
 
-/* German property preview */
+/* --- German Property Preview ---
+   Hypothesis 1: Karl needs "verified facts."
+   Design Decision: The border is dark and serious to match the formal theme. */
 [data-lang="de"] .property-preview {
     border-color: #212529;
 }
@@ -107,7 +131,10 @@
     color: #212529;
 }
 
-/* Chinese property preview */
+/* --- Chinese Property Preview ---
+   Hypothesis 3: Low UA users (Wei Chen) like bright, energetic designs.
+   Design Decision: We use a warm background and orange borders to
+   make the property look more inviting. */
 [data-lang="zh"] .property-preview {
     border-color: #ff6633;
     background: #fff8f5;
