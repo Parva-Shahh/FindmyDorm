@@ -1021,7 +1021,7 @@ msgid "Reasonable price, spacious rooms, highly recommended! Made so many friend
 msgstr "性价比超高，房间宽敞，强烈推荐！在这里交到了很多朋友。"
 
 msgid "Clean and tidy overall, friendly staff. The Ask a Resident feature was so helpful before I moved in."
-msgstr "整体干净整洁，工作人员友好。入住前使用"问问居民"功能真的很有帮助。"
+msgstr "整体干净整洁，工作人员友好。入住前使用 问问居民 功能真的很有帮助。"
 
 msgid "Internet speed could be improved, otherwise very satisfied. Great community atmosphere."
 msgstr "网速有待提升，其他方面非常满意。社区氛围很棒。"
