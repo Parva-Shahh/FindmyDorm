@@ -1,0 +1,71 @@
+/* Developed by: Alex(C24375301) */
+
+/* --- About & Profile Page: Chinese Reveal Logic (Cultural Adaptation) --- */
+/*
+   This section handles the 'Click to Reveal' interaction specifically designed for
+   the Chinese (ZH) layout to manage information density.
+*/
+
+.reveal-content {
+    /* Hidden state: Content starts with no height and zero visibility */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    /* Smooth transition for the reveal effect when the toggle is triggered */
+    transition: all 0.5s ease-in-out;
+}
+
+/*
+   The 'Checkbox Hack': When the hidden checkbox (.toggle-input) is checked,
+   we target the sibling (.reveal-content) to show it.
+*/
+.toggle-input:checked ~ .reveal-content {
+    /* Large max-height allows the content to expand naturally while still being animatable */
+    max-height: 800px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.reveal-btn {
+    /* Button-like appearance for the label associated with the hidden checkbox */
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #f8f9fa;
+    /* Dashed border implies an interactive 'unlockable' element */
+    border: 2px dashed #0d6efd;
+    color: #0d6efd;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    /* Smooth hover transition for better UX */
+    transition: all 0.3s ease;
+}
+
+.reveal-btn:hover {
+    /* Standard hover feedback for interactivity */
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Once the information is revealed, the button hides itself to clean up the UI */
+.toggle-input:checked ~ .reveal-btn {
+    display: none;
+}
+
+/* --- Profile Page: Saved Cards (Visual Feedback) --- */
+/*
+   These styles apply to the 'My Saved' section to provide
+   professional-grade interactive feedback.
+*/
+
+.favorite-card {
+    /* Ensures the lift and shadow effects animate smoothly over 0.3 seconds */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorite-card:hover {
+    /* Lift the card slightly to give a sense of depth (Floating effect) */
+    transform: translateY(-5px);
+    /* Enhances the shadow on hover to make the card 'pop' out of the layout */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
