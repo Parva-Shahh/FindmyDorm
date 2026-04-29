@@ -107,6 +107,12 @@ msgstr "Passwort eingegeben"
 msgid "Ready to sign in"
 msgstr "Bereit zum Anmelden"
 
+msgid "you@example.com"
+msgstr "du@beispiel.de"
+
+msgid "Enter your password"
+msgstr "Passwort eingeben"
+
 # ── Profile ───────────────────────────────────────────────────────────────────
 msgid "My Profile"
 msgstr "Mein Profil"
