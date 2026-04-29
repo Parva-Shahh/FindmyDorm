@@ -134,8 +134,16 @@
         <div class="listing-card">
           <div class="card-image">
             <span class="badge">{{ _(dorm.type) }}</span>
+            {% if lang == 'de' %}
+            <img src="{{ url_for('static', filename='assets/img/de-listings/de-dorm-' + loop.index|string + '.jpg') }}" alt="{{ dorm.name }}"
+                 onerror="this.src='{{ url_for('static', filename='assets/image1.jpg') }}'">
+            {% elif lang == 'zh' %}
+            <img src="{{ url_for('static', filename='assets/img/zh-listings/zh-dorm-' + loop.index|string + '.jpg') }}" alt="{{ dorm.name }}"
+                 onerror="this.src='{{ url_for('static', filename='assets/image1.jpg') }}'">
+            {% else %}
             <img src="{{ url_for('static', filename='assets/' + dorm.img) }}" alt="{{ dorm.name }}"
                  onerror="this.src='{{ url_for('static', filename='assets/image1.jpg') }}'">
+            {% endif %}
           </div>
           <div class="card-content">
             <h5>{{ dorm.name }}</h5>
