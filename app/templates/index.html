@@ -1,16 +1,36 @@
+{# Developed by: Parva Shah (D24125609) — Homepage / Landing Page #}
 {% extends "base.html" %}
 
+{# Load the homepage stylesheet — kept separate from base.html to avoid
+   affecting teammates' pages during integration #}
 {% block extra_css %}
     <link href="{{ url_for('static', filename='css/Parva/home-styles.css') }}" rel="stylesheet" />
 {% endblock %}
 
+
 {% block main %}
 
 {# ================================================================
-   GERMAN LAYOUT – Individualist / High Uncertainty Avoidance
+   LANGUAGE DISPATCH
+   Reads the language stored in the Flask session (set when the user
+   clicks EN / CN / DE in the navbar) and renders a completely
+   different layout for each. Only one layout is ever sent to the browser.
+
+   DE  → German  (High Uncertainty Avoidance / Individualist)
+   EN  → English (default, neutral/balanced)
+   ZH  → Chinese (Low Uncertainty Avoidance / Collectivist)
 ================================================================ #}
+
+
+{# ----------------------------------------------------------------
+   GERMAN LAYOUT
+   Design rationale: structured, explicit, linear. Gives Karl a clear
+   mental map of the booking journey at every step (Hypothesis 1).
+---------------------------------------------------------------- #}
 {% if session.get('language') == 'de' %}
 
+{# Progress bar — shows the 4-step booking journey at the top of the page.
+   The active step updates via JavaScript as the user scrolls. #}
 <div class="de-progress-bar">
     <div class="container">
         <ol class="de-steps" id="deSteps">
@@ -25,6 +45,8 @@
     </div>
 </div>
 
+{# Hero — solid black background, no images. Right side shows four explicit
+   trust guarantees rather than photos, targeting the Individualist/High UA user. #}
 <section class="hero-de">
     <div class="container py-5" style="position:relative;z-index:1;">
         <div class="row align-items-center g-5">
@@ -32,6 +54,8 @@
                 <div class="hero-badge"><i class="fa fa-shield-alt me-1"></i>{{ _('Verified Student Housing · Ireland') }}</div>
                 <h1 class="hero-title">{{ _('Find Your') }} <span class="accent">{{ _('Perfect Dorm') }}</span><br>{{ _('in Ireland') }}</h1>
                 <p class="hero-subtitle">{{ _('Compare verified student accommodations with exact specifications, transparent pricing and a clear booking process.') }}</p>
+
+                {# Search panel — university and room type dropdowns #}
                 <div class="search-panel">
                     <div class="row g-2 align-items-end">
                         <div class="col-md-4">
@@ -62,6 +86,8 @@
                         </div>
                     </div>
                 </div>
+
+                {# Quick stats row below the search bar #}
                 <div class="hero-stats">
                     <div class="hero-stat"><span class="stat-num">1,200+</span><span class="stat-label">{{ _('Listings') }}</span></div>
                     <div class="hero-stat"><span class="stat-num">4,800+</span><span class="stat-label">{{ _('Reviews') }}</span></div>
@@ -69,6 +95,9 @@
                     <div class="hero-stat"><span class="stat-num">100%</span><span class="stat-label">{{ _('Verified') }}</span></div>
                 </div>
             </div>
+
+            {# Trust panel — replaces hero image for German users.
+               Loops over four guarantee items: icon, title, subtitle. #}
             <div class="col-lg-5 d-none d-lg-block">
                 <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:2rem;">
                     <div style="font-family:'Raleway',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:2.5px;text-transform:uppercase;color:#e8c012;margin-bottom:1.2rem;">{{ _('Why Students Trust Us') }}</div>
@@ -84,7 +113,12 @@
     </div>
 </section>
 
-<!-- DE Universities: one per slide with real logo, rating, walk time -->
+{# ----------------------------------------------------------------
+   DE University carousel — one slide per university (Hypothesis 1).
+   Each tuple: id, name, city, listings, reviews, logo, stars,
+               rating_num, walk_min, avg_rent, description
+   Logos stored in: static/assets/img/de-homepage/
+---------------------------------------------------------------- #}
 <section class="home-section-alt">
     <div class="container">
         <div class="text-center mb-5">
@@ -94,103 +128,19 @@
         </div>
         <div class="de-uni-carousel-wrapper">
             <div class="de-uni-track" id="deUniTrack">
-                {#
-                  Tuple fields:
-                  id, name, city, listings, reviews, logo_file, rating_stars, rating_num, walk_min, avg_rent, description
-                #}
                 {% set de_unis = [
-                    (
-                        'ucd',
-                        'University College Dublin',
-                        'Belfield, Dublin 4',
-                        '142', '312',
-                        'ucd_logo.png',
-                        4, '4.1',
-                        '12',
-                        '€230',
-                        _("Ireland's largest university. Strong research culture, vibrant campus life and excellent transport links to the city centre.")
-                    ),
-                    (
-                        'dcu',
-                        'Dublin City University',
-                        'Glasnevin, Dublin 9',
-                        '98', '198',
-                        'dcu_logo.png',
-                        5, '4.7',
-                        '8',
-                        '€210',
-                        _('Consistently ranked among Ireland\'s top universities for graduate employment. Modern campus with purpose-built student accommodation on-site.')
-                    ),
-                    (
-                        'tud',
-                        'TU Dublin',
-                        'Grangegorman, Dublin 7',
-                        '87', '176',
-                        'tud_logo.png',
-                        5, '4.8',
-                        '6',
-                        '€195',
-                        _('Ireland\'s first technological university. Located in a landmark regeneration quarter in the heart of Dublin, minutes from the city centre.')
-                    ),
-                    (
-                        'tcd',
-                        'Trinity College Dublin',
-                        'College Green, Dublin 2',
-                        '115', '289',
-                        'trinity_logo.png',
-                        3, '3.6',
-                        '18',
-                        '€245',
-                        _('Founded in 1592, Trinity is Ireland\'s oldest and most prestigious university. Located in the city centre, accommodation nearby is in high demand.')
-                    ),
-                    (
-                        'mu',
-                        'Maynooth University',
-                        'Maynooth, Co. Kildare',
-                        '64', '134',
-                        'maynooth_logo.png',
-                        4, '4.3',
-                        '10',
-                        '€175',
-                        _('A welcoming university town campus 25 km west of Dublin. Known for its friendly community atmosphere and affordable accommodation options.')
-                    ),
-                    (
-                        'ucc',
-                        'University College Cork',
-                        'Cork City',
-                        '79', '154',
-                        'ucc_logo.png',
-                        4, '4.5',
-                        '9',
-                        '€195',
-                        _('One of Ireland\'s leading research universities, set on a stunning Victorian campus. Cork city offers a lively student scene and lower living costs.')
-                    ),
-                    (
-                        'ul',
-                        'University of Limerick',
-                        'Castletroy, Limerick',
-                        '71', '142',
-                        'ul_logo.png',
-                        3, '3.8',
-                        '14',
-                        '€175',
-                        _('A dynamic campus university on the banks of the River Shannon. Known for its co-operative education programme and strong industry links.')
-                    ),
-                    (
-                        'nuig',
-                        'University of Galway',
-                        'Galway City',
-                        '58', '116',
-                        'galway_logo.png',
-                        5, '4.6',
-                        '11',
-                        '€185',
-                        _('Located in the heart of one of Ireland\'s most vibrant cities. Renowned for its bilingual character, arts culture and thriving student community.')
-                    ),
+                    ('ucd','University College Dublin','Belfield, Dublin 4','142','312','ucd_logo.png',4,'4.1','12','€230',_("Ireland's largest university. Strong research culture, vibrant campus life and excellent transport links to the city centre.")),
+                    ('dcu','Dublin City University','Glasnevin, Dublin 9','98','198','dcu_logo.png',5,'4.7','8','€210',_('Consistently ranked among Ireland\'s top universities for graduate employment. Modern campus with purpose-built student accommodation on-site.')),
+                    ('tud','TU Dublin','Grangegorman, Dublin 7','87','176','tud_logo.png',5,'4.8','6','€195',_('Ireland\'s first technological university. Located in a landmark regeneration quarter in the heart of Dublin, minutes from the city centre.')),
+                    ('tcd','Trinity College Dublin','College Green, Dublin 2','115','289','trinity_logo.png',3,'3.6','18','€245',_('Founded in 1592, Trinity is Ireland\'s oldest and most prestigious university. Located in the city centre, accommodation nearby is in high demand.')),
+                    ('mu','Maynooth University','Maynooth, Co. Kildare','64','134','maynooth_logo.png',4,'4.3','10','€175',_('A welcoming university town campus 25 km west of Dublin. Known for its friendly community atmosphere and affordable accommodation options.')),
+                    ('ucc','University College Cork','Cork City','79','154','ucc_logo.png',4,'4.5','9','€195',_('One of Ireland\'s leading research universities, set on a stunning Victorian campus. Cork city offers a lively student scene and lower living costs.')),
+                    ('ul','University of Limerick','Castletroy, Limerick','71','142','ul_logo.png',3,'3.8','14','€175',_('A dynamic campus university on the banks of the River Shannon. Known for its co-operative education programme and strong industry links.')),
+                    ('nuig','University of Galway','Galway City','58','116','galway_logo.png',5,'4.6','11','€185',_('Located in the heart of one of Ireland\'s most vibrant cities. Renowned for its bilingual character, arts culture and thriving student community.')),
                 ] %}
                 {% for id, name, city, listings, reviews, logo_file, stars, rating_num, walk_min, avg_rent, desc in de_unis %}
                 <div class="uni-card-de">
-                    <!-- Logo -->
+                    {# University logo — falls back to abbreviated text if image missing #}
                     <div class="uni-logo-box">
                         <img src="{{ url_for('static', filename='assets/img/de-homepage/' + logo_file) }}"
                              alt="{{ name }} logo"
@@ -198,15 +148,15 @@
                         <div class="uni-logo-fallback" style="display:none;">{{ id|upper }}</div>
                     </div>
 
-                    <!-- Info -->
                     <div class="de-uni-info">
                         <div class="de-uni-name">{{ name }}</div>
                         <div class="de-uni-city"><i class="fa fa-map-marker-alt me-1"></i>{{ city }}</div>
 
-                        <!-- Star rating + walk time row -->
+                        {# Meta row: satisfaction stars, walk time, average rent #}
                         <div class="de-uni-meta">
                             <div class="de-uni-meta-item">
                                 <div class="de-uni-stars">
+                                    {# Render filled/faded stars based on the rating integer #}
                                     {% for i in range(5) %}
                                         {% if i < stars %}
                                             <i class="fa fa-star"></i>
@@ -229,27 +179,14 @@
                             </div>
                         </div>
 
-                        <!-- Description -->
                         <p class="de-uni-desc">{{ desc }}</p>
 
-                        <!-- Stats row -->
+                        {# Summary stats strip: listings, reviews, walk, rent #}
                         <div class="de-uni-stats">
-                            <div class="uni-stat-box">
-                                <span class="us-num">{{ listings }}</span>
-                                <span class="us-lbl">{{ _('Listings') }}</span>
-                            </div>
-                            <div class="uni-stat-box">
-                                <span class="us-num">{{ reviews }}</span>
-                                <span class="us-lbl">{{ _('Reviews') }}</span>
-                            </div>
-                            <div class="uni-stat-box">
-                                <span class="us-num">{{ walk_min }}m</span>
-                                <span class="us-lbl">{{ _('Avg. Walk') }}</span>
-                            </div>
-                            <div class="uni-stat-box">
-                                <span class="us-num">{{ avg_rent }}</span>
-                                <span class="us-lbl">{{ _('Avg. Rent') }}</span>
-                            </div>
+                            <div class="uni-stat-box"><span class="us-num">{{ listings }}</span><span class="us-lbl">{{ _('Listings') }}</span></div>
+                            <div class="uni-stat-box"><span class="us-num">{{ reviews }}</span><span class="us-lbl">{{ _('Reviews') }}</span></div>
+                            <div class="uni-stat-box"><span class="us-num">{{ walk_min }}m</span><span class="us-lbl">{{ _('Avg. Walk') }}</span></div>
+                            <div class="uni-stat-box"><span class="us-num">{{ avg_rent }}</span><span class="us-lbl">{{ _('Avg. Rent') }}</span></div>
                         </div>
 
                         <a href="{{ url_for('listings') }}?uni={{ id }}" class="de-uni-btn">{{ _('View Listings') }} →</a>
@@ -258,6 +195,7 @@
                 {% endfor %}
             </div>
         </div>
+        {# Prev / Next controls + "1 / 8" counter, updated by JavaScript #}
         <div class="de-uni-nav">
             <div class="nav-left">
                 <button class="de-uni-nav-btn" id="deUniPrev" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
@@ -270,7 +208,13 @@
     </div>
 </section>
 
-<!-- DE Accommodations: one at a time slider -->
+{# ----------------------------------------------------------------
+   DE Accommodation slider — one listing at a time with a full spec
+   table (room size, distance, contract, bills, price) so High UA
+   users can compare precisely without ambiguity (Hypothesis 2).
+   Tuple: name, location, rating, reviews, size(m²), distance(km),
+          contract(weeks), price(€), icon, image, tags[]
+---------------------------------------------------------------- #}
 <section class="home-section">
     <div class="container">
         <div class="text-center mb-5">
@@ -298,6 +242,7 @@
                         <div class="de-accom-name">{{ name }}</div>
                         <div class="de-accom-loc"><i class="fa fa-map-marker-alt me-1"></i>{{ loc }}</div>
                         <div class="de-accom-stars">★★★★★ <span class="rating-val">{{ rating }}</span> <small class="text-muted">({{ reviews }} {{ _('Reviews') }})</small></div>
+                        {# Explicit spec table — key feature for High UA users #}
                         <div class="de-specs">
                             <div class="de-spec-row"><span>{{ _('Room Size') }}</span><strong>{{ size }} m²</strong></div>
                             <div class="de-spec-row"><span>{{ _('Distance to University') }}</span><strong>{{ dist }} km</strong></div>
@@ -312,6 +257,7 @@
                 {% endfor %}
             </div>
         </div>
+        {# Prev / Next + "1 / 6" counter, controlled by JavaScript #}
         <div class="de-accom-nav">
             <div class="nav-left">
                 <button class="de-nav-btn" id="deAccomPrev" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
@@ -343,7 +289,7 @@
     </div>
 </section>
 
-<!-- DE Reviews -->
+<!-- DE Reviews — German-language quotes from German student personas -->
 <section class="home-section">
     <div class="container">
         <div class="text-center mb-5">
@@ -359,6 +305,7 @@
     </div>
 </section>
 
+<!-- DE CTA banner — black background, matching the German colour scheme -->
 <section class="cta-banner">
     <div class="container">
         <div class="cta-banner-title">{{ _('Start Your Structured Search') }}</div>
@@ -369,11 +316,12 @@
 </section>
 
 
-{# ================================================================
-   ENGLISH LAYOUT – Balanced, aspirational
-================================================================ #}
+{# ----------------------------------------------------------------
+   ENGLISH LAYOUT — default, neutral, balanced
+---------------------------------------------------------------- #}
 {% elif session.get('language') != 'zh' %}
 
+{# Hero — solid blue background with a photo and floating review card #}
 <section class="hero-en">
     <div class="container py-5" style="position:relative;z-index:1;">
         <div class="row align-items-center g-5">
@@ -418,6 +366,7 @@
                     <div class="hero-stat"><span class="stat-num">15+</span><span class="stat-label">{{ _('Providers') }}</span></div>
                 </div>
             </div>
+            {# Hero photo + floating review card — hidden on smaller screens #}
             <div class="col-lg-6 d-none d-lg-block" style="position:relative;">
                 <img src="{{ url_for('static', filename='assets/image1.jpg') }}" alt="Student accommodation" class="img-fluid rounded shadow-lg" style="border-radius:18px;max-height:420px;object-fit:cover;width:100%;" onerror="this.style.display='none'">
                 <div class="floating-card">
@@ -430,7 +379,11 @@
     </div>
 </section>
 
-<!-- EN Universities: large cards, scroll to see more -->
+{# ----------------------------------------------------------------
+   EN University carousel — large cards (~2 visible), campus photos.
+   en_imgs maps to images in static/assets/img/cn-homepage/
+   Clicking a card links to listings filtered by university ID.
+---------------------------------------------------------------- #}
 <section class="home-section-alt">
     <div class="container">
         <div class="text-center mb-5">
@@ -460,7 +413,11 @@
     </div>
 </section>
 
-<!-- EN Featured Accommodations -->
+{# ----------------------------------------------------------------
+   EN Accommodation cards — standard grid, tags + rating shown.
+   No spec table here (that is a German-only feature).
+   Tuple: name, location, rating, reviews, price, icon, image, tags[]
+---------------------------------------------------------------- #}
 <section class="home-section">
     <div class="container">
         <div class="text-center mb-5">
@@ -518,7 +475,7 @@
     </div>
 </section>
 
-<!-- EN Reviews -->
+<!-- EN Reviews — English student quotes -->
 <section class="home-section">
     <div class="container">
         <div class="text-center mb-5">
@@ -534,6 +491,7 @@
     </div>
 </section>
 
+<!-- EN CTA banner — blue background -->
 <section class="cta-banner">
     <div class="container">
         <div class="cta-banner-title">{{ _('Ready to Find Your Perfect Dorm?') }}</div>
@@ -544,15 +502,15 @@
 </section>
 
 
-{# ================================================================
-   CHINESE LAYOUT – Collectivist / Low Uncertainty Avoidance
-================================================================ #}
+{# ----------------------------------------------------------------
+   CHINESE LAYOUT
+   Design rationale: vibrant, social, exploratory. Prioritises peer
+   validation and community context for Wei Chen (Hypotheses 3–5).
+---------------------------------------------------------------- #}
 {% else %}
 
-<!-- ZH: entire page sits on the orange background -->
-
-
-<!-- Ticker -->
+{# Social proof ticker — scrolling bar of real-time community activity.
+   Targets the Collectivist need for peer validation (Hypothesis 4/5). #}
 <div class="zh-ticker">
     <div class="container">
         <div class="zh-ticker-inner">
@@ -566,7 +524,8 @@
     </div>
 </div>
 
-<!-- ZH Hero -->
+{# Hero — orange background. Includes Ask a Resident bar and mosaic grid
+   instead of the German trust panel, encouraging exploration (Hypothesis 3). #}
 <section class="hero-zh">
     <div class="container py-5" style="position:relative;z-index:1;">
         <div class="row align-items-center g-5">
@@ -574,10 +533,13 @@
                 <div class="hero-badge"><i class="fa fa-users me-1"></i>{{ _("Ireland's Most Social Student Housing Platform") }}</div>
                 <h1 class="hero-title">{{ _('Find Your') }} <span class="accent">{{ _('Community') }}</span><br>{{ _('in Ireland') }}</h1>
                 <p class="hero-subtitle">{{ _('Discover student accommodation loved by thousands. Read real peer reviews, explore communities, and connect with residents before you book.') }}</p>
+
+                {# Ask a Resident bar — prominent CTA linking to the messaging/profile page (Hypothesis 5) #}
                 <a href="{{ url_for('profile') }}" class="zh-ask-bar">
                     <div><div class="ask-title">💬 {{ _('Ask a Resident') }}</div><div class="ask-sub">{{ _('Chat live with current residents before you decide') }}</div></div>
                     <div class="ask-arrow">›</div>
                 </a>
+
                 <div class="search-panel">
                     <div class="row g-2 align-items-end">
                         <div class="col-md-4">
@@ -614,6 +576,9 @@
                     <div class="hero-stat"><span class="stat-num">10,000+</span><span class="stat-label">{{ _('10,000+ students!') }}</span></div>
                 </div>
             </div>
+
+            {# Mosaic grid — 5 lifestyle tiles replacing the German spec panel.
+               Encourages exploration rather than linear reading (Hypothesis 3). #}
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="zh-mosaic-grid">
                     <div class="mosaic-cell featured">
@@ -632,7 +597,11 @@
     </div>
 </section>
 
-<!-- ZH Universities: campus photos -->
+{# ----------------------------------------------------------------
+   ZH University carousel — campus life photos instead of logos.
+   Makes the choice feel social rather than administrative.
+   Images stored in: static/assets/img/cn-homepage/
+---------------------------------------------------------------- #}
 <section class="home-section" style="padding-top:56px;padding-bottom:56px;">
     <div class="container">
         <div class="text-center mb-5">
@@ -662,7 +631,11 @@
     </div>
 </section>
 
-<!-- ZH Featured Accommodations -->
+{# ----------------------------------------------------------------
+   ZH Accommodation cards — social proof snippet added below rating.
+   "X+ students already living here" targets Collectivist decision-
+   making: Wei Chen trusts peer behaviour over individual specs.
+---------------------------------------------------------------- #}
 <section class="home-section" style="padding-top:0;padding-bottom:56px;">
     <div class="container">
         <div class="text-center mb-5">
@@ -690,6 +663,7 @@
                         <div class="accom-name">{{ name }}</div>
                         <div class="accom-loc"><i class="fa fa-map-marker-alt me-1"></i>{{ loc }}</div>
                         <div class="accom-stars">★★★★★ <span class="rating-val">{{ rating }}</span> <small class="text-muted">({{ rev }} {{ _('Reviews') }})</small></div>
+                        {# Social proof snippet — divides review count by 3 as a rough "residents" estimate #}
                         <div style="background:#ffe8e4;border-radius:8px;padding:7px 12px;margin:8px 0;font-size:0.78rem;color:#c0160a;">
                             👥 {{ _('Join') }} {{ (rev|int // 3) }}+ {{ _('students already living here') }}
                         </div>
@@ -707,7 +681,7 @@
     </div>
 </section>
 
-<!-- ZH How It Works -->
+<!-- ZH How It Works — framed as a community journey, not a task list -->
 <section class="home-section" style="padding-top:0;padding-bottom:56px;">
     <div class="container">
         <div class="text-center mb-5">
@@ -723,7 +697,7 @@
     </div>
 </section>
 
-<!-- ZH Reviews -->
+{# ZH Reviews — avatar + quote cards with Chinese student names (Hypothesis 4) #}
 <section class="home-section" style="padding-top:0;padding-bottom:56px;">
     <div class="container">
         <div class="text-center mb-5">
@@ -756,6 +730,7 @@
     </div>
 </section>
 
+<!-- ZH CTA — orange gradient, community-focused messaging -->
 <section class="cta-banner">
     <div class="container">
         <div class="cta-banner-title">{{ _('Join 10,000+ Students Who Found Their Home') }}</div>
@@ -766,38 +741,47 @@
 </section>
 
 
-{% endif %}
+{% endif %}{# end language dispatch #}
 
 {% endblock %}
 
 
 {% block extra_js %}
 <script>
-/* =====================================================
-   EN + ZH: Standard carousel (scrolls by one card)
-===================================================== */
+/* ─────────────────────────────────────────────────────────────
+   EN + ZH: Horizontal university carousel
+   Slides the card track left/right by one card width.
+   Touch/swipe supported for mobile users.
+───────────────────────────────────────────────────────────── */
 (function () {
     var track = document.getElementById('uniTrack');
     var prev  = document.getElementById('uniPrev');
     var next  = document.getElementById('uniNext');
-    if (!track) return;
+    if (!track) return;  /* exits silently if DE layout is active */
 
     var pos = 0;
+
+    /* card width + gap so each click moves by exactly one card */
     function cardW() {
         var c = track.querySelector('.uni-card-en, .uni-card-zh');
         if (!c) return 240;
-        return c.offsetWidth + 19; /* card + gap */
+        return c.offsetWidth + 19;
     }
+
+    /* prevent scrolling past the last card */
     function maxPos() {
         return Math.max(0, track.scrollWidth - track.parentElement.offsetWidth + 36);
     }
+
     function slide(dir) {
         pos = Math.max(0, Math.min(pos + dir * cardW(), maxPos()));
         track.style.transform = 'translateX(-' + pos + 'px)';
     }
+
     if (prev) prev.addEventListener('click', function () { slide(-1); });
     if (next) next.addEventListener('click', function () { slide(1); });
 
+    /* swipe support */
     var startX = 0;
     track.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend',   function (e) {
@@ -806,9 +790,11 @@
     });
 })();
 
-/* =====================================================
-   DE: University slider (1 card at a time)
-===================================================== */
+
+/* ─────────────────────────────────────────────────────────────
+   DE: University slider — one card at a time
+   Moves by 100% of container width and updates the "x / 8" counter.
+───────────────────────────────────────────────────────────── */
 (function () {
     var track   = document.getElementById('deUniTrack');
     var prevBtn = document.getElementById('deUniPrev');
@@ -821,17 +807,21 @@
     var idx    = 0;
 
     function go(newIdx) {
+        /* wraps around using modulo so navigation is circular */
         idx = (newIdx + total) % total;
         track.style.transform = 'translateX(-' + (idx * 100) + '%)';
         if (counter) counter.textContent = (idx + 1) + ' / ' + total;
     }
+
     if (prevBtn) prevBtn.addEventListener('click', function () { go(idx - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function () { go(idx + 1); });
 })();
 
-/* =====================================================
-   DE: Accommodation slider (1 card at a time)
-===================================================== */
+
+/* ─────────────────────────────────────────────────────────────
+   DE: Accommodation slider — one listing at a time
+   Same pattern as the university slider above.
+───────────────────────────────────────────────────────────── */
 (function () {
     var track   = document.getElementById('deAccomTrack');
     var prevBtn = document.getElementById('deAccomPrev');
@@ -848,16 +838,21 @@
         track.style.transform = 'translateX(-' + (idx * 100) + '%)';
         if (counter) counter.textContent = (idx + 1) + ' / ' + total;
     }
+
     if (prevBtn) prevBtn.addEventListener('click', function () { go(idx - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function () { go(idx + 1); });
 })();
 
-/* =====================================================
-   DE: Progress bar – highlight step on scroll
-===================================================== */
+
+/* ─────────────────────────────────────────────────────────────
+   DE: Progress bar — highlight step based on scroll position.
+   Calculates how far down the page the user has scrolled as a
+   percentage, then activates the matching step (Hypothesis 1).
+───────────────────────────────────────────────────────────── */
 (function () {
     var steps = document.querySelectorAll('#deSteps li');
     if (!steps.length) return;
+
     window.addEventListener('scroll', function () {
         var ratio = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
         var idx   = Math.min(Math.floor(ratio * steps.length), steps.length - 1);

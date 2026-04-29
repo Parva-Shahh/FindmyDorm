@@ -1,16 +1,27 @@
 /**
- * FILE: home-styles.css
- * AUTHOR: Parva (D24125609)
- * Homepage / Index page styles
- * Three cultural layouts: EN (default), ZH (Chinese/Collectivist), DE (German/High-UA)
+ * FILE:   home-styles.css
+ * AUTHOR: Parva Shah (D24125609)
+ * PAGE:   Homepage / Landing Page (index.html)
+ *
+ * Three culturally distinct layouts in one stylesheet:
+ *   EN — solid blue, neutral and balanced
+ *   ZH — solid orange, vibrant and social (Collectivist / Low UA)
+ *   DE — solid black, structured and explicit (Individualist / High UA)
+ *
+ * Language-specific overrides use the [data-lang] attribute selector.
+ * base.html sets data-lang on the <html> tag from session['language'].
  */
 
+
 /* =============================================
-   SHARED HELPERS
+   SHARED SECTION WRAPPERS
+   .home-section-alt adds a light grey background
+   to create visual separation between sections.
    ============================================= */
 .home-section     { padding: 72px 0; }
 .home-section-alt { padding: 72px 0; background-color: #f8f9fa; }
 
+/* Small uppercase label above section headings */
 .eyebrow {
     font-size: 0.72rem;
     font-weight: 700;
@@ -19,6 +30,7 @@
     color: #0d6efd;
     margin-bottom: 0.4rem;
 }
+/* clamp() scales font size fluidly between a min and max */
 .section-heading-main {
     font-family: 'Raleway', sans-serif;
     font-weight: 900;
@@ -32,18 +44,20 @@
     margin-bottom: 0;
 }
 
+
 /* =============================================
-   HERO – ENGLISH  (solid blue)
+   HERO – ENGLISH  (solid blue background)
    ============================================= */
 .hero-en {
     background: #0d6efd;
-    min-height: 82vh;
+    min-height: 82vh;   /* fills most of the viewport height */
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
 }
 
+/* Small pill badge at the top of the hero text */
 .hero-badge {
     display: inline-block;
     background: rgba(255,255,255,0.15);
@@ -65,6 +79,7 @@
     line-height: 1.15;
     margin-bottom: 1.1rem;
 }
+/* The highlighted word in the title e.g. "Perfect Dorm" */
 .hero-title .accent { color: #ffffff; text-decoration: underline; text-underline-offset: 6px; }
 .hero-subtitle {
     font-family: 'Lora', serif;
@@ -74,7 +89,7 @@
     margin-bottom: 2rem;
 }
 
-/* Search bar */
+/* Search panel — sits inside the hero on all three layouts */
 .search-panel {
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.25);
@@ -104,8 +119,10 @@
     color: #fff;
     box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
 }
+/* Dropdown options need dark text since they render on a white background */
 .search-panel .form-select option { color: #212529; background: #fff; }
 
+/* EN search button — white on blue */
 .btn-search-en {
     background: #ffffff;
     color: #0d6efd;
@@ -122,7 +139,7 @@
 }
 .btn-search-en:hover { background: #e9f0ff; color: #0d6efd; text-decoration: none; }
 
-/* Stats row */
+/* Quick stats row below the search bar */
 .hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
 .hero-stat .stat-num {
     font-family: 'Raleway', sans-serif;
@@ -138,7 +155,7 @@
     letter-spacing: 1px;
 }
 
-/* Floating review card */
+/* Floating review quote card overlaid on the EN hero photo */
 .floating-card {
     position: absolute;
     bottom: 24px;
@@ -154,8 +171,11 @@
 .floating-card .fc-name  { font-weight: 700; font-size: 0.83rem; color: #212529; margin: 3px 0 2px; }
 .floating-card .fc-text  { font-size: 0.76rem; color: #6c757d; }
 
+
 /* =============================================
    HERO – CHINESE  (solid orange)
+   Overrides the shared .hero-badge / .hero-title
+   classes defined above for the English layout.
    ============================================= */
 .hero-zh {
     background: #ff6633;
@@ -166,6 +186,7 @@
     overflow: hidden;
 }
 .hero-zh .hero-title { color: #fff; }
+/* Yellow accent word stands out against the orange background */
 .hero-zh .hero-title .accent { color: #fff200; text-decoration: none; }
 .hero-zh .hero-subtitle { color: rgba(255,255,255,0.90); font-family: 'Raleway', sans-serif; }
 .hero-zh .hero-badge {
@@ -180,6 +201,7 @@
     border-color: rgba(255,255,255,0.30);
 }
 
+/* ZH search button — yellow on orange */
 .btn-search-zh {
     background: #fff200;
     color: #c0160a;
@@ -196,7 +218,8 @@
 }
 .btn-search-zh:hover { background: #ffe600; color: #c0160a; text-decoration: none; }
 
-/* ZH Social ticker */
+/* Social proof ticker — scrolling banner of real-time community activity.
+   overflow: hidden + scrollbar-width: none hides the scrollbar on all browsers. */
 .zh-ticker {
     background: #e8230a;
     border-bottom: 2px solid rgba(255,255,255,0.25);
@@ -213,7 +236,7 @@
 }
 .zh-ticker-inner::-webkit-scrollbar { display: none; }
 .zh-ticker-badge {
-    white-space: nowrap;
+    white-space: nowrap;    /* prevents badge text wrapping onto two lines */
     background: rgba(255,255,255,0.25);
     color: #fff;
     font-size: 0.75rem;
@@ -231,7 +254,7 @@
     flex-shrink: 0;
 }
 
-/* ZH Ask-a-Resident bar */
+/* Ask a Resident bar — prominent CTA in the Chinese hero (Hypothesis 5) */
 .zh-ask-bar {
     background: rgba(0,0,0,0.18);
     border: 1px solid rgba(255,255,255,0.25);
@@ -251,7 +274,8 @@
 .zh-ask-bar .ask-sub   { font-size: 0.82rem; opacity: 0.9; }
 .zh-ask-bar .ask-arrow { font-size: 1.5rem; }
 
-/* ZH Mosaic grid */
+/* Mosaic grid — 5 lifestyle tiles in the Chinese hero.
+   The "featured" cell spans two rows using grid-row: span 2. */
 .zh-mosaic-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -275,7 +299,7 @@
 }
 .mosaic-cell:hover { background: rgba(255,255,255,0.25); }
 .mosaic-cell.featured {
-    grid-row: span 2;
+    grid-row: span 2;   /* this tile is twice as tall as the others */
     background: rgba(0,0,0,0.20);
     border-color: rgba(255,255,255,0.30);
 }
@@ -284,8 +308,11 @@
 .mosaic-sublabel { font-size: 0.75rem; opacity: 0.85; margin-top: 3px; }
 .mosaic-cell.featured .mosaic-label { font-size: 1.15rem; }
 
+
 /* =============================================
    HERO – GERMAN  (solid black)
+   Intentionally stark — authority and precision
+   over visual warmth (High UA design rationale).
    ============================================= */
 .hero-de {
     background: #111111;
@@ -299,10 +326,11 @@
     background: rgba(255,255,255,0.08);
     border-color: rgba(255,255,255,0.18);
     color: #adb5bd;
-    border-radius: 4px;
+    border-radius: 4px;    /* square corners — more formal than the EN pill */
     letter-spacing: 3px;
 }
 .hero-de .hero-title { color: #fff; letter-spacing: -0.5px; }
+/* Gold accent — only colour on the black hero, draws the eye to the key word */
 .hero-de .hero-title .accent { color: #e8c012; text-decoration: none; }
 .hero-de .hero-subtitle { color: rgba(255,255,255,0.60); font-family: 'Raleway', sans-serif; font-size: 1rem; }
 .hero-de .hero-stat .stat-num   { color: #e8c012; }
@@ -313,6 +341,7 @@
     border-radius: 4px;
 }
 
+/* DE search button — gold on black */
 .btn-search-de {
     background: #e8c012;
     color: #111;
@@ -330,7 +359,8 @@
 }
 .btn-search-de:hover { background: #d4ae0f; color: #111; text-decoration: none; }
 
-/* DE Progress Steps bar */
+/* Progress bar — shows the 4-step booking journey (Hypothesis 1).
+   Gold bottom border anchors it visually to the black page. */
 .de-progress-bar {
     background: #1a1a1a;
     border-bottom: 3px solid #e8c012;
@@ -349,14 +379,15 @@
     font-family: 'Raleway', sans-serif;
     font-size: 0.77rem;
     font-weight: 600;
-    color: #6c757d;
+    color: #6c757d;       /* inactive steps are grey */
     letter-spacing: 0.4px;
 }
-.de-steps li.active { color: #e8c012; }
+.de-steps li.active { color: #e8c012; }   /* active step turns gold */
+/* Numbered circle beside each step label */
 .de-steps .step-circle {
     width: 22px; height: 22px;
     border-radius: 50%;
-    border: 2px solid currentColor;
+    border: 2px solid currentColor;   /* inherits the li colour (grey or gold) */
     display: flex; align-items: center; justify-content: center;
     font-size: 0.68rem;
     margin-right: 6px;
@@ -369,18 +400,22 @@
 }
 .de-steps .step-sep { margin: 0 14px; color: #444; font-size: 0.9rem; }
 
+
 /* =============================================
    UNIVERSITY CAROUSEL – ENGLISH
-   Larger cards, fewer visible at once (scroll more)
+   Large cards (~2 visible at once). Users scroll
+   to discover the rest — balanced exploration.
    ============================================= */
+/* overflow: hidden clips cards that are outside the visible area */
 .carousel-outer { position: relative; overflow: hidden; }
 .uni-track {
     display: flex;
     gap: 1.2rem;
+    /* JavaScript moves this track left/right using translateX */
     transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 
-/* EN: big cards, only ~2 visible at once */
+/* flex: 0 0 340px means: don't grow, don't shrink, always 340px wide */
 .uni-card-en {
     flex: 0 0 340px;
     background: #fff;
@@ -401,7 +436,7 @@
 .uni-card-en .uni-card-thumb {
     height: 180px;
     overflow: hidden;
-    background: #dce8ff;
+    background: #dce8ff;   /* fallback colour if image fails to load */
 }
 .uni-card-en .uni-card-thumb img {
     width: 100%; height: 100%; object-fit: cover;
@@ -410,6 +445,7 @@
 .uni-card-en .uni-card-body { padding: 16px 18px; }
 .uni-card-en .uni-card-name { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 1rem; color: #212529; margin-bottom: 4px; }
 .uni-card-en .uni-card-city { font-size: 0.78rem; color: #6c757d; margin-bottom: 8px; }
+/* Small pill showing the number of listings near that university */
 .uni-card-en .uni-card-pill {
     display: inline-block;
     background: #e9f0ff; color: #0d6efd;
@@ -417,14 +453,16 @@
     padding: 3px 10px; border-radius: 50px;
 }
 
+
 /* =============================================
    UNIVERSITY CAROUSEL – CHINESE
-   Campus photos, medium cards
+   Smaller cards with an orange accent border.
+   Campus photos replace logos to feel social.
    ============================================= */
 .uni-card-zh {
     flex: 0 0 220px;
     background: #fff;
-    border: 2px solid #ffe0d6;
+    border: 2px solid #ffe0d6;    /* subtle orange border at rest */
     border-radius: 14px;
     overflow: hidden;
     text-decoration: none;
@@ -434,7 +472,7 @@
     box-shadow: 0 3px 14px rgba(0,0,0,0.07);
 }
 .uni-card-zh:hover {
-    border-color: #e8230a;
+    border-color: #e8230a;        /* border deepens to red on hover */
     transform: translateY(-4px);
     box-shadow: 0 10px 30px rgba(232,35,10,0.12);
     color: #212529;
@@ -453,27 +491,30 @@
 .uni-card-zh .uni-card-city { font-size: 0.73rem; color: #6c757d; margin-bottom: 7px; }
 .uni-card-zh .uni-card-pill {
     display: inline-block;
-    background: #ffe8e4; color: #c0160a;
+    background: #ffe8e4; color: #c0160a;   /* orange-tinted pill for ZH */
     font-size: 0.68rem; font-weight: 700;
     padding: 2px 9px; border-radius: 50px;
 }
 
+
 /* =============================================
    UNIVERSITY CAROUSEL – GERMAN
-   One card visible at a time, full-width, with logo
+   One full-width card at a time. JavaScript
+   moves the track by 100% per click.
    ============================================= */
 .de-uni-carousel-wrapper {
     position: relative;
-    overflow: hidden;
+    overflow: hidden;   /* hides the non-active slides */
 }
 .de-uni-track {
     display: flex;
     transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
 }
+/* flex: 0 0 100% means each slide fills the full wrapper width */
 .uni-card-de {
     flex: 0 0 100%;
     background: #fff;
-    border: 2px solid #e8c012;
+    border: 2px solid #e8c012;    /* gold border matches the German colour scheme */
     border-radius: 6px;
     display: flex;
     align-items: flex-start;
@@ -483,6 +524,7 @@
     color: inherit;
 }
 .uni-card-de:hover { color: inherit; text-decoration: none; }
+/* Square box for the university logo */
 .uni-logo-box {
     width: 120px;
     height: 120px;
@@ -496,6 +538,7 @@
     overflow: hidden;
 }
 .uni-logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+/* Abbreviation text shown if the logo image fails to load */
 .uni-logo-box .uni-logo-fallback {
     font-family: 'Raleway', sans-serif;
     font-weight: 900;
@@ -533,7 +576,7 @@
 }
 .de-uni-btn:hover { background: #d4ae0f; color: #111; text-decoration: none; }
 
-/* DE uni card – star rating, walk time, description */
+/* Meta row: satisfaction stars | walk time | avg rent */
 .de-uni-meta {
     display: flex;
     align-items: center;
@@ -559,7 +602,7 @@
     max-width: 540px;
 }
 
-/* DE carousel nav */
+/* Prev / Next buttons and "x / 8" counter below the DE university carousel */
 .de-uni-nav {
     display: flex;
     align-items: center;
@@ -588,7 +631,7 @@
     text-align: center;
 }
 
-/* Shared carousel nav buttons (EN + ZH) */
+/* Shared circular prev/next buttons used by the EN and ZH carousels */
 .car-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 40px; height: 40px; border-radius: 50%;
@@ -601,11 +644,15 @@
 .car-btn:hover { background: #0d6efd; border-color: #0d6efd; color: #fff; }
 .car-btn.prev { left: -18px; }
 .car-btn.next { right: -18px; }
+/* ZH override — orange accent instead of blue */
 [data-lang="zh"] .car-btn { background: #fff; border-color: #ffe0d6; color: #e8230a; }
 [data-lang="zh"] .car-btn:hover { background: #e8230a; border-color: #e8230a; color: #fff; }
 
+
 /* =============================================
-   ACCOMMODATION CARDS (EN + ZH)
+   ACCOMMODATION CARDS (EN + ZH shared)
+   display:flex + flex-direction:column lets the
+   price always pin to the bottom of the card.
    ============================================= */
 .accom-card {
     background: #fff;
@@ -624,7 +671,9 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 3rem; position: relative;
 }
+/* Image covers the whole thumb area; emoji shows if image is missing */
 .accom-thumb img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+/* Green "✓ Verified" pill positioned over the top-right of the image */
 .verified-badge {
     position: absolute; top: 10px; right: 10px;
     background: #198754; color: #fff;
@@ -642,6 +691,7 @@
     font-size: 0.68rem; font-weight: 600;
     padding: 3px 9px; border-radius: 50px;
 }
+/* margin-top: auto pushes the price to the bottom of the card */
 .accom-price { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 1.1rem; color: #0d6efd; margin-top: auto; }
 .accom-price small { font-weight: 400; font-size: 0.73rem; color: #6c757d; }
 .btn-view {
@@ -655,16 +705,18 @@
 }
 .btn-view:hover { background: #0b5ed7; color: #fff; text-decoration: none; }
 
-/* ZH card overrides */
+/* ZH overrides — orange accent replaces blue */
 [data-lang="zh"] .accom-tag    { background: #ffe8e4; color: #c0160a; }
 [data-lang="zh"] .accom-price  { color: #c0160a; }
 [data-lang="zh"] .btn-view     { background: #ff6633; }
 [data-lang="zh"] .btn-view:hover { background: #e05520; }
 [data-lang="zh"] .accom-card:hover { box-shadow: 0 14px 44px rgba(192,22,10,0.15); }
 
+
 /* =============================================
    ACCOMMODATION SLIDER – GERMAN
-   One card at a time, full-width slider
+   One full-width slide at a time. Spec table
+   gives High UA users the exact data they need.
    ============================================= */
 .de-accom-wrapper { position: relative; overflow: hidden; }
 .de-accom-track {
@@ -672,7 +724,7 @@
     transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 .de-accom-slide {
-    flex: 0 0 100%;
+    flex: 0 0 100%;   /* each slide is exactly full width */
     display: flex;
     gap: 2rem;
     background: #fff;
@@ -704,6 +756,7 @@
 .de-accom-loc   { font-size: 0.85rem; color: #6c757d; margin-bottom: 12px; }
 .de-accom-stars { color: #f59e0b; font-size: 0.9rem; margin-bottom: 16px; }
 .de-accom-stars .rating-val { color: #212529; font-weight: 700; }
+/* Spec table — bordered rows showing room size, distance, contract etc. */
 .de-specs { margin-bottom: 16px; border: 1px solid #f0f0f0; border-radius: 6px; overflow: hidden; }
 .de-spec-row {
     display: flex; justify-content: space-between;
@@ -733,7 +786,7 @@
 }
 .btn-de-view:hover { background: #d4ae0f; color: #111; text-decoration: none; }
 
-/* DE accom nav */
+/* Prev / Next + counter below the DE accommodation slider */
 .de-accom-nav {
     display: flex;
     align-items: center;
@@ -762,8 +815,11 @@
     color: #6c757d;
 }
 
+
 /* =============================================
    HOW IT WORKS – STEPS
+   Shared across all three languages; colour
+   overridden per language via [data-lang].
    ============================================= */
 .step-card {
     background: #fff;
@@ -783,24 +839,28 @@
 .step-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
 .step-desc  { font-size: 0.86rem; color: #6c757d; line-height: 1.6; }
 
+/* ZH: orange accent on icons and step numbers */
 [data-lang="zh"] .step-icon  { background: #ffe8e4; }
 [data-lang="zh"] .step-num   { color: #e8230a; }
 [data-lang="zh"] .step-card  { background: #fff; border: 1px solid #ffe0d6; color: #212529; }
 [data-lang="zh"] .step-title { color: #212529; }
 [data-lang="zh"] .step-desc  { color: #6c757d; }
 
+/* DE: squarer corners and a gold icon background */
 [data-lang="de"] .step-card  { border-radius: 6px; border: 2px solid #f0f0f0; }
 [data-lang="de"] .step-icon  { background: #fff8d6; border-radius: 6px; }
 [data-lang="de"] .step-num   { color: #856404; }
 
+
 /* =============================================
    REVIEW CARDS
+   Left border colour changes per language.
    ============================================= */
 .review-strip {
     background: #f8f9fa;
     border-radius: 12px;
     padding: 1.5rem;
-    border-left: 4px solid #0d6efd;
+    border-left: 4px solid #0d6efd;    /* blue for EN */
     height: 100%;
 }
 .review-stars-home { color: #f59e0b; margin-bottom: 0.6rem; }
@@ -815,8 +875,11 @@
 
 [data-lang="de"] .review-strip { border-left-color: #e8c012; background: #fafafa; border-radius: 4px; }
 
+
 /* =============================================
    CTA BANNER
+   Background colour changes per language to
+   match the overall page colour scheme.
    ============================================= */
 .cta-banner { background: #0a58ca; padding: 70px 0; text-align: center; }
 .cta-banner-title { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; margin-bottom: 1rem; }
@@ -836,34 +899,34 @@
 [data-lang="de"] .cta-banner { background: #000; border-top: 3px solid #e8c012; }
 [data-lang="de"] .btn-cta-main { color: #111; }
 
+
 /* =============================================
-   EYEBROW THEME OVERRIDES
-   ============================================= */
-/* =============================================
-   EYEBROW / SECTION HEADING THEME OVERRIDES
+   SECTION HEADING THEME OVERRIDES
+   [data-lang] selectors let one shared class
+   change colour based on the active language.
    ============================================= */
 [data-lang="de"] .eyebrow { color: #856404; letter-spacing: 3px; }
 
-/* ZH sections alternate orange hero / white content / orange / white */
-[data-lang="zh"] .home-section {
-    background: #ffffff;
-}
-[data-lang="zh"] .home-section-alt {
-    background: #fff3ee;
-}
-[data-lang="zh"] .eyebrow { color: #e8230a; }
+/* ZH sections alternate between white and a very light orange tint */
+[data-lang="zh"] .home-section     { background: #ffffff; }
+[data-lang="zh"] .home-section-alt { background: #fff3ee; }
+[data-lang="zh"] .eyebrow            { color: #e8230a; }
 [data-lang="zh"] .section-heading-main { color: #212529; }
-[data-lang="zh"] .section-sub { color: #6c757d; }
+[data-lang="zh"] .section-sub        { color: #6c757d; }
+
 
 /* =============================================
-   RESPONSIVE
+   RESPONSIVE BREAKPOINTS
+   Below 991px (tablet): heroes collapse, mosaic
+   reflows, sliders stack vertically.
+   Below 575px (mobile): card widths shrink further.
    ============================================= */
 @media (max-width: 991px) {
     .hero-en, .hero-zh, .hero-de { min-height: auto; padding: 60px 0 48px; }
-    .floating-card  { display: none; }
+    .floating-card  { display: none; }   /* hides the EN review card on small screens */
     .zh-mosaic-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
     .mosaic-cell.featured { grid-row: span 1; min-height: 180px; }
-    .de-accom-slide { flex-direction: column; }
+    .de-accom-slide { flex-direction: column; }   /* image stacks above content */
     .de-accom-img   { width: 100%; height: 220px; }
     .de-accom-content { padding: 1.5rem; }
     .uni-card-de    { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
