@@ -1,0 +1,194 @@
+/* zh_infostyles.css — Chinese Info Page   Author: Nathan
+   Path: app/static/css/Nathan/zh_infostyles.css
+   Colour: #ff6633 orange / warm white cards */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --zh-info-primary:       #ff6633;
+  --zh-info-primary-dark:  #cc5500;
+  --zh-info-primary-light: #fff2ee;
+  --zh-info-accent:        #ffaa00;
+  --zh-info-save-active:   #ff6633;
+  --zh-info-text:          #1a1a1a;
+  --zh-info-text-muted:    #6b7280;
+  --zh-info-text-light:    #9ca3af;
+  --zh-info-bg:            #f9f0ec;
+  --zh-info-card-bg:       #ffffff;
+  --zh-info-border:        #f0d5c8;
+  --zh-info-radius:        0.65rem;
+  --zh-info-radius-sm:     0.4rem;
+  --zh-info-shadow:        0 2px 8px rgba(0,0,0,0.07);
+  --zh-info-shadow-hover:  0 6px 22px rgba(255,102,51,0.14);
+  --zh-info-transition:    0.2s ease;
+  --zh-info-font:          'Noto Sans SC', 'Raleway', sans-serif;
+}
+
+body { font-family: var(--zh-info-font); background: var(--zh-info-bg); color: var(--zh-info-text); }
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.info-hero { background: var(--zh-info-primary); color: #fff; padding: 2rem 0 0; }
+.info-hero__inner { padding-bottom: 1.25rem; }
+.info-hero__title { font-size: 2.2rem; font-weight: 900; margin-bottom: 0.35rem; color: #fff; }
+.info-hero__meta { font-size: 0.95rem; color: rgba(255,255,255,0.88); margin-bottom: 0; }
+.info-hero__meta i { margin-right: 0.3rem; }
+.info-hero__banner { width: 100%; max-height: 340px; overflow: hidden; }
+.info-hero__banner-img { width: 100%; height: 340px; object-fit: cover; display: block; }
+.info-hero__banner--no-img { height: 8px; background: var(--zh-info-primary-dark); }
+
+/* ── Section headings ─────────────────────────────────────── */
+.info-section-heading--zh {
+  font-size: 1.2rem; font-weight: 700; color: var(--zh-info-text);
+  margin-bottom: 0.85rem; padding-bottom: 0.45rem;
+  border-bottom: 3px solid var(--zh-info-primary); display: inline-block;
+}
+
+/* ── Body container ───────────────────────────────────────── */
+.info-body--zh { padding: 2rem 0 4rem; }
+
+/* ── ROW 1 & ROW 2: two-column media rows ─────────────────── */
+.zh-row-media {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.75rem; margin-bottom: 2rem; align-items: start;
+}
+.zh-row-media--reviews { align-items: start; }
+.zh-media-col { min-width: 0; }
+
+/* ── YouTube embed ────────────────────────────────────────── */
+.zh-youtube-embed {
+  position: relative; width: 100%; padding-bottom: 56.25%;
+  border-radius: var(--zh-info-radius); overflow: hidden;
+  box-shadow: var(--zh-info-shadow); background: #000;
+}
+.zh-youtube-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.zh-youtube-embed--placeholder { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+.zh-youtube-placeholder-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; text-align: center; padding: 1.5rem; }
+.zh-youtube-placeholder__icon { font-size: 3rem; color: #ff0000; opacity: 0.85; }
+.zh-youtube-placeholder__text { font-size: 1rem; font-weight: 700; color: #fff; margin: 0; }
+.zh-youtube-placeholder__sub { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin: 0; }
+
+/* ── Carousel (used in ROW 1 right col) ───────────────────── */
+.info-carousel--zh { border-radius: var(--zh-info-radius); overflow: hidden; box-shadow: var(--zh-info-shadow); background: #e9ecef; }
+.info-carousel__img { height: 320px; object-fit: cover; display: block; }
+.info-carousel__caption-badge { background: rgba(255,102,51,0.75); color: #fff; font-size: 0.78rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 2rem; backdrop-filter: blur(4px); }
+
+/* ── TikTok feed (ROW 2 left col) ────────────────────────── */
+.zh-tiktok-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.zh-tiktok-tag { background: var(--zh-info-primary-light); color: var(--zh-info-primary); border: 1px solid var(--zh-info-border); border-radius: 2rem; padding: 0.22rem 0.7rem; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+.zh-tiktok-tag--active { background: var(--zh-info-primary) !important; color: #fff !important; border-color: var(--zh-info-primary) !important; }
+.zh-tiktok-feed { display: flex; flex-direction: column; gap: 0.75rem; max-height: 340px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--zh-info-border) transparent; }
+.zh-tiktok-card { background: var(--zh-info-card-bg); border: 1px solid var(--zh-info-border); border-radius: var(--zh-info-radius-sm); box-shadow: var(--zh-info-shadow); display: flex; align-items: center; gap: 0.85rem; padding: 0.6rem; transition: box-shadow 0.2s, transform 0.2s; }
+.zh-tiktok-card:hover { box-shadow: var(--zh-info-shadow-hover); transform: translateX(3px); }
+.zh-tiktok-card__thumb { flex-shrink: 0; width: 64px; height: 64px; border-radius: var(--zh-info-radius-sm); background: linear-gradient(135deg, #010101, #1a1a2e); position: relative; overflow: hidden; }
+.zh-tiktok-card__thumb-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.15rem; }
+.zh-tiktok-card__icon { font-size: 1.5rem; color: #fff; }
+.zh-tiktok-card__duration { font-size: 0.65rem; color: rgba(255,255,255,0.7); font-weight: 700; }
+.zh-tiktok-card__caption { font-size: 0.8rem; font-weight: 500; color: var(--zh-info-text-muted); margin: 0; }
+.zh-tiktok-feed__note { font-size: 0.73rem; color: var(--zh-info-text-light); margin: 0.25rem 0 0; text-align: center; font-style: italic; }
+
+/* ── Reviews vertical (ROW 2 right col) ───────────────────── */
+.zh-reviews-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 340px;        /* fixed height — matches TikTok feed column */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--zh-info-border) transparent;
+  padding-right: 4px;   /* gap for scrollbar */
+  box-sizing: border-box;
+}
+.zh-reviews-vertical::-webkit-scrollbar { width: 4px; }
+.zh-reviews-vertical::-webkit-scrollbar-thumb { background: var(--zh-info-border); border-radius: 3px; }
+
+.info-review-card--zh {
+  scroll-snap-align: start;
+  flex-shrink: 0;        /* cards must NOT compress to fit — scroll instead */
+  background: var(--zh-info-card-bg);
+  border: 1px solid var(--zh-info-border);
+  border-left: 4px solid var(--zh-info-primary);
+  border-radius: var(--zh-info-radius);
+  box-shadow: var(--zh-info-shadow);
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.info-review-card--zh:hover { box-shadow: var(--zh-info-shadow-hover); transform: translateX(4px); }
+.info-review-card__avatar img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--zh-info-primary-light); flex-shrink: 0; }
+.info-review-card__content { flex: 1; min-width: 0; }
+.info-review-card__name { font-size: 0.88rem; font-weight: 700; color: var(--zh-info-text); margin: 0 0 0.25rem; }
+.info-review-card__stars i { font-size: 0.85rem; color: var(--zh-info-text-light); }
+.info-review-card__star--filled { color: var(--zh-info-accent) !important; }
+.info-review-card__comment { font-size: 0.8rem; line-height: 1.6; color: var(--zh-info-text-muted); margin: 0.25rem 0 0; }
+
+/* ── Details row (ROW 3) ──────────────────────────────────── */
+.zh-details-row { margin-top: 1rem; margin-bottom: 2.5rem; }
+.zh-details-header { margin-bottom: 1rem; }
+.zh-details-header__name { font-size: 1.6rem; font-weight: 900; color: var(--zh-info-text); margin: 0; }
+.info-details-list--zh { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+.info-details-list__item { display: flex; flex-direction: column; gap: 0.2rem; }
+.info-details-list__label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--zh-info-text-muted); }
+.info-details-list__label i { color: var(--zh-info-primary); margin-right: 0.25rem; }
+.info-details-list__value { font-size: 0.95rem; font-weight: 600; color: var(--zh-info-text); }
+.info-details-list__value--price { font-size: 1.2rem; font-weight: 900; color: var(--zh-info-primary); }
+.info-amenities-list { list-style: none; padding: 0; margin: 0.3rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.info-amenities-list li { background: var(--zh-info-primary-light); color: var(--zh-info-primary); border: 1px solid var(--zh-info-border); border-radius: 2rem; padding: 0.2rem 0.7rem; font-size: 0.78rem; font-weight: 600; }
+
+/* ── Save + Post a Review action row ─────────────────────── */
+.zh-action-row {
+  display: flex; align-items: center; gap: 0.85rem;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+
+/* Save button — bigger, labelled */
+.info-save-btn--zh.info-save-btn--large {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  background: none; border: 2px solid var(--zh-info-border);
+  border-radius: var(--zh-info-radius-sm);
+  padding: 0.75rem 1.5rem; cursor: pointer;
+  color: var(--zh-info-text-muted);
+  font-family: var(--zh-info-font); font-size: 1rem; font-weight: 700;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
+}
+.info-save-btn--zh.info-save-btn--large:hover { border-color: var(--zh-info-primary); color: var(--zh-info-primary); background: var(--zh-info-primary-light); }
+.info-save-btn--zh.info-save-btn--large.is-saved,
+.info-save-btn--zh.info-save-btn--large:has(.info-save-btn__icon--saved) { border-color: var(--zh-info-save-active); color: var(--zh-info-save-active); background: var(--zh-info-primary-light); }
+.info-save-btn--zh.info-save-btn--large .info-save-btn__icon { font-size: 1.1rem; }
+.info-save-btn--zh.just-saved { animation: zhSavePulse 0.35s ease; }
+@keyframes zhSavePulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+/* Post a Review button — rectangular, orange */
+.zh-post-review-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--zh-info-primary); color: #fff;
+  border-radius: var(--zh-info-radius-sm);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--zh-info-font); font-size: 1rem; font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.zh-post-review-btn:hover { background: var(--zh-info-primary-dark); color: #fff; transform: translateY(-2px); text-decoration: none; }
+.zh-post-review-btn i { font-size: 1rem; }
+
+/* ── Description ──────────────────────────────────────────── */
+.info-description--zh .info-description__text { font-size: 1rem; line-height: 1.9; color: var(--zh-info-text); }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .zh-row-media { grid-template-columns: 1fr; }
+  .zh-tiktok-feed { max-height: 240px; }
+  .zh-reviews-vertical { max-height: 240px; }
+  .info-carousel__img { height: 240px; }
+  .info-details-list--zh { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .zh-details-header__name { font-size: 1.3rem; }
+  .info-carousel__img { height: 200px; }
+  .zh-action-row { flex-direction: column; align-items: flex-start; }
+}

@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, session, redirect, request
+from flask import render_template, session, redirect, request, jsonify
 
 @app.route('/')
 @app.route('/index')
@@ -14,7 +14,6 @@ def review():
 def about():
     return render_template("about.html")
 
-# Accepts ?uni=tcd&type=En-Suite&search=parnell for pre-filtering from index page
 @app.route('/listings')
 def listings():
     pre_uni    = request.args.get('uni', '')
@@ -29,7 +28,8 @@ def login():
 
 @app.route('/info')
 def info():
-    return render_template("info.html")
+    current_user = {'saved_dorms': []}
+    return render_template("info.html", current_user=current_user)
 
 @app.route('/profile')
 def profile():
@@ -43,7 +43,15 @@ def profile():
         {'name': 'Baker House',  'image': 'Image2.jpg'},
         {'name': 'MacGregor House', 'image': 'image4.jpg'}
     ]
-    reviews_list = [{'dorm':'Simmons Hall','rating':5,'comment':'Great architecture and very social atmosphere!','date':'March 2026','has_video':True}]
+    reviews_list = [
+        {
+            'dorm': 'Simmons Hall',
+            'rating': 5,
+            'comment': 'Great architecture and very social atmosphere!',
+            'date': 'March 2026',
+            'has_video': True
+        }
+    ]
     return render_template("profile.html", user=user_data, reviews=reviews_list, favorites=saved_favorites)
 
 @app.route('/set_language/<lang_code>')
@@ -56,3 +64,20 @@ def set_language(lang_code):
 def set_session_language():
     if 'language' not in session:
         session['language'] = 'en'
+
+# /save — toggles bookmark state in session so clicking again unbookmarks
+@app.route('/save', methods=['POST'])
+def save():
+    data = request.get_json(silent=True) or {}
+    dorm_id = data.get('dorm_id', '')
+    if not dorm_id:
+        return jsonify({'saved': False, 'dorm_id': dorm_id})
+    saved = session.get('saved_dorms', [])
+    if dorm_id in saved:
+        saved.remove(dorm_id)
+        is_saved = False
+    else:
+        saved.append(dorm_id)
+        is_saved = True
+    session['saved_dorms'] = saved
+    return jsonify({'saved': is_saved, 'dorm_id': dorm_id})

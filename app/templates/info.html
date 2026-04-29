@@ -1,8 +1,336 @@
 {% extends "base.html" %}
 
+{# ============================================================
+   info.html — Dorm Listing Detail Page   Author: Nathan
+   All dorm data (name, location, images, reviews etc.) lives
+   here in the template — nothing comes from routes.py except
+   current_user. Language-specific reviews are defined per block.
+   ============================================================ #}
+
+{% block extra_css %}
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" />
+  {% if session.get('language') == 'de' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Nathan/de_infostyles.css') }}" />
+  {% elif session.get('language') == 'zh' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Nathan/zh_infostyles.css') }}" />
+  {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Nathan/en_infostyles.css') }}" />
+  {% endif %}
+{% endblock %}
+
+
 {% block main %}
-<div class="container py-5">
-    <h1 class="fw-bold">Information</h1>
-    <p class="lead">Content for the Info page will go here.</p>
+
+{# ================================================================
+   DORM DATA — defined here so routes.py stays clean.
+   Images: only real carousel images — NO placeholder "main" banner.
+   The hero uses images[0] as a real photo, not a text placeholder.
+================================================================ #}
+{% set dorm_id          = 'yugo-dublin-1' %}
+{% set dorm_name        = _('Yugo Dublin') %}
+{% set dorm_location    = _('City Centre, Dublin 2') %}
+{% set dorm_university  = _('Trinity College Dublin / TU Dublin') %}
+{% set dorm_price       = 920 %}
+{% set dorm_youtube_url = 'https://www.youtube.com/embed/dQw4w9WgXcQ' %}
+{% set dorm_tiktok_tags = ['YugoDublin', 'FindMyDorm', 'StudentLivingDublin', 'DormLife'] %}
+
+{# Carousel images — real placeholder photos, NO "Yugo Dublin Main" #}
+{% set dorm_images = [
+    'https://placehold.co/800x460?text=Common+Room',
+    'https://placehold.co/800x460?text=Gym',
+    'https://placehold.co/800x460?text=Rooftop+Terrace',
+    'https://placehold.co/800x460?text=Study+Room',
+    'https://placehold.co/800x460?text=Laundry+Room',
+] %}
+
+{% set dorm_amenities = [
+    _('En-Suite Bathroom'),
+    _('High-Speed Wi-Fi'),
+    _('Gym'),
+    _('Cinema Room'),
+    _('Rooftop Terrace'),
+    _('Laundry'),
+    _('Bike Storage'),
+    _('Bills Included'),
+    _('24/7 Security'),
+    _('Study Rooms'),
+] %}
+
+{% set dorm_description = _(
+    'Yugo Dublin is a premium student accommodation located in the heart '
+    'of Dublin city centre, just a short walk from Trinity College Dublin '
+    'and TU Dublin. The building offers fully furnished en-suite rooms, '
+    'high-speed WiFi, on-site gym, cinema room, rooftop terrace and 24/7 '
+    'security. Bills are fully included in the weekly price, with flexible '
+    'contract lengths to suit semester or full-year stays.'
+) %}
+
+{# Language-specific reviews — each language only sees its own reviews #}
+{% if session.get('language') == 'zh' %}
+  {% set dorm_reviews = [
+    {
+      'reviewer_name': 'Wei Chen',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=WC',
+      'rating': 5,
+      'comment': _('Great facilities and excellent location! Staff are very friendly and check-in was smooth. Highly recommended!'),
+    },
+    {
+      'reviewer_name': 'Lin Mei',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=LM',
+      'rating': 5,
+      'comment': _('Reasonable price, spacious rooms, highly recommended! Made so many friends here.'),
+    },
+    {
+      'reviewer_name': 'Jia Hui',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=JH',
+      'rating': 4,
+      'comment': _('Clean and tidy overall, friendly staff. The Ask a Resident feature was so helpful before I moved in.'),
+    },
+    {
+      'reviewer_name': 'Xiao Ming',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=XM',
+      'rating': 3,
+      'comment': _('Internet speed could be improved, otherwise very satisfied. Great community atmosphere.'),
+    },
+  ] %}
+{% elif session.get('language') == 'de' %}
+  {% set dorm_reviews = [
+    {
+      'reviewer_name': 'Karl Schmidt',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=KS',
+      'rating': 4,
+      'comment': _('Very good location and clean. The technical specifications on the website matched reality. No surprises.'),
+    },
+    {
+      'reviewer_name': 'Anna Müller',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=AM',
+      'rating': 5,
+      'comment': _('The booking progress steps kept me informed at every stage. Transparent and trustworthy process from start to finish.'),
+    },
+    {
+      'reviewer_name': 'Lukas Bauer',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=LB',
+      'rating': 5,
+      'comment': _('Exact room dimensions and distance information made comparison straightforward. No surprises on arrival.'),
+    },
+  ] %}
+{% else %}
+  {% set dorm_reviews = [
+    {
+      'reviewer_name': 'Aoife Kelly',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=AK',
+      'rating': 5,
+      'comment': _('Absolutely love living here. The location is unbeatable and the community events are brilliant.'),
+    },
+    {
+      'reviewer_name': 'Marco Bianchi',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=MB',
+      'rating': 4,
+      'comment': _('Great facilities and very social atmosphere. The gym is top class. Would recommend to any international student.'),
+    },
+    {
+      'reviewer_name': 'Ciarán Murphy',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=CM',
+      'rating': 5,
+      'comment': _('The rooftop is class. Made loads of friends through the weekly events. Best student living in Dublin.'),
+    },
+    {
+      'reviewer_name': 'Siobhán O\'Brien',
+      'reviewer_avatar': 'https://placehold.co/48x48?text=SO',
+      'rating': 4,
+      'comment': _('Great value for Dublin. Bills included makes budgeting so much easier. Gym is excellent.'),
+    },
+  ] %}
+{% endif %}
+
+{# saved state from session #}
+{% set is_saved = dorm_id in (session.get('saved_dorms') or []) %}
+
+
+{# ================================================================
+   SHARED HERO BANNER — same structure for all languages,
+   colour driven by data-lang CSS in nav-footer-styles.css
+================================================================ #}
+<section class="info-hero">
+  <div class="container info-hero__inner">
+    <h1 class="info-hero__title">{{ dorm_name }}</h1>
+    <p class="info-hero__meta">
+      <i class="fa-solid fa-location-dot"></i>
+      {{ dorm_location }}
+      &nbsp;·&nbsp;
+      <i class="fa-solid fa-graduation-cap"></i>
+      {{ dorm_university }}
+    </p>
+  </div>
+  {# Hero uses the first real carousel image as a banner.
+     No "Yugo Dublin Main" placeholder. Falls back to slim colour bar. #}
+  {% if dorm_images %}
+    <div class="info-hero__banner">
+      <img src="{{ dorm_images[0] }}"
+           alt="{{ dorm_name }}"
+           class="info-hero__banner-img"
+           onerror="this.parentElement.classList.add('info-hero__banner--no-img'); this.remove();" />
+    </div>
+  {% else %}
+    <div class="info-hero__banner info-hero__banner--no-img"></div>
+  {% endif %}
+</section>
+
+
+{# ================================================================
+   LOCALE DISPATCH
+================================================================ #}
+{% if session.get('language') == 'zh' %}
+  {% include 'chineseinfo.html' %}
+{% elif session.get('language') == 'de' %}
+  {% include 'germaninfo.html' %}
+{% else %}
+
+{# ── ENGLISH layout ───────────────────────────────────────────── #}
+<div class="container info-body">
+  <div class="info-body__row">
+
+    {# LEFT: Carousel + Description #}
+    <div class="info-col-main">
+      <h2 class="info-section-heading">{{ _('View Dorm') }}</h2>
+
+      <div id="dormCarousel" class="carousel slide info-carousel"
+           data-bs-ride="carousel" aria-label="{{ _('Room Photos') }}">
+        <div class="carousel-indicators">
+          {% for img in dorm_images %}
+            <button type="button" data-bs-target="#dormCarousel"
+                    data-bs-slide-to="{{ loop.index0 }}"
+                    {% if loop.first %}class="active" aria-current="true"{% endif %}
+                    aria-label="{{ _('Slide') }} {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+        <div class="carousel-inner">
+          {% for img in dorm_images %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+              <img src="{{ img }}" class="d-block w-100 info-carousel__img"
+                   alt="{{ _('Room photo') }} {{ loop.index }}"
+                   onerror="this.src='https://placehold.co/800x460?text=Room+{{ loop.index }}'" />
+              <div class="carousel-caption d-none d-md-block">
+                <span class="info-carousel__caption-badge">{{ loop.index }} / {{ dorm_images | length }}</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#dormCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">{{ _('Previous') }}</span>
+        </button>
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#dormCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">{{ _('Next') }}</span>
+        </button>
+      </div>
+
+      <div class="info-description">
+        <h2 class="info-section-heading">{{ _('Description') }}</h2>
+        <p class="info-description__text">{{ dorm_description }}</p>
+      </div>
+    </div>
+
+    {# RIGHT: Details card #}
+    <div class="info-col-aside">
+      <div class="info-details-card">
+        <div class="info-details-card__header">
+          <h2 class="info-details-card__name">{{ dorm_name }}</h2>
+        </div>
+        <ul class="info-details-list">
+          <li class="info-details-list__item">
+            <span class="info-details-list__label"><i class="fa-solid fa-location-dot"></i> {{ _('Location') }}</span>
+            <span class="info-details-list__value">{{ dorm_location }}</span>
+          </li>
+          <li class="info-details-list__item">
+            <span class="info-details-list__label"><i class="fa-solid fa-graduation-cap"></i> {{ _('University') }}</span>
+            <span class="info-details-list__value">{{ dorm_university }}</span>
+          </li>
+          <li class="info-details-list__item">
+            <span class="info-details-list__label"><i class="fa-solid fa-euro-sign"></i> {{ _('Price') }}</span>
+            <span class="info-details-list__value info-details-list__value--price">€{{ dorm_price }} / {{ _('month') }}</span>
+          </li>
+          <li class="info-details-list__item info-details-list__item--amenities">
+            <span class="info-details-list__label"><i class="fa-solid fa-star"></i> {{ _('Amenities') }}</span>
+            <ul class="info-amenities-list">
+              {% for a in dorm_amenities %}<li>{{ a }}</li>{% endfor %}
+            </ul>
+          </li>
+        </ul>
+
+        <div class="info-social-links">
+          <a href="https://www.tiktok.com/@findmydorm" target="_blank" rel="noopener noreferrer"
+             class="info-social-btn info-social-btn--tiktok">
+            <i class="fa-brands fa-tiktok"></i><span>{{ _('TikTok Reviews') }}</span>
+          </a>
+          <a href="https://www.youtube.com/@findmydorm" target="_blank" rel="noopener noreferrer"
+             class="info-social-btn info-social-btn--youtube">
+            <i class="fa-brands fa-youtube"></i><span>{{ _('Video Tour') }}</span>
+          </a>
+          <a href="{{ url_for('review') }}" class="info-social-btn info-social-btn--review">
+            <i class="fa-solid fa-pen"></i><span>{{ _('Post a Review') }}</span>
+          </a>
+        </div>
+
+        <button class="info-save-btn" id="saveBtn"
+                data-dorm-id="{{ dorm_id }}"
+                data-saved="{{ 'true' if is_saved else 'false' }}"
+                aria-label="{{ _('Save dorm') }}">
+          <i class="{{ 'fa-solid info-save-btn__icon--saved' if is_saved else 'fa-regular' }} fa-bookmark info-save-btn__icon"></i>
+          <span class="info-save-btn__label">{{ _('Save') }}</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  {# Reviews — English only #}
+  <section class="info-reviews">
+    <h2 class="info-section-heading">{{ _('Reviews') }}</h2>
+    <div class="info-reviews__track" id="reviewsTrack">
+      {% for review in dorm_reviews %}
+      <div class="info-review-card">
+        <div class="info-review-card__avatar">
+          <img src="{{ review.reviewer_avatar }}" alt="{{ review.reviewer_name }}"
+               onerror="this.src='https://placehold.co/48x48?text=U'" />
+        </div>
+        <p class="info-review-card__name">{{ review.reviewer_name }}</p>
+        <div class="info-review-card__stars">
+          {% for i in range(1, 6) %}
+            <i class="fa-star {% if i <= review.rating %}fa-solid info-review-card__star--filled{% else %}fa-regular{% endif %}"></i>
+          {% endfor %}
+        </div>
+        <p class="info-review-card__comment">{{ review.comment | truncate(120) }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="info-reviews__controls">
+      <button class="info-reviews__arrow" id="reviewsPrev" aria-label="{{ _('Previous reviews') }}">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="info-reviews__arrow" id="reviewsNext" aria-label="{{ _('Next reviews') }}">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
+
 </div>
+{% endif %}
+{% endblock %}
+
+
+{% block extra_js %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  {% if session.get('language') == 'de' %}
+    <script src="{{ url_for('static', filename='js/Nathan/de_info.js') }}"></script>
+  {% elif session.get('language') == 'zh' %}
+    <script src="{{ url_for('static', filename='js/Nathan/zh_info.js') }}"></script>
+  {% else %}
+    <script src="{{ url_for('static', filename='js/Nathan/en_info.js') }}"></script>
+  {% endif %}
 {% endblock %}

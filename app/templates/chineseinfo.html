@@ -1,0 +1,180 @@
+{# chineseinfo.html — Chinese dorm info body   Author: Nathan
+   Included by info.html when lang == 'zh'
+   Uses template variables set in info.html:
+     dorm_id, dorm_name, dorm_location, dorm_university,
+     dorm_price, dorm_description, dorm_images, dorm_amenities,
+     dorm_reviews, dorm_youtube_url, dorm_tiktok_tags, is_saved #}
+
+<div class="container info-body info-body--zh">
+
+  {# ROW 1: Video Tour (left) | View Dorm carousel (right) #}
+  <div class="zh-row-media">
+
+    <div class="zh-media-col">
+      <h2 class="info-section-heading info-section-heading--zh">{{ _('Dorm Tour Video') }}</h2>
+      {% if dorm_youtube_url %}
+        <div class="zh-youtube-embed">
+          <iframe src="{{ dorm_youtube_url }}"
+                  title="{{ dorm_name }}"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen loading="lazy"></iframe>
+        </div>
+      {% else %}
+        <div class="zh-youtube-embed zh-youtube-embed--placeholder">
+          <div class="zh-youtube-placeholder-inner">
+            <i class="fa-brands fa-youtube zh-youtube-placeholder__icon"></i>
+            <p class="zh-youtube-placeholder__text">{{ _('Video tour coming soon') }}</p>
+            <p class="zh-youtube-placeholder__sub">{{ _('A dorm tour video will be embedded here.') }}</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="zh-media-col">
+      <h2 class="info-section-heading info-section-heading--zh">{{ _('View Dorm') }}</h2>
+      <div id="dormCarouselZH" class="carousel slide info-carousel info-carousel--zh"
+           data-bs-ride="carousel" aria-label="{{ _('Room Photos') }}">
+        <div class="carousel-indicators">
+          {% for img in dorm_images %}
+            <button type="button" data-bs-target="#dormCarouselZH"
+                    data-bs-slide-to="{{ loop.index0 }}"
+                    {% if loop.first %}class="active" aria-current="true"{% endif %}
+                    aria-label="{{ _('Slide') }} {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+        <div class="carousel-inner">
+          {% for img in dorm_images %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+              <img src="{{ img }}" class="d-block w-100 info-carousel__img"
+                   alt="{{ _('Room photo') }} {{ loop.index }}"
+                   onerror="this.src='https://placehold.co/700x420?text=房间照片+{{ loop.index }}'" />
+              <div class="carousel-caption d-none d-md-block">
+                <span class="info-carousel__caption-badge">{{ loop.index }} / {{ dorm_images | length }}</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#dormCarouselZH" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">{{ _('Previous') }}</span>
+        </button>
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#dormCarouselZH" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">{{ _('Next') }}</span>
+        </button>
+      </div>
+    </div>
+
+  </div>{# end ROW 1 #}
+
+
+  {# ROW 2: TikTok Shorts (left) | Reviews (right) #}
+  <div class="zh-row-media zh-row-media--reviews">
+
+    <div class="zh-media-col">
+      <h2 class="info-section-heading info-section-heading--zh">{{ _('TikTok Shorts') }}</h2>
+      <div class="zh-tiktok-tags">
+        {% for tag in dorm_tiktok_tags %}
+          <span class="zh-tiktok-tag">#{{ tag }}</span>
+        {% endfor %}
+      </div>
+      <div class="zh-tiktok-feed" id="zhTiktokFeed">
+        {% for n in range(1, 5) %}
+        <div class="zh-tiktok-card" data-tags="{{ dorm_tiktok_tags | join(',') }}">
+          <div class="zh-tiktok-card__thumb">
+            <div class="zh-tiktok-card__thumb-inner">
+              <i class="fa-brands fa-tiktok zh-tiktok-card__icon"></i>
+              <span class="zh-tiktok-card__duration">0:{{ '%02d' | format(n * 15) }}</span>
+            </div>
+          </div>
+          <p class="zh-tiktok-card__caption">
+            {{ _('TikTok Short') }} {{ n }} — #{{ dorm_tiktok_tags[0] }}
+          </p>
+        </div>
+        {% endfor %}
+        <p class="zh-tiktok-feed__note">{{ _('Showing shorts tagged with dorm-specific hashtags') }}</p>
+      </div>
+    </div>
+
+    <div class="zh-media-col">
+      <h2 class="info-section-heading info-section-heading--zh">{{ _('Reviews') }}</h2>
+      {# Reviews scroll container — fixed height so cards don't overflow #}
+      <div class="zh-reviews-vertical" id="zhReviewsTrack">
+        {% for review in dorm_reviews %}
+        <div class="info-review-card info-review-card--zh">
+          <div class="info-review-card__avatar">
+            <img src="{{ review.reviewer_avatar }}"
+                 alt="{{ review.reviewer_name }}"
+                 onerror="this.src='https://placehold.co/48x48?text=U'" />
+          </div>
+          <div class="info-review-card__content">
+            <p class="info-review-card__name">{{ review.reviewer_name }}</p>
+            <div class="info-review-card__stars">
+              {% for i in range(1, 6) %}
+                <i class="fa-star {% if i <= review.rating %}fa-solid info-review-card__star--filled{% else %}fa-regular{% endif %}"></i>
+              {% endfor %}
+            </div>
+            <p class="info-review-card__comment">{{ review.comment | truncate(160) }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>{# end ROW 2 #}
+
+
+  {# ROW 3: UNI-DORM details + Save/Review buttons + Description #}
+  <div class="zh-details-row">
+
+    <div class="zh-details-header">
+      <h1 class="zh-details-header__name">{{ dorm_name }}</h1>
+    </div>
+
+    <ul class="info-details-list info-details-list--zh">
+      <li class="info-details-list__item">
+        <span class="info-details-list__label"><i class="fa-solid fa-location-dot"></i> {{ _('Location') }}</span>
+        <span class="info-details-list__value">{{ dorm_location }}</span>
+      </li>
+      <li class="info-details-list__item">
+        <span class="info-details-list__label"><i class="fa-solid fa-graduation-cap"></i> {{ _('University') }}</span>
+        <span class="info-details-list__value">{{ dorm_university }}</span>
+      </li>
+      <li class="info-details-list__item">
+        <span class="info-details-list__label"><i class="fa-solid fa-euro-sign"></i> {{ _('Price') }}</span>
+        <span class="info-details-list__value info-details-list__value--price">€{{ dorm_price }} / {{ _('month') }}</span>
+      </li>
+      <li class="info-details-list__item info-details-list__item--amenities">
+        <span class="info-details-list__label"><i class="fa-solid fa-star"></i> {{ _('Amenities') }}</span>
+        <ul class="info-amenities-list">
+          {% for a in dorm_amenities %}<li>{{ a }}</li>{% endfor %}
+        </ul>
+      </li>
+    </ul>
+
+    {# Save + Post a Review — side by side below amenities #}
+    <div class="zh-action-row">
+      <button class="info-save-btn info-save-btn--zh info-save-btn--large"
+              id="saveBtn"
+              data-dorm-id="{{ dorm_id }}"
+              data-saved="{{ 'true' if is_saved else 'false' }}"
+              aria-label="{{ _('Save dorm') }}">
+        <i class="{{ 'fa-solid info-save-btn__icon--saved' if is_saved else 'fa-regular' }} fa-bookmark info-save-btn__icon"></i>
+        <span class="info-save-btn__label">{{ _('Save') }}</span>
+      </button>
+      <a href="{{ url_for('review') }}" class="zh-post-review-btn">
+        <i class="fa-solid fa-pen"></i>
+        <span>{{ _('Post a Review') }}</span>
+      </a>
+    </div>
+
+    <div class="info-description info-description--zh">
+      <h2 class="info-section-heading info-section-heading--zh">{{ _('Description') }}</h2>
+      <p class="info-description__text">{{ dorm_description }}</p>
+    </div>
+
+  </div>{# end ROW 3 #}
+
+</div>
