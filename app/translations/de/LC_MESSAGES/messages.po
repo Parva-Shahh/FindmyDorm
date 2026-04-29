@@ -638,3 +638,16 @@ msgstr "Beitreten"
 
 msgid "Discover student communities near every Irish university"
 msgstr "Entdecken Sie Studierendengemeinschaften in der Nähe jeder irischen Universität"
+
+# ── Dynamic Profile Content (DE) ──────────────────────────────────────────────
+msgid "Verified Resident"
+msgstr "Verifizierter Bewohner"
+
+msgid "Living the dorm life since 2024. Architecture enthusiast and coffee lover."
+msgstr "Seit 2024 im Wohnheimleben. Architektur-Enthusiast und Kaffeeliebhaber."
+
+msgid "Great architecture and very social atmosphere!"
+msgstr "Tolle Architektur und eine sehr soziale Atmosphäre!"
+
+msgid "March 2026"
+msgstr "März 2026"

@@ -657,3 +657,16 @@ msgstr "坐落在香农河畔的充满活力的校园大学。以其合作教育
 
 msgid "Located in the heart of one of Ireland's most vibrant cities. Renowned for its bilingual character, arts culture and thriving student community."
 msgstr "位于爱尔兰最具活力的城市之一的中心。以其双语特色、艺术文化和蓬勃发展的学生社区而闻名。"
+
+# ── Dynamic Profile Content (ZH) ──────────────────────────────────────────────
+msgid "Verified Resident"
+msgstr "认证住户"
+
+msgid "Living the dorm life since 2024. Architecture enthusiast and coffee lover."
+msgstr "自 2024 年起开始宿舍生活。建筑爱好者，热爱咖啡。"
+
+msgid "Great architecture and very social atmosphere!"
+msgstr "建筑风格很棒，社交氛围也非常活跃！"
+
+msgid "March 2026"
+msgstr "2026年3月"
