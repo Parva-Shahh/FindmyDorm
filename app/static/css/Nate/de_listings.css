@@ -119,22 +119,19 @@ body {
 
 .de-search-btn:hover { background: var(--de-accent-dark); }
 
-/* ── Hide base HTML blocks ─────────────────────────────────────
-   DE JS rebuilds both into Trivago layout from scratch.
-   Hiding here prevents flash of unstyled content before JS runs. */
+/* ── Hide base HTML blocks — DE JS rebuilds into Trivago layout */
 .filter-bar-wrapper   { display: none !important; }
 .listings-map-wrapper { display: none !important; }
 
-/* ── Map banner — full width below search ───────────────────────
-   Hypothesis 1: Karl sees ALL dorm locations on map BEFORE browsing
-   any cards. Full-width placement makes geographic context impossible
-   to miss — eliminates location ambiguity immediately. */
+/* ── Map banner — full width below search ───────────────────── */
 .de-map-banner {
   width: 100%; height: 240px;
   border-bottom: 3px solid var(--de-primary);
 }
 
 .de-map-banner #dormMap { width: 100%; height: 100%; }
+.de-map-banner #dormMap iframe { width: 100%; height: 100%; min-height: 240px; display: block; border: none; }
+.de-map-banner #dormMap iframe { width: 100%; height: 100%; min-height: 240px; display: block; border: none; }
 
 /* ── Results bar ────────────────────────────────────────────── */
 .de-results-bar {
@@ -160,10 +157,7 @@ body {
   padding: 1.25rem 1.5rem 3rem; gap: 1.25rem;
 }
 
-/* ── Amazon-style sidebar ───────────────────────────────────────
-   Collapsible filter sections with explicit labels.
-   Hypothesis 1: structured, predictable filter interface.
-   Karl can precisely narrow results before reading any card. */
+/* ── Sidebar ────────────────────────────────────────────────── */
 .de-sidebar {
   width: 250px; flex-shrink: 0;
   position: sticky; top: 1rem;
@@ -235,10 +229,7 @@ body {
   display: flex; flex-direction: column; gap: 0.85rem;
 }
 
-/* ── Horizontal card ────────────────────────────────────────────
-   Image | Body (specs) | Aside (price + CTA) — mirrors Trivago layout.
-   Hypothesis 2: body contains full spec table; aside has explicit price.
-   Linear horizontal flow suits High UA "compare across rows" behaviour. */
+/* ── Horizontal card ────────────────────────────────────────── */
 .de-hcard {
   background: var(--de-card-bg); border: 1px solid var(--de-border);
   border-radius: var(--de-radius); box-shadow: var(--de-shadow);
@@ -335,10 +326,6 @@ body {
 .de-price-amount { font-size: 1.6rem; font-weight: 900; color: var(--de-text); line-height: 1; }
 .de-price-per   { font-size: 0.7rem; color: var(--de-text-light); display: block; margin-bottom: 0.4rem; }
 
-/* Deal badge: green (#198754) — visceral trust signal.
-   Colour deviation justified: green = confirmed deal/verified quality
-   rather than standard blue/grey (README Section 7 deviation note).
-   Hypothesis 1: trust marker reduces commitment anxiety for High UA. */
 .de-deal-badge {
   font-size: 0.65rem; font-weight: 800; color: var(--de-green);
   background: #d1e7dd; border: 1px solid #a3cfbb;
@@ -361,9 +348,7 @@ body {
   box-shadow: 0 4px 10px rgba(33,37,41,0.3);
 }
 
-/* Map pins — charcoal to match DE brand palette.
-   Price pin on map = Hypothesis 2: explicit pricing without clicking.
-   Full-width banner map is always visible for geographic mental map. */
+/* Map pins */
 .map-price-pin {
   background: var(--de-primary); color: #fff;
   font-size: 0.7rem; font-weight: 800; padding: 3px 9px;
