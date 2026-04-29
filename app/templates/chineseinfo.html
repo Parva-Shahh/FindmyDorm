@@ -1,15 +1,45 @@
-{# chineseinfo.html — Chinese dorm info body   Author: Nathan
-   Included by info.html when lang == 'zh'
-   Uses template variables set in info.html:
-     dorm_id, dorm_name, dorm_location, dorm_university,
-     dorm_price, dorm_description, dorm_images, dorm_amenities,
-     dorm_reviews, dorm_youtube_url, dorm_tiktok_tags, is_saved #}
+{# ============================================================
+   chineseinfo.html — Chinese Dorm Info Body
+   Author: Nathan John Paseos
+
+   Included by info.html when session['language'] == 'zh'.
+   All dorm data variables (dorm_name, dorm_images, dorm_reviews,
+   dorm_youtube_url, dorm_tiktok_tags, etc.) are set in info.html
+   and available here through Jinja2 template scope.
+
+   Cultural Design Decision — Low UA + Collectivism (Wei Chen, H3, H4):
+     This layout deliberately inverts the English/German structure.
+     Media and social proof come FIRST; factual details come LAST.
+     Wei Chen's PoV states she needs to "feel the vibe" of a community
+     before she can engage with specifications. Placing the YouTube
+     tour and TikTok shorts at the top of the page respects that
+     cognitive priority without hiding the facts entirely.
+
+   Layout structure (three rows):
+     ROW 1 — YouTube tour (left) | Photo carousel (right)
+     ROW 2 — TikTok shorts feed (left) | Peer reviews (right)
+     ROW 3 — Dorm details + amenities + save/review actions + description
+
+   Hypotheses addressed:
+     H3 — Media-first layout + orange palette encourages discovery
+     H4 — Peer reviews in row 2 provide social proof before details
+============================================================ #}
+
 
 <div class="container info-body info-body--zh">
 
-  {# ROW 1: Video Tour (left) | View Dorm carousel (right) #}
+  {# ── ROW 1: Video Tour (left) | Photo Carousel (right) ──────────
+     H3 — Progressive media disclosure: rich visual content is the
+     first thing Wei Chen sees, reducing the need to read specs first.
+     Two media panels side-by-side create the high-density,
+     "vibrant bazaar" feel described in Phase 1, Section 6.3 Layout.
+  ─────────────────────────────────────────────────────────────── #}
   <div class="zh-row-media">
 
+    {# YouTube embed — H3: video tour gives Wei Chen a social,
+       experiential preview of the dorm before any data is shown.
+       loading="lazy" defers the iframe until it enters the viewport,
+       keeping initial page load fast on mobile. #}
     <div class="zh-media-col">
       <h2 class="info-section-heading info-section-heading--zh">{{ _('Dorm Tour Video') }}</h2>
       {% if dorm_youtube_url %}
@@ -20,6 +50,8 @@
                   allowfullscreen loading="lazy"></iframe>
         </div>
       {% else %}
+        {# Placeholder shown if no video URL is set — prevents an
+           empty column breaking the two-column grid layout. #}
         <div class="zh-youtube-embed zh-youtube-embed--placeholder">
           <div class="zh-youtube-placeholder-inner">
             <i class="fa-brands fa-youtube zh-youtube-placeholder__icon"></i>
@@ -30,9 +62,12 @@
       {% endif %}
     </div>
 
+    {# Photo carousel — labelled dormCarouselZH to avoid ID collision
+       with the English (#dormCarousel) and German (#dormCarouselDE)
+       instances if Bootstrap JS is initialised across templates. #}
     <div class="zh-media-col">
       <h2 class="info-section-heading info-section-heading--zh">{{ _('View Dorm') }}</h2>
-      <div id="dormCarouselZH" class="carousel slide info-carousel info-carousel--zh"
+      <div id="dormCarouselZH" class="carousel slide info-carousel"
            data-bs-ride="carousel" aria-label="{{ _('Room Photos') }}">
         <div class="carousel-indicators">
           {% for img in dorm_images %}
@@ -48,6 +83,8 @@
               <img src="{{ img }}" class="d-block w-100 info-carousel__img"
                    alt="{{ _('Room photo') }} {{ loop.index }}"
                    onerror="this.src='https://placehold.co/700x420?text=房间照片+{{ loop.index }}'" />
+              {# Caption badge shows current slide position — a minor
+                 usability aid that does not conflict with H3. #}
               <div class="carousel-caption d-none d-md-block">
                 <span class="info-carousel__caption-badge">{{ loop.index }} / {{ dorm_images | length }}</span>
               </div>
@@ -70,9 +107,21 @@
   </div>{# end ROW 1 #}
 
 
-  {# ROW 2: TikTok Shorts (left) | Reviews (right) #}
+  {# ── ROW 2: TikTok Shorts (left) | Peer Reviews (right) ─────────
+     H4 — Social proof is the second thing Wei Chen encounters,
+     still before any factual data. Short-form video content and
+     peer-written reviews together address the PoV requirement
+     to "feel the vibe" and validate through the crowd.
+  ─────────────────────────────────────────────────────────────── #}
   <div class="zh-row-media zh-row-media--reviews">
 
+    {# TikTok shorts feed — H4, H3:
+       Displays dorm-specific hashtag tags and four placeholder
+       short-form cards. In production these would be dynamically
+       fetched via TikTok's embed API filtered by dorm_tiktok_tags.
+       The feed directly addresses Wei Chen's PoV: "I always look up
+       reviews on online forums and watch reviews through short-form
+       content." (Phase 1, Section 4, PoV 2). #}
     <div class="zh-media-col">
       <h2 class="info-section-heading info-section-heading--zh">{{ _('TikTok Shorts') }}</h2>
       <div class="zh-tiktok-tags">
@@ -98,9 +147,15 @@
       </div>
     </div>
 
+    {# Peer reviews panel — H4:
+       Reviews are shown as a vertically scrollable column so Wei Chen
+       can browse multiple voices without leaving the page.
+       Review content is seeded in info.html with community-focused
+       Chinese peer names and comments to feel authentic to the locale.
+       The fixed-height scroll container (set in zh_infostyles.css)
+       prevents the column from overflowing the two-column grid. #}
     <div class="zh-media-col">
       <h2 class="info-section-heading info-section-heading--zh">{{ _('Reviews') }}</h2>
-      {# Reviews scroll container — fixed height so cards don't overflow #}
       <div class="zh-reviews-vertical" id="zhReviewsTrack">
         {% for review in dorm_reviews %}
         <div class="info-review-card info-review-card--zh">
@@ -112,10 +167,16 @@
           <div class="info-review-card__content">
             <p class="info-review-card__name">{{ review.reviewer_name }}</p>
             <div class="info-review-card__stars">
+              {# Star rating loop — orange stars in Chinese locale
+                 are set via [data-lang="zh"] CSS in components-styles.css
+                 (Garreth's shared component styles). #}
               {% for i in range(1, 6) %}
                 <i class="fa-star {% if i <= review.rating %}fa-solid info-review-card__star--filled{% else %}fa-regular{% endif %}"></i>
               {% endfor %}
             </div>
+            {# Comment truncated to 160 chars — longer than the
+               English/German 120 to accommodate longer translated strings
+               without cutting off key social proof details. #}
             <p class="info-review-card__comment">{{ review.comment | truncate(160) }}</p>
           </div>
         </div>
@@ -126,13 +187,23 @@
   </div>{# end ROW 2 #}
 
 
-  {# ROW 3: UNI-DORM details + Save/Review buttons + Description #}
+  {# ── ROW 3: Dorm Details + Actions + Description ─────────────────
+     Cultural design decision — details LAST (H3):
+     By the time Wei Chen reaches this row she has already seen the
+     video, photos, TikTok content, and peer reviews. Factual data
+     here acts as confirmation rather than a gate, which matches
+     the Low UA preference for discovering before committing.
+  ─────────────────────────────────────────────────────────────── #}
   <div class="zh-details-row">
 
     <div class="zh-details-header">
       <h1 class="zh-details-header__name">{{ dorm_name }}</h1>
     </div>
 
+    {# Spec list — same fields as German/English but positioned at the
+       bottom of the page rather than in a prominent sidebar.
+       H3: Low UA users are comfortable reaching this after exploration;
+       they do not need it immediately visible on load. #}
     <ul class="info-details-list info-details-list--zh">
       <li class="info-details-list__item">
         <span class="info-details-list__label"><i class="fa-solid fa-location-dot"></i> {{ _('Location') }}</span>
@@ -154,7 +225,12 @@
       </li>
     </ul>
 
-    {# Save + Post a Review — side by side below amenities #}
+    {# Save + Post a Review actions — displayed side-by-side (zh-action-row).
+       H3: large, tappable buttons suit mobile-first usage patterns
+       common in Chinese digital culture. The orange save state
+       (set in zh_infostyles.css) is consistent with the palette.
+       data-saved is read by zh_info.js on load to restore session state.
+       aria-label is set to Chinese by zh_info.js after DOM load. #}
     <div class="zh-action-row">
       <button class="info-save-btn info-save-btn--zh info-save-btn--large"
               id="saveBtn"
@@ -170,6 +246,9 @@
       </a>
     </div>
 
+    {# Description — prose summary of the dorm placed at the end.
+       For Wei Chen this acts as a final confirmation after the visual
+       and social proof above have already built initial trust. #}
     <div class="info-description info-description--zh">
       <h2 class="info-section-heading info-section-heading--zh">{{ _('Description') }}</h2>
       <p class="info-description__text">{{ dorm_description }}</p>

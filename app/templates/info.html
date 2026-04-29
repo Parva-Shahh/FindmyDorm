@@ -1,16 +1,42 @@
 {% extends "base.html" %}
 
 {# ============================================================
-   info.html — Dorm Listing Detail Page   Author: Nathan Paseos
-   All dorm data (name, location, images, reviews etc.) lives
-   here in the template — nothing comes from routes.py except
-   current_user. Language-specific reviews are defined per block.
-   ============================================================ #}
+   info.html — Dorm Listing Detail Page
+   Author: Nathan John Paseos
+
+   Purpose:
+     Renders a full dorm detail view for a single listing.
+     Acts as the master dispatcher: shared hero and dorm data
+     are defined here, then the body is handed off to a
+     locale-specific sub-template (chineseinfo.html / germaninfo.html)
+     or rendered inline for English.
+
+   Cultural Design Decision:
+     Rather than one template with deeply nested conditionals,
+     locale layouts are split into separate include files.
+     This keeps each cultural variant independently readable
+     and editable without risk of breaking the other two.
+     Dorm data is set once here and passed through Jinja2 scope.
+
+   Hypotheses addressed:
+     H1 — German: always-visible spec card gives Karl a clear mental map
+     H2 — German: explicit labelled spec list (location, price, amenities)
+     H3 — Chinese: media-first layout encourages exploration for Wei Chen
+     H4 — Chinese: peer reviews prominent above factual details
+============================================================ #}
+
 
 {% block extra_css %}
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" />
+
+  {# Cultural assumption — CSS per locale (H1, H3):
+     Each language gets its own stylesheet so the visual language
+     feels native. Karl (DE) gets a structured charcoal palette;
+     Wei Chen (ZH) gets a vibrant orange, media-dense layout.
+     Loaded here in extra_css rather than base.html to prevent
+     these locale overrides from leaking into teammates' pages. #}
   {% if session.get('language') == 'de' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Nathan/de_infostyles.css') }}" />
   {% elif session.get('language') == 'zh' %}
@@ -21,12 +47,14 @@
 {% endblock %}
 
 
+
 {% block main %}
 
 {# ================================================================
-   DORM DATA — defined here so routes.py stays clean.
-   Images: only real carousel images — NO placeholder "main" banner.
-   The hero uses images[0] as a real photo, not a text placeholder.
+   DORM DATA — defined centrally so routes.py stays clean and so
+   that all three locale sub-templates share one consistent source
+   of truth. All user-facing strings are wrapped in _() for
+   Flask-Babel so they are extracted into the .po translation files.
 ================================================================ #}
 {% set dorm_id          = 'yugo-dublin-1' %}
 {% set dorm_name        = _('Yugo Dublin') %}
@@ -36,45 +64,59 @@
 {% set dorm_youtube_url = 'https://www.youtube.com/embed/dQw4w9WgXcQ' %}
 {% set dorm_tiktok_tags = ['YugoDublin', 'FindMyDorm', 'StudentLivingDublin', 'DormLife'] %}
 
-{# Carousel images — real placeholder photos, NO "Yugo Dublin Main" #}
+{# Placeholder carousel images — in production these would be
+   fetched dynamically from the database via the route context. #}
 {% set dorm_images = [
-    'https://placehold.co/800x460?text=Common+Room',
-    'https://placehold.co/800x460?text=Gym',
-    'https://placehold.co/800x460?text=Rooftop+Terrace',
-    'https://placehold.co/800x460?text=Study+Room',
-    'https://placehold.co/800x460?text=Laundry+Room',
+   'https://placehold.co/800x460?text=Common+Room',
+   'https://placehold.co/800x460?text=Gym',
+   'https://placehold.co/800x460?text=Rooftop+Terrace',
+   'https://placehold.co/800x460?text=Study+Room',
+   'https://placehold.co/800x460?text=Laundry+Room',
 ] %}
 
+{# Amenities list — all strings wrapped in _() for translation.
+   H2 (German/Karl): this explicit, itemised amenities list is the
+   core of the "technical specification" design response. Karl
+   needs to verify every facility before committing. #}
 {% set dorm_amenities = [
-    _('En-Suite Bathroom'),
-    _('High-Speed Wi-Fi'),
-    _('Gym'),
-    _('Cinema Room'),
-    _('Rooftop Terrace'),
-    _('Laundry'),
-    _('Bike Storage'),
-    _('Bills Included'),
-    _('24/7 Security'),
-    _('Study Rooms'),
+   _('En-Suite Bathroom'),
+   _('High-Speed Wi-Fi'),
+   _('Gym'),
+   _('Cinema Room'),
+   _('Rooftop Terrace'),
+   _('Laundry'),
+   _('Bike Storage'),
+   _('Bills Included'),
+   _('24/7 Security'),
+   _('Study Rooms'),
 ] %}
 
+{# Description string — localised via gettext.
+   Displayed as prose in the English and German layouts.
+   Chinese layout places it below media content (H3). #}
 {% set dorm_description = _(
-    'Yugo Dublin is a premium student accommodation located in the heart '
-    'of Dublin city centre, just a short walk from Trinity College Dublin '
-    'and TU Dublin. The building offers fully furnished en-suite rooms, '
-    'high-speed WiFi, on-site gym, cinema room, rooftop terrace and 24/7 '
-    'security. Bills are fully included in the weekly price, with flexible '
-    'contract lengths to suit semester or full-year stays.'
+   'Yugo Dublin is a premium student accommodation located in the heart '
+   'of Dublin city centre, just a short walk from Trinity College Dublin '
+   'and TU Dublin. The building offers fully furnished en-suite rooms, '
+   'high-speed WiFi, on-site gym, cinema room, rooftop terrace and 24/7 '
+   'security. Bills are fully included in the weekly price, with flexible '
+   'contract lengths to suit semester or full-year stays.'
 ) %}
 
-{# Language-specific reviews — each language only sees its own reviews #}
+{# Cultural assumption — locale-specific review content (H4):
+   Reviews are seeded per language to reflect culturally relevant
+   peer voices. Chinese reviews reference community atmosphere and
+   the "Ask a Resident" feature (social proof for Wei Chen).
+   German reviews reference process transparency and matched specs
+   (factual reassurance for Karl). This is not user-generated data —
+   in production, reviews would be pulled from the database. #}
 {% if session.get('language') == 'zh' %}
   {% set dorm_reviews = [
-    {
-      'reviewer_name': 'Wei Chen',
-      'reviewer_avatar': 'https://placehold.co/48x48?text=WC',
-      'rating': 5,
-      'comment': _('Great facilities and excellent location! Staff are very friendly and check-in was smooth. Highly recommended!'),
+   {
+    'reviewer_name': 'Wei Chen',
+    'reviewer_avatar': 'https://placehold.co/48x48?text=WC',
+    'rating': 5,
+    'comment': _('Great facilities and excellent location! Staff are very friendly and check-in was smooth. Highly recommended!'),
     },
     {
       'reviewer_name': 'Lin Mei',
@@ -145,13 +187,19 @@
   ] %}
 {% endif %}
 
-{# saved state from session #}
+{# Session-persisted save state — checked on every load so the
+   bookmark icon reflects the user's existing saved dorms list. #}
 {% set is_saved = dorm_id in (session.get('saved_dorms') or []) %}
 
 
 {# ================================================================
-   SHARED HERO BANNER — same structure for all languages,
-   colour driven by data-lang CSS in nav-footer-styles.css
+   SHARED HERO BANNER
+   Same structure across all three locales — colour theming is
+   handled by [data-lang] CSS selectors in nav-footer-styles.css
+   so the hero feels culturally consistent without duplicating HTML.
+   H1 (German): charcoal header signals authority before Karl reads
+   a single data point. H3 (Chinese): orange header cues energy
+   and invites Wei Chen to scroll further.
 ================================================================ #}
 <section class="info-hero">
   <div class="container info-hero__inner">
@@ -164,8 +212,9 @@
       {{ dorm_university }}
     </p>
   </div>
-  {# Hero uses the first real carousel image as a banner.
-     No "Yugo Dublin Main" placeholder. Falls back to slim colour bar. #}
+  {# Banner image uses the first carousel image.
+     onerror falls back to a slim colour bar (handled in CSS)
+     so the hero never appears broken on placeholder URLs. #}
   {% if dorm_images %}
     <div class="info-hero__banner">
       <img src="{{ dorm_images[0] }}"
@@ -180,7 +229,17 @@
 
 
 {# ================================================================
-   LOCALE DISPATCH
+   LOCALE DISPATCH — Cultural layout decision (H1, H3):
+   Each locale gets a fundamentally different page structure, not
+   just different text. Dispatching to sub-templates keeps each
+   cultural variant self-contained and avoids deeply nested
+   conditionals that would make the file unreadable.
+
+   DE → germaninfo.html: task-centric 50/50 split, spec card visible
+        immediately without scrolling (H1, H2)
+   ZH → chineseinfo.html: media-first two-column grid, reviews above
+        factual details (H3, H4)
+   EN → inline below: neutral single-column, balanced layout
 ================================================================ #}
 {% if session.get('language') == 'zh' %}
   {% include 'chineseinfo.html' %}
@@ -192,7 +251,10 @@
 <div class="container info-body">
   <div class="info-body__row">
 
-    {# LEFT: Carousel + Description #}
+
+    {# LEFT: Carousel + Description
+       Standard single-column carousel for English/neutral users.
+       No cultural overrides needed — this is the baseline layout. #}
     <div class="info-col-main">
       <h2 class="info-section-heading">{{ _('View Dorm') }}</h2>
 
@@ -236,7 +298,10 @@
       </div>
     </div>
 
-    {# RIGHT: Details card #}
+    {# RIGHT: Details card
+       Sidebar card with key facts. Neutral version — no locale
+       overrides. The German layout uses a heavier version of this
+       same card as its primary trust signal (H1, H2). #}
     <div class="info-col-aside">
       <div class="info-details-card">
         <div class="info-details-card__header">
@@ -263,6 +328,9 @@
           </li>
         </ul>
 
+        {# Social links — TikTok and YouTube route users to external
+           short-form content. Supports H4 (peer video reviews) for
+           collectivist users who may arrive via the English locale. #}
         <div class="info-social-links">
           <a href="https://www.tiktok.com/@findmydorm" target="_blank" rel="noopener noreferrer"
              class="info-social-btn info-social-btn--tiktok">
@@ -277,6 +345,8 @@
           </a>
         </div>
 
+        {# Save button — data-saved attribute is read by en_info.js
+           to set initial icon state from session on page load. #}
         <button class="info-save-btn" id="saveBtn"
                 data-dorm-id="{{ dorm_id }}"
                 data-saved="{{ 'true' if is_saved else 'false' }}"
@@ -289,7 +359,10 @@
 
   </div>
 
-  {# Reviews — English only #}
+  {# REVIEWS — English layout
+     Horizontal scrollable carousel with prev/next arrows.
+     Reviews are neutral in tone, mixing local and international
+     student voices. Arrow controls are handled by en_info.js. #}
   <section class="info-reviews">
     <h2 class="info-section-heading">{{ _('Reviews') }}</h2>
     <div class="info-reviews__track" id="reviewsTrack">
@@ -326,6 +399,13 @@
 
 {% block extra_js %}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  {# Cultural assumption — JS per locale:
+     Each locale loads its own script so JS behaviour matches the
+     cultural layout. de_info.js provides keyboard carousel nav and
+     German aria-labels for the save button. zh_info.js handles the
+     TikTok feed interactions and Chinese aria-labels. Loaded here
+     (not in base.html) to keep Nathan's JS scoped to this page only. #}
   {% if session.get('language') == 'de' %}
     <script src="{{ url_for('static', filename='js/Nathan/de_info.js') }}"></script>
   {% elif session.get('language') == 'zh' %}

@@ -1,6 +1,6 @@
 /**
  * zh_info.js  —  FindMyDorm  |  Chinese Dorm Info Page
- * Author: Nathan
+ * Author: Nathan John Paseos
  * Path: app/static/js/Nathan/zh_info.js
  */
 
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ── 2. TIKTOK HASHTAG FILTER ─────────────────────────────────── */
+  /* Tiktok filter is only applied on our chinese website to cater towards the short-form video implementations from Hypothesis 4 regarding Wei Chen */
   const tiktokFeed = document.getElementById('zhTiktokFeed');
 
   if (tiktokFeed) {

@@ -1,8 +1,9 @@
 /* de_infostyles.css — German Info Page   Author: Nathan
-   Path: app/static/css/Nathan/de_infostyles.css
-   Colour scheme: BLACK / WHITE / GREY — no orange */
+  Path: app/static/css/Nathan/de_infostyles.css
+  Colour scheme: BLACK / WHITE / GREY — no orange
+*/
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap'); /* Hypothesis 1 (Karl): Karl finds it easier to read and take things seriously with a modern sans-serif font. */
 
 :root {
   --de-info-primary:       #212529;
@@ -28,8 +29,10 @@
 
 body { font-family: var(--de-info-font); background: var(--de-info-bg); color: var(--de-info-text); }
 
+
 /* ── Hero — black/grey scheme ─────────────────────────────── */
 .info-hero { background: #212529; color: #fff; padding: 2rem 0 0; }
+/* */
 .info-hero__inner { padding-bottom: 1.25rem; }
 .info-hero__title { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.35rem; color: #fff; }
 .info-hero__meta { font-size: 0.95rem; color: rgba(255,255,255,0.75); margin-bottom: 0; }
@@ -43,6 +46,7 @@ body { font-family: var(--de-info-font); background: var(--de-info-bg); color: v
   font-size: 1.25rem; font-weight: 900; color: var(--de-info-text);
   margin-bottom: 1rem; padding-bottom: 0.45rem;
   border-bottom: 3px solid #212529; display: inline-block; letter-spacing: -0.3px;
+  /* Design guideline: Make section headings bold and clear so Karl can find info fast—no confusion, just straight to the point! */
 }
 
 /* ── Body ─────────────────────────────────────────────────── */
@@ -72,7 +76,7 @@ body { font-family: var(--de-info-font); background: var(--de-info-bg); color: v
 .de-contact-btn:hover { background: var(--de-info-bg); color: #212529; text-decoration: none; }
 .de-contact-btn i { font-size: 1rem; }
 
-/* ── Details card — grey top border instead of orange ────── */
+/* ── Details card — grey top border ────── */
 .info-details-card--de {
   background: var(--de-info-card-bg); border: 1px solid var(--de-info-border);
   border-top: 4px solid #212529;   /* dark top-accent bar */

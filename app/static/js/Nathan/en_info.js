@@ -1,6 +1,6 @@
 /**
  * en_info.js  —  FindMyDorm  |  English Dorm Info Page
- * Author: Nathan
+ * Author: Nathan John Paseos
  * Path: app/static/js/Nathan/en_info.js
  */
 

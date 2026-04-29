@@ -1,12 +1,46 @@
-{# germaninfo.html — German dorm info body   Author: Nathan Paseos
-   Included by info.html when lang == 'de'
-   Uses template variables set in info.html. #}
+{# ============================================================
+   germaninfo.html — German Dorm Info Body
+   Author: Nathan John Paseos
+
+   Included by info.html when session['language'] == 'de'.
+   All dorm data variables (dorm_name, dorm_images, dorm_reviews,
+   dorm_id, dorm_amenities, etc.) are set in info.html and
+   available here through Jinja2 template scope.
+
+   Cultural Design Decision — High UA + Individualism (Karl, H1, H2):
+     This layout puts the explicit spec card immediately alongside
+     the carousel so Karl can see location, university, price, and
+     amenities without scrolling. Karl's PoV states: "If I can't
+     see exactly where I am in the process or if the data is vague,
+     I cannot move forward." (Phase 1, Section 4, PoV 1).
+     Every structural decision here is made to eliminate ambiguity
+     before Karl encounters it.
+
+   Layout structure:
+     ROW 1 — Carousel (left) + Contact a Resident CTA | Spec card (right)
+     BELOW  — Description prose (full width)
+     BELOW  — Horizontal reviews carousel with arrow controls
+
+   Hypotheses addressed:
+     H1 — Spec card visible immediately; no scrolling required
+     H2 — Explicit labelled list: location, university, price, amenities
+============================================================ #}
+
 
 <div class="container info-body info-body--de">
 
-  {# ROW 1: Carousel (left) | Details card (right) #}
+  {# ── ROW 1: Carousel (left) | Details card (right) ──────────────
+     H1, H2 — 50/50 split layout: Karl can compare photos and
+     specifications simultaneously without switching context.
+     This mirrors the "task-centric landing zone" described in
+     Phase 1, Section 6.3 Layout for High UA / Individualist users.
+  ─────────────────────────────────────────────────────────────── #}
   <div class="de-top-split">
 
+    {# LEFT: Photo carousel + Contact a Resident CTA
+       H2: The carousel lets Karl inspect each room visually.
+       Individual carousel IDs (dormCarouselDE) avoid Bootstrap JS
+       conflicts if other locale carousels exist in the DOM. #}
     <div class="de-carousel-col">
       <h2 class="info-section-heading info-section-heading--de">{{ _('View Dorm') }}</h2>
 
@@ -26,6 +60,9 @@
               <img src="{{ img }}" class="d-block w-100 info-carousel__img"
                    alt="{{ _('Room photo') }} {{ loop.index }}"
                    onerror="this.src='https://placehold.co/700x420?text=Zimmer+{{ loop.index }}'" />
+              {# Slide counter badge — minor H1 usability aid.
+                 Karl can see exactly how many photos remain,
+                 reducing uncertainty during carousel browsing. #}
               <div class="carousel-caption d-none d-md-block">
                 <span class="info-carousel__caption-badge">{{ loop.index }} / {{ dorm_images | length }}</span>
               </div>
@@ -44,7 +81,13 @@
         </button>
       </div>
 
-      {# Contact a Resident below carousel #}
+      {# Contact a Resident — H1, H2:
+         Placed directly below the carousel as a task-directed CTA.
+         Unlike the Chinese layout's social proof panels, this is
+         framed as an individual, opt-in action (contact one resident)
+         not a crowd-based validation signal. This respects Karl's
+         Individualist profile — he wants direct answers, not
+         aggregate peer opinion. Routes to profile.html. #}
       <div class="de-contact-resident">
         <a href="{{ url_for('profile') }}" class="de-contact-btn">
           <i class="fa-solid fa-comments"></i>
@@ -53,6 +96,14 @@
       </div>
     </div>
 
+    {# RIGHT: Spec card — H1, H2:
+       This is the primary trust signal for High UA / Individualist users.
+       Location, university, price, and a full amenities checklist are
+       ALL visible without any interaction (no hovers, no expandable
+       sections). Karl's PoV requires "explicit data" and "constant
+       reassurance" — this card delivers both on first load.
+       Charcoal theming (#212529, set in de_infostyles.css) signals
+       authority and professionalism to a German user. #}
     <div class="de-details-col">
       <div class="info-details-card info-details-card--de">
 
@@ -60,6 +111,11 @@
           <h1 class="info-details-card__name">{{ dorm_name }}</h1>
         </div>
 
+        {# Explicit labelled spec list — H2:
+           Each item uses a labelled icon + value pair with no
+           ambiguity about what the data represents. This is the
+           "technical specification" design response described in
+           Phase 1, Section 5, Hypothesis 2. #}
         <ul class="info-details-list">
           <li class="info-details-list__item">
             <span class="info-details-list__label"><i class="fa-solid fa-location-dot"></i> {{ _('Location') }}</span>
@@ -73,6 +129,11 @@
             <span class="info-details-list__label"><i class="fa-solid fa-euro-sign"></i> {{ _('Price') }}</span>
             <span class="info-details-list__value info-details-list__value--price">€{{ dorm_price }} / {{ _('month') }}</span>
           </li>
+          {# Full amenities list — H2:
+             Displayed as an itemised checklist rather than a comma-
+             separated string so every facility is unambiguously listed.
+             Karl needs to verify each amenity individually before
+             committing to a high-stakes financial decision. #}
           <li class="info-details-list__item info-details-list__item--amenities">
             <span class="info-details-list__label"><i class="fa-solid fa-star"></i> {{ _('Amenities') }}</span>
             <ul class="info-amenities-list">
@@ -81,6 +142,9 @@
           </li>
         </ul>
 
+        {# Social links — kept as labelled icon buttons (de-social-icon-btn)
+           rather than the Chinese large-card style. H1: labels are always
+           visible; Karl should never have to hover to understand a button. #}
         <div class="info-social-links info-social-links--de">
           <a href="https://www.tiktok.com/@findmydorm" target="_blank" rel="noopener noreferrer"
              class="info-social-btn info-social-btn--tiktok de-social-icon-btn">
@@ -99,6 +163,10 @@
           </a>
         </div>
 
+        {# Save button — H1: data-saved sets initial icon state.
+           de_info.js reads this on DOMContentLoaded and applies
+           the German aria-label ("Unterkunft speichern / entfernen")
+           so screen-reader output is fully localised. #}
         <button class="info-save-btn info-save-btn--de"
                 id="saveBtn"
                 data-dorm-id="{{ dorm_id }}"
@@ -114,12 +182,25 @@
   </div>{# end top split #}
 
 
+  {# ── DESCRIPTION — full width below the split ─────────────────────
+     H1: Prose description appears AFTER the spec card, not before.
+     Karl already has the critical data; this section provides
+     supplementary context for those who want it, without burying
+     the facts in a wall of text. #}
   <section class="info-description info-description--de">
     <h2 class="info-section-heading info-section-heading--de">{{ _('Description') }}</h2>
     <p class="info-description__text">{{ dorm_description }}</p>
   </section>
 
 
+  {# ── REVIEWS — horizontal carousel with explicit arrow controls ───
+     H1: Reviews for German users focus on factual confirmation
+     ("specifications matched reality", "no surprises") rather than
+     community atmosphere. The horizontal carousel with visible prev/
+     next arrows gives Karl a predictable, navigable structure.
+     Arrow opacity feedback (fades at scroll limits) is handled in
+     de_info.js — a subtle H1 implementation providing clear system
+     status at all times. #}
   <section class="info-reviews info-reviews--de">
     <h2 class="info-section-heading info-section-heading--de">{{ _('Reviews') }}</h2>
     <div class="info-reviews__wrapper">
@@ -132,6 +213,10 @@
           </div>
           <p class="info-review-card__name">{{ review.reviewer_name }}</p>
           <div class="info-review-card__stars">
+            {# Star icons — monochrome in German locale, set via
+               [data-lang="de"] CSS in components-styles.css.
+               Consistent with the charcoal palette and structured
+               professional aesthetic for Karl. #}
             {% for i in range(1, 6) %}
               <i class="fa-star {% if i <= review.rating %}fa-solid info-review-card__star--filled{% else %}fa-regular{% endif %}"></i>
             {% endfor %}
@@ -140,6 +225,9 @@
         </div>
         {% endfor %}
       </div>
+      {# Prev/Next arrow buttons — IDs are DE-specific to avoid
+         collision with English review controls (#reviewsPrev/Next).
+         de_info.js attaches scroll logic and opacity feedback here. #}
       <div class="info-reviews__controls">
         <button class="info-reviews__arrow info-reviews__arrow--de"
                 id="reviewsPrevDE" aria-label="{{ _('Previous reviews') }}">

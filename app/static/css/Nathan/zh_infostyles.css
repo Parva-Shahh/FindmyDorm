@@ -1,8 +1,11 @@
-/* zh_infostyles.css — Chinese Info Page   Author: Nathan
-   Path: app/static/css/Nathan/zh_infostyles.css
-   Colour: #ff6633 orange / warm white cards */
+/* zh_infostyles.css — Chinese Info Page   
+  Author: Nathan John Paseos
+  Path: app/static/css/Nathan/zh_infostyles.css
+  Colour: #ff6633 orange / warm white cards
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap'); /* Hypothesis 3 (Wei): Wei finds it way easier to read and more legit with a font she sees everywhere in China. */
 
 :root {
   --zh-info-primary:       #ff6633;

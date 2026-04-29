@@ -1,6 +1,6 @@
 /**
  * de_info.js  —  FindMyDorm  |  German Dorm Info Page
- * Author: Nathan
+ * Author: Nathan John Paseos
  * Path: app/static/js/Nathan/de_info.js
  */
 
