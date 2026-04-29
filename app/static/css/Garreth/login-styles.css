@@ -1,85 +1,163 @@
 /**
  * FILE: login-styles.css
  * AUTHOR: Garreth (C24451694)
+ *
+ * PURPOSE: Cultural adaptations specific to the login page.
+ * NOTE: Background image URLs are set via inline style in login.html
+ * using url_for() — CSS files cannot use Flask's url_for.
+ *
+ * CULTURAL DIMENSIONS ADDRESSED (Phase 1, Section 2.2):
+ * - China: Low UA + Collectivist (Wei Chen persona)
+ * - Germany: High UA + Individualist (Karl persona)
+ *
+ * HYPOTHESES ADDRESSED:
+ * - Hypothesis 1 (German checklist): constant feedback prompts give High UA
+ *   users the clear mental map they need (Phase 1, Section 5).
+ * - Hypotheses 4 & 5 (Chinese social proof): peer validation and user count
+ *   build trust for collectivist users (Phase 1, Section 5).
  */
 
-/* ===== CHINESE LOGIN ===== */
-[data-lang="zh"] .btn-primary {
-    background-color: #ff6633 !important;
-    border-color: #ff6633 !important;
-    color: #ffffff !important;
+/* ===== CHINESE LOGIN — full background image layout =====
+   flex:1 works because body is display:flex flex-direction:column
+   in components-styles.css, so this wrapper fills remaining height
+   and pushes the footer to the very bottom of the viewport. */
+.zh-login-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 2rem 1rem;
 }
 
-[data-lang="zh"] .section-heading-lower {
-    color: #ff6633 !important;
+/* Semi-transparent overlay keeps the white card legible over any image */
+.zh-login-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
 }
 
-/* Form labels white on Chinese layout */
-[data-lang="zh"] .cta-inner .form-label {
-    color: #212529 !important;
+.zh-login-card-wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
 }
 
-/* Social proof layout fix */
-[data-lang="zh"] .zh-social-proof {
-    background-color: #fff3ee;
+/* Frosted white card floats above the image */
+.zh-login-card {
+    background: rgba(255, 255, 255, 0.93);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 2.5rem;
+}
+
+/* --- SOCIAL PROOF ---
+   Hypothesis 4 & 5: peer count and review snippets signal social belonging.
+   Key design decision: explicit left/right halves avoid the Bootstrap gap
+   utility conflicting with the negative avatar margin-right overlap. */
+.zh-social-proof {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff3ee;
     border: 1px solid #ff6633;
     border-radius: 10px;
+    padding: 12px 14px;
+    gap: 12px;
 }
 
-[data-lang="zh"] .zh-avatar-group {
+.zh-proof-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Negative margin creates overlapping crowd effect */
+.zh-avatar-group {
     display: flex;
     align-items: center;
 }
 
-[data-lang="zh"] .zh-avatar {
-    width: 36px;
-    height: 36px;
+.zh-avatar {
+    width: 34px;
+    height: 34px;
     background: #ff6633;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border: 2px solid white;
     margin-right: -8px;
     flex-shrink: 0;
 }
 
-[data-lang="zh"] .zh-avatar:last-child {
+.zh-avatar:last-child {
     margin-right: 0;
 }
 
-[data-lang="zh"] .zh-proof-text {
-    margin-left: 16px;
+/* Fixed left margin clears the overlapping avatars cleanly */
+.zh-proof-text {
+    margin-left: 14px;
+    font-size: 0.82rem;
+    white-space: nowrap;
 }
 
-/* ===== GERMAN LOGIN ===== */
-[data-lang="de"] .btn-primary {
-    background-color: #212529 !important;
-    border-color: #212529 !important;
-    color: #ffffff !important;
+.zh-proof-right {
+    border-left: 1px solid #ffd4c2;
+    padding-left: 12px;
+    flex-shrink: 0;
 }
 
-[data-lang="de"] .btn-primary:hover {
-    background-color: #343a40 !important;
-    border-color: #343a40 !important;
+/* Orange bullet dot — more reliable than Font Awesome icon in this context */
+.zh-dot {
+    width: 7px;
+    height: 7px;
+    min-width: 7px;
+    background: #ff6633;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
 }
 
-/* Override Bootstrap blue border on card */
-[data-lang="de"] .card.border-primary,
-[data-lang="de"] .card.shadow.border-primary {
-    border-color: #212529 !important;
-    border-width: 2px !important;
+/* ===== GERMAN LOGIN — Facebook-style 50/50 split =====
+   flex:1 fills remaining height — same approach as Chinese wrapper. */
+.de-login-wrapper {
+    flex: 1;
+    display: flex;
+    min-height: 0;
 }
 
-/* Override Bootstrap blue text */
-[data-lang="de"] .text-primary,
-[data-lang="de"] h5.text-primary,
-[data-lang="de"] .fw-bold.text-primary {
-    color: #212529 !important;
+/* Left image panel — hidden on mobile, shown on large screens */
+.de-login-image {
+    display: none;
+    flex: 1;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
-/* Checklist success state — black not green */
-[data-lang="de"] #germanLoginChecklist .text-success {
-    color: #212529 !important;
+@media (min-width: 992px) {
+    .de-login-image {
+        display: block;
+    }
+}
+
+/* Right white panel */
+.de-login-form-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 3rem 2rem;
+}
+
+.de-login-form-inner {
+    width: 100%;
+    max-width: 420px;
 }
