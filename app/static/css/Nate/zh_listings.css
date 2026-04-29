@@ -7,7 +7,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
 
-/* ── Tokens — ZH: orange theme ──────────────────────────────── */
 :root {
   --zh-primary:       #ff6633;
   --zh-primary-dark:  #cc5500;
@@ -209,7 +208,13 @@ body {
 
 .card-content .small {
   font-size: 0.78rem; color: var(--zh-text-muted);
-  display: flex; align-items: center; gap: 0.25rem; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.25rem; margin-bottom: 0.4rem;
+}
+
+.distance-badge {
+  font-size: 0.72rem; color: var(--zh-text-muted);
+  display: flex; align-items: center; gap: 0.3rem;
+  margin-bottom: 0.4rem;
 }
 
 .amenity-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.6rem; }

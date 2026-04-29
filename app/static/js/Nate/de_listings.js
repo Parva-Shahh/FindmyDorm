@@ -1,285 +1,127 @@
 /**
- * FILE: de_listings.js
- * AUTHOR: Nate
- * German locale — Trivago-inspired layout
- * Includes filtering and search logic (no separate filter.js needed)
+ * FILE: de_listings.js  —  German locale  —  Trivago layout
+ * Pre-filter from index via window._preFilter
+ * Room types: En-Suite, Studio, Shared
  */
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ══════════════════════════════════════════════════════════
-     FILTER & SEARCH LOGIC
-  ══════════════════════════════════════════════════════════ */
+  var searchInput=document.getElementById('searchInput');
 
-  var searchInput = document.getElementById('searchInput');
-
-  function applyFilters() {
-    var dorms           = document.querySelectorAll('.dorm-item');
-    var query           = searchInput ? searchInput.value.toLowerCase() : '';
-    var activeTypes     = getChecked(['Apartment', 'Studio', 'Room']);
-    var activePrices    = getChecked(['budget', 'mid', 'premium']);
-    var activeLocations = getChecked(['dublin 1', 'dublin 2', 'dublin 6', 'dun laoghaire']);
-    var activeAmenities = getChecked(['wifi', 'bills', 'furnished', 'parking']);
-
-    var visibleCount = 0;
-
-    dorms.forEach(function (dorm) {
-      var name      = (dorm.getAttribute('data-name')      || '').toLowerCase();
-      var address   = (dorm.getAttribute('data-address')   || '').toLowerCase();
-      var type      = (dorm.getAttribute('data-type')      || '');
-      var price     = parseInt(dorm.getAttribute('data-price') || '0', 10);
-      var amenities = (dorm.getAttribute('data-amenities') || '').toLowerCase().split(',');
-
-      var matchesSearch    = !query || name.includes(query) || address.includes(query);
-      var matchesType      = activeTypes.length === 0 || activeTypes.includes(type);
-      var matchesPrice     = activePrices.length === 0 || activePrices.some(function (r) {
-        if (r === 'budget')  return price < 800;
-        if (r === 'mid')     return price >= 800 && price <= 1000;
-        if (r === 'premium') return price > 1000;
-        return true;
-      });
-      var matchesLocation  = activeLocations.length === 0 || activeLocations.some(function (l) { return address.includes(l); });
-      var matchesAmenities = activeAmenities.length === 0 || activeAmenities.every(function (a) { return amenities.includes(a); });
-
-      var visible = matchesSearch && matchesType && matchesPrice && matchesLocation && matchesAmenities;
-      dorm.style.setProperty('display', visible ? 'block' : 'none', 'important');
-      if (visible) visibleCount++;
+  function applyFilters(){
+    var dorms=document.querySelectorAll('.dorm-item'),query=searchInput?searchInput.value.toLowerCase():'';
+    var types=getChecked(['En-Suite','Studio','Shared']),prices=getChecked(['budget','mid','premium']);
+    var locs=getChecked(['dublin 1','dublin 2','dublin 4','dublin 6','dublin 8','dublin 9','dun laoghaire']);
+    var unis=getChecked(['uni-tcd','uni-ucd','uni-tud','uni-dcu']),dists=getChecked(['dist-1','dist-2','dist-5']);
+    var amens=getChecked(['wifi','bills','furnished','parking']),visible=0;
+    dorms.forEach(function(d){
+      var name=(d.getAttribute('data-name')||'').toLowerCase(),addr=(d.getAttribute('data-address')||'').toLowerCase();
+      var type=d.getAttribute('data-type')||'',price=parseInt(d.getAttribute('data-price')||'0',10);
+      var amen=(d.getAttribute('data-amenities')||'').toLowerCase().split(',');
+      var uni=(d.getAttribute('data-university')||'').toLowerCase(),dist=parseFloat(d.getAttribute('data-distance')||'99');
+      var ok=(!query||name.includes(query)||addr.includes(query))
+        &&(types.length===0||types.indexOf(type)!==-1)
+        &&(prices.length===0||prices.some(function(r){return r==='budget'?price<800:r==='mid'?price>=800&&price<=1000:price>1000;}))
+        &&(locs.length===0||locs.some(function(l){return addr.includes(l);}))
+        &&(unis.length===0||unis.some(function(u){return('uni-'+uni)===u;}))
+        &&(dists.length===0||dists.some(function(x){return x==='dist-1'?dist<1:x==='dist-2'?dist<2:dist<5;}))
+        &&(amens.length===0||amens.every(function(a){return amen.indexOf(a)!==-1;}));
+      d.style.setProperty('display',ok?'block':'none','important');
+      if(ok)visible++;
     });
-
-    var countEl = document.getElementById('resultCount');
-    if (countEl) countEl.textContent = visibleCount + ' properties found';
+    var c=document.getElementById('resultCount');if(c)c.textContent=visible+' properties found';
   }
 
-  function getChecked(knownValues) {
-    var checked = [];
-    document.querySelectorAll('.filter-check:checked').forEach(function (cb) {
-      if (knownValues.includes(cb.value)) checked.push(cb.value);
-    });
-    return checked;
+  function getChecked(vals){var out=[];document.querySelectorAll('.filter-check:checked').forEach(function(cb){if(vals.indexOf(cb.value)!==-1)out.push(cb.value);});return out;}
+  if(searchInput)searchInput.addEventListener('input',applyFilters);
+  document.querySelectorAll('.filter-check').forEach(function(cb){cb.addEventListener('change',applyFilters);});
+  window.resetFilters=function(){if(searchInput)searchInput.value='';document.querySelectorAll('.filter-check').forEach(function(cb){cb.checked=false;});applyFilters();};
+
+  function applyPreFilters(){
+    var pf=window._preFilter||{};
+    if(pf.uni&&pf.uni!==''){var cb=document.querySelector('.filter-check[value="uni-'+pf.uni+'"]');if(cb)cb.checked=true;}
+    if(pf.type&&pf.type!==''){var cb2=document.querySelector('.filter-check[value="'+pf.type+'"]');if(cb2)cb2.checked=true;}
+    if(pf.search&&pf.search!==''){var si=document.getElementById('searchInput');if(si)si.value=pf.search;}
+    if(pf.uni||pf.type||pf.search)applyFilters();
   }
 
-  if (searchInput) searchInput.addEventListener('input', applyFilters);
-  document.querySelectorAll('.filter-check').forEach(function (cb) {
-    cb.addEventListener('change', applyFilters);
+  // Search button
+  var sc=document.querySelector('.search-container');
+  if(sc){var b=document.createElement('button');b.className='de-search-btn';b.textContent='Suchen';b.addEventListener('click',applyFilters);sc.appendChild(b);}
+
+  // Map banner
+  var sw=document.querySelector('.search-bar-wrapper'),mb=document.createElement('div');mb.className='de-map-banner';
+  var dm=document.getElementById('dormMap');
+  if(dm){mb.appendChild(dm);if(sw&&sw.nextSibling)sw.parentNode.insertBefore(mb,sw.nextSibling);setTimeout(function(){if(window._dormLeafletMap)window._dormLeafletMap.invalidateSize();},100);}
+
+  // Results bar
+  var rb=document.createElement('div');rb.className='de-results-bar';
+  var rc=document.getElementById('resultCount'),cc=rc?rc.cloneNode(true):document.createElement('span');
+  cc.id='resultCount';if(rc)rc.id='resultCount-old';cc.className='de-results-count';
+  var sv=document.createElement('div');sv.innerHTML='<span style="font-size:0.82rem;color:#6c757d;">Sortieren nach:</span><select class="de-sort-select"><option>Empfohlen</option><option>Preis: niedrig bis hoch</option><option>Preis: hoch bis niedrig</option><option>Bewertung</option><option>Entfernung zur Universität</option></select>';
+  rb.appendChild(cc);rb.appendChild(sv);mb.insertAdjacentElement('afterend',rb);
+
+  // Layout
+  var deLayout=document.createElement('div');deLayout.className='de-layout';
+  var sidebar=document.createElement('aside');sidebar.className='de-sidebar';
+  var rst=document.createElement('button');rst.className='de-filter-reset';rst.textContent='✕ Filter zurücksetzen';
+  rst.addEventListener('click',function(){document.querySelectorAll('.de-filter-check,.filter-check').forEach(function(cb){cb.checked=false;});applyFilters();});
+  sidebar.appendChild(rst);
+
+  document.querySelectorAll('.filter-bar-wrapper .dropdown').forEach(function(dd){
+    var te=dd.querySelector('.filter-pill'),items=dd.querySelectorAll('.dropdown-item');
+    if(!te||!items.length)return;
+    var sec=document.createElement('div');sec.className='de-filter-section';
+    var hdr=document.createElement('div');hdr.className='de-filter-header';
+    hdr.innerHTML=te.textContent.trim()+' <span class="de-chevron">▾</span>';
+    hdr.addEventListener('click',function(){var bdy=hdr.nextElementSibling;var col=bdy.style.display==='none';bdy.style.display=col?'block':'none';hdr.classList.toggle('collapsed',!col);});
+    var bdy=document.createElement('div');bdy.className='de-filter-body';
+    items.forEach(function(it){
+      var cb=it.querySelector('input[type="checkbox"]');if(!cb)return;
+      var row=document.createElement('label');row.className='de-filter-item';
+      row.innerHTML='<div class="de-filter-left"><input type="checkbox" class="de-filter-check filter-check" value="'+cb.value+'"><span class="de-filter-label">'+it.textContent.trim()+'</span></div>';
+      var ncb=row.querySelector('input');
+      ncb.addEventListener('change',function(){cb.checked=ncb.checked;cb.dispatchEvent(new Event('change',{bubbles:true}));applyFilters();});
+      bdy.appendChild(row);
+    });
+    sec.appendChild(hdr);sec.appendChild(bdy);sidebar.appendChild(sec);
   });
-
-  window.resetFilters = function () {
-    if (searchInput) searchInput.value = '';
-    document.querySelectorAll('.filter-check').forEach(function (cb) { cb.checked = false; });
-    applyFilters();
-  };
-
-  /* ══════════════════════════════════════════════════════════
-     LAYOUT — Trivago style
-  ══════════════════════════════════════════════════════════ */
-
-  /* ── 1. Search button ───────────────────────────────────── */
-  const searchContainer = document.querySelector('.search-container');
-  if (searchContainer) {
-    const btn = document.createElement('button');
-    btn.className = 'de-search-btn';
-    btn.textContent = 'Suchen';
-    btn.addEventListener('click', applyFilters);
-    searchContainer.appendChild(btn);
-  }
-
-  /* ── 2. Map banner ──────────────────────────────────────── */
-  const searchWrapper = document.querySelector('.search-bar-wrapper');
-  const mapBanner = document.createElement('div');
-  mapBanner.className = 'de-map-banner';
-
-  const dormMap = document.getElementById('dormMap');
-  if (dormMap) {
-    mapBanner.appendChild(dormMap);
-    if (searchWrapper && searchWrapper.nextSibling) {
-      searchWrapper.parentNode.insertBefore(mapBanner, searchWrapper.nextSibling);
-    }
-    setTimeout(() => { if (window._dormLeafletMap) window._dormLeafletMap.invalidateSize(); }, 100);
-  }
-
-  /* ── 3. Results bar ─────────────────────────────────────── */
-  const resultsBar = document.createElement('div');
-  resultsBar.className = 'de-results-bar';
-
-  const resultCount = document.getElementById('resultCount');
-  const countClone = resultCount ? resultCount.cloneNode(true) : document.createElement('span');
-  countClone.id = 'resultCount';
-  if (resultCount) resultCount.id = 'resultCount-old';
-  countClone.className = 'de-results-count';
-
-  const sortWrap = document.createElement('div');
-  sortWrap.innerHTML = `
-    <span style="font-size:0.82rem;color:#6c757d;">Sortieren nach:</span>
-    <select class="de-sort-select">
-      <option>Empfohlen</option>
-      <option>Preis: niedrig bis hoch</option>
-      <option>Preis: hoch bis niedrig</option>
-      <option>Bewertung</option>
-    </select>`;
-
-  resultsBar.appendChild(countClone);
-  resultsBar.appendChild(sortWrap);
-  mapBanner.insertAdjacentElement('afterend', resultsBar);
-
-  /* ── 4. Main layout ─────────────────────────────────────── */
-  const deLayout = document.createElement('div');
-  deLayout.className = 'de-layout';
-
-  /* ── 5. Sidebar ─────────────────────────────────────────── */
-  const sidebar = document.createElement('aside');
-  sidebar.className = 'de-sidebar';
-
-  const resetBtn = document.createElement('button');
-  resetBtn.className = 'de-filter-reset';
-  resetBtn.textContent = '✕ Filter zurücksetzen';
-  resetBtn.addEventListener('click', () => {
-    document.querySelectorAll('.de-filter-check, .filter-check').forEach(cb => cb.checked = false);
-    applyFilters();
-  });
-  sidebar.appendChild(resetBtn);
-
-  const dropdowns = document.querySelectorAll('.filter-bar-wrapper .dropdown');
-  dropdowns.forEach(dropdown => {
-    const titleEl = dropdown.querySelector('.filter-pill');
-    const items   = dropdown.querySelectorAll('.dropdown-item');
-    if (!titleEl || !items.length) return;
-
-    const section = document.createElement('div');
-    section.className = 'de-filter-section';
-
-    const header = document.createElement('div');
-    header.className = 'de-filter-header';
-    header.innerHTML = `${titleEl.textContent.trim()} <span class="de-chevron">▾</span>`;
-    header.addEventListener('click', () => {
-      const body = header.nextElementSibling;
-      const collapsed = body.style.display === 'none';
-      body.style.display = collapsed ? 'block' : 'none';
-      header.classList.toggle('collapsed', !collapsed);
-    });
-
-    const body = document.createElement('div');
-    body.className = 'de-filter-body';
-
-    items.forEach(item => {
-      const checkbox  = item.querySelector('input[type="checkbox"]');
-      const labelText = item.textContent.trim();
-      if (!checkbox) return;
-
-      const row = document.createElement('label');
-      row.className = 'de-filter-item';
-      row.innerHTML = `
-        <div class="de-filter-left">
-          <input type="checkbox" class="de-filter-check filter-check" value="${checkbox.value}">
-          <span class="de-filter-label">${labelText}</span>
-        </div>`;
-
-      const newCb = row.querySelector('input');
-      newCb.addEventListener('change', () => {
-        checkbox.checked = newCb.checked;
-        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-        applyFilters();
-      });
-      body.appendChild(row);
-    });
-
-    section.appendChild(header);
-    section.appendChild(body);
-    sidebar.appendChild(section);
-  });
-
   deLayout.appendChild(sidebar);
 
-  /* ── 6. Horizontal cards ────────────────────────────────── */
-  const deListings = document.createElement('div');
-  deListings.className = 'de-listings';
+  // Cards
+  var deListings=document.createElement('div');deListings.className='de-listings';
+  var dormItems=document.querySelectorAll('.dorm-item');
+  dormItems.forEach(function(item,i){
+    var card=item.querySelector('.listing-card');if(!card)return;
+    var img=card.querySelector('.card-image img'),badge=card.querySelector('.badge');
+    var title=card.querySelector('.card-content h5'),address=card.querySelector('.card-content .small');
+    var score=card.querySelector('.rating-score'),lbl=card.querySelector('.rating-label');
+    var revs=card.querySelector('.rating-reviews'),price=card.querySelector('.price-amount'),per=card.querySelector('.price-per');
+    var specs=card.querySelector('.de-card-specs');
+    var specsHTML=specs?specs.outerHTML.replace('de-card-specs','de-specs'):'';
+    var dist=item.getAttribute('data-distance')||'';
+    var amenStr=item.getAttribute('data-amenities')||'';
+    var tagHTML=amenStr.split(',').filter(Boolean).map(function(a){var l={wifi:'WiFi',bills:'Nebenkosten inkl.',furnished:'Möbliert',parking:'Parkplatz'};return'<span class="de-hcard-tag">'+(l[a.trim()]||a)+'</span>';}).join('');
 
-  const dormItems = document.querySelectorAll('.dorm-item');
-  dormItems.forEach((item, i) => {
-    const card = item.querySelector('.listing-card');
-    if (!card) return;
+    var wrapper=document.createElement('div');wrapper.className='de-hcard-wrapper dorm-item';wrapper.style.cursor='pointer';
+    Array.from(item.attributes).forEach(function(a){if(a.name.startsWith('data-'))wrapper.setAttribute(a.name,a.value);});
 
-    const img     = card.querySelector('.card-image img');
-    const badge   = card.querySelector('.badge');
-    const title   = card.querySelector('.card-content h5');
-    const address = card.querySelector('.card-content .small');
-    const tags    = card.querySelectorAll('.amenity-tag');
-    const score   = card.querySelector('.rating-score');
-    const label   = card.querySelector('.rating-label');
-    const reviews = card.querySelector('.rating-reviews');
-    const price   = card.querySelector('.price-amount');
-    const per     = card.querySelector('.price-per');
+    wrapper.innerHTML='<div class="de-hcard"><div class="de-hcard-img"><span class="de-badge">'+(badge?badge.textContent.trim():'')+'</span><img src="'+(img?img.src:'')+'" alt="'+(title?title.textContent.trim():'')+'"></div><div class="de-hcard-body"><div><a href="/info" class="de-hcard-title">'+(title?title.textContent.trim():'')+'</a><div class="de-hcard-address">📍 '+(address?address.textContent.replace('📍','').trim():'')+' </div>'+(dist?'<div class="de-hcard-dist"><i class="fa fa-walking"></i> '+dist+' km zur Universität</div>':'')+'<div class="de-hcard-tags">'+tagHTML+'</div>'+specsHTML+'</div><div class="de-hcard-rating"><span class="de-rating-score">'+(score?score.textContent.trim():'')+'</span><span class="de-rating-label">'+(lbl?lbl.textContent.trim():'')+'</span><span class="de-rating-reviews">'+(revs?revs.textContent.trim():'')+'</span></div></div><div class="de-hcard-aside"><div><span class="de-price-from">Ab</span><span class="de-price-amount">'+(price?price.textContent.trim():'')+'</span><span class="de-price-per">'+(per?per.textContent.trim():'')+'</span><span class="de-deal-badge">✓ Bestes Angebot</span></div><a href="/info" class="de-view-btn">Unterkunft ansehen →</a></div></div>';
 
-    const tagHTML = Array.from(tags).map(t => `<span class="de-hcard-tag">${t.textContent.trim()}</span>`).join('');
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'de-hcard-wrapper dorm-item';
-    Array.from(item.attributes).forEach(attr => {
-      if (attr.name.startsWith('data-')) wrapper.setAttribute(attr.name, attr.value);
-    });
-
-    wrapper.innerHTML = `
-      <div class="de-hcard">
-        <div class="de-hcard-img">
-          <span class="de-badge">${badge ? badge.textContent.trim() : ''}</span>
-          <img src="${img ? img.src : ''}" alt="${title ? title.textContent.trim() : ''}">
-        </div>
-        <div class="de-hcard-body">
-          <div>
-            <div class="de-hcard-title">${title ? title.textContent.trim() : ''}</div>
-            <div class="de-hcard-address">📍 ${address ? address.textContent.replace('📍','').trim() : ''}</div>
-            <div class="de-hcard-tags">${tagHTML}</div>
-          </div>
-          <div class="de-hcard-rating">
-            <span class="de-rating-score">${score ? score.textContent.trim() : ''}</span>
-            <span class="de-rating-label">${label ? label.textContent.trim() : ''}</span>
-            <span class="de-rating-reviews">${reviews ? reviews.textContent.trim() : ''}</span>
-          </div>
-        </div>
-        <div class="de-hcard-aside">
-          <div>
-            <span class="de-price-from">Ab</span>
-            <span class="de-price-amount">${price ? price.textContent.trim() : ''}</span>
-            <span class="de-price-per">${per ? per.textContent.trim() : ''}</span>
-            <span class="de-deal-badge">✓ Bestes Angebot</span>
-          </div>
-          <button class="de-view-btn">Angebot ansehen →</button>
-        </div>
-      </div>`;
-
-    wrapper.addEventListener('mouseenter', () => {
-      if (window._dormMarkers && window._dormMarkers[i]) window._dormMarkers[i].openPopup();
-      wrapper.querySelector('.de-hcard').style.borderColor = '#212529';
-    });
-    wrapper.addEventListener('mouseleave', () => {
-      if (window._dormMarkers && window._dormMarkers[i]) window._dormMarkers[i].closePopup();
-      wrapper.querySelector('.de-hcard').style.borderColor = '';
-    });
-
+    wrapper.addEventListener('click',function(){window.location.href='/info';});
+    wrapper.addEventListener('mouseenter',function(){if(window._dormMarkers&&window._dormMarkers[i])window._dormMarkers[i].openPopup();wrapper.querySelector('.de-hcard').style.borderColor='#212529';});
+    wrapper.addEventListener('mouseleave',function(){if(window._dormMarkers&&window._dormMarkers[i])window._dormMarkers[i].closePopup();wrapper.querySelector('.de-hcard').style.borderColor='';});
     deListings.appendChild(wrapper);
-    item.style.display = 'none';
+    item.style.display='none';
   });
 
   deLayout.appendChild(deListings);
-  resultsBar.insertAdjacentElement('afterend', deLayout);
+  rb.insertAdjacentElement('afterend',deLayout);
 
-  /* ── 7. Sync filter visibility to DE cards ──────────────── */
-  const observer = new MutationObserver(() => {
-    dormItems.forEach((item, i) => {
-      const wrapper = deListings.querySelectorAll('.de-hcard-wrapper')[i];
-      if (wrapper) {
-        wrapper.style.setProperty(
-          'display',
-          item.style.display === 'none' ? 'none' : 'block',
-          'important'
-        );
-      }
-    });
-    const oldCount = document.getElementById('resultCount-old');
-    if (oldCount) countClone.textContent = oldCount.textContent;
+  var observer=new MutationObserver(function(){
+    dormItems.forEach(function(item,i){var w=deListings.querySelectorAll('.de-hcard-wrapper')[i];if(w)w.style.setProperty('display',item.style.display==='none'?'none':'block','important');});
+    var oc2=document.getElementById('resultCount-old');if(oc2)cc.textContent=oc2.textContent;
   });
+  dormItems.forEach(function(item){observer.observe(item,{attributes:true,attributeFilter:['style']});});
 
-  dormItems.forEach(item => {
-    observer.observe(item, { attributes: true, attributeFilter: ['style'] });
-  });
-
+  applyPreFilters();
 });

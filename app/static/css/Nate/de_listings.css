@@ -1,13 +1,12 @@
 /* ============================================================
    FindMyDorm — de_listings.css
    German locale: Trivago-inspired layout
-   Colours match existing DE navbar: #212529 dark / #ffffff text
+   Colours match existing DE navbar: #212529 dark / #fd7e14 accent
    Navbar handled by base.html + nav-footer-styles.css
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap');
 
-/* ── Tokens — DE: dark theme ────────────────────────────────── */
 :root {
   --de-primary:        #212529;
   --de-primary-dark:   #16191c;
@@ -28,7 +27,14 @@
   --de-transition:     0.18s ease;
 }
 
-body { font-family: 'Nunito Sans', 'Raleway', sans-serif; background: var(--de-bg); color: var(--de-text); min-height: 100vh; display: flex; flex-direction: column; }
+body {
+  font-family: 'Nunito Sans', 'Raleway', sans-serif;
+  background: var(--de-bg);
+  color: var(--de-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 /* ── Search bar ─────────────────────────────────────────────── */
 .search-bar-wrapper {
@@ -76,7 +82,7 @@ body { font-family: 'Nunito Sans', 'Raleway', sans-serif; background: var(--de-b
 
 .de-search-btn:hover { background: var(--de-accent-dark); }
 
-/* ── Hide base HTML blocks (DE JS rebuilds into Trivago layout) */
+/* ── Hide base HTML blocks — DE JS rebuilds into Trivago layout */
 .filter-bar-wrapper   { display: none !important; }
 .listings-map-wrapper { display: none !important; }
 
@@ -222,9 +228,15 @@ body { font-family: 'Nunito Sans', 'Raleway', sans-serif; background: var(--de-b
 }
 
 .de-hcard-title { font-size: 1rem; font-weight: 800; color: var(--de-text); margin-bottom: 0.2rem; line-height: 1.3; }
-.de-hcard-address { font-size: 0.78rem; color: var(--de-text-muted); margin-bottom: 0.55rem; }
+.de-hcard-address { font-size: 0.78rem; color: var(--de-text-muted); margin-bottom: 0.3rem; }
 
-.de-hcard-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.6rem; }
+.de-hcard-dist {
+  font-size: 0.75rem; color: var(--de-text-muted);
+  display: flex; align-items: center; gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.de-hcard-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.5rem; }
 
 .de-hcard-tag {
   font-size: 0.68rem; font-weight: 700; color: var(--de-text-muted);
@@ -232,12 +244,32 @@ body { font-family: 'Nunito Sans', 'Raleway', sans-serif; background: var(--de-b
   border-radius: var(--de-radius-sm); padding: 0.15em 0.55em;
 }
 
+/* Spec table (DE full specs) */
+.de-specs,
+.de-card-specs {
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius-sm);
+  overflow: hidden;
+  margin: 0.4rem 0 0.6rem;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.de-spec-row {
+  display: flex; justify-content: space-between;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--de-border);
+  padding: 6px 10px; color: #495057;
+}
+
+.de-spec-row:last-child { border-bottom: none; }
+.de-spec-row strong { color: var(--de-text); font-weight: 700; }
+
 .de-hcard-rating { display: flex; align-items: center; gap: 0.45rem; }
 
 .de-rating-score {
   display: inline-flex; align-items: center; justify-content: center;
   width: 2rem; height: 2rem; border-radius: 50% 50% 50% 0;
-  background: var(--de-primary); color: #fff;
+  background: var(--de-green); color: #fff;
   font-size: 0.8rem; font-weight: 900; flex-shrink: 0;
 }
 
@@ -318,7 +350,8 @@ body { font-family: 'Nunito Sans', 'Raleway', sans-serif; background: var(--de-b
   .de-hcard-img { width: 100%; height: 170px; }
   .de-hcard-aside {
     width: 100%; border-left: none; border-top: 1px solid var(--de-border);
-    flex-direction: row; align-items: center; justify-content: space-between; text-align: left;
+    flex-direction: row; align-items: center;
+    justify-content: space-between; text-align: left;
   }
   .de-map-banner { height: 180px; }
 }

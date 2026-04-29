@@ -7,7 +7,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap');
 
-/* ── Tokens — EN: white/blue ────────────────────────────────── */
 :root {
   --en-primary:       #0d6efd;
   --en-primary-dark:  #0a58ca;
@@ -85,7 +84,7 @@ body {
 
 .en-search-btn:hover { background: #e0a800; }
 
-/* ── Hide base HTML blocks (JS rebuilds into EN layout) ─────── */
+/* ── Hide base HTML blocks — JS rebuilds into EN layout ─────── */
 .filter-bar-wrapper   { display: none !important; }
 .listings-map-wrapper { display: none !important; }
 
@@ -268,7 +267,14 @@ body {
 
 .en-card-title:hover { text-decoration: underline; color: var(--en-primary-dark); }
 
-.en-card-address { font-size: 0.75rem; color: var(--en-text-muted); margin-bottom: 0.5rem; }
+.en-card-address { font-size: 0.75rem; color: var(--en-text-muted); margin-bottom: 0.3rem; }
+
+.en-distance-badge,
+.distance-badge {
+  font-size: 0.72rem; color: var(--en-text-muted);
+  display: flex; align-items: center; gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
 
 .en-card-rating {
   display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.5rem;

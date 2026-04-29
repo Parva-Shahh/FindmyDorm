@@ -1,34 +1,35 @@
 from app import app
 from flask import render_template, session, redirect, request
 
-#Starts, website function
 @app.route('/')
-
-#Routes to Home page - Parva
 @app.route('/index')
 def index():
-    return (render_template("index.html"))
+    return render_template("index.html")
 
-#Routes to review - Garreth
 @app.route('/review')
 def review():
-    return (render_template ("review.html"))
+    return render_template("review.html")
 
-#Routes to About page - Alex
 @app.route('/about')
 def about():
-    return (render_template ("about.html"))
+    return render_template("about.html")
 
-#Routes to Listings page - Nathaniel
+# Accepts ?uni=tcd&type=En-Suite&search=parnell for pre-filtering from index page
 @app.route('/listings')
 def listings():
-        return (render_template ("listings.html"))
+    pre_uni    = request.args.get('uni', '')
+    pre_type   = request.args.get('type', '')
+    pre_search = request.args.get('search', '')
+    return render_template("listings.html",
+        pre_uni=pre_uni, pre_type=pre_type, pre_search=pre_search)
 
-
-#Routes to Login page - Garreth
 @app.route('/login')
 def login():
-    return (render_template ("login.html"))
+    return render_template("login.html")
+
+@app.route('/info')
+def info():
+    return render_template("info.html")
 
 @app.route('/profile')
 def profile():
@@ -39,33 +40,19 @@ def profile():
     }
     saved_favorites = [
         {'name': 'Simmons Hall', 'image': 'image1.jpg'},
-        {'name': 'Baker House', 'image': 'Image2.jpg'},
+        {'name': 'Baker House',  'image': 'Image2.jpg'},
         {'name': 'MacGregor House', 'image': 'image4.jpg'}
     ]
-    reviews_list = [
-        {
-            'dorm': 'Simmons Hall',
-            'rating': 5,
-            'comment': 'Great architecture and very social atmosphere!',
-            'date': 'March 2026',
-            'has_video': True
-        }
-    ]
+    reviews_list = [{'dorm':'Simmons Hall','rating':5,'comment':'Great architecture and very social atmosphere!','date':'March 2026','has_video':True}]
     return render_template("profile.html", user=user_data, reviews=reviews_list, favorites=saved_favorites)
 
 @app.route('/set_language/<lang_code>')
 def set_language(lang_code):
-    # If the language matches one of the languages we are facilitating
-    # Change the value of the language variable in session to that
     if lang_code in ['en', 'zh', 'de']:
         session['language'] = lang_code
-    # Redirect the page to the page from which the language change
-    # request was made
     return redirect(request.referrer or '/')
 
-# Before each request to the app, check if the language variable
-# in session has a value. If not set it to English.
 @app.before_request
 def set_session_language():
     if 'language' not in session:
-        session['language'] = 'en' # Set default language here
+        session['language'] = 'en'
