@@ -1,4 +1,37 @@
 /* ============================================================
+   FILE:    zh_listings.css
+   AUTHOR:  Nathaniel Christian Dedumo (C24516069)
+   PAGE:    Dormitory Listings — Chinese Locale
+
+   CULTURAL DESIGN RATIONALE:
+   Non-linear, high-density cards-left / map-right split layout.
+   Inspired by McDonald's China — the reference site for Chinese
+   user analysis (Trivago vs McDonald's China, Section 2).
+
+   Key decisions:
+   - Orange palette (#ff6633): vibrant, entices exploration.
+     Phase 1 Section 6.3 Colour: "vibrant colours entice exploration"
+     for Low UA users (Hypothesis 3).
+   - Cards left / map right: both visible simultaneously — non-linear,
+     exploratory layout for Low UA users (Wei Chen, PoV 2).
+   - filter-bar-wrapper VISIBLE (display:block): ZH keeps the filter
+     bar at the top, not in a sidebar — allows Wei Chen to filter
+     while keeping the map in view (Hypothesis 3 density control).
+   - listings-map-wrapper VISIBLE: ZH uses the original base HTML
+     layout — ZH JS enhances cards without rebuilding the structure.
+   - Orange amenity tags: vibrant social proof signals for
+     Collectivist users — visual hierarchy emphasises community
+     features (Hypothesis 4: peer validation).
+   - Rating score in orange: consistent with ZH brand palette,
+     social proof badge (Hypothesis 4).
+   - Sticky map column: persistent geographic context allows
+     discovery-based browsing (Hypothesis 3: Low UA exploration).
+
+   Asset Loading Deviation (README Section 7):
+   Loaded in {% block extra_css %} per-page, not globally.
+   ============================================================ */
+
+/* ============================================================
    FindMyDorm — zh_listings.css
    Chinese locale: Booking.com-inspired, cards left / map right
    Colours match existing ZH navbar: #ff6633 orange
@@ -83,7 +116,10 @@ body {
 
 .zh-search-btn:hover { background: #aa4400; }
 
-/* ── Filter bar ─────────────────────────────────────────────── */
+/* ── Filter bar ─────────────────────────────────────────────────
+   ZH keeps filter bar VISIBLE (unlike EN/DE which hide it).
+   Horizontal bar suits non-linear exploratory browsing (Hypothesis 3).
+   Orange pill buttons match ZH brand palette. */
 .filter-bar-wrapper {
   background: #fff;
   border-bottom: 1px solid var(--zh-border);
@@ -146,7 +182,10 @@ body {
   background: var(--zh-primary-light);
 }
 
-/* ── Two-column layout ──────────────────────────────────────── */
+/* ── Two-column layout ──────────────────────────────────────────
+   Cards left (48%) / Map right (52%) — both visible simultaneously.
+   Non-linear layout: Wei Chen can explore map and cards together
+   without following a fixed sequential path (Hypothesis 3 Low UA). */
 .listings-map-wrapper {
   height: calc(100vh - 160px);
   display: block !important;
@@ -168,7 +207,10 @@ body {
 
 #dormMap { width: 100%; height: 100%; z-index: 0; }
 
-/* ── Cards ──────────────────────────────────────────────────── */
+/* ── Cards ──────────────────────────────────────────────────────
+   ZH cards use the base HTML structure from listings.html.
+   JS enhances them with orange hover rings and clickable titles.
+   Hypothesis 3: hover reveals context progressively (Miller's Law). */
 .listing-card {
   background: var(--zh-card-bg); border: 1px solid var(--zh-border);
   border-radius: var(--zh-radius); box-shadow: var(--zh-shadow);
@@ -217,6 +259,9 @@ body {
   margin-bottom: 0.4rem;
 }
 
+/* Orange amenity tags — vibrant social proof signals.
+   Hypothesis 4: bills/furnished/wifi displayed as community features
+   rather than dry specs (collectivist framing). */
 .amenity-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.6rem; }
 
 .amenity-tag {
@@ -262,7 +307,9 @@ body {
   box-shadow: 0 4px 12px rgba(255,102,51,0.3);
 }
 
-/* Map pins */
+/* Map pins — orange to match ZH brand palette.
+   Persistent right-side map allows geographic exploration
+   alongside card browsing (Hypothesis 3: Low UA non-linear layout). */
 .map-price-pin {
   background: var(--zh-primary); color: #fff;
   font-size: 0.7rem; font-weight: 800; padding: 3px 9px;

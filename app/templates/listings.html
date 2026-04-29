@@ -1,13 +1,55 @@
 {% extends "base.html" %}
 
+{# ============================================================
+   FILE:    listings.html
+   AUTHOR:  Nathaniel Christian Dedumo (C24516069)
+   PAGE:    Dormitory Listings & Interactive Map
+
+   CULTURAL DESIGN RATIONALE:
+   This page acts as a dynamic layout controller — the same base HTML is
+   transformed into three distinct experiences depending on session language:
+
+   EN (English):  Booking.com-inspired 3-column card grid with sidebar filters.
+                  Neutral conventions, blue palette. Familiar to Irish/EN users.
+
+   ZH (Chinese):  Non-linear, high-density cards-left / map-right split layout.
+                  Orange palette (#ff6633), vibrant social badges, review counts.
+                  Addresses Low UA + Collectivist (Wei Chen, PoV 2):
+                  — Hypothesis 3: Progressive disclosure (hover) controls density
+                  — Hypothesis 4: Resident review counts provide social proof
+
+   DE (German):   Linear Trivago-inspired horizontal card list with full-width map
+                  banner and Amazon-style sidebar filter panel.
+                  Dark palette (#212529), explicit spec table per card.
+                  Addresses High UA + Individualist (Karl, PoV 1):
+                  — Hypothesis 1: Immediate map feedback gives clear mental map
+                  — Hypothesis 2: Explicit spec table (size, distance, contract,
+                    bills) provides objective data before commitment
+
+   Asset Loading Strategy (Deviation from Group Guidelines):
+   CSS and JS are loaded dynamically in {% block extra_css/extra_js %} rather
+   than globally in base.html. This prevents locale-specific listing styles from
+   conflicting with teammates' pages during integration.
+   ============================================================ #}
+
 {% block extra_css %}
 {% set lang = session.get('language', 'en') %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+{# Load locale-specific CSS — each file contains culturally adapted layout,
+   colour scheme and typography targeting the relevant user archetype #}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/Nate/' + lang + '_listings.css') }}">
 {% endblock %}
 
 {% block main %}
 {% set lang = session.get('language', 'en') %}
+
+{# ── DORMITORY DATA ──────────────────────────────────────────────────────────
+   16 Dublin dormitories with full data attributes.
+   Each dorm carries university, distance, lat/lng for the filter engine and
+   interactive Leaflet map — key to Hypothesis 1 (geographic mental map).
+   Locale-aware images: EN uses original assets; DE uses de-listings/de-dorm-N.jpg;
+   ZH uses zh-listings/zh-dorm-N.jpg — culturally specific photography per locale.
+#}
 {% set dormitories = [
   {'name':'Dublin Student Living','address':'Parnell Square, Dublin 1','price':850,'type':'En-Suite','lat':53.3524,'lng':-6.2635,'rating':8.4,'rating_label':'Very Good','reviews':124,'university':'tcd','distance':1.2,'size':18,'contract':44,'bills':True,'img':'image1.jpg','amenities':'wifi,bills,furnished'},
   {'name':'Coastal House','address':'Dun Laoghaire, Dublin','price':900,'type':'Studio','lat':53.2941,'lng':-6.1353,'rating':7.6,'rating_label':'Good','reviews':88,'university':'ucd','distance':3.4,'size':22,'contract':40,'bills':True,'img':'Image2.jpg','amenities':'wifi,bills,parking'},
@@ -27,7 +69,12 @@
   {'name':'Northside Shared House','address':'Drumcondra Road, Dublin 9','price':700,'type':'Shared','lat':53.3710,'lng':-6.2540,'rating':7.0,'rating_label':'Good','reviews':89,'university':'dcu','distance':2.5,'size':10,'contract':36,'bills':False,'img':'image4.jpg','amenities':'wifi'}
 ] %}
 
-<!-- Pre-filter values injected by Flask from URL params -->
+{# ── PRE-FILTER INJECTION ────────────────────────────────────────────────────
+   Flask passes ?uni= ?type= ?search= URL params from the index page carousel
+   and search form. These are injected into window._preFilter so the locale
+   JS files can tick the correct checkboxes on load — giving the user a
+   pre-filtered view when arriving from the homepage.
+#}
 <script>
     window._preFilter = {
         uni:    "{{ pre_uni | default('') }}",
@@ -36,7 +83,11 @@
     };
 </script>
 
-<!-- SEARCH BAR -->
+{# ── SEARCH BAR ──────────────────────────────────────────────────────────────
+   Shared across all locales. The locale JS files add a styled search button
+   appropriate to each culture (yellow EN, orange ZH, charcoal DE).
+   Babel _() wraps placeholder for translation — Phase 1 Section 6.2.
+#}
 <div class="search-bar-wrapper">
   <div class="container">
     <div class="search-container">
@@ -47,10 +98,19 @@
   </div>
 </div>
 
-<!-- FILTER BAR -->
+{# ── FILTER BAR ──────────────────────────────────────────────────────────────
+   Multi-criteria filter engine — core feature of the listings page.
+   EN/DE JS rebuild this into a sidebar; ZH keeps it as a top bar.
+   Filters cover: Property Type, Price, Location, University, Distance, Amenities.
+   University + Distance filters directly address Hypothesis 2 (Karl needs
+   exact proximity data before committing to a dorm).
+   All labels wrapped in Babel _() for localisation.
+#}
 <div class="filter-bar-wrapper d-flex align-items-center gap-3">
   <span class="filter-label"><i class="fa fa-sliders-h"></i> {{ _('Filters:') }}</span>
 
+  {# Property Type: En-Suite / Studio / Shared — room types match Phase 1
+     user stories where Karl needs precise room category data (Hypothesis 2) #}
   <div class="dropdown">
     <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Property Type') }}</button>
     <ul class="dropdown-menu p-3">
@@ -60,6 +120,8 @@
     </ul>
   </div>
 
+  {# Price Range: budget/mid/premium buckets. Explicit pricing addresses
+     High UA anxiety — Karl needs to know costs upfront (Hypothesis 1/2) #}
   <div class="dropdown">
     <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Price Range') }}</button>
     <ul class="dropdown-menu p-3">
@@ -69,6 +131,8 @@
     </ul>
   </div>
 
+  {# Location: Dublin area filters. Allows geographic narrowing — supports
+     the map's "mental map" function for High UA users (Hypothesis 1) #}
   <div class="dropdown">
     <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Location') }}</button>
     <ul class="dropdown-menu p-3">
@@ -82,6 +146,9 @@
     </ul>
   </div>
 
+  {# University filter: allows students to find dorms near their specific campus.
+     Directly addresses the core user need — proximity to their institution.
+     Pre-populated from index page carousel (window._preFilter.uni) #}
   <div class="dropdown">
     <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('University') }}</button>
     <ul class="dropdown-menu p-3">
@@ -92,6 +159,8 @@
     </ul>
   </div>
 
+  {# Distance: km-based proximity buckets. Hypothesis 2 — Karl needs exact
+     distance data. data-distance on each .dorm-item enables JS filtering. #}
   <div class="dropdown">
     <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Distance') }}</button>
     <ul class="dropdown-menu p-3">
@@ -101,6 +170,8 @@
     </ul>
   </div>
 
+  {# Amenities: social proof for Wei Chen (bills included, furnished = lower risk),
+     practical data for Karl (parking, WiFi = objective checklist) #}
   <div class="dropdown">
     <button class="filter-pill dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ _('Amenities') }}</button>
     <ul class="dropdown-menu p-3">
@@ -115,11 +186,22 @@
   <span id="resultCount" class="small text-muted ms-auto">{{ dormitories|length }} {{ _('properties found') }}</span>
 </div>
 
-<!-- LISTINGS + MAP -->
+{# ── LISTINGS + MAP WRAPPER ──────────────────────────────────────────────────
+   Base HTML structure used by all three locales.
+   EN/DE CSS hides .listings-map-wrapper (display:none !important) and the
+   locale JS rebuilds the layout entirely.
+   ZH CSS keeps this wrapper visible — cards left, map right — matching the
+   non-linear, exploration-oriented layout for Low UA users (Hypothesis 3).
+#}
 <div class="listings-map-wrapper">
   <div class="listings-split">
     <div class="listings-col" id="listing-grid">
       {% for dorm in dormitories %}
+
+      {# Each .dorm-item carries all filter data as data-* attributes.
+         The JS filter engine reads these without re-querying the server.
+         data-lat / data-lng feed the Leaflet map for geographic validation
+         — the map centres on hover, giving Karl his mental map (Hypothesis 1). #}
       <div class="dorm-item"
            data-name="{{ dorm.name|lower }}"
            data-address="{{ dorm.address|lower }}"
@@ -134,6 +216,15 @@
         <div class="listing-card">
           <div class="card-image">
             <span class="badge">{{ _(dorm.type) }}</span>
+
+            {# ── LOCALE-AWARE IMAGE PATHS ──────────────────────────────────
+               DE: de-listings/de-dorm-N.jpg — structured exterior/room shots
+                   reflecting individualist preference for "Direct Object" imagery
+                   (Phase 1 Section 6.3 Images, Hypothesis 2)
+               ZH: zh-listings/zh-dorm-N.jpg — social/communal photography
+                   reflecting collectivist "Social Context" imagery (Hypothesis 4)
+               EN: original assets — neutral standard photography
+               onerror fallback prevents broken images during development. #}
             {% if lang == 'de' %}
             <img src="{{ url_for('static', filename='assets/img/de-listings/de-dorm-' + loop.index|string + '.jpg') }}" alt="{{ dorm.name }}"
                  onerror="this.src='{{ url_for('static', filename='assets/image1.jpg') }}'">
@@ -145,17 +236,33 @@
                  onerror="this.src='{{ url_for('static', filename='assets/image1.jpg') }}'">
             {% endif %}
           </div>
+
           <div class="card-content">
             <h5>{{ dorm.name }}</h5>
             <p class="small">📍 {{ dorm.address }}</p>
+
+            {# ── LOCALE-AWARE CONTENT STRUCTURE ───────────────────────────
+               DE: Full technical spec table (size, distance, contract, bills).
+                   Hypothesis 2 — explicit objective data for Karl before commit.
+                   High UA users need this granularity to build confidence.
+               EN/ZH: Amenity tags + distance badge.
+                   Hypothesis 3 — tags act as progressive disclosure for Wei Chen.
+                   Hypothesis 4 — review count visible on card footer below. #}
             {% if lang == 'de' %}
             <div class="de-card-specs">
+              {# Room size in m² — addresses Karl's need for precise personal space data #}
               <div class="de-spec-row"><span>{{ _('Room Size') }}</span><strong>{{ dorm.size }} m²</strong></div>
+              {# Distance to university — key Hypothesis 2 data point for individualist users #}
               <div class="de-spec-row"><span>{{ _('Distance to University') }}</span><strong>{{ dorm.distance }} km</strong></div>
+              {# Contract length in weeks — eliminates ambiguity for High UA users #}
               <div class="de-spec-row"><span>{{ _('Contract Length') }}</span><strong>{{ dorm.contract }} {{ _('weeks') }}</strong></div>
+              {# Bills included/not — removes financial uncertainty (Hypothesis 1) #}
               <div class="de-spec-row"><span>{{ _('Bills') }}</span><strong>{% if dorm.bills %}{{ _('Included') }}{% else %}{{ _('Not included') }}{% endif %}</strong></div>
             </div>
             {% else %}
+            {# Amenity tags: scannable social proof for Wei Chen (Hypothesis 3/4).
+               Tags act as low-density progressive disclosure — user sees only
+               what's relevant without being overwhelmed by a spec table. #}
             <div class="amenity-tags">
               {% for amenity in dorm.amenities.split(',') %}
               <span class="amenity-tag">
@@ -167,11 +274,16 @@
               </span>
               {% endfor %}
             </div>
+            {# Distance badge: walking distance to campus — important for both
+               Karl (objective data) and Wei Chen (quick social validation) #}
             <div class="distance-badge"><i class="fa fa-walking"></i> {{ dorm.distance }} km {{ _('from university') }}</div>
             {% endif %}
           </div>
+
           <div class="card-footer-row">
             <div class="rating-block">
+              {# Rating score + label: social proof for Wei Chen (Hypothesis 4).
+                 Review count shown prominently — peer validation signal. #}
               <span class="rating-score">{{ dorm.rating }}</span>
               <div>
                 <span class="rating-label">{{ _(dorm.rating_label) }}</span>
@@ -179,16 +291,29 @@
               </div>
             </div>
             <div class="price-block">
+              {# "From" pricing: explicit, upfront cost data for Karl (Hypothesis 2).
+                 No hidden fees implied — reduces transactional anxiety for High UA. #}
               <span class="price-from">{{ _('From') }}</span>
               <span class="price-amount">€{{ dorm.price }}</span>
               <span class="price-per">/ {{ _('month') }}</span>
             </div>
           </div>
+
+          {# CTA links to info.html — next step in the linear navigation path.
+             Hypothesis 1: clear "next step" indicator for High UA users. #}
           <a href="{{ url_for('info') }}" class="btn-view-deal">{{ _('View dorm') }}</a>
         </div>
       </div>
       {% endfor %}
     </div>
+
+    {# ── MAP COLUMN ────────────────────────────────────────────────────────
+       Leaflet map providing geographic validation of listings.
+       ZH: sits in this column (right side), always visible.
+       EN: moved into sidebar thumbnail by en_listings.js.
+       DE: moved into full-width banner by de_listings.js.
+       Hypothesis 1: map gives Karl a visceral "mental map" of Dublin,
+       reducing geographic ambiguity before committing to a dorm. #}
     <div class="map-col"><div id="dormMap"></div></div>
   </div>
 </div>
@@ -196,18 +321,27 @@
 
 {% block extra_js %}
 {% set lang = session.get('language', 'en') %}
+
+{# Leaflet.js: open-source map library — no API key required.
+   Tiles served from OpenStreetMap. #}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+{# ── DORM DATA FOR MAP ─────────────────────────────────────────────────────
+   Serialise dormitory coordinates into JS for Leaflet marker placement.
+   Avg lat/lng computed from all dorms to centre the map on Dublin —
+   fixes the Germany bug (default Leaflet view was [0,0] → Germany). #}
 var dormData = [
   {% for dorm in dormitories %}
   {name:"{{ dorm.name }}",address:"{{ dorm.address }}",price:{{ dorm.price }},type:"{{ dorm.type }}",lat:{{ dorm.lat }},lng:{{ dorm.lng }},university:"{{ dorm.university }}",distance:{{ dorm.distance }},index:{{ loop.index0 }}}{% if not loop.last %},{% endif %}
   {% endfor %}
 ];
 
-// Compute centre from actual dorm coordinates — fixes the Germany bug
+{# Compute geographic centre from real dorm coordinates.
+   This ensures the map opens over Dublin, not a default zero-coordinate. #}
 var avgLat = dormData.reduce(function(s,d){return s+d.lat;},0) / dormData.length;
 var avgLng = dormData.reduce(function(s,d){return s+d.lng;},0) / dormData.length;
 
+{# Initialise Leaflet map centred on Dublin dorm cluster #}
 var map = L.map('dormMap').setView([avgLat, avgLng], 12);
 window._dormLeafletMap = map;
 
@@ -220,23 +354,32 @@ var markers = [];
 window._dormMarkers = markers;
 
 dormData.forEach(function(dorm, i) {
+  {# Price pin icon: shows €price directly on map marker.
+     Hypothesis 2: explicit pricing immediately visible without clicking.
+     High UA users can compare price and location at a glance. #}
   var icon = L.divIcon({
     className: '',
     html: '<div class="map-price-pin">&euro;' + dorm.price + '</div>',
     iconAnchor: [28, 14]
   });
+
   var marker = L.marker([dorm.lat, dorm.lng], {icon: icon})
     .addTo(map)
     .bindPopup('<strong>' + dorm.name + '</strong><br>&#128205; ' + dorm.address +
       '<br><span style="font-weight:700;">&euro;' + dorm.price + ' / month</span>' +
       '<br><small>' + dorm.distance + ' km from university</small>');
   markers.push(marker);
+
   var card = document.querySelectorAll('.dorm-item')[i];
   if (card) {
+    {# Hover → map centres on dorm + popup opens.
+       Hypothesis 1: immediate geographic feedback gives Karl a visceral
+       sense of exactly where each dorm is in Dublin. #}
     card.addEventListener('mouseenter', function() {
       marker.openPopup();
       map.setView([dorm.lat, dorm.lng], 14, {animate:true, duration:0.5});
     });
+    {# Mouse leave → map zooms back to Dublin overview #}
     card.addEventListener('mouseleave', function() {
       marker.closePopup();
       map.setView([avgLat, avgLng], 12, {animate:true, duration:0.5});
@@ -245,11 +388,23 @@ dormData.forEach(function(dorm, i) {
 });
 </script>
 
+{# ── LOCALE JS LOADING ────────────────────────────────────────────────────
+   Each locale JS file transforms the base HTML into its culturally adapted
+   layout AFTER the map and dorm data have been initialised above.
+   Loading order matters: map must exist before JS moves the #dormMap div.
+   Asset Loading Deviation: loaded here in extra_js block, not globally,
+   to prevent listing styles from affecting teammates' pages. #}
 {% if lang == 'de' %}
+  {# de_listings.js: Trivago layout, Amazon sidebar, horizontal cards,
+     full-width map banner — High UA linear structure (Hypothesis 1/2) #}
   <script src="{{ url_for('static', filename='js/Nate/de_listings.js') }}"></script>
 {% elif lang == 'zh' %}
+  {# zh_listings.js: cards-left / map-right, orange hover rings,
+     social proof triggers — Low UA exploration (Hypothesis 3/4) #}
   <script src="{{ url_for('static', filename='js/Nate/zh_listings.js') }}"></script>
 {% else %}
+  {# en_listings.js: Booking.com 3-column grid, sidebar filters,
+     map thumbnail — neutral EN conventions #}
   <script src="{{ url_for('static', filename='js/Nate/en_listings.js') }}"></script>
 {% endif %}
 {% endblock %}
