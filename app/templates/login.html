@@ -4,12 +4,6 @@
     <link href="{{ url_for('static', filename='css/components-styles.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/login-styles.css') }}" rel="stylesheet" />
 
-    {% if session.get('language') == 'zh' %}
-        <link href="{{ url_for('static', filename='css/chinese-styles.css') }}" rel="stylesheet" />
-    {% elif session.get('language') == 'de' %}
-        <link href="{{ url_for('static', filename='css/german-styles.css') }}" rel="stylesheet" />
-    {% endif %}
-
     <style>
         main.flex-grow-1 {
             display: flex;
@@ -108,7 +102,7 @@
     </div>
 
     {% elif session.get('language') == 'de' %}
-    <!-- ========== GERMAN LAYOUT — Facebook-style 50/50 split ========== -->
+    <!-- ========== GERMAN LAYOUT ========== -->
     <div style="flex:1; display:flex; min-height:calc(100vh - 114px);">
 
         <div class="d-none d-lg-block" style="
@@ -159,7 +153,7 @@
     </div>
 
     {% else %}
-    <!-- ========== DEFAULT (EN) LAYOUT ========== -->
+    <!-- ========== ENGLISH LAYOUT ========== -->
     <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:3rem 1rem; min-height:calc(100vh - 114px);">
         <div style="width:100%; max-width:520px;">
             <div class="cta-inner bg-faded text-center rounded p-5">
