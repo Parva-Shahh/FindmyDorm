@@ -746,3 +746,187 @@ msgstr "Inklusive"
 
 msgid "weeks"
 msgstr "Wochen"
+# ── Info page (Nathan) ────────────────────────────────────────────────────────
+msgid "Room Photos"
+msgstr "Zimmerfotos"
+
+msgid "Slide"
+msgstr "Folie"
+
+msgid "Previous"
+msgstr "Vorherige"
+
+msgid "Next"
+msgstr "Nächste"
+
+msgid "Room photo"
+msgstr "Zimmerfoto"
+
+msgid "Room photo placeholder"
+msgstr "Zimmerfoto-Platzhalter"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "No description available for this dorm yet."
+msgstr "Für dieses Wohnheim ist noch keine Beschreibung verfügbar."
+
+msgid "Dorm Name"
+msgstr "Wohnheimname"
+
+msgid "Location"
+msgstr "Lage"
+
+msgid "University"
+msgstr "Universität"
+
+msgid "Price"
+msgstr "Preis"
+
+msgid "month"
+msgstr "Monat"
+
+msgid "Contact for pricing"
+msgstr "Für Preisinfos kontaktieren"
+
+msgid "Amenities"
+msgstr "Ausstattung"
+
+msgid "Wi-Fi"
+msgstr "WLAN"
+
+msgid "Laundry"
+msgstr "Wäscherei"
+
+msgid "Common Room"
+msgstr "Gemeinschaftsraum"
+
+msgid "Security"
+msgstr "Sicherheit"
+
+msgid "Save dorm"
+msgstr "Unterkunft speichern"
+
+msgid "Save to profile"
+msgstr "Im Profil speichern"
+
+msgid "TikTok Reviews"
+msgstr "TikTok-Bewertungen"
+
+msgid "Watch TikTok reviews for this dorm"
+msgstr "TikTok-Bewertungen für dieses Wohnheim ansehen"
+
+msgid "Video Tours"
+msgstr "Videobesichtigungen"
+
+msgid "Watch YouTube tours for this dorm"
+msgstr "YouTube-Touren für dieses Wohnheim ansehen"
+
+msgid "TikTok reviews for this dorm"
+msgstr "TikTok-Bewertungen für dieses Wohnheim"
+
+msgid "YouTube video tours for this dorm"
+msgstr "YouTube-Videobesichtigungen für dieses Wohnheim"
+
+msgid "out of 5 stars"
+msgstr "von 5 Sternen"
+
+msgid "Reviewer"
+msgstr "Bewerter"
+
+msgid "Anonymous"
+msgstr "Anonym"
+
+msgid "Placeholder reviewer"
+msgstr "Platzhalter-Bewerter"
+
+msgid "This is a placeholder review comment. Real reviews will appear here once linked to this dorm listing."
+msgstr "Dies ist ein Platzhalter-Kommentar. Echte Bewertungen erscheinen hier, sobald sie mit diesem Wohnheimeintrag verknüpft sind."
+
+msgid "Placeholder review. Real reviews for this dorm will appear here."
+msgstr "Platzhalter-Bewertung. Echte Bewertungen für dieses Wohnheim erscheinen hier."
+
+msgid "Previous reviews"
+msgstr "Vorherige Bewertungen"
+
+msgid "Next reviews"
+msgstr "Nächste Bewertungen"
+
+msgid "Dorm Photo"
+msgstr "Wohnheimfoto"
+
+msgid "Photo Not Found"
+msgstr "Foto nicht gefunden"
+
+# ── Info page – new strings ───────────────────────────────────────────────────
+msgid "View Dorm"
+msgstr "Unterkunft ansehen"
+
+msgid "Post a Review"
+msgstr "Bewertung schreiben"
+
+msgid "Contact a Resident"
+msgstr "Bewohner kontaktieren"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Video Tour"
+msgstr "Videobesichtigung"
+
+msgid "TikTok Reviews"
+msgstr "TikTok-Bewertungen"
+
+msgid "Dorm Tour Video"
+msgstr "Unterkunfts-Video"
+
+msgid "Yugo Dublin is a premium student accommodation located in the heart of Dublin city centre, just a short walk from Trinity College Dublin and TU Dublin. The building offers fully furnished en-suite rooms, high-speed WiFi, on-site gym, cinema room, rooftop terrace and 24/7 security. Bills are fully included in the weekly price, with flexible contract lengths to suit semester or full-year stays."
+msgstr "Yugo Dublin ist eine erstklassige Studentenunterkunft im Herzen des Dubliner Stadtzentrums, nur wenige Gehminuten von Trinity College Dublin und TU Dublin entfernt. Das Gebäude bietet vollmöblierte En-Suite-Zimmer, schnelles WLAN, ein hauseigenes Fitnessstudio, einen Kinosaal, eine Dachterrasse und 24/7-Sicherheit. Die Nebenkosten sind vollständig im Wochenpreis enthalten, mit flexiblen Vertragslaufzeiten für ein Semester oder das gesamte Jahr."
+
+# ── Info page – review comments (German) ─────────────────────────────────────
+msgid "Very good location and clean. The technical specifications on the website matched reality. No surprises."
+msgstr "Sehr gute Lage und sauber. Die technischen Angaben auf der Website stimmten mit der Realität überein. Keine Überraschungen."
+
+msgid "The booking progress steps kept me informed at every stage. Transparent and trustworthy process from start to finish."
+msgstr "Die Buchungsschritte haben mich auf dem Laufenden gehalten. Transparenter und vertrauenswürdiger Prozess von Anfang bis Ende."
+
+msgid "Exact room dimensions and distance information made comparison straightforward. No surprises on arrival."
+msgstr "Genaue Zimmermaße und Entfernungsangaben machten den Vergleich unkompliziert. Keine Überraschungen bei der Ankunft."
+
+# ── Info page – amenities (translated) ───────────────────────────────────────
+msgid "En-Suite Bathroom"
+msgstr "Ensuite-Badezimmer"
+
+msgid "High-Speed Wi-Fi"
+msgstr "Hochgeschwindigkeits-WLAN"
+
+msgid "Cinema Room"
+msgstr "Kinosaal"
+
+msgid "Rooftop Terrace"
+msgstr "Dachterrasse"
+
+msgid "Bike Storage"
+msgstr "Fahrradabstellraum"
+
+msgid "Bills Included"
+msgstr "Nebenkosten inklusive"
+
+msgid "24/7 Security"
+msgstr "24/7-Sicherheit"
+
+msgid "Study Rooms"
+msgstr "Lernräume"
+
+msgid "Gym"
+msgstr "Fitnessstudio"
+
+# ── Info page – dorm name and location ───────────────────────────────────────
+msgid "Yugo Dublin"
+msgstr "Yugo Dublin"
+
+msgid "City Centre, Dublin 2"
+msgstr "Stadtzentrum, Dublin 2"
+
+msgid "Trinity College Dublin / TU Dublin"
+msgstr "Trinity College Dublin / TU Dublin"

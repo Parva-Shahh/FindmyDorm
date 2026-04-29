@@ -670,3 +670,206 @@ msgstr "建筑风格很棒，社交氛围也非常活跃！"
 
 msgid "March 2026"
 msgstr "2026年3月"
+# ── Info page (Nathan) ────────────────────────────────────────────────────────
+msgid "Room Photos"
+msgstr "房间照片"
+
+msgid "Slide"
+msgstr "幻灯片"
+
+msgid "Previous"
+msgstr "上一张"
+
+msgid "Next"
+msgstr "下一张"
+
+msgid "Room photo"
+msgstr "房间照片"
+
+msgid "Room photo placeholder"
+msgstr "房间照片占位符"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "No description available for this dorm yet."
+msgstr "该宿舍暂无描述信息。"
+
+msgid "Dorm Name"
+msgstr "宿舍名称"
+
+msgid "Location"
+msgstr "位置"
+
+msgid "University"
+msgstr "大学"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "month"
+msgstr "月"
+
+msgid "Contact for pricing"
+msgstr "联系获取价格"
+
+msgid "Amenities"
+msgstr "设施"
+
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+msgid "Laundry"
+msgstr "洗衣房"
+
+msgid "Common Room"
+msgstr "公共休息室"
+
+msgid "Security"
+msgstr "安保"
+
+msgid "Save dorm"
+msgstr "收藏宿舍"
+
+msgid "Save to profile"
+msgstr "保存到个人资料"
+
+msgid "Dorm Tour Video"
+msgstr "宿舍参观视频"
+
+msgid "Tour Video"
+msgstr "参观视频"
+
+msgid "Dorm Tour"
+msgstr "宿舍参观"
+
+msgid "Video tour coming soon"
+msgstr "视频参观即将上线"
+
+msgid "A dorm tour video will be embedded here."
+msgstr "宿舍参观视频将嵌入此处。"
+
+msgid "TikTok Shorts"
+msgstr "TikTok 短视频"
+
+msgid "Showing shorts tagged with dorm-specific hashtags"
+msgstr "显示带有宿舍专属话题标签的短视频"
+
+msgid "TikTok Short"
+msgstr "TikTok 短视频"
+
+msgid "out of 5 stars"
+msgstr "满分5星"
+
+msgid "Reviewer"
+msgstr "评论者"
+
+msgid "Anonymous"
+msgstr "匿名"
+
+msgid "Placeholder reviewer"
+msgstr "占位评论者"
+
+msgid "This is a placeholder review comment. Real reviews will appear here once linked to this dorm listing."
+msgstr "这是一条占位评论。真实评价将在与该宿舍房源关联后显示在此处。"
+
+msgid "Placeholder review. Real reviews linked to this dorm listing will appear here."
+msgstr "占位评价。与该宿舍房源关联的真实评价将显示在此处。"
+
+msgid "Previous reviews"
+msgstr "上一条评价"
+
+msgid "Next reviews"
+msgstr "下一条评价"
+
+msgid "Dorm Photo"
+msgstr "宿舍照片"
+
+msgid "Photo Not Found"
+msgstr "照片未找到"
+
+# ── Info page – new strings ───────────────────────────────────────────────────
+msgid "View Dorm"
+msgstr "查看宿舍"
+
+msgid "Post a Review"
+msgstr "发表评价"
+
+msgid "Contact a Resident"
+msgstr "联系住户"
+
+msgid "Save"
+msgstr "收藏"
+
+msgid "Video Tour"
+msgstr "视频参观"
+
+msgid "TikTok Reviews"
+msgstr "TikTok 评价"
+
+msgid "Yugo Dublin is a premium student accommodation located in the heart of Dublin city centre, just a short walk from Trinity College Dublin and TU Dublin. The building offers fully furnished en-suite rooms, high-speed WiFi, on-site gym, cinema room, rooftop terrace and 24/7 security. Bills are fully included in the weekly price, with flexible contract lengths to suit semester or full-year stays."
+msgstr "都柏林Yugo公寓是一处优质学生住宿，位于都柏林市中心核心地带，步行即可抵达都柏林三一学院和都柏林理工大学。公寓提供全套家具的套间客房、高速WiFi、健身房、影音室、屋顶露台及24小时安保服务。每周费用已包含全部账单，合同期灵活，可选学期或全年入住。"
+
+# ── Info page – review comments (Chinese) ────────────────────────────────────
+msgid "Great facilities and excellent location! Staff are very friendly and check-in was smooth. Highly recommended!"
+msgstr "设施很好，地理位置超级棒！工作人员非常友好，入住体验很顺畅。强烈推荐！"
+
+msgid "Reasonable price, spacious rooms, highly recommended! Made so many friends here."
+msgstr "性价比超高，房间宽敞，强烈推荐！在这里交到了很多朋友。"
+
+msgid "Clean and tidy overall, friendly staff. The Ask a Resident feature was so helpful before I moved in."
+msgstr "整体干净整洁，工作人员友好。入住前使用"问问居民"功能真的很有帮助。"
+
+msgid "Internet speed could be improved, otherwise very satisfied. Great community atmosphere."
+msgstr "网速有待提升，其他方面非常满意。社区氛围很棒。"
+
+# ── Info page – amenities (Chinese) ──────────────────────────────────────────
+msgid "En-Suite Bathroom"
+msgstr "套间浴室"
+
+msgid "High-Speed Wi-Fi"
+msgstr "高速Wi-Fi"
+
+msgid "Cinema Room"
+msgstr "影音室"
+
+msgid "Rooftop Terrace"
+msgstr "屋顶露台"
+
+msgid "Bike Storage"
+msgstr "自行车存放处"
+
+msgid "Bills Included"
+msgstr "含账单"
+
+msgid "24/7 Security"
+msgstr "24小时安保"
+
+msgid "Study Rooms"
+msgstr "自习室"
+
+msgid "Gym"
+msgstr "健身房"
+
+# ── Info page – dorm name and location ───────────────────────────────────────
+msgid "Yugo Dublin"
+msgstr "都柏林Yugo公寓"
+
+msgid "City Centre, Dublin 2"
+msgstr "都柏林市中心2区"
+
+msgid "Trinity College Dublin / TU Dublin"
+msgstr "都柏林三一学院 / 都柏林理工大学"
+
+# ── Info page – EN reviews (ZH fallback) ─────────────────────────────────────
+msgid "Absolutely love living here. The location is unbeatable and the community events are brilliant."
+msgstr "非常喜欢住在这里。地理位置无与伦比，社区活动也很棒。"
+
+msgid "Great facilities and very social atmosphere. The gym is top class. Would recommend to any international student."
+msgstr "设施很好，社交氛围浓厚。健身房一流。强烈推荐给国际学生。"
+
+msgid "The rooftop is class. Made loads of friends through the weekly events. Best student living in Dublin."
+msgstr "屋顶很棒。通过每周活动结交了很多朋友。都柏林最好的学生住宿。"
+
+msgid "Great value for Dublin. Bills included makes budgeting so much easier. Gym is excellent."
+msgstr "在都柏林性价比很高。包含账单让预算轻松多了。健身房很好。"
