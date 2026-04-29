@@ -110,9 +110,7 @@ body {
 
 .en-search-btn:hover { background: #e0a800; }
 
-/* ── Hide base HTML blocks ─────────────────────────────────────
-   EN JS rebuilds both into Booking.com layout from scratch.
-   Hiding here prevents flash of unstyled content before JS runs. */
+/* ── Hide base HTML blocks — JS rebuilds into EN layout ─────── */
 .filter-bar-wrapper   { display: none !important; }
 .listings-map-wrapper { display: none !important; }
 
@@ -163,6 +161,8 @@ body {
 }
 
 .en-map-thumb #dormMap { width: 100%; height: 100%; }
+.en-map-thumb #dormMap iframe { width: 100%; height: 100%; min-height: 160px; display: block; border: none; }
+.en-map-thumb #dormMap iframe { width: 100%; height: 100%; min-height: 160px; display: block; border: none; }
 
 .en-map-thumb-overlay {
   position: absolute; bottom: 0.5rem; left: 50%;
@@ -232,10 +232,7 @@ body {
 
 .en-filter-reset:hover { background: #cfe2ff; }
 
-/* ── 3-column card grid ─────────────────────────────────────────
-   3 columns = max listings visible without scrolling.
-   Reduces need to scroll for users who want a broad overview first.
-   Responsive: drops to 2-col at 1100px, 1-col at 520px. */
+/* ── 3-column card grid ─────────────────────────────────────── */
 .en-grid {
   flex: 1;
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -360,9 +357,7 @@ body {
   box-shadow: 0 3px 10px rgba(13,110,253,0.3);
 }
 
-/* Map pins — price shown directly on marker (€850, €900 etc).
-   Hypothesis 2: explicit pricing visible on map without clicking.
-   High UA users can compare price + location at a glance. */
+/* Map pins */
 .map-price-pin {
   background: var(--en-primary); color: #fff;
   font-size: 0.7rem; font-weight: 800; padding: 3px 9px;
