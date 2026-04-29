@@ -207,6 +207,9 @@ msgstr "229 Vassar St, Cambridge, MA 02139"
 msgid "Student Dormitory"
 msgstr "Studentenwohnheim"
 
+msgid "Accommodation Details"
+msgstr "Unterkunftsdetails"
+
 # ── Homepage – shared ─────────────────────────────────────────────────────────
 msgid "University"
 msgstr "Universität"
