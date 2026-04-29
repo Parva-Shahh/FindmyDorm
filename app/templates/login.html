@@ -1,8 +1,30 @@
 {% extends "base.html" %}
 
 {% block extra_css %}
-    <link href="{{ url_for('static', filename='css/Garreth/components-styles.css') }}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/Garreth/login-styles.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/components-styles.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/login-styles.css') }}" rel="stylesheet" />
+
+    {% if session.get('language') == 'zh' %}
+        <link href="{{ url_for('static', filename='css/chinese-styles.css') }}" rel="stylesheet" />
+    {% elif session.get('language') == 'de' %}
+        <link href="{{ url_for('static', filename='css/german-styles.css') }}" rel="stylesheet" />
+    {% endif %}
+
+    <style>
+        main.flex-grow-1 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Force German login checklist ticked items to black, not Bootstrap green */
+        [data-lang="de"] #germanLoginChecklist .text-success {
+            color: #212529 !important;
+        }
+
+        [data-lang="de"] #germanLoginChecklist .text-success svg path {
+            fill: #212529 !important;
+        }
+    </style>
 {% endblock %}
 
 {% block extra_js %}
@@ -12,152 +34,157 @@
 {% endblock %}
 
 {% block main %}
-<section class="page-section cta">
-    <div class="container">
 
-        {% if session.get('language') == 'zh' %}
-        <!-- ========== CHINESE LAYOUT ========== -->
-        <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-8">
-                <div class="cta-inner bg-faded text-center rounded p-5">
+    {% if session.get('language') == 'zh' %}
+    <!-- ========== CHINESE LAYOUT ========== -->
+    <div style="
+        flex: 1;
+        min-height: calc(100vh - 114px);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url('{{ url_for('static', filename='assets/img/zh-login-bg.jpg') }}');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        padding: 3rem 1rem;">
 
+        <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); z-index:1;"></div>
+
+        <div style="position:relative; z-index:2; width:100%; max-width:460px;">
+            <div style="background:rgba(255,255,255,0.95); backdrop-filter:blur(6px); border-radius:14px; padding:2.5rem;">
+
+                <h2 class="mb-4 text-center" style="color:#ff6633; font-weight:700;">{{ _('Sign In') }}</h2>
+
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">{{ _('Email') }}</label>
+                        <input type="email" class="form-control" placeholder="{{ _('you@example.com') }}">
+                    </div>
                     <div class="mb-4">
-                        <img src="{{ url_for('static', filename='assets/img/dorm-banner.jpg') }}"
-                             alt="FindMyDorm" class="img-fluid rounded w-100"
-                             style="max-height:160px; object-fit:cover;"
-                             onerror="this.style.display='none'">
+                        <label class="form-label fw-bold">{{ _('Password') }}</label>
+                        <input type="password" class="form-control" placeholder="{{ _('Enter your password') }}">
                     </div>
+                    <button type="submit" class="btn w-100 py-3 fw-bold"
+                            style="background-color:#ff6633; border-color:#ff6633; color:#ffffff;">
+                        {{ _('Sign In') }}
+                    </button>
+                </form>
 
-                    <h2 class="section-heading mb-4">
-                        <span class="section-heading-lower">{{ _('Sign In') }}</span>
-                    </h2>
+                <p class="login-footer-text mt-3 text-center">
+                    {{ _('New here?') }} <a href="/register" style="color:#ff6633; font-weight:bold;">{{ _('Create account') }}</a>
+                </p>
 
-                    <form>
-                        <div class="mb-3 text-start">
-                            <label class="form-label">{{ _('Email') }}</label>
-                            <input type="email" class="form-control" placeholder="you@example.com">
+                <hr class="my-3">
+
+                <div style="display:flex; align-items:stretch; background:#fff3ee; border:1px solid #ff6633; border-radius:10px; padding:12px 14px; gap:12px;">
+                    <div style="display:flex; align-items:center; flex-shrink:0;">
+                        <div style="display:flex; align-items:center;">
+                            <div style="width:32px;height:32px;background:#ff6633;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;border:2px solid white;margin-right:-8px;flex-shrink:0;">👤</div>
+                            <div style="width:32px;height:32px;background:#ff6633;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;border:2px solid white;margin-right:-8px;flex-shrink:0;">👤</div>
+                            <div style="width:32px;height:32px;background:#ff6633;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;border:2px solid white;flex-shrink:0;">👤</div>
                         </div>
-                        <div class="mb-4 text-start">
-                            <label class="form-label">{{ _('Password') }}</label>
-                            <input type="password" class="form-control" placeholder="••••••••">
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Sign In') }}</button>
-                    </form>
-
-                    <p class="login-footer-text mt-3">
-                        {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
-                    </p>
-
-                    <hr class="my-4">
-
-                    <!-- *** ONLY THIS BLOCK CHANGED *** -->
-                    <div class="zh-social-proof d-flex align-items-center justify-content-between p-3 rounded">
-                        <div class="d-flex align-items-center">
-                            <div class="zh-avatar-group d-flex">
-                                <div class="zh-avatar">👤</div>
-                                <div class="zh-avatar">👤</div>
-                                <div class="zh-avatar">👤</div>
-                            </div>
-                            <div class="text-start zh-proof-text">
-                                <strong class="d-block" style="font-size:0.85rem;">{{ _('Join') }}</strong>
-                                <strong style="font-size:0.85rem;">{{ _('10,000+ students!') }}</strong>
-                            </div>
-                        </div>
-                        <div class="text-start border-start ps-3">
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-circle me-2" style="font-size:0.4rem; color:#ff6633;"></i>
-                                <span class="small text-muted">{{ _('Great dorm experience') }}</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-circle me-2" style="font-size:0.4rem; color:#ff6633;"></i>
-                                <span class="small text-muted">{{ _('Great value, highly recommended') }}</span>
-                            </div>
+                        <div style="margin-left:12px; font-size:0.8rem; line-height:1.4;">
+                            <strong style="display:block;">{{ _('Join') }}</strong>
+                            <strong>{{ _('10,000+ students!') }}</strong>
                         </div>
                     </div>
-                    <!-- *** END OF CHANGE *** -->
-
+                    <div style="width:1px; background:#ffd4c2; flex-shrink:0;"></div>
+                    <div style="display:flex; flex-direction:column; justify-content:center; gap:6px; min-width:0;">
+                        <div style="display:flex; align-items:flex-start; gap:6px;">
+                            <span style="width:7px;height:7px;min-width:7px;background:#ff6633;border-radius:50%;display:inline-block;margin-top:4px;"></span>
+                            <span style="font-size:0.78rem; color:#6c757d; line-height:1.3;">{{ _('Great dorm experience') }}</span>
+                        </div>
+                        <div style="display:flex; align-items:flex-start; gap:6px;">
+                            <span style="width:7px;height:7px;min-width:7px;background:#ff6633;border-radius:50%;display:inline-block;margin-top:4px;"></span>
+                            <span style="font-size:0.78rem; color:#6c757d; line-height:1.3;">{{ _('Great value, highly recommended') }}</span>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
-
-        {% elif session.get('language') == 'de' %}
-        <!-- ========== GERMAN LAYOUT ========== -->
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="row g-4 align-items-start">
-
-                    <div class="col-md-7">
-                        <div class="cta-inner bg-faded rounded p-5">
-                            <div class="mb-4">
-                                <img src="{{ url_for('static', filename='assets/img/dorm-banner.jpg') }}"
-                                     alt="FindMyDorm" class="img-fluid rounded w-100"
-                                     style="max-height:140px; object-fit:cover;"
-                                     onerror="this.style.display='none'">
-                            </div>
-                            <h2 class="section-heading mb-4 text-center">
-                                <span class="section-heading-lower">{{ _('Sign In') }}</span>
-                            </h2>
-                            <form>
-                                <div class="mb-3">
-                                    <label class="form-label">{{ _('Email') }}</label>
-                                    <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com">
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label">{{ _('Password') }}</label>
-                                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••">
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Sign In') }}</button>
-                            </form>
-                            <p class="login-footer-text mt-4 text-center">
-                                {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-5 mt-5">
-                        <div class="card shadow border-primary">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold text-primary mb-3">{{ _('Progress') }}</h5>
-                                <ul class="list-unstyled" id="germanLoginChecklist">
-                                    <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Email entered') }}</li>
-                                    <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Password entered') }}</li>
-                                    <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Ready to sign in') }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        {% else %}
-        <!-- ========== DEFAULT (EN) LAYOUT ========== -->
-        <div class="row justify-content-center">
-            <div class="col-xl-6 col-lg-8">
-                <div class="cta-inner bg-faded text-center rounded p-5">
-                    <h2 class="section-heading mb-4">
-                        <span class="section-heading-lower">{{ _('Sign In') }}</span>
-                    </h2>
-                    <form>
-                        <div class="mb-3 text-start">
-                            <label class="form-label">{{ _('Email') }}</label>
-                            <input type="email" class="form-control" placeholder="you@example.com">
-                        </div>
-                        <div class="mb-4 text-start">
-                            <label class="form-label">{{ _('Password') }}</label>
-                            <input type="password" class="form-control" placeholder="••••••••">
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Sign In') }}</button>
-                    </form>
-                    <p class="login-footer-text mt-4">
-                        {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
     </div>
-</section>
+
+    {% elif session.get('language') == 'de' %}
+    <!-- ========== GERMAN LAYOUT — Facebook-style 50/50 split ========== -->
+    <div style="flex:1; display:flex; min-height:calc(100vh - 114px);">
+
+        <div class="d-none d-lg-block" style="
+            flex:1;
+            background-image: url('{{ url_for('static', filename='assets/img/de-login-bg.jpg') }}');
+            background-size:cover;
+            background-position:center center;
+            background-repeat:no-repeat;">
+        </div>
+
+        <div style="flex:1; display:flex; align-items:center; justify-content:center; background:#ffffff; padding:3rem 2rem;">
+            <div style="width:100%; max-width:420px;">
+
+                <h2 class="mb-4 text-center fw-bold">{{ _('Sign In') }}</h2>
+
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">{{ _('Email') }}</label>
+                        <input type="email" id="loginEmail" class="form-control"
+                               placeholder="{{ _('you@example.com') }}">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">{{ _('Password') }}</label>
+                        <input type="password" id="loginPassword" class="form-control"
+                               placeholder="{{ _('Enter your password') }}">
+                    </div>
+                    <button type="submit" class="btn w-100 py-3 fw-bold"
+                            style="background-color:#212529; border-color:#212529; color:#ffffff;">
+                        {{ _('Sign In') }}
+                    </button>
+                </form>
+
+                <p class="login-footer-text mt-3 text-center">
+                    {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
+                </p>
+
+                <div style="border:2px solid #212529; border-radius:8px; background:#f8f9fa; padding:1.25rem; margin-top:1.25rem;">
+                    <h5 class="fw-bold mb-3" style="color:#212529;">{{ _('Progress') }}</h5>
+                    <ul class="list-unstyled mb-0" id="germanLoginChecklist">
+                        <li class="text-muted mb-2"><i class="far fa-circle me-2"></i> {{ _('Email entered') }}</li>
+                        <li class="text-muted mb-2"><i class="far fa-circle me-2"></i> {{ _('Password entered') }}</li>
+                        <li class="text-muted"><i class="far fa-circle me-2"></i> {{ _('Ready to sign in') }}</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- ========== DEFAULT (EN) LAYOUT ========== -->
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:3rem 1rem; min-height:calc(100vh - 114px);">
+        <div style="width:100%; max-width:520px;">
+            <div class="cta-inner bg-faded text-center rounded p-5">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-lower">{{ _('Sign In') }}</span>
+                </h2>
+                <form>
+                    <div class="mb-3 text-start">
+                        <label class="form-label">{{ _('Email') }}</label>
+                        <input type="email" class="form-control"
+                               placeholder="{{ _('you@example.com') }}">
+                    </div>
+                    <div class="mb-4 text-start">
+                        <label class="form-label">{{ _('Password') }}</label>
+                        <input type="password" class="form-control"
+                               placeholder="{{ _('Enter your password') }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-3">{{ _('Sign In') }}</button>
+                </form>
+                <p class="login-footer-text mt-4">
+                    {{ _('New here?') }} <a href="/register">{{ _('Create account') }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
 {% endblock %}
