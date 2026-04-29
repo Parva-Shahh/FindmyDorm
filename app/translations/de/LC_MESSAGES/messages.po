@@ -107,6 +107,12 @@ msgstr "Passwort eingegeben"
 msgid "Ready to sign in"
 msgstr "Bereit zum Anmelden"
 
+msgid "you@example.com"
+msgstr "du@beispiel.de"
+
+msgid "Enter your password"
+msgstr "Passwort eingeben"
+
 # ── Profile ───────────────────────────────────────────────────────────────────
 msgid "My Profile"
 msgstr "Mein Profil"
@@ -133,6 +139,21 @@ msgid "My Saved"
 msgstr "Meine Gespeicherten"
 
 # ── Review page ───────────────────────────────────────────────────────────────
+msgid "Accommodation Details"
+msgstr "Unterkunftsdetails"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "University"
+msgstr "Universität"
+
+msgid "City"
+msgstr "Stadt"
+
+msgid "Type"
+msgstr "Typ"
+
 msgid "Write a Review"
 msgstr "Bewertung schreiben"
 

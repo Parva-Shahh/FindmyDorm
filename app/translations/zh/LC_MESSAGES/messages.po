@@ -116,6 +116,12 @@ msgstr "已输入密码"
 msgid "Ready to sign in"
 msgstr "准备登录"
 
+msgid "you@example.com"
+msgstr "你的邮箱@example.com"
+
+msgid "Enter your password"
+msgstr "输入您的密码"
+
 # ── Profile ───────────────────────────────────────────────────────────────────
 msgid "My Profile"
 msgstr "我的个人资料"
@@ -167,6 +173,15 @@ msgstr "点击查看个人简介"
 
 
 # ── Review page ───────────────────────────────────────────────────────────────
+msgid "Type"
+msgstr "类型"
+
+msgid "College"
+msgstr "大学"
+
+msgid "Student Dormitory"
+msgstr "学生宿舍"
+
 msgid "Write a Review"
 msgstr "撰写评价"
 
