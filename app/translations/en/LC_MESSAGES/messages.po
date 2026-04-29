@@ -166,3 +166,117 @@ msgstr "Not included"
 
 msgid "weeks"
 msgstr "weeks"
+
+msgid "Search by name, address or area..."
+msgstr "Search by name, address or area..."
+
+msgid "Filters:"
+msgstr "Filters:"
+
+msgid "Property Type"
+msgstr "Property Type"
+
+msgid "Apartment"
+msgstr "Apartment"
+
+msgid "Room"
+msgstr "Room"
+
+msgid "Price Range"
+msgstr "Price Range"
+
+msgid "Under €800"
+msgstr "Under €800"
+
+msgid "€800 – €1000"
+msgstr "€800 – €1000"
+
+msgid "Over €1000"
+msgstr "Over €1000"
+
+msgid "Dublin 1"
+msgstr "Dublin 1"
+
+msgid "Dublin 2"
+msgstr "Dublin 2"
+
+msgid "Dublin 6"
+msgstr "Dublin 6"
+
+msgid "Dun Laoghaire"
+msgstr "Dun Laoghaire"
+
+msgid "Trinity College Dublin"
+msgstr "Trinity College Dublin"
+
+msgid "University College Dublin"
+msgstr "University College Dublin"
+
+msgid "TU Dublin"
+msgstr "TU Dublin"
+
+msgid "Dublin City University"
+msgstr "Dublin City University"
+
+msgid "Distance"
+msgstr "Distance"
+
+msgid "Under 1 km"
+msgstr "Under 1 km"
+
+msgid "Under 2 km"
+msgstr "Under 2 km"
+
+msgid "Under 5 km"
+msgstr "Under 5 km"
+
+msgid "Amenities"
+msgstr "Amenities"
+
+msgid "WiFi"
+msgstr "WiFi"
+
+msgid "Bills Included"
+msgstr "Bills Included"
+
+msgid "Furnished"
+msgstr "Furnished"
+
+msgid "Parking"
+msgstr "Parking"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "properties found"
+msgstr "properties found"
+
+msgid "from university"
+msgstr "from university"
+
+msgid "Very Good"
+msgstr "Very Good"
+
+msgid "Good"
+msgstr "Good"
+
+msgid "Exceptional"
+msgstr "Exceptional"
+
+msgid "reviews"
+msgstr "reviews"
+
+msgid "From"
+msgstr "From"
+
+msgid "month"
+msgstr "month"
+
+msgid "View deal"
+msgstr "View deal"
+
+msgid "Not included"
+msgstr "Not included"
+
+msgid "weeks"
+msgstr "weeks"

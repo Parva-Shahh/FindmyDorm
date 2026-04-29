@@ -936,3 +936,132 @@ msgstr "Stadtzentrum, Dublin 2"
 
 msgid "Trinity College Dublin / TU Dublin"
 msgstr "Trinity College Dublin / TU Dublin"
+
+msgid "Search by name, address or area..."
+msgstr "Nach Name, Adresse oder Gebiet suchen..."
+
+msgid "Filters:"
+msgstr "Filter:"
+
+msgid "Property Type"
+msgstr "Unterkunftsart"
+
+msgid "Apartment"
+msgstr "Apartment"
+
+msgid "Room"
+msgstr "Zimmer"
+
+msgid "Price Range"
+msgstr "Preisbereich"
+
+msgid "Under €800"
+msgstr "Unter €800"
+
+msgid "€800 – €1000"
+msgstr "€800 – €1.000"
+
+msgid "Over €1000"
+msgstr "Über €1.000"
+
+msgid "Dublin 1"
+msgstr "Dublin 1"
+
+msgid "Dublin 2"
+msgstr "Dublin 2"
+
+msgid "Dublin 6"
+msgstr "Dublin 6"
+
+msgid "Dun Laoghaire"
+msgstr "Dún Laoghaire"
+
+msgid "Trinity College Dublin"
+msgstr "Trinity College Dublin"
+
+msgid "University College Dublin"
+msgstr "University College Dublin"
+
+msgid "TU Dublin"
+msgstr "TU Dublin"
+
+msgid "Dublin City University"
+msgstr "Dublin City University"
+
+msgid "Distance"
+msgstr "Entfernung"
+
+msgid "Under 1 km"
+msgstr "Unter 1 km"
+
+msgid "Under 2 km"
+msgstr "Unter 2 km"
+
+msgid "Under 5 km"
+msgstr "Unter 5 km"
+
+msgid "Amenities"
+msgstr "Ausstattung"
+
+msgid "WiFi"
+msgstr "WLAN"
+
+msgid "Bills Included"
+msgstr "Nebenkosten inklusive"
+
+msgid "Furnished"
+msgstr "Möbliert"
+
+msgid "Parking"
+msgstr "Parkplatz"
+
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+msgid "properties found"
+msgstr "Unterkünfte gefunden"
+
+msgid "from university"
+msgstr "zur Universität"
+
+msgid "Very Good"
+msgstr "Sehr gut"
+
+msgid "Good"
+msgstr "Gut"
+
+msgid "Exceptional"
+msgstr "Ausgezeichnet"
+
+msgid "reviews"
+msgstr "Bewertungen"
+
+msgid "From"
+msgstr "Ab"
+
+msgid "month"
+msgstr "Monat"
+
+msgid "View deal"
+msgstr "Angebot ansehen"
+
+msgid "Not included"
+msgstr "Nicht inklusive"
+
+msgid "Room Size"
+msgstr "Zimmergröße"
+
+msgid "Distance to University"
+msgstr "Entfernung zur Universität"
+
+msgid "Contract Length"
+msgstr "Vertragslaufzeit"
+
+msgid "Bills"
+msgstr "Nebenkosten"
+
+msgid "Included"
+msgstr "Inklusive"
+
+msgid "weeks"
+msgstr "Wochen"

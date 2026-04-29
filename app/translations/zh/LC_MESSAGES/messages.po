@@ -1076,3 +1076,117 @@ msgstr "屋顶很棒。通过每周活动结交了很多朋友。都柏林最好
 
 msgid "Great value for Dublin. Bills included makes budgeting so much easier. Gym is excellent."
 msgstr "在都柏林性价比很高。包含账单让预算轻松多了。健身房很好。"
+
+msgid "Search by name, address or area..."
+msgstr "按名称、地址或区域搜索..."
+
+msgid "Filters:"
+msgstr "筛选："
+
+msgid "Property Type"
+msgstr "房型"
+
+msgid "Apartment"
+msgstr "公寓"
+
+msgid "Room"
+msgstr "单间"
+
+msgid "Price Range"
+msgstr "价格范围"
+
+msgid "Under €800"
+msgstr "€800以下"
+
+msgid "€800 – €1000"
+msgstr "€800 – €1000"
+
+msgid "Over €1000"
+msgstr "€1000以上"
+
+msgid "Dublin 1"
+msgstr "都柏林1区"
+
+msgid "Dublin 2"
+msgstr "都柏林2区"
+
+msgid "Dublin 6"
+msgstr "都柏林6区"
+
+msgid "Dun Laoghaire"
+msgstr "邓莱里"
+
+msgid "Trinity College Dublin"
+msgstr "都柏林圣三一学院"
+
+msgid "University College Dublin"
+msgstr "都柏林大学"
+
+msgid "TU Dublin"
+msgstr "都柏林理工大学"
+
+msgid "Dublin City University"
+msgstr "都柏林城市大学"
+
+msgid "Distance"
+msgstr "距离"
+
+msgid "Under 1 km"
+msgstr "1公里以内"
+
+msgid "Under 2 km"
+msgstr "2公里以内"
+
+msgid "Under 5 km"
+msgstr "5公里以内"
+
+msgid "Amenities"
+msgstr "设施"
+
+msgid "WiFi"
+msgstr "WiFi"
+
+msgid "Bills Included"
+msgstr "含水电费"
+
+msgid "Furnished"
+msgstr "含家具"
+
+msgid "Parking"
+msgstr "停车位"
+
+msgid "Reset"
+msgstr "重置"
+
+msgid "properties found"
+msgstr "条房源"
+
+msgid "from university"
+msgstr "距大学"
+
+msgid "Very Good"
+msgstr "非常好"
+
+msgid "Good"
+msgstr "好"
+
+msgid "Exceptional"
+msgstr "卓越"
+
+msgid "reviews"
+msgstr "条评价"
+
+msgid "From"
+msgstr "起价"
+
+msgid "month"
+msgstr "月"
+
+msgid "View deal"
+msgstr "查看详情"
+
+msgid "Not included"
+msgstr "不含"
+
+msgid "weeks"
+msgstr "周"
